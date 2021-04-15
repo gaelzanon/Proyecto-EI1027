@@ -1,15 +1,14 @@
-package es.uji.ei1027.projecto1027;
+package es.uji.ei1027.proyecto1027;
 
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
 @Configuration
-public class ClubesportiuConfiguration {
+public class ProyectoEI1027Configuration {
 // Configura l'accés a la base de dades (DataSource)
     // a partir de les propietats a src/main/resources/applications.properties
     // que comencen pel prefix spring.datasource

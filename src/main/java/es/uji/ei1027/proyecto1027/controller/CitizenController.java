@@ -1,8 +1,8 @@
-package es.uji.ei1027.projecto1027.controller;
+package es.uji.ei1027.proyecto1027.controller;
 
 
-import es.uji.ei1027.projecto1027.Dao.CitizenDao;
-import es.uji.ei1027.projecto1027.model.Citizen;
+import es.uji.ei1027.proyecto1027.Dao.CitizenDao;
+import es.uji.ei1027.proyecto1027.model.Citizen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

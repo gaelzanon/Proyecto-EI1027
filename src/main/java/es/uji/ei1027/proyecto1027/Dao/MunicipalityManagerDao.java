@@ -1,5 +1,5 @@
-package es.uji.ei1027.projecto1027.Dao;
-import es.uji.ei1027.projecto1027.model.MunicipalityManager;
+package es.uji.ei1027.proyecto1027.Dao;
+import es.uji.ei1027.proyecto1027.model.MunicipalityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

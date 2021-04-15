@@ -1,4 +1,4 @@
-package es.uji.ei1027.projecto1027.model;
+package es.uji.ei1027.proyecto1027.model;
 
 public class R_NArea_service {
     private String areaCode;

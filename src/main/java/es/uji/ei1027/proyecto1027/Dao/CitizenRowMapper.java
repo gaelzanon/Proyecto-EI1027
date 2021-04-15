@@ -1,12 +1,11 @@
-package es.uji.ei1027.projecto1027.Dao;
+package es.uji.ei1027.proyecto1027.Dao;
 
-import es.uji.ei1027.projecto1027.model.Citizen;
+import es.uji.ei1027.proyecto1027.model.Citizen;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class CitizenRowMapper implements RowMapper<Citizen>{
     public Citizen mapRow(ResultSet rs, int rowNum) throws SQLException {
