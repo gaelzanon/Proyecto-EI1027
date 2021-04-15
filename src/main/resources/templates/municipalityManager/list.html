@@ -21,13 +21,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="municipality_manager: ${municipality_managers}">
-            <td th:text="${municipality_manager.NIF}"></td>
-            <td th:text="${municipality_manager.areaCode}"></td>
-            <td th:text="${municipality_manager.munName}"></td>
-            <td th:text="${{municipality_manager.email}}"></td>
-            <td><a th:href="@{/municipality_manager/update/{NIF}(NIF=${municipality_manager.NIF})}" class="btn btn-warning" role="button">Editar</a></td>
-            <td><a th:href="@{/municipality_manager/delete/{NIF}(NIF=${municipality_manager.NIF})}" class="btn btn-danger" role="button">Borrar</a></td>
+        <tr th:each="municipalityManager: ${municipalityManagers}">
+            <td th:text="${municipalityManager.NIF}"></td>
+            <td th:text="${municipalityManager.areaCode}"></td>
+            <td th:text="${municipalityManager.munName}"></td>
+            <td th:text="${{municipalityManager.email}}"></td>
+            <td><a th:href="@{/municipalityManager/update/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-warning" role="button">Editar</a></td>
+            <td><a th:href="@{/municipalityManager/delete/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-danger" role="button">Borrar</a></td>
         </tr>
         </tbody>
     </table>
