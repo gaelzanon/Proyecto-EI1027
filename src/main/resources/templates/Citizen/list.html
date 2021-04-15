@@ -7,7 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1>Llista de Citizen</h1>
+<h1>Lista de Citizen</h1>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -27,13 +27,13 @@
         <td th:text="${citizen.surname}"></td>
         <td th:text="${citizen.Address}"></td>
         <td th:text="${citizen.Email}"></td>
-        <td><a th:href="@{/citizen/update/{NIF}(NIF=${citizen.NIF})}" class="btn btn-warning" role="button">Edita</a>
+        <td><a th:href="@{/citizen/update/{NIF}(NIF=${citizen.NIF})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/citizen/delete/{NIF}(NIF=${citizen.NIF})}" class="btn btn-danger" role="button">Esborra</a>
+        <td><a th:href="@{/citizen/delete/{NIF}(NIF=${citizen.NIF})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Afegeix citizen</a>
+<a href="add" class="btn btn-success" role="button">Añadir citizen</a>
 </body>
 </html>

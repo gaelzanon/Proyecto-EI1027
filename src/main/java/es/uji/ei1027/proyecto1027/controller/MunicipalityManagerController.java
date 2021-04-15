@@ -22,20 +22,20 @@ public class MunicipalityManagerController {
 
     @RequestMapping("/list")
     public String listMunicipalityManager(Model model) {
-        model.addAttribute("municipality_managers", managerDao.getMunicipalityManagers());
-        return "municipality_manager/list";
+        model.addAttribute("municipalityManagers", managerDao.getMunicipalityManagers());
+        return "municipalityManager/list";
     }
 
     @RequestMapping(value="/add")
     public String addZone(Model model) {
-        model.addAttribute("municipality_manager", new MunicipalityManager());
-        return "municipality_manager/add";
+        model.addAttribute("municipalityManager", new MunicipalityManager());
+        return "municipalityManager/add";
     }
 
     @RequestMapping(value="/update/{NIF}", method= RequestMethod.GET)
     public String editZone(Model model, @PathVariable String NIF) {
-        model.addAttribute("municipality_manager", managerDao.getMunicipalityManager(NIF));
-        return "municipality_manager/update";
+        model.addAttribute("municipalityManager", managerDao.getMunicipalityManager(NIF));
+        return "municipalityManager/update";
     }
 
     @RequestMapping(value="/delete/{NIF}")
