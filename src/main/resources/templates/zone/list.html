@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Zonas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Zonas</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Columna</th>
+            <th>Fila</th>
+            <th>Capacidad</th>
+            <th>Código Area</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="zone: ${zones}">
+            <td th:text="${zone.col}"></td>
+            <td th:text="${zone.row}"></td>
+            <td th:text="${zone.capacity}"></td>
+            <td th:text="${{zone.areaCode}}"></td>
+            <td><a th:href="@{/zone/update/{col}/{row}/{areaCode}(col=${zone.col},row=${zone.row},areaCode=${zone.areaCode})}" class="btn btn-warning" role="button">Editar</a></td>
+            <td><a th:href="@{/zone/delete/{col}/{row}/{areaCode}(col=${zone.col},row=${zone.row},areaCode=${zone.areaCode})}" class="btn btn-danger" role="button">Borrar</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Añadir Zona</a>
+</div>
+</body>
+</html>

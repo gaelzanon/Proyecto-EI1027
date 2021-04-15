@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Managers Municipales</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Managers</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>NIF</th>
+            <th>Código Area</th>
+            <th>Nombre Municipalidad</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="municipality_manager: ${municipality_managers}">
+            <td th:text="${municipality_manager.NIF}"></td>
+            <td th:text="${municipality_manager.areaCode}"></td>
+            <td th:text="${municipality_manager.munName}"></td>
+            <td th:text="${{municipality_manager.email}}"></td>
+            <td><a th:href="@{/municipality_manager/update/{NIF}(NIF=${municipality_manager.NIF})}" class="btn btn-warning" role="button">Editar</a></td>
+            <td><a th:href="@{/municipality_manager/delete/{NIF}(NIF=${municipality_manager.NIF})}" class="btn btn-danger" role="button">Borrar</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Añadir Manager</a>
+</div>
+</body>
+</html>
