@@ -1,6 +1,6 @@
-package es.uji.ei1027.projecto1027.controller;
+package es.uji.ei1027.proyecto1027.controller;
 
-import es.uji.ei1027.projecto1027.Dao.ControllerDao;
+import es.uji.ei1027.proyecto1027.Dao.ControllerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,12 +30,12 @@ public class ControllerController {
     }
     @RequestMapping(value="/add")
     public String addController(Model model) {
-        model.addAttribute("controller", new es.uji.ei1027.projecto1027.model.Controller());
+        model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
         return "controller/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("controller") es.uji.ei1027.projecto1027.model.Controller controller,
+    public String processAddSubmit(@ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
                                        BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "controller/add";
@@ -49,7 +49,7 @@ public class ControllerController {
         }
         @RequestMapping(value="/update", method = RequestMethod.POST)
         public String processUpdateSubmit(
-                @ModelAttribute("controller") es.uji.ei1027.projecto1027.model.Controller controller,
+                @ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
                 BindingResult bindingResult) {
             if (bindingResult.hasErrors())
                 return "controller/update";

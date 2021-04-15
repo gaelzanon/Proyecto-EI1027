@@ -1,6 +1,5 @@
-package es.uji.ei1027.projecto1027.model;
+package es.uji.ei1027.proyecto1027.model;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 public class Citizen {

@@ -1,4 +1,4 @@
-package es.uji.ei1027.projecto1027.model;
+package es.uji.ei1027.proyecto1027.model;
 
 public class Controller {
     private String NIF;
