@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar controller</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Llista de Controller</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>NIF</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Code Area</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="controller: ${controller}">
+        <td th:text="${controller.NIF}"></td>
+        <td th:text="${controller.name}"></td>
+        <td th:text="${controller.surname}"></td>
+        <td th:text="${controller.code_area}"></td>
+        <td th:text="${controller.Email}"></td>
+        <td><a th:href="@{/controller/update/{NIF}(NIF=${controller.NIF})}" class="btn btn-warning" role="button">Edita</a>
+        </td>
+        <td><a th:href="@{/controller/delete/{NIF}(NIF=${controller.NIF})}" class="btn btn-danger" role="button">Esborra</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add" class="btn btn-success" role="button">Afegeix controller</a>
+</body>
+</html>

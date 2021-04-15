@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Citizen</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Llista de Citizen</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>NIF</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="citizen: ${citizen}">
+        <td th:text="${citizen.NIF}"></td>
+        <td th:text="${citizen.name}"></td>
+        <td th:text="${citizen.surname}"></td>
+        <td th:text="${citizen.Address}"></td>
+        <td th:text="${citizen.Email}"></td>
+        <td><a th:href="@{/citizen/update/{NIF}(NIF=${citizen.NIF})}" class="btn btn-warning" role="button">Edita</a>
+        </td>
+        <td><a th:href="@{/citizen/delete/{NIF}(NIF=${citizen.NIF})}" class="btn btn-danger" role="button">Esborra</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add" class="btn btn-success" role="button">Afegeix citizen</a>
+</body>
+</html>
