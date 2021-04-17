@@ -46,7 +46,7 @@ public class ControllerDao {
 
     public void updateController(Controller controller) {
 
-        String SQL = "update Controller set Name = ?, Surname = ?, code_area = ?, Email = ? where NIF = ?";
+        String SQL = "update Controller set name = ?, surname = ?, code_area = ?, email = ? where NIF = ?";
         jdbcTemplate.update(SQL, controller.getName(),controller.getSurname(),controller.getCode_area(),controller.getEmail(), controller.getNIF());
 
     }

@@ -1,7 +1,6 @@
-package es.uji.ei1027.clubesportiu.dao;
+package es.uji.ei1027.proyecto1027.Dao;
 
 
-import es.uji.ei1027.clubesportiu.model.Nadador;
 import es.uji.ei1027.clubesportiu.model.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
