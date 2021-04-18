@@ -1,4 +1,4 @@
-package es.uji.ei1027.clubesportiu.model;
+package es.uji.ei1027.proyecto1027.model;
 public class Service {
     private String code ;
     private String type ;

@@ -1,6 +1,6 @@
 package es.uji.ei1027.proyecto1027.model;
 
-public class R_NArea_service {
+public class ResNatAreaService {
     private String areaCode;
     private String code;
 
@@ -22,7 +22,7 @@ public class R_NArea_service {
 
     @Override
     public String toString() {
-        return "R_NArea_service{" +
+        return "ResNatAreaService{" +
                 "areaCode='" + areaCode + '\'' +
                 ", code='" + code + '\'' +
                 '}';

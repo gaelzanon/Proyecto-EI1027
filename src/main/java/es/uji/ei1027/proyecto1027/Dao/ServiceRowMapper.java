@@ -1,7 +1,7 @@
 package es.uji.ei1027.proyecto1027.Dao;
 
 
-import es.uji.ei1027.clubesportiu.model.Service;
+import es.uji.ei1027.proyecto1027.model.Service;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,7 +1,7 @@
 package es.uji.ei1027.proyecto1027.Dao;
 
 
-import es.uji.ei1027.clubesportiu.model.Service;
+import es.uji.ei1027.proyecto1027.model.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -45,7 +45,7 @@ public void deleteService(Service service) {
 (excepte el code, que és la clau primària) */
 public void updateService(Service service) {
     jdbcTemplate.update(
-    "UPDATE service SET type=?,  description =? , innitial_date =?   WHERE code = ?",
+    "UPDATE service SET type=?,  description =? , initial_date =?   WHERE code = ?",
     service.getType(), service.getDescription(), service.getInitial_Date() , service.getCode() );
 }
 
