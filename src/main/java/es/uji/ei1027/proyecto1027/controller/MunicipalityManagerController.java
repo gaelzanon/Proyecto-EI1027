@@ -1,6 +1,6 @@
 package es.uji.ei1027.proyecto1027.controller;
 
-import es.uji.ei1027.proyecto1027.Dao.MunicipalityManagerDao;
+import es.uji.ei1027.proyecto1027.dao.MunicipalityManagerDao;
 import es.uji.ei1027.proyecto1027.model.MunicipalityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

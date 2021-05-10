@@ -1,4 +1,4 @@
-package es.uji.ei1027.proyecto1027.Dao;
+package es.uji.ei1027.proyecto1027.dao;
 
 
 import es.uji.ei1027.proyecto1027.model.Service;
@@ -35,11 +35,20 @@ public void addService(Service service) {
 }
 
 /* Esborra  */
-public void deleteService(Service service) {
-    jdbcTemplate.update(
-    "DELETE FROM service WHERE nom = ?",
-    service.getCode());
+    public void deleteService(Service service) {
+        jdbcTemplate.update(
+        "DELETE FROM service WHERE nom = ?",
+        service.getCode());
 }
+
+    /* Esborra  */
+    public void deleteService(String code) {
+        if (getService(code)!=null){
+            //Se puede hacer delete
+            String SQL = "DELETE from Citizen where NIF = ?";
+            jdbcTemplate.update(SQL,code);
+        }
+    }
 
 /* Actualitza
 (excepte el code, que és la clau primària) */

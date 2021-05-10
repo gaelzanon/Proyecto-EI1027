@@ -1,4 +1,4 @@
-package es.uji.ei1027.proyecto1027.Dao;
+package es.uji.ei1027.proyecto1027.dao;
 
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,7 @@ public class ResNatAreaServiceDao {
     public void deleteR_NArea_service(String areaCode, String code) {
         jdbcTemplate.update("DELETE from ResNatAreaService where code_area=? AND code=?", areaCode, code);
     }
+
 
     /* Obtener un ResNatAreaService */
     public ResNatAreaService getR_NArea_service(String areaCode, String code) {

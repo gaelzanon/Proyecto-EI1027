@@ -1,4 +1,4 @@
-package es.uji.ei1027.proyecto1027.Dao;
+package es.uji.ei1027.proyecto1027.dao;
 
 
 import es.uji.ei1027.proyecto1027.model.Municipality;

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Service</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Lista de Service</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="Service: ${Service}">
+        <td th:text="${Service.code}"></td>
+        <td th:text="${Service.type}"></td>
+        <td th:text="${Service.description}"></td>
+        <td th:text="${Service.date}"></td>
+        <td><a th:href="@{/Service/update/{code}(code=${Service.code})}" class="btn btn-warning" role="button">Editar</a>
+        </td>
+        <td><a th:href="@{/Service/delete/{code}(code=${Service.code})}" class="btn btn-danger" role="button">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add" class="btn btn-success" role="button">Añadir Service</a>
+</body>
+</html>

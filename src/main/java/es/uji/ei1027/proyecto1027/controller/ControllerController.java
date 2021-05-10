@@ -1,6 +1,6 @@
 package es.uji.ei1027.proyecto1027.controller;
 
-import es.uji.ei1027.proyecto1027.Dao.ControllerDao;
+import es.uji.ei1027.proyecto1027.dao.ControllerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

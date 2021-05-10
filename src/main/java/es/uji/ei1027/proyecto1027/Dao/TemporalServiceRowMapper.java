@@ -1,6 +1,6 @@
-package es.uji.ei1027.clubesportiu.dao;
+package es.uji.ei1027.proyecto1027.dao;
 
-import es.uji.ei1027.clubesportiu.model.Nadador;
+
 import es.uji.ei1027.clubesportiu.model.TemporalService;
 import org.springframework.jdbc.core.RowMapper;
 

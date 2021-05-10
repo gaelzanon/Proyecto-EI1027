@@ -1,6 +1,6 @@
 package es.uji.ei1027.proyecto1027.controller;
 
-import es.uji.ei1027.proyecto1027.Dao.ZoneDao;
+import es.uji.ei1027.proyecto1027.dao.ZoneDao;
 import es.uji.ei1027.proyecto1027.model.Zone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

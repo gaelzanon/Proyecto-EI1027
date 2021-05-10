@@ -1,10 +1,7 @@
-package es.uji.ei1027.clubesportiu.dao;
+package es.uji.ei1027.proyecto1027.dao;
 
 
 
-
-
-import es.uji.ei1027.clubesportiu.model.Service;
 import es.uji.ei1027.clubesportiu.model.TemporalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
