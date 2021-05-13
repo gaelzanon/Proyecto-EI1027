@@ -24,7 +24,7 @@ public class CitizenDao {
 
     public void addCitizen(Citizen citizen) {
         jdbcTemplate.update(
-                "INSERT INTO Citizen VALUES(?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO citizen VALUES(?, ?, ?, ?, ?, ?, ?)",
                 citizen.getNIF(),citizen.getName(),citizen.getSurname(),citizen.getEmail(), citizen.getAddress(),citizen.getdate_of_birth(),citizen.getregistration_date());
     }
 
@@ -32,14 +32,14 @@ public class CitizenDao {
     public void deleteCitizen(Citizen citizen) {
         if (getCitizen(citizen.getNIF())!=null){
             //Se puede hacer delete
-            String SQL = "DELETE from Citizen where NIF = ?";
+            String SQL = "DELETE from citizen where NIF = ?";
             jdbcTemplate.update(SQL,citizen.getNIF());
         }
     }
     public void deleteCitizen(String NIF) {
         if (getCitizen(NIF)!=null){
             //Se puede hacer delete
-            String SQL = "DELETE from Citizen where NIF = ?";
+            String SQL = "DELETE from citizen where NIF = ?";
             jdbcTemplate.update(SQL,NIF);
         }
     }
@@ -47,7 +47,7 @@ public class CitizenDao {
 
     public void updateCitizen(Citizen citizen) {
 
-        String SQL = "update Citizen set Name = ?, Surname = ?, Address = ?, Email = ?, date_of_birth = ?, registration_date = ? where NIF = ?";
+        String SQL = "update citizen set Name = ?, Surname = ?, Address = ?, Email = ?, date_of_birth = ?, registration_date = ? where NIF = ?";
         jdbcTemplate.update(SQL, citizen.getName(),citizen.getSurname(),citizen.getAddress(),citizen.getEmail(),citizen.getdate_of_birth(), citizen.getregistration_date(), citizen.getNIF());
 
     }

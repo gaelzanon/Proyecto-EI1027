@@ -66,7 +66,7 @@ public class Citizen {
 
     @Override
     public String toString() {
-        return "Citizen{" +
+        return "citizen{" +
                 "nif='" + NIF + "\'" +
                 "nom='" + name + "\'" +
                 ", surname='" + surname + "\'" +

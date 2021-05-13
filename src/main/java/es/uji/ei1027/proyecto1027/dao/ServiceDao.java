@@ -45,7 +45,7 @@ public void addService(Service service) {
     public void deleteService(String code) {
         if (getService(code)!=null){
             //Se puede hacer delete
-            String SQL = "DELETE from Citizen where NIF = ?";
+            String SQL = "DELETE from citizen where NIF = ?";
             jdbcTemplate.update(SQL,code);
         }
     }

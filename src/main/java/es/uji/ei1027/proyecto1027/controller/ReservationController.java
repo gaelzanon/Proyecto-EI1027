@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/Reservation")
+@RequestMapping("/reservation")
 public class ReservationController {
 
     private ReservationDao ReservationDao;
@@ -25,34 +25,34 @@ public class ReservationController {
 
     @RequestMapping("/list")
     public String listReservations(Model model) {
-        model.addAttribute("Reservation", ReservationDao.getReservation());
-        return "Reservation/list";
+        model.addAttribute("reservation", ReservationDao.getReservation());
+        return "reservation/list";
     }
     @RequestMapping(value="/add")
     public String addReservation(Model model) {
-        model.addAttribute("Reservation", new Reservation());
-        return "Reservation/add";
+        model.addAttribute("reservation", new Reservation());
+        return "reservation/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("Reservation") Reservation Reservation,
+    public String processAddSubmit(@ModelAttribute("reservation") Reservation Reservation,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "Reservation/add";
+            return "reservation/add";
         ReservationDao.addReservation(Reservation);
         return "redirect:list";
     }
     @RequestMapping(value="/update/{nom}", method = RequestMethod.GET)
     public String editReservation(Model model, @PathVariable String code) {
-        model.addAttribute("Reservation", ReservationDao.getReservation(code));
-        return "Reservation/update";
+        model.addAttribute("reservation", ReservationDao.getReservation(code));
+        return "reservation/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("Reservation") Reservation Reservation,
+            @ModelAttribute("reservation") Reservation Reservation,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "Reservation/update";
+            return "reservation/update";
         ReservationDao.updateReservation(Reservation);
         return "redirect:list";
     }
