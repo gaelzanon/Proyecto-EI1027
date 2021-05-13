@@ -43,8 +43,8 @@ public class ReservationController {
         return "redirect:list";
     }
     @RequestMapping(value="/update/{nom}", method = RequestMethod.GET)
-    public String editReservation(Model model, @PathVariable String NIF) {
-        model.addAttribute("Reservation", ReservationDao.getReservation(NIF));
+    public String editReservation(Model model, @PathVariable String code) {
+        model.addAttribute("Reservation", ReservationDao.getReservation(code));
         return "Reservation/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)

@@ -30,9 +30,10 @@
     <tbody>
     <tr th:each="Reservation: ${Reservation}">
         <td th:text="${Reservation.address}"></td>
+        <td th:text="${Reservation.date}"></td>
         <td th:text="${Reservation.qr}"></td>
         <td th:text="${Reservation.code}"></td>
-        <td th:text="${Reservation.creationDate}"></td>
+        <td th:text="${#temporals.format(Reservation.creationDate,'dd/MM/yyyy')}"></td>
         <td th:text="${Reservation.nifCitizen}"></td>
         <td th:text="${Reservation.state}"></td>
         <td th:text="${Reservation.startTime}"></td>
@@ -40,9 +41,9 @@
         <td th:text="${Reservation.cols}"></td>
         <td th:text="${Reservation.row}"></td>
         <td th:text="${Reservation.codeArea}"></td>
-        <td><a th:href="@{/Reservation/update/{code}(NIF=${Reservation.code})}" class="btn btn-warning" role="button">Editar</a>
+        <td><a th:href="@{/Reservation/update/{code}(code=${Reservation.code})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/Reservation/delete/{code}(NIF=${Reservation.code})}" class="btn btn-danger" role="button">Borrar</a>
+        <td><a th:href="@{/Reservation/delete/{code}(code=${Reservation.code})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>

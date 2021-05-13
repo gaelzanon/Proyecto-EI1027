@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear nou Reserva</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nou Reservation</h2>
+<form action="#" th:action="@{/Reservation/add}"
+      th:object="${reservation}" method="post">
+    <table>
+        <tr>
+            <td><label>Address</label></td>
+            <td><input type="text" th:field="*{address}" /></td>
+        </tr>
+        <tr>
+            <td><label>Date</label></td>
+            <td><input type="date" th:field="*{date}" /></td>
+        </tr>
+        <tr>
+            <td><label>QR</label></td>
+            <td><input type="text" th:field="*{qr}" /></td>
+        </tr>
+        <tr>
+            <td><label>Code</label></td>
+            <td><input type="text" th:field="*{code}" /></td>
+        </tr>
+        <tr>
+        <tr>
+            <td><label>creationDate</label></td>
+            <td><input type="text" th:field="*{creationDate}" /></td>
+        </tr>
+        <tr>
+            <td><label>nifCitizen</label></td>
+            <td><input type="text" th:field="*{nifCitizen}" /></td>
+        </tr>
+        <tr>
+
+        <tr>
+            <td><label>state</label></td>
+            <td><input type="text" th:field="*{state}" /></td>
+        </tr>
+        <tr>
+            <td><label>startTime</label></td>
+            <td><input type="text" th:field="*{startTime}" /></td>
+        </tr>
+        <tr>
+            <td><label>endTime</label></td>
+            <td><input type="text" th:field="*{endTime}" /></td>
+        </tr>
+        <tr>
+            <td><label>cols</label></td>
+            <td><input type="text" th:field="*{cols}" /></td>
+        </tr>
+        <tr>
+            <td><label>rows</label></td>
+            <td><input type="text" th:field="*{rows}" /></td>
+        </tr>
+        <tr>
+            <td><label>codeArea</label></td>
+            <td><input type="text" th:field="*{codeArea}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Afegeix Reservation" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

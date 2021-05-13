@@ -1,5 +1,7 @@
 package es.uji.ei1027.proyecto1027.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Reservation {
@@ -9,8 +11,9 @@ public class Reservation {
     private String code;
     private LocalDate creationDate;
     private String nifCitizen;
-    private StateReservationEnum state;
+    private String state;
     private LocalDate startTime;
+    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     private LocalDate endTime;
     private int cols;
     private int row;
@@ -68,11 +71,11 @@ public class Reservation {
     }
 
     public String getState() {
-        return state.toString();
+        return state;
     }
 
     public void setState(String state) {
-        this.state = StateReservationEnum.valueOf(state);
+        this.state = state;
     }
 
     public LocalDate getStartTime() {
