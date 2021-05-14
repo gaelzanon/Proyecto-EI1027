@@ -41,7 +41,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +"code='" + code + " \' " +
+        return "service{" +"code='" + code + " \' " +
 		", type='" + type + " \' " +
 		", description='" + description + " \' " +
 		", initial_Date=" + initial_Date +

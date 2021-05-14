@@ -52,7 +52,7 @@ public class Controller {
     }
     @Override
     public String toString() {
-        return "Citizen{" +
+        return "citizen{" +
                 "nif='" + NIF + "\'" +
                 "nom='" + name + "\'" +
                 ", surname='" + surname + "\'" +

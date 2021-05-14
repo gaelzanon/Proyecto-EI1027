@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/Service")
+@RequestMapping("/service")
 public class ServiceController {
 
     private ServiceDao ServiceDao;
@@ -25,40 +25,40 @@ public class ServiceController {
 
     @RequestMapping("/list")
     public String listServices(Model model) {
-        model.addAttribute("Service", ServiceDao.getServices());
-        return "Service/list";
+        model.addAttribute("service", ServiceDao.getServices());
+        return "service/list";
     }
     @RequestMapping(value="/add")
     public String addService(Model model) {
-        model.addAttribute("Service", new Service());
-        return "Service/add";
+        model.addAttribute("service", new Service());
+        return "service/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("Service") Service Service,
+    public String processAddSubmit(@ModelAttribute("service") Service Service,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "Service/add";
+            return "service/add";
         ServiceDao.addService(Service);
         return "redirect:list";
     }
-    @RequestMapping(value="/update/{nom}", method = RequestMethod.GET)
-    public String editService(Model model, @PathVariable String NIF) {
-        model.addAttribute("Service", ServiceDao.getService(NIF));
-        return "Service/update";
+    @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
+    public String editService(Model model, @PathVariable String code) {
+        model.addAttribute("service", ServiceDao.getService(code));
+        return "service/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("Service") Service Service,
+            @ModelAttribute("service") Service Service,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "Service/update";
+            return "service/update";
         ServiceDao.updateService(Service);
         return "redirect:list";
     }
-    @RequestMapping(value="/delete/{nom}")
-    public String processDelete(@PathVariable Service service) {
-        ServiceDao.deleteService(service);
+    @RequestMapping(value="/delete/{code}")
+    public String processDelete(@PathVariable String code) {
+        ServiceDao.deleteService(code);
         return "redirect:../list";
     }
 

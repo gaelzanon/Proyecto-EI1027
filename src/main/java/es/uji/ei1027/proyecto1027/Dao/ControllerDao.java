@@ -23,7 +23,7 @@ public class ControllerDao {
 
     public void addController(Controller controller) {
         jdbcTemplate.update(
-                "INSERT INTO Controller VALUES(?, ?, ?, ?, ?)",
+                "INSERT INTO controller VALUES(?, ?, ?, ?, ?)",
                 controller.getNIF(),controller.getName(),controller.getSurname(),controller.getEmail(), controller.getCode_area());
     }
 
@@ -31,14 +31,14 @@ public class ControllerDao {
     public void deleteController(Controller controller) {
         if (getController(controller.getNIF())!=null){
             //Se puede hacer delete
-            String SQL = "DELETE from Controller where NIF = ?";
+            String SQL = "DELETE from controller where NIF = ?";
             jdbcTemplate.update(SQL,controller.getNIF());
         }
     }
     public void deleteController(String NIF) {
         if (getController(NIF)!=null){
             //Se puede hacer delete
-            String SQL = "DELETE from Controller where NIF = ?";
+            String SQL = "DELETE from controller where NIF = ?";
             jdbcTemplate.update(SQL,NIF);
         }
     }
@@ -46,7 +46,7 @@ public class ControllerDao {
 
     public void updateController(Controller controller) {
 
-        String SQL = "update Controller set name = ?, surname = ?, code_area = ?, email = ? where NIF = ?";
+        String SQL = "update controller set name = ?, surname = ?, code_area = ?, email = ? where NIF = ?";
         jdbcTemplate.update(SQL, controller.getName(),controller.getSurname(),controller.getCode_area(),controller.getEmail(), controller.getNIF());
 
     }
@@ -55,7 +55,7 @@ public class ControllerDao {
         try {
 
             Controller c = jdbcTemplate.queryForObject(
-                    "SELECT * FROM Controller WHERE NIF =?",
+                    "SELECT * FROM controller WHERE NIF =?",
                     new ControllerRowMapper(),
                     NIF);
             return c;
@@ -68,7 +68,7 @@ public class ControllerDao {
 
     public List<Controller> getControllers() {
         try {
-            return jdbcTemplate.query("SELECT * FROM Controller",new ControllerRowMapper());
+            return jdbcTemplate.query("SELECT * FROM controller",new ControllerRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Controller>();

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestionar Service</title>
+    <title>Gestionar service</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1>Lista de Service</h1>
+<h1>Lista de service</h1>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -20,18 +20,18 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="Service: ${Service}">
-        <td th:text="${Service.code}"></td>
-        <td th:text="${Service.type}"></td>
-        <td th:text="${Service.description}"></td>
-        <td th:text="${Service.date}"></td>
-        <td><a th:href="@{/Service/update/{code}(code=${Service.code})}" class="btn btn-warning" role="button">Editar</a>
+    <tr th:each="service: ${service}">
+        <td th:text="${service.code}"></td>
+        <td th:text="${service.type}"></td>
+        <td th:text="${service.description}"></td>
+        <td th:text="${service.initial_Date}"></td>
+        <td><a th:href="@{/service/update/{code}(code=${service.code})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/Service/delete/{code}(code=${Service.code})}" class="btn btn-danger" role="button">Borrar</a>
+        <td><a th:href="@{/service/delete/{code}(code=${service.code})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Añadir Service</a>
+<a href="add" class="btn btn-success" role="button">Añadir service</a>
 </body>
 </html>

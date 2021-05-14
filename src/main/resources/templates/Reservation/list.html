@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestionar Reservation</title>
+    <title>Gestionar reservation</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1>Lista de Reservation</h1>
+<h1>Lista de reservation</h1>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -28,22 +28,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="Reservation: ${Reservation}">
-        <td th:text="${Reservation.address}"></td>
-        <td th:text="${Reservation.date}"></td>
-        <td th:text="${Reservation.qr}"></td>
-        <td th:text="${Reservation.code}"></td>
-        <td th:text="${#temporals.format(Reservation.creationDate,'dd/MM/yyyy')}"></td>
-        <td th:text="${Reservation.nifCitizen}"></td>
-        <td th:text="${Reservation.state}"></td>
-        <td th:text="${Reservation.startTime}"></td>
-        <td th:text="${Reservation.endTime}"></td>
-        <td th:text="${Reservation.cols}"></td>
-        <td th:text="${Reservation.row}"></td>
-        <td th:text="${Reservation.codeArea}"></td>
-        <td><a th:href="@{/Reservation/update/{code}(code=${Reservation.code})}" class="btn btn-warning" role="button">Editar</a>
+    <tr th:each="reservation: ${reservation}">
+        <td th:text="${reservation.address}"></td>
+        <td th:text="${reservation.date}"></td>
+        <td th:text="${reservation.qr}"></td>
+        <td th:text="${reservation.code}"></td>
+        <td th:text="${#temporals.format(reservation.creationDate,'dd/MM/yyyy')}"></td>
+        <td th:text="${reservation.nifCitizen}"></td>
+        <td th:text="${reservation.state}"></td>
+        <td th:text="${reservation.startTime}"></td>
+        <td th:text="${reservation.endTime}"></td>
+        <td th:text="${reservation.cols}"></td>
+        <td th:text="${reservation.row}"></td>
+        <td th:text="${reservation.codeArea}"></td>
+        <td><a th:href="@{/reservation/update/{code}(code=${reservation.code})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/Reservation/delete/{code}(code=${Reservation.code})}" class="btn btn-danger" role="button">Borrar</a>
+        <td><a th:href="@{/reservation/delete/{code}(code=${reservation.code})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>

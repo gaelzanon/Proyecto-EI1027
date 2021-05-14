@@ -25,7 +25,7 @@ public void setDataSource(DataSource dataSource) {
 public void addService(Service service) {
 	try {
         jdbcTemplate.update( 
-        "INSERT INTO service VALUES(?, ?, ?, ?, ?)" ,
+        "INSERT INTO service VALUES(?, ?, ?, ?)" ,
         service.getCode() , service.getType() , service.getDescription() ,
         service.getInitial_Date());
 	}catch(Exception e ){
@@ -37,7 +37,7 @@ public void addService(Service service) {
 /* Esborra  */
     public void deleteService(Service service) {
         jdbcTemplate.update(
-        "DELETE FROM service WHERE nom = ?",
+        "DELETE FROM service WHERE code = ?",
         service.getCode());
 }
 
@@ -45,7 +45,7 @@ public void addService(Service service) {
     public void deleteService(String code) {
         if (getService(code)!=null){
             //Se puede hacer delete
-            String SQL = "DELETE from Citizen where NIF = ?";
+            String SQL = "DELETE FROM service WHERE code = ?";
             jdbcTemplate.update(SQL,code);
         }
     }
@@ -54,7 +54,7 @@ public void addService(Service service) {
 (excepte el code, que és la clau primària) */
 public void updateService(Service service) {
     jdbcTemplate.update(
-    "UPDATE service SET type=?,  description =? , initial_date =?   WHERE code = ?",
+    "UPDATE service SET type=?,  description =? , initial_Date =?   WHERE code = ?",
     service.getType(), service.getDescription(), service.getInitial_Date() , service.getCode() );
 }
 
