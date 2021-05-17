@@ -45,11 +45,7 @@ public void addService(Service service) {
     public void deleteService(String code) {
         if (getService(code)!=null){
             //Se puede hacer delete
-<<<<<<< HEAD:src/main/java/es/uji/ei1027/proyecto1027/Dao/ServiceDao.java
             String SQL = "DELETE FROM service WHERE code = ?";
-=======
-            String SQL = "DELETE from citizen where NIF = ?";
->>>>>>> 4d931217bc856976012a328e3035264030cf5bc9:src/main/java/es/uji/ei1027/proyecto1027/dao/ServiceDao.java
             jdbcTemplate.update(SQL,code);
         }
     }
@@ -60,6 +56,7 @@ public void updateService(Service service) {
     jdbcTemplate.update(
     "UPDATE service SET type=?,  description =? , initial_Date =?   WHERE code = ?",
     service.getType(), service.getDescription(), service.getInitial_Date() , service.getCode() );
+    System.out.println("No funciona");
 }
 
 /* listar */

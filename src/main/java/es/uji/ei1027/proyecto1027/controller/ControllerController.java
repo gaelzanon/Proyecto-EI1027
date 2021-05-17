@@ -42,25 +42,25 @@ public class ControllerController {
         ControllerDao.addController(controller);
         return "redirect:list";
     }
-        @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
-        public String editController(Model model, @PathVariable String NIF) {
-            model.addAttribute("controller", ControllerDao.getController(NIF));
+    @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
+    public String editController(Model model, @PathVariable String NIF) {
+        model.addAttribute("controller", ControllerDao.getController(NIF));
+        return "controller/update";
+    }
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    public String processUpdateSubmit(
+            @ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
             return "controller/update";
-        }
-        @RequestMapping(value="/update", method = RequestMethod.POST)
-        public String processUpdateSubmit(
-                @ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
-                BindingResult bindingResult) {
-            if (bindingResult.hasErrors())
-                return "controller/update";
-            ControllerDao.updateController(controller);
-            return "redirect:list";
-        }
-        @RequestMapping(value="/delete/{NIF}")
-        public String processDelete(@PathVariable String NIF) {
-            ControllerDao.deleteController(NIF);
-            return "redirect:../list";
-        }
+        ControllerDao.updateController(controller);
+        return "redirect:list";
+    }
+    @RequestMapping(value="/delete/{NIF}")
+    public String processDelete(@PathVariable String NIF) {
+        ControllerDao.deleteController(NIF);
+        return "redirect:../list";
+    }
 
 
 

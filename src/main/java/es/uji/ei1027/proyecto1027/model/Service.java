@@ -1,9 +1,18 @@
 package es.uji.ei1027.proyecto1027.model;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
+
 public class Service {
     private String code ;
     private String type ;
     private String description;
-    private String initial_Date ;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate initial_Date ;
+
+
     public Service() {}
     
     public String getCode() {
@@ -30,11 +39,11 @@ public class Service {
         this.description = description;
     }
 
-    public String getInitial_Date() {
+    public LocalDate getInitial_Date() {
         return initial_Date ;
     }
 
-    public void setInitial_Date(String initial_Date) {
+    public void setInitial_Date(LocalDate initial_Date) {
         this.initial_Date = initial_Date;
     }
 

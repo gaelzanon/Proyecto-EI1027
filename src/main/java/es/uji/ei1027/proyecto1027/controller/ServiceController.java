@@ -42,21 +42,19 @@ public class ServiceController {
         ServiceDao.addService(Service);
         return "redirect:list";
     }
-<<<<<<< HEAD
+
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
     public String editService(Model model, @PathVariable String code) {
         model.addAttribute("service", ServiceDao.getService(code));
-=======
-    @RequestMapping(value="/update/{nom}", method = RequestMethod.GET)
-    public String editService(Model model, @PathVariable String NIF) {
-        model.addAttribute("service", ServiceDao.getService(NIF));
->>>>>>> 4d931217bc856976012a328e3035264030cf5bc9
+
         return "service/update";
     }
+
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("service") Service Service,
             BindingResult bindingResult) {
+        System.out.println(Service.getInitial_Date());
         if (bindingResult.hasErrors())
             return "service/update";
         ServiceDao.updateService(Service);

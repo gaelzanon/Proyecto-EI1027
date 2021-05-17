@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Natural Area</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Lista de Natural Area</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Code_area</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>current_capacity</th>
+        <th>max_capacity</th>
+        <th>description</th>
+        <th>Type</th>
+        <th>Reg_Date</th>
+        <th>StartTime</th>
+        <th>EndTime</th>
+        <th>Mun_code</th>
+
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="naturalarea: ${naturalarea}">
+        <td th:text="${naturalarea.codeArea}"></td>
+        <td th:text="${naturalarea.name}"></td>
+        <td th:text="${naturalarea.address}"></td>
+        <td th:text="${naturalarea.currentCapacity}"></td>
+        <td th:text="${naturalarea.maxCapacity}"></td>
+        <td th:text="${naturalarea.descripcion}"></td>
+        <td th:text="${naturalarea.type}"></td>
+        <td th:text="${naturalarea.registrationDate}"></td>
+        <td th:text="${naturalarea.state}"></td>
+        <td th:text="${naturalarea.startTime}"></td>
+        <td th:text="${naturalarea.endTime}"></td>
+        <td th:text="${naturalarea.munCode}"></td>
+
+        <td><a th:href="@{/naturalarea/update/{codeArea}(codeArea=${naturalarea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
+        </td>
+        <td><a th:href="@{/naturalarea/delete/{codeArea}(codeArea=${naturalarea.codeArea})}" class="btn btn-danger" role="button">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add" class="btn btn-success" role="button">Añadir Natual Area</a>
+</body>
+</html>

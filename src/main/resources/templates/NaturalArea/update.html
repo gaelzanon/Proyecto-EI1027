@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Natural Area</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Modifica Natural Area</h2>
+<form action="#" th:action="@{/naturalarea/update}"
+      th:object="${naturalarea}" method="post">
+    <table>
+        <tr>
+            <td><label>CodeArea</label></td>
+            <td><input type="text" th:field="*{codeArea}" /></td>
+        </tr>
+        <tr>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Address</label></td>
+            <td><input type="text" th:field="*{address}" /></td>
+        </tr>
+        <tr>
+            <td><label>CurrentCapacity</label></td>
+            <td><input type="number" th:field="*{currentCapacity}" /></td>
+        </tr>
+        <tr>
+        <tr>
+            <td><label>MaxCapacity</label></td>
+            <td><input type="number" th:field="*{maxCapacity}" /></td>
+        </tr>
+        <tr>
+            <td><label>Descripcion</label></td>
+            <td><input type="text" th:field="*{descripcion}" /></td>
+        </tr>
+        <tr>
+
+        <tr>
+            <td><label>Type</label></td>
+            <td><input type="text" th:field="*{type}" /></td>
+        </tr>
+        <tr>
+            <td><label>RegistrationDate</label></td>
+            <td><input type="text" th:field="*{registrationDate}" /></td>
+        </tr>
+        <tr>
+            <td><label>State</label></td>
+            <td><input type="text" th:field="*{state}" /></td>
+        </tr>
+        <tr>
+            <td><label>StartTime</label></td>
+            <td><input type="text" th:field="*{startTime}" /></td>
+        </tr>
+        <tr>
+            <td><label>EndTime</label></td>
+            <td><input type="text" th:field="*{endTime}" /></td>
+        </tr>
+        <tr>
+            <td><label>MunCode</label></td>
+            <td><input type="text" th:field="*{munCode}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Afegeix Natural Area" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

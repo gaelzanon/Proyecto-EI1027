@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public final class ServiceRowMapper implements RowMapper<Service> {
     public Service mapRow(ResultSet rs, int rowNum) throws SQLException
@@ -14,7 +15,7 @@ Service service = new Service();
 service.setCode(rs.getString( "code" ));
 service.setType(rs.getString( "type" ));
 service.setDescription(rs.getString( "description" ));
-service.setInitial_Date(rs.getString( "initial_date" ));
+service.setInitial_Date(rs.getObject( "initial_date" , LocalDate.class));
 return service;
 }
 }
