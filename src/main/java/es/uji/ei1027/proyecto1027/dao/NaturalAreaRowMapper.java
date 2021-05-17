@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class NaturalAreaRowMapper implements RowMapper<NaturalArea> {
@@ -19,10 +20,10 @@ public class NaturalAreaRowMapper implements RowMapper<NaturalArea> {
         naturalArea.setMaxCapacity(rs.getInt("max_capacity"));
         naturalArea.setDescripcion(rs.getString("description"));
         naturalArea.setType(rs.getString("type"));
-        naturalArea.setRegistrationDate(LocalDate.parse(rs.getString("reg_date"), DateTimeFormatter.ofPattern("d/MM/yyyy")));
+        naturalArea.setRegistrationDate(rs.getObject("reg_date",LocalDate.class));
         naturalArea.setState(rs.getString("state"));
-        naturalArea.setStartTime(LocalDate.parse(rs.getString("start_time"), DateTimeFormatter.ofPattern("d/MM/yyyy")));
-        naturalArea.setEndTime(LocalDate.parse(rs.getString("end_time"), DateTimeFormatter.ofPattern("d/MM/yyyy")));
+        naturalArea.setStartTime(rs.getObject("start_time", LocalTime.class));
+        naturalArea.setEndTime(rs.getObject("end_time",LocalTime.class));
         naturalArea.setMunCode(rs.getString("mun_code"));
         return naturalArea;
     }
