@@ -47,7 +47,7 @@ public class CitizenDao {
 
     public void updateCitizen(Citizen citizen) {
 
-        String SQL = "update citizen set Name = ?, Surname = ?, Address = ?, Email = ?, date_of_birth = ?, registration_date = ? where NIF = ?";
+        String SQL = "update citizen set name = ?, surname = ?, Address = ?, Email = ?, date_of_birth = ?, registration_date = ? where NIF = ?";
         jdbcTemplate.update(SQL, citizen.getName(),citizen.getSurname(),citizen.getAddress(),citizen.getEmail(),citizen.getdate_of_birth(), citizen.getregistration_date(), citizen.getNIF());
 
     }

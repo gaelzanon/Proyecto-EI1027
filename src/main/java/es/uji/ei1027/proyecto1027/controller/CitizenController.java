@@ -42,7 +42,7 @@ public class CitizenController {
         CitizenDao.addCitizen(citizen);
         return "redirect:list";
     }
-    @RequestMapping(value="/update/{nom}", method = RequestMethod.GET)
+    @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
     public String editCitizen(Model model, @PathVariable String NIF) {
         model.addAttribute("citizen", CitizenDao.getCitizen(NIF));
         return "citizen/update";
@@ -56,7 +56,7 @@ public class CitizenController {
         CitizenDao.updateCitizen(citizen);
         return "redirect:list";
     }
-    @RequestMapping(value="/delete/{nom}")
+    @RequestMapping(value="/delete/{NIF}")
     public String processDelete(@PathVariable String NIF) {
         CitizenDao.deleteCitizen(NIF);
         return "redirect:../list";

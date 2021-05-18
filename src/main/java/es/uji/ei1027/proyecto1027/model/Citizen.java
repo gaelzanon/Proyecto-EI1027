@@ -66,14 +66,14 @@ public class Citizen {
 
     @Override
     public String toString() {
-        return "citizen{" +
-                "nif='" + NIF + "\'" +
-                "nom='" + name + "\'" +
-                ", surname='" + surname + "\'" +
-                ", email='" + email + "\'" +
-                ", Address=" + address +
-                ", fechaNacimiento='" + date_of_birth + "\'" +
-                ", fechaRegistro='" + registration_date + "\'" +
-                "}";
+        return "Citizen{" +
+                "NIF='" + NIF + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", date_of_birth=" + date_of_birth +
+                ", registration_date=" + registration_date +
+                '}';
     }
 }

@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear nou nadador</title>
+    <title>Crear nou Citizen</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nou nadador</h2>
+<h2>Nou Citizen</h2>
 <form action="#" th:action="@{/citizen/add}"
       th:object="${citizen}" method="post">
     <table>
         <tr>
-            <td><label>Nom</label></td>
-            <td><input type="text" th:field="*{nom}" /></td>
+            <td><label>NIF</label></td>
+            <td><input type="text" th:field="*{NIF}" /></td>
         </tr>
         <tr>
-            <td><label>Num. Federat</label></td>
-            <td><input type="text" th:field="*{numFederat}" /></td>
+            <td><label>Name</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
         </tr>
         <tr>
-            <td><label>Pais</label></td>
-            <td><input type="text" th:field="*{pais}" /></td>
+            <td><label>Surname</label></td>
+            <td><input type="text" th:field="*{surname}" /></td>
         </tr>
         <tr>
-            <td><label>Edat</label></td>
-            <td><input type="number" th:field="*{edat}" /></td>
+            <td><label>Address</label></td>
+            <td><input type="text" th:field="*{Address}" /></td>
         </tr>
         <tr>
-            <td><label>Genere</label></td>
-            <td><input type="text" th:field="*{genere}" /></td>
+            <td><label>Email</label></td>
+            <td><input type="text" th:field="*{Email}" /></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Afegeix nadador" /></td>
+            <td colspan="2"><input type="submit" value="Afegeix Citizen" /></td>
         </tr>
     </table>
 </form>

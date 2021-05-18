@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear nou controller</title>
+    <title>Modificar controller</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Modifica el Service</h2>
+<h2>Modifica el Controller</h2>
 <form action="#" th:action="@{/controller/update}"
       th:object="${controller}" method="post">
     <table>
         <tr>
-            <td><label>NIF</label></td>
-            <td><input type="text" th:field="*{NIF}" /></td>
+            <td><input type="hidden" th:field="*{NIF}" /></td>
         </tr>
         <tr>
             <td><label>Name</label></td>
