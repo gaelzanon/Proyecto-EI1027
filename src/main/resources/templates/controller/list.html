@@ -26,7 +26,7 @@
         <td th:text="${controller.name}"></td>
         <td th:text="${controller.surname}"></td>
         <td th:text="${controller.code_area}"></td>
-        <td th:text="${controller.Email}"></td>
+        <td th:text="${controller.email}"></td>
         <td><a th:href="@{/controller/update/{NIF}(NIF=${controller.NIF})}" class="btn btn-warning" role="button">Editar</a>
         </td>
         <td><a th:href="@{/controller/delete/{NIF}(NIF=${controller.NIF})}" class="btn btn-danger" role="button">Borrar</a>
