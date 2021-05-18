@@ -20,7 +20,7 @@ public class ControllerDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-
+    //o bien no los anyade bien o bien no los ensenya bien. Nif y Name salen al reves.
     public void addController(Controller controller) {
         jdbcTemplate.update(
                 "INSERT INTO controller VALUES(?, ?, ?, ?, ?)",
