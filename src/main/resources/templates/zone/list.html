@@ -7,21 +7,20 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div class="container">
     <h1>Lista de Zonas</h1>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Columna</th>
             <th>Fila</th>
-            <th>Capacidad</th>
+            <th>Máxima Capacidad</th>
             <th>Código Area</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="zone: ${zones}">
+        <tr th:each="zone: ${zone}">
             <td th:text="${zone.col}"></td>
             <td th:text="${zone.row}"></td>
             <td th:text="${zone.capacity}"></td>
@@ -32,6 +31,5 @@
         </tbody>
     </table>
     <a href="add" class="btn btn-success" role="button">Añadir Zona</a>
-</div>
 </body>
 </html>

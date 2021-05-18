@@ -22,7 +22,7 @@ public class MunicipalityManagerController {
 
     @RequestMapping("/list")
     public String listMunicipalityManager(Model model) {
-        model.addAttribute("municipalityManagers", managerDao.getMunicipalityManagers());
+        model.addAttribute("municipalityManager", managerDao.getMunicipalityManagers());
         return "municipalityManager/list";
     }
 

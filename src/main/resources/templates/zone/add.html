@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Crear nova Zona</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nova Zona</h2>
+<form action="#" th:action="@{/zone/add}"
+      th:object="${zone}" method="post">
+  <table>
+    <tr>
+      <td><label>Columna</label></td>
+      <td><input type="number" th:field="*{col}" /></td>
+    </tr>
+    <tr>
+      <td><label>Fila</label></td>
+      <td><input type="number" th:field="*{row}" /></td>
+    </tr>
+    <tr>
+      <td><label>Máxima Capacidad</label></td>
+      <td><input type="number" th:field="*{capacity}" /></td>
+    </tr>
+    <tr>
+      <td><label>Código Area</label></td>
+      <td><input type="text" th:field="*{areaCode}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="Añadir Zona" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

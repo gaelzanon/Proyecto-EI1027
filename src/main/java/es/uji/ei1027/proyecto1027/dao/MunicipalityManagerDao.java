@@ -30,7 +30,7 @@ public class MunicipalityManagerDao {
 
     /* Modificar los datos de un manager */
     public void updateMunicipalityManager(MunicipalityManager munManager) {
-        jdbcTemplate.update("UPDATE Municipality_manager SET code=?, mun_name=?, email=?", munManager.getAreaCode(), munManager.getMunicipalityName(), munManager.getEmail());
+        jdbcTemplate.update("UPDATE Municipality_manager SET code=?, mun_name=?, email=? where NIF=?", munManager.getAreaCode(), munManager.getMunicipalityName(), munManager.getEmail(), munManager.getNIF());
     }
 
     /* Obtener una zona mediante su NIF */

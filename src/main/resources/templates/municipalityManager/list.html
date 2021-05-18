@@ -7,7 +7,6 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div class="container">
     <h1>Lista de Managers</h1>
     <table class="table table-striped">
         <thead>
@@ -21,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="municipalityManager: ${municipalityManagers}">
+        <tr th:each="municipalityManager: ${municipalityManager}">
             <td th:text="${municipalityManager.NIF}"></td>
             <td th:text="${municipalityManager.areaCode}"></td>
             <td th:text="${municipalityManager.munName}"></td>
@@ -32,6 +31,5 @@
         </tbody>
     </table>
     <a href="add" class="btn btn-success" role="button">Añadir Manager</a>
-</div>
 </body>
 </html>
