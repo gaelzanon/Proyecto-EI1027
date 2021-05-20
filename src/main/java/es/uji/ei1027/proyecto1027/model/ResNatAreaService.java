@@ -1,15 +1,15 @@
 package es.uji.ei1027.proyecto1027.model;
 
 public class ResNatAreaService {
-    private String areaCode;
+    private String code_area;
     private String code;
 
-    public String getAreaCode() {
-        return areaCode;
+    public String getCode_area() {
+        return code_area;
     }
 
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
+    public void setCode_area(String code_area) {
+        this.code_area = code_area;
     }
 
     public String getCode() {
@@ -23,7 +23,7 @@ public class ResNatAreaService {
     @Override
     public String toString() {
         return "ResNatAreaService{" +
-                "areaCode='" + areaCode + '\'' +
+                "Code_area='" + code_area + '\'' +
                 ", code='" + code + '\'' +
                 '}';
     }

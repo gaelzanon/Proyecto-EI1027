@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear nou Service</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nou Service</h2>
+<form action="#" th:action="@{/resNatAreaSer/add}"
+      th:object="${resNatAreaSer}" method="post">
+    <table>
+        <tr>
+            <td><label>CodeArea</label></td>
+            <td><input type="text" th:field="*{code_area}" /></td>
+        </tr>
+        <tr>
+            <td><label>Code</label></td>
+            <td><input type="text" th:field="*{code}" /></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><input type="submit" value="Afegeix Relacio" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
