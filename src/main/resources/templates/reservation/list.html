@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
 <head>
     <title>Gestionar reservation</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
 </head>
 <body>
+<div layout:fragment="content">
 <h1>Lista de reservation</h1>
 <table class="table table-striped">
     <thead>
@@ -49,5 +54,6 @@
     </tbody>
 </table>
 <a href="add" class="btn btn-success" role="button">Añadir Reserva</a>
+</div>
 </body>
 </html>

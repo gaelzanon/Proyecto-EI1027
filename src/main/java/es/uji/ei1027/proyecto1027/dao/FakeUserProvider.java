@@ -14,12 +14,12 @@ public class FakeUserProvider implements UserDao {
     public FakeUserProvider() {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
         UserDetails userDavid = new UserDetails();
-        userDavid.setUsername("David");
+        userDavid.setUsername("david");
         userDavid.setPassword(passwordEncryptor.encryptPassword("david"));
         knownUsers.put("david", userDavid);
 
         UserDetails userFelipe = new UserDetails();
-        userFelipe.setUsername("Felipe");
+        userFelipe.setUsername("felipe");
         userFelipe.setPassword(passwordEncryptor.encryptPassword("felipe"));
         knownUsers.put("felipe", userFelipe);
     }

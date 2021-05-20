@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
 <head>
     <title>Login</title>
     <meta charset="UTF-8"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
 
 </head>
 <body>
+<div layout:fragment="content">
     <h2>Acceso</h2>
     <form action="#" th:action="@{/login}"
           th:object="${user}" method="post">
@@ -22,5 +27,6 @@
         </p>
         <input type="submit" value="Acceder" />
     </form>
+</div>
 </body>
 </html>

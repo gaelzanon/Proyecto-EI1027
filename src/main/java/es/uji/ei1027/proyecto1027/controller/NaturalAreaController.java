@@ -5,6 +5,7 @@ import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
 import es.uji.ei1027.proyecto1027.model.NaturalArea;
 
+import es.uji.ei1027.proyecto1027.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/naturalArea")
@@ -26,7 +29,12 @@ public class NaturalAreaController {
     }
 
     @RequestMapping("/list")
-    public String listnaturalAreas(Model model) {
+    public String listnaturalAreas(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
         return "naturalArea/list";
     }

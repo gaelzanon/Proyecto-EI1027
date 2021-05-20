@@ -41,18 +41,12 @@ public class LoginController {
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
         session.setAttribute("user", user);
-
-        // Torna a la pàgina principal
-        String nextUrl = (String) session.getAttribute("nextUrl");
-        if (!nextUrl.trim().equals("")) {
-            return "redirect:/" + nextUrl;
-        }
         return "redirect:/";
     }
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
