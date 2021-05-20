@@ -18,10 +18,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="resnatareaser: ${resnatareaser}">
-        <td th:text="${resnatareaser.code_area}"></td>
-        <td th:text="${resnatareaser.code}"></td>
-        <td><a th:href="@{/resnatareaser/delete/{code_area}(code_area=${resnatareaser.code_area})}" class="btn btn-danger" role="button">Borrar</a>
+    <tr th:each="resNatAreaSer: ${resNatAreaSer}">
+        <td th:text="${resNatAreaSer.code_area}"></td>
+        <td th:text="${resNatAreaSer.code}"></td>
+        <td><a th:href="@{/resNatAreaSer/delete/{code_area}(code_area=${resNatAreaSer.code_area})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>

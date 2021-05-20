@@ -28,7 +28,7 @@
         <tr th:each="municipalityManager: ${municipalityManager}">
             <td th:text="${municipalityManager.NIF}"></td>
             <td th:text="${municipalityManager.areaCode}"></td>
-            <td th:text="${municipalityManager.munName}"></td>
+            <td th:text="${municipalityManager.municipalityName}"></td>
             <td th:text="${{municipalityManager.email}}"></td>
             <td><a th:href="@{/municipalityManager/update/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-warning" role="button">Editar</a></td>
             <td><a th:href="@{/municipalityManager/delete/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-danger" role="button">Borrar</a></td>

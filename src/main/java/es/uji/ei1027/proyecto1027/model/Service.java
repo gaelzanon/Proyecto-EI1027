@@ -50,7 +50,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "service{" +"code='" + code + " \' " +
+        return "Service{" +"code='" + code + " \' " +
 		", type='" + type + " \' " +
 		", description='" + description + " \' " +
 		", initial_Date=" + initial_Date +

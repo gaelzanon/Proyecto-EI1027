@@ -25,18 +25,18 @@ public class ResNatAreaServiceController {
 
     @RequestMapping("/list")
     public String listResNatAreaServices(Model model) {
-        model.addAttribute("resNatAreaService", ResNatAreaServiceDao.getR_NArea_services());
+        model.addAttribute("resNatAreaSer", ResNatAreaServiceDao.getR_NArea_services());
         System.out.println(ResNatAreaServiceDao.getR_NArea_services());
         return "resNatAreaSer/list";
     }
     @RequestMapping(value="/add")
     public String addResNatAreaService(Model model) {
-        model.addAttribute("resNatAreaService", new ResNatAreaService());
+        model.addAttribute("resNatAreaSer", new ResNatAreaService());
         return "resNatAreaSer/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("resNatAreaService") ResNatAreaService ResNatAreaService,
+    public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService ResNatAreaService,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";

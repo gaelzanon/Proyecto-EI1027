@@ -33,28 +33,32 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="naturalarea: ${naturalarea}">
-        <td th:text="${naturalarea.codeArea}"></td>
-        <td th:text="${naturalarea.name}"></td>
-        <td th:text="${naturalarea.address}"></td>
-        <td th:text="${naturalarea.currentCapacity}"></td>
-        <td th:text="${naturalarea.maxCapacity}"></td>
-        <td th:text="${naturalarea.descripcion}"></td>
-        <td th:text="${naturalarea.name}"></td>
-        <td th:text="${naturalarea.registrationDate}"></td>
-        <td th:text="${naturalarea.state}"></td>
-        <td th:text="${naturalarea.startTime}"></td>
-        <td th:text="${naturalarea.endTime}"></td>
-        <td th:text="${naturalarea.munCode}"></td>
+    <tr th:each="naturalArea: ${naturalArea}">
+        <td th:text="${naturalArea.codeArea}"></td>
+        <td th:text="${naturalArea.name}"></td>
+        <td th:text="${naturalArea.address}"></td>
+        <td th:text="${naturalArea.currentCapacity}"></td>
+        <td th:text="${naturalArea.maxCapacity}"></td>
+        <td th:text="${naturalArea.descripcion}"></td>
+        <td th:text="${naturalArea.name}"></td>
+        <td th:text="${naturalArea.registrationDate}"></td>
+        <td th:text="${naturalArea.state}"></td>
+        <td th:text="${naturalArea.startTime}"></td>
+        <td th:text="${naturalArea.endTime}"></td>
+        <td th:text="${naturalArea.munCode}"></td>
 
-        <td><a th:href="@{/naturalarea/update/{codeArea}(codeArea=${naturalarea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
+        <td><a th:href="@{/naturalArea/update/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/naturalarea/delete/{codeArea}(codeArea=${naturalarea.codeArea})}" class="btn btn-danger" role="button">Borrar</a>
+        <td><a th:href="@{/naturalArea/delete/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>
 </table>
 <a href="add" class="btn btn-success" role="button">Añadir Natual Area</a>
+    <br>
+    <a href="/resNatAreaSer/list" class="btn btn-success" role="button">Añadir Servicios a las Areas Naturales</a>
+
 </div>
+
 </body>
 </html>
