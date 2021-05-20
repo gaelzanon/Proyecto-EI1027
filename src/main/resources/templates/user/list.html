@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
 <head>
     <title>Lista de usuarios</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
 </head>
 
 <body>
+<div layout:fragment="content">
     <h1>Lista de usuarios</h1>
     <div th:if="${#lists.isEmpty(users)}">
         No hay usuarios
@@ -26,5 +31,6 @@
         </tbody>
     </table>
     <a href="/" class="btn btn-primary" role="button">Volver</a>
+</div>
 </body>
 </html>

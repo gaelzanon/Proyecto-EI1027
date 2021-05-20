@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
 <head>
     <title>Gestionar Managers Municipales</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
 </head>
 <body>
+<div layout:fragment="content">
 <div class="container">
     <h2>Editar Manager</h2>
     <form class="form-horizontal" action="#" th:action="@{/municipality_manager/update}"
@@ -47,6 +52,7 @@
         </div>
 
     </form>
+</div>
 </div>
 </body>
 </html>
