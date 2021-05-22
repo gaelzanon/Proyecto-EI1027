@@ -14,8 +14,8 @@
 <div layout:fragment="content">
 <div class="container">
     <h2>Editar Manager</h2>
-    <form class="form-horizontal" action="#" th:action="@{/municipality_manager/update}"
-          th:object="${municipality_manager}" method="post">
+    <form class="form-horizontal" action="#" th:action="@{/municipalityManager/update}"
+          th:object="${municipalityManager}" method="post">
 
         <div class="form-group row">
             <label class="control-label col-sm-2" for="NIF">NIF:</label>
@@ -25,16 +25,16 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="areaCode">Código Area:</label>
+            <label class="control-label col-sm-2" for="areaCode">Código Municipalidad:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="areaCode" th:field="*{areaCode}" />
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="munName">Nombre municipalidad:</label>
+            <label class="control-label col-sm-2" for="munName">Nombre Municipalidad:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="munName" th:field="*{munName}" />
+                <input type="text" class="form-control" id="munName" th:field="*{municipalityName}" />
             </div>
         </div>
 
