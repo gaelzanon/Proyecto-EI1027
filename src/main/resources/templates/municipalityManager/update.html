@@ -33,6 +33,7 @@
             <label class="control-label col-sm-2" for="munName">Nombre Municipalidad:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="munName" th:field="*{municipalityName}" />
+                <div class="error" th:if="${#fields.hasErrors('municipalityName')}" th:errors="*{municipalityName}"></div>
             </div>
         </div>
 
@@ -40,6 +41,7 @@
             <label class="control-label col-sm-2" for="email">Email:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="email" th:field="*{email}"/>
+                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
         </div>
 

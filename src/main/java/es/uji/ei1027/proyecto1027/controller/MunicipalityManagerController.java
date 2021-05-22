@@ -40,6 +40,8 @@ public class MunicipalityManagerController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("municipalityManager") MunicipalityManager munManager,
                                    BindingResult bindingResult) {
+        MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
+        municipalityManagerValidator.validate(munManager, bindingResult);
         if (bindingResult.hasErrors())
             return "municipalityManager/add";
         try {
@@ -67,9 +69,16 @@ public class MunicipalityManagerController {
     public String processUpdateSubmit(
             @ModelAttribute("municipalityManager") MunicipalityManager munManager,
             BindingResult bindingResult) {
+        MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
+        municipalityManagerValidator.validate(munManager, bindingResult);
         if (bindingResult.hasErrors())
             return "municipalityManager/update";
-        managerDao.updateMunicipalityManager(munManager);
+        try {
+            managerDao.updateMunicipalityManager(munManager);
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
 
