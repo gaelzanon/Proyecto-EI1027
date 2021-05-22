@@ -76,7 +76,7 @@ public class MunicipalityManagerController {
     @RequestMapping(value="/delete/{NIF}")
     public String processDeleteMunicipalityManager(@PathVariable String NIF) {
         managerDao.deleteMunicipalityManager(NIF);
-        return "redirect:../../list";
+        return "redirect:../list";
     }
 
 }

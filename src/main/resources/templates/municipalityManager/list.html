@@ -17,7 +17,7 @@
         <thead>
         <tr>
             <th>NIF</th>
-            <th>Código Municipalidad</th>
+            <th>Código</th>
             <th>Nombre Municipalidad</th>
             <th>Email</th>
             <th></th>
@@ -27,7 +27,7 @@
         <tbody>
         <tr th:each="municipalityManager: ${municipalityManager}">
             <td th:text="${municipalityManager.NIF}"></td>
-            <td th:text="${municipalityManager.areaCode}"></td>
+            <td th:text="${municipalityManager.code}"></td>
             <td th:text="${municipalityManager.municipalityName}"></td>
             <td th:text="${{municipalityManager.email}}"></td>
             <td><a th:href="@{/municipalityManager/update/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-warning" role="button">Editar</a></td>

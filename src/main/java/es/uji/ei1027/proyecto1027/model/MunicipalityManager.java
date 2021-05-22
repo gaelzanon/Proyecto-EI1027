@@ -2,7 +2,7 @@ package es.uji.ei1027.proyecto1027.model;
 
 public class MunicipalityManager {
     private String NIF;
-    private String areaCode;
+    private String code;
     private String municipalityName;
     private String email;
 
@@ -14,12 +14,12 @@ public class MunicipalityManager {
         this.NIF = NIF;
     }
 
-    public String getAreaCode() {
-        return areaCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getMunicipalityName() {
@@ -42,7 +42,7 @@ public class MunicipalityManager {
     public String toString() {
         return "MunicipalityManager{" +
                 "NIF='" + NIF + '\'' +
-                ", areaCode='" + areaCode + '\'' +
+                ", code='" + code + '\'' +
                 ", municipalityName='" + municipalityName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
