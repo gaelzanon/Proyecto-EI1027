@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Gestionar ResNatAreaService</title>
+    <title>Gestionar Servicios asignados</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1>Lista de ResNatAreaService</h1>
+<h1>Lista de Servicios asignados a cada area</h1>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -23,15 +23,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="resNatAreaSer: ${resNatAreaSer}">
+    <tr th:each="resNatAreaSer: ${resNatAreaSers}">
         <td th:text="${resNatAreaSer.code_area}"></td>
         <td th:text="${resNatAreaSer.code}"></td>
-        <td><a th:href="@{/resNatAreaSer/delete/{code_area}(code_area=${resNatAreaSer.code_area})}" class="btn btn-danger" role="button">Borrar</a>
+        <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Añadir ResNatAreaService</a>
+<a href="add" class="btn btn-success" role="button">Añadir Servicio</a>
 </div>
 </body>
 </html>

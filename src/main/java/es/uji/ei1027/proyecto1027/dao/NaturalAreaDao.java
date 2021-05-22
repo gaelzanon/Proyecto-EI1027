@@ -20,8 +20,8 @@ public class NaturalAreaDao {
     }
 
     public void addNaturalArea(NaturalArea naturalArea) {
-        jdbcTemplate.update("INSERT INTO Natural_Area VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                naturalArea.getCodeArea(), naturalArea.getName(), naturalArea.getAddress(), naturalArea.getCurrentCapacity(),
+        jdbcTemplate.update("INSERT INTO Natural_Area VALUES(?, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?)",
+                naturalArea.getCodeArea(), naturalArea.getName(), naturalArea.getAddress(),
                 naturalArea.getMaxCapacity(), naturalArea.getDescripcion(), naturalArea.getType(), naturalArea.getRegistrationDate(),
                  naturalArea.getState(), naturalArea.getStartTime(), naturalArea.getEndTime(), naturalArea.getMunCode());
     }

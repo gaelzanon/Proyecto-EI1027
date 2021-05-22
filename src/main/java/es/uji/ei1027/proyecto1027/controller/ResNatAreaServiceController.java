@@ -1,8 +1,10 @@
 package es.uji.ei1027.proyecto1027.controller;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
+import es.uji.ei1027.proyecto1027.services.ResNatAreaSerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -20,6 +22,13 @@ public class ResNatAreaServiceController {
 
     private ResNatAreaServiceDao ResNatAreaServiceDao;
 
+    private ResNatAreaSerService resNatAreaSerService;
+
+    @Autowired
+    public void setResNatAreaSerService(ResNatAreaSerService resNatAreaSerService) {
+        this.resNatAreaSerService = resNatAreaSerService;
+    }
+
     @Autowired
     public void setResNatAreaServiceDao(ResNatAreaServiceDao ResNatAreaServiceDao) {
         this.ResNatAreaServiceDao=ResNatAreaServiceDao;
@@ -27,7 +36,7 @@ public class ResNatAreaServiceController {
 
     @RequestMapping("/list")
     public String listResNatAreaServices(Model model) {
-        model.addAttribute("resNatAreaSer", ResNatAreaServiceDao.getR_NArea_services());
+        model.addAttribute("resNatAreaSers", ResNatAreaServiceDao.getR_NArea_services());
         System.out.println(ResNatAreaServiceDao.getR_NArea_services());
         return "resNatAreaSer/list";
     }
@@ -56,6 +65,12 @@ public class ResNatAreaServiceController {
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
         return "redirect:list";
+    }
+
+    @RequestMapping("/porArea/{code_area}")
+    public String listResNatAreaServicePorArea(Model model, @PathVariable String code_area) {
+        model.addAttribute("resNatAreaSersPA", resNatAreaSerService.getResNatAreaServiceByArea(code_area));
+        return "resNatAreaSer/porArea";
     }
 
     @RequestMapping(value = "/delete/{code_area}/{code}")

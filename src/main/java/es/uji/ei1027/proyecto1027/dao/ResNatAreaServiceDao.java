@@ -30,13 +30,15 @@ public class ResNatAreaServiceDao {
     }
 
 
-    /* Obtener un ResNatAreaService */
-    public ResNatAreaService getR_NArea_service(String areaCode, String code) {
+    /* Obtener un ResNatAreaService por area */
+    public List<ResNatAreaService> getResNatAreaServicePorArea(String code_area) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * from r_narea_services where cols=? and rows=? and code_area", new ResNatAreaServiceRowMapper(), areaCode, code);
+            return this.jdbcTemplate.query(
+                    "SELECT * FROM R_NArea_Services WHERE code_area=?",
+                    new Object[] {code_area}, new ResNatAreaServiceRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
-            return null;
+            return new ArrayList<ResNatAreaService>();
         }
     }
 

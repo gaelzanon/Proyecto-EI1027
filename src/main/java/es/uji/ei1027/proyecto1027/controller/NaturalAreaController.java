@@ -53,8 +53,7 @@ public class NaturalAreaController {
             return "naturalArea/add";
         try {
             NaturalAreaDao.addNaturalArea(naturalArea);
-        } catch (
-                DuplicateKeyException e) {
+        } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya existe el area "
                             + naturalArea.getName() + " en el municipio "
@@ -63,6 +62,7 @@ public class NaturalAreaController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
+        NaturalAreaDao.addNaturalArea(naturalArea);
         return "redirect:list";
     }
 
