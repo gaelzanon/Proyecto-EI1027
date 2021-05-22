@@ -5,6 +5,8 @@ import es.uji.ei1027.proyecto1027.dao.ReservationDao;
 import es.uji.ei1027.proyecto1027.model.Reservation;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,11 +45,22 @@ public class ReservationController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("reservation") Reservation Reservation,
+    public String processAddSubmit(@ModelAttribute("reservation") Reservation reservation,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "reservation/add";
-        ReservationDao.addReservation(Reservation);
+        try {
+            ReservationDao.addReservation(reservation);
+        } catch (DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya existe una reserva para el cliente "
+                            + reservation.getNifCitizen() + " en el espacio natural "
+                            + reservation.getCode() + " para la fecha "
+                            + reservation.getDate(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)

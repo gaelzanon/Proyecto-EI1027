@@ -4,6 +4,8 @@ import es.uji.ei1027.proyecto1027.dao.ZoneDao;
 import es.uji.ei1027.proyecto1027.model.Citizen;
 import es.uji.ei1027.proyecto1027.model.Zone;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +42,19 @@ public class ZoneController {
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "zone/add";
-        zoneDao.addZone(zone);
+        try {
+            zoneDao.addZone(zone);
+        } catch (
+    DuplicateKeyException e) {
+        throw new ProyectoException(
+                "Ya está creada la zona ("
+                        + zone.getCol() + ", " + zone.getRow() + ") en el area "
+                        + zone.getAreaCode(), "CPduplicada");
+    } catch (
+    DataAccessException e) {
+        throw new ProyectoException(
+                "Error en el acceso a la base de datos", "ErrorAccedintDades");
+    }
         return "redirect:list";
     }
 

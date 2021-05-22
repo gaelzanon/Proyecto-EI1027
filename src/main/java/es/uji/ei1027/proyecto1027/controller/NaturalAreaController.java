@@ -7,6 +7,8 @@ import es.uji.ei1027.proyecto1027.model.NaturalArea;
 
 import es.uji.ei1027.proyecto1027.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,7 +51,18 @@ public class NaturalAreaController {
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "naturalArea/add";
-        NaturalAreaDao.addNaturalArea(naturalArea);
+        try {
+            NaturalAreaDao.addNaturalArea(naturalArea);
+        } catch (
+                DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya existe el area "
+                            + naturalArea.getName() + " en el municipio "
+                            + naturalArea.getMunCode(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
 
@@ -70,6 +83,7 @@ public class NaturalAreaController {
         NaturalAreaDao.updateNaturalArea(naturalArea);
         return "redirect:list";
     }
+
     @RequestMapping(value="/delete/{codeArea}")
     public String processDelete(@PathVariable String codeArea) {
         NaturalAreaDao.deleteNaturalArea(codeArea);

@@ -4,6 +4,8 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.ServiceDao;
 import es.uji.ei1027.proyecto1027.model.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,11 +38,21 @@ public class ServiceController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("service") Service Service,
+    public String processAddSubmit(@ModelAttribute("service") Service service,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "service/add";
-        ServiceDao.addService(Service);
+        try {
+            ServiceDao.addService(service);
+        } catch (
+                DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya existe el servicio "
+                            + service.getCode(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
 

@@ -4,6 +4,8 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,11 +38,21 @@ public class ResNatAreaServiceController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService ResNatAreaService,
+    public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";
-        ResNatAreaServiceDao.addR_NArea_service(ResNatAreaService);
+        try {
+            ResNatAreaServiceDao.addR_NArea_service(resNatAreaService);
+        } catch (DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya existe dado de alta el servicio "
+                            + resNatAreaService.getCode() + " en el area "
+                            + resNatAreaService.getCode_area(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
     /*

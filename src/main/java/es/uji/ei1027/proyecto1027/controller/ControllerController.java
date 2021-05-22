@@ -2,6 +2,8 @@ package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.ControllerDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +41,17 @@ public class ControllerController {
                                        BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "controller/add";
-        ControllerDao.addController(controller);
+        try {
+            ControllerDao.addController(controller);
+        } catch (
+                DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya existe el controlador "
+                            + controller.getNIF(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
     @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
