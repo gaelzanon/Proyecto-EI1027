@@ -17,19 +17,25 @@
       th:object="${service}" method="post">
     <table>
         <tr>
-            <td><label>Code</label></td>
+            <td><label>Codigo del Servicio</label></td>
             <td><input type="text" th:field="*{code}" /></td>
         </tr>
         <tr>
-            <td><label>Type</label></td>
-            <td><input type="text" th:field="*{type}" /></td>
+            <td><label>Tipo</label></td>
+            <td> <select class="form_control" type="text" th:field="*{type}">
+                <!--option value="No seleccionat">Selecciona el gènere</option-->
+                <option th:each="typevalue : ${typeList}"
+                        th:value="${typevalue}"
+                        th:text="${typevalue}"></option>
+            </select>
+            </td>
         </tr>
         <tr>
-            <td><label>description</label></td>
+            <td><label>Descripcion</label></td>
             <td><input type="text" th:field="*{description}" /></td>
         </tr>
         <tr>
-            <td><label>Date</label></td>
+            <td><label>Fecha de creacion</label></td>
             <td><input type="text" th:field="*{initial_Date}" /></td>
         </tr>
         <tr>

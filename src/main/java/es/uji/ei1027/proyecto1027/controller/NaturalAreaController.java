@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/naturalArea")
@@ -69,7 +71,8 @@ public class NaturalAreaController {
     @RequestMapping(value="/update/{codeArea}", method = RequestMethod.GET)
     public String editnaturalArea(Model model, @PathVariable String codeArea) {
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
-
+        List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
+        model.addAttribute("stateList", stateList);
         return "naturalArea/update";
     }
 

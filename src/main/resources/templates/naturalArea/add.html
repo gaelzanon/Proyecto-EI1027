@@ -17,19 +17,23 @@
       th:object="${naturalArea}" method="post">
     <table>
         <tr>
-            <td><label>CodeArea</label></td>
+            <td><label>Codigo del Area</label></td>
             <td><input type="text" th:field="*{codeArea}" /></td>
         </tr>
         <tr>
-            <td><label>Name</label></td>
+            <td><label>Nombre</label></td>
             <td><input type="text" th:field="*{name}" /></td>
         </tr>
         <tr>
-            <td><label>Address</label></td>
+            <td><label>Dirrecion</label></td>
             <td><input type="text" th:field="*{address}" /></td>
         </tr>
         <tr>
-            <td><label>MaxCapacity</label></td>
+            <td><label>Capacidad Actual</label></td>
+            <td><input type="number" th:field="*{currentCapacity}" /></td>
+        </tr>
+        <tr>
+            <td><label>Capacidad Maxima</label></td>
             <td><input type="number" th:field="*{maxCapacity}" /></td>
         </tr>
         <tr>
@@ -37,27 +41,33 @@
             <td><input type="text" th:field="*{descripcion}" /></td>
         </tr>
         <tr>
-            <td><label>Type</label></td>
+            <td><label>Tipo</label></td>
             <td><input type="text" th:field="*{type}" /></td>
         </tr>
         <tr>
-            <td><label>RegistrationDate</label></td>
+            <td><label>Fecha de registro</label></td>
             <td><input type="text" th:field="*{registrationDate}" /></td>
         </tr>
         <tr>
-            <td><label>State</label></td>
-            <td><input type="text" th:field="*{state}" /></td>
+            <td><label>Estado</label></td>
+            <td><select class="form_control" type="text" th:field="*{state}">
+                <option value="No seleccionat">Selecciona el tipo</option>
+                <option value="Abierta">Abierta</option>
+                <option value="Cerrada">Cerrada</option>
+                <option value="Restringida">Restringida</option>
+            </select>
+            </td>
         </tr>
         <tr>
-            <td><label>StartTime</label></td>
+            <td><label>Hora de apertura</label></td>
             <td><input type="text" th:field="*{startTime}" /></td>
         </tr>
         <tr>
-            <td><label>EndTime</label></td>
+            <td><label>Hora de cierre</label></td>
             <td><input type="text" th:field="*{endTime}" /></td>
         </tr>
         <tr>
-            <td><label>MunCode</label></td>
+            <td><label>Codigo Municipal</label></td>
             <td><input type="text" th:field="*{munCode}" /></td>
         </tr>
         <tr>

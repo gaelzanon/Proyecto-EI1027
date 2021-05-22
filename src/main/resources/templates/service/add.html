@@ -17,22 +17,27 @@
       th:object="${service}" method="post">
     <table>
         <tr>
-            <td><label>Code</label></td>
+            <td><label>Codigo del Servicio</label></td>
             <td><input type="text" th:field="*{code}" /></td>
             <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
         </tr>
         <tr>
-            <td><label>Type</label></td>
-            <td><input type="text" th:field="*{type}" /></td>
+            <td><label>Tipo</label></td>
+            <td><select class="form_control" type="text" th:field="*{type}">
+                <option value="No seleccionat">Selecciona el tipo</option>
+                <option value="Piscina">Piscina</option>
+                <option value="Rocodromo">Rocodromo</option>
+            </select>
+            </td>
             <div class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
         </tr>
         <tr>
-            <td><label>Description</label></td>
+            <td><label>Descripcion</label></td>
             <td><input type="text" th:field="*{description}" /></td>
             <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
         </tr>
         <tr>
-            <td><label>Date</label></td>
+            <td><label>Fecha de Inicio</label></td>
             <td><input type="text" th:field="*{initial_Date}" /></td>
             <div class="error" th:if="${#fields.hasErrors('initial_Date')}" th:errors="*{initial_Date}"></div>
         </tr>
