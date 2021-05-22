@@ -12,17 +12,17 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Nou Service</h2>
+<h2>Nou Service en un area</h2>
 <form action="#" th:action="@{/resNatAreaSer/add}"
       th:object="${resNatAreaSer}" method="post">
     <table>
         <tr>
-            <td><label>CodeArea</label></td>
+            <td><label>Codigo del Area</label></td>
             <td><input type="text" th:field="*{code_area}" /></td>
             <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
         </tr>
         <tr>
-            <td><label>Code</label></td>
+            <td><label>Codigo del servicio</label></td>
             <td><input type="text" th:field="*{code}" /></td>
             <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
         </tr>

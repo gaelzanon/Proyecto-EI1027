@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RequestMapping("/service")
 public class ServiceController {
@@ -61,6 +64,8 @@ public class ServiceController {
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
     public String editService(Model model, @PathVariable String code) {
         model.addAttribute("service", ServiceDao.getService(code));
+        List<String> typeList = Arrays.asList("Piscina", "Rocodromo");
+        model.addAttribute("typeList", typeList);
 
         return "service/update";
     }
