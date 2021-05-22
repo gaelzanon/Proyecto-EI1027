@@ -12,28 +12,32 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Nou Service</h2>
+<h2>Nuevo Servicio</h2>
 <form action="#" th:action="@{/service/add}"
       th:object="${service}" method="post">
     <table>
         <tr>
             <td><label>Code</label></td>
             <td><input type="text" th:field="*{code}" /></td>
+            <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
         </tr>
         <tr>
             <td><label>Type</label></td>
             <td><input type="text" th:field="*{type}" /></td>
+            <div class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
         </tr>
         <tr>
             <td><label>Description</label></td>
             <td><input type="text" th:field="*{description}" /></td>
+            <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
         </tr>
         <tr>
             <td><label>Date</label></td>
             <td><input type="text" th:field="*{initial_Date}" /></td>
+            <div class="error" th:if="${#fields.hasErrors('initial_Date')}" th:errors="*{initial_Date}"></div>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Afegeix Service" /></td>
+            <td colspan="2"><input type="submit" value="Añadir Servicio" /></td>
         </tr>
     </table>
 </form>

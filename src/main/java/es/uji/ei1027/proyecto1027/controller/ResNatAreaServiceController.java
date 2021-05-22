@@ -40,6 +40,8 @@ public class ResNatAreaServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
                                    BindingResult bindingResult) {
+        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
+        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";
         try {

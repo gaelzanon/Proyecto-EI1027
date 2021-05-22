@@ -19,14 +19,16 @@
         <tr>
             <td><label>CodeArea</label></td>
             <td><input type="text" th:field="*{code_area}" /></td>
+            <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
         </tr>
         <tr>
             <td><label>Code</label></td>
             <td><input type="text" th:field="*{code}" /></td>
+            <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
         </tr>
 
         <tr>
-            <td colspan="2"><input type="submit" value="Añadir Relacion" /></td>
+            <td colspan="2"><input type="submit" value="Añadir Relacion"/></td>
         </tr>
     </table>
 </form>

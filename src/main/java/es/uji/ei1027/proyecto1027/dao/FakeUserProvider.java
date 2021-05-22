@@ -22,6 +22,11 @@ public class FakeUserProvider implements UserDao {
         userFelipe.setUsername("felipe");
         userFelipe.setPassword(passwordEncryptor.encryptPassword("felipe"));
         knownUsers.put("felipe", userFelipe);
+
+        UserDetails userAdmin = new UserDetails();
+        userAdmin.setUsername("admin");
+        userAdmin.setPassword(passwordEncryptor.encryptPassword("admin"));
+        knownUsers.put("admin", userFelipe);
     }
 
     @Override

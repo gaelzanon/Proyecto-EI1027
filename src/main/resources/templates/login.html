@@ -16,7 +16,7 @@
     <form action="#" th:action="@{/login}"
           th:object="${user}" method="post">
         <p>
-            <label>Nombre de usuario:</label>
+            <label>Usuario:</label>
             <input class="form_control" type="text" th:field="*{username}"/>
         <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
         </p>

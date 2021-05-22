@@ -40,6 +40,8 @@ public class ServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("service") Service service,
                                    BindingResult bindingResult) {
+        ServiceValidator serviceValidator = new ServiceValidator();
+        serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors())
             return "service/add";
         try {

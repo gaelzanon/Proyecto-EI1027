@@ -39,6 +39,8 @@ public class CitizenController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("citizen") Citizen citizen,
                                    BindingResult bindingResult) {
+        CitizenValidator citizenValidator = new CitizenValidator();
+        citizenValidator.validate(citizen, bindingResult);
         if (bindingResult.hasErrors())
             return "citizen/add";
         try {
