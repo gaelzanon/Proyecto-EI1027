@@ -25,7 +25,7 @@ public class CitizenValidator implements Validator {
             errors.rejectValue("surname", "obligatori",
                     "Se debe introducir un apellido");
         if (citizen.getAddress().trim().equals(""))
-            errors.rejectValue("address", "obligatori",
+            errors.rejectValue("Address", "obligatori",
                     "Se debe introducir una dirección domiciliaria");
         if (citizen.getEmail().trim().equals(""))
             errors.rejectValue("Email", "obligatori",

@@ -67,6 +67,8 @@ public class CitizenController {
     public String processUpdateSubmit(
             @ModelAttribute("citizen") Citizen citizen,
             BindingResult bindingResult) {
+        CitizenValidator citizenValidator = new CitizenValidator();
+        citizenValidator.validate(citizen, bindingResult);
         if (bindingResult.hasErrors())
             return "citizen/update";
         CitizenDao.updateCitizen(citizen);
