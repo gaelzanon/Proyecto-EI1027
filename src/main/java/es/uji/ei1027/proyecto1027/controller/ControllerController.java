@@ -39,6 +39,8 @@ public class ControllerController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
                                        BindingResult bindingResult) {
+        ControllerValidator controllerValidator = new ControllerValidator();
+        controllerValidator.validate(controller, bindingResult);
         if (bindingResult.hasErrors())
             return "controller/add";
         try {
@@ -63,6 +65,8 @@ public class ControllerController {
     public String processUpdateSubmit(
             @ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
             BindingResult bindingResult) {
+        ControllerValidator controllerValidator = new ControllerValidator();
+        controllerValidator.validate(controller, bindingResult);
         if (bindingResult.hasErrors())
             return "controller/update";
         ControllerDao.updateController(controller);
