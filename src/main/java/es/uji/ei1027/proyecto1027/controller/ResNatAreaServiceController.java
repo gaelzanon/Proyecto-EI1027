@@ -57,27 +57,12 @@ public class ResNatAreaServiceController {
         }
         return "redirect:list";
     }
-    /*
-    @RequestMapping(value="/update/{nom}", method = RequestMethod.GET)
-    public String editResNatAreaService(Model model, @PathVariable String NIF) {
-        model.addAttribute("ResNatAreaService", ResNatAreaServiceDao.getR_NArea_services(NIF));
-        return "ResNatAreaService/update";
-    }
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("ResNatAreaService") ResNatAreaService ResNatAreaService,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "ResNatAreaService/update";
-        ResNatAreaServiceDao.updateR_NArea_service(ResNatAreaService);
-        return "redirect:list";
-    }
-    */
-    @RequestMapping(value="/delete/{code_area}")
-    public String processDelete(@PathVariable String code_area, String code) {
+    @RequestMapping(value = "/delete/{code_area}/{code}")
+    public String processDeleteResNatAreaService(@PathVariable String code_area,
+                                                 @PathVariable String code) {
         ResNatAreaServiceDao.deleteR_NArea_service(code_area, code);
-        return "redirect:../list";
+        return "redirect:../../list";
     }
 
 
