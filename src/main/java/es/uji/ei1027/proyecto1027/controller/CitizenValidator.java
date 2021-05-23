@@ -8,8 +8,7 @@ public class CitizenValidator implements Validator {
     @Override
     public boolean supports(Class<?> cls) {
         return Citizen.class.equals(cls);
-        // o, si volguérem tractar també les subclasses:
-        // return Nadador.class.isAssignableFrom(cls);
+
     }
 
     @Override
