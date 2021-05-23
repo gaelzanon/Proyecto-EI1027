@@ -51,6 +51,8 @@ public class NaturalAreaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("naturalArea") NaturalArea naturalArea,
                                    BindingResult bindingResult) {
+        NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
+        naturalAreaValidator.validate(naturalArea, bindingResult);
         if (bindingResult.hasErrors())
             return "naturalArea/add";
         try {
@@ -79,7 +81,8 @@ public class NaturalAreaController {
     public String processUpdateSubmit(
             @ModelAttribute("naturalArea") NaturalArea naturalArea,
             BindingResult bindingResult) {
-
+        NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
+        naturalAreaValidator.validate(naturalArea, bindingResult);
         if (bindingResult.hasErrors())
             return "naturalArea/update";
         try {
@@ -96,10 +99,5 @@ public class NaturalAreaController {
         NaturalAreaDao.deleteNaturalArea(codeArea);
         return "redirect:../list";
     }
-
-
-
-
-
 
 }
