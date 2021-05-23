@@ -48,8 +48,6 @@
         <td th:text="${naturalArea.endTime}"></td>
         <td th:text="${naturalArea.munCode}"></td>
 
-        <td><a th:href="@{/resNatAreaSer/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-primary" role="button">Gestionar Servicios</a>
-        </td>
         <td><a th:href="@{/naturalArea/update/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
         </td>
         <td><a th:href="@{/naturalArea/delete/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-danger" role="button">Borrar</a>
@@ -57,8 +55,8 @@
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Añadir Natual Area</a>
-
+<a href="add" class="btn btn-success" role="button">Añadir Natural Area</a>
+<a th:href="@{/resNatAreaSer/list}"class="btn btn-primary" role="button">Gestionar Servicios</a>
 
 </div>
 

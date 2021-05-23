@@ -10,6 +10,7 @@ public class ResNatAreaService {
     private String code;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate startTime;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate endTime;
 
     public String getCode_area() {

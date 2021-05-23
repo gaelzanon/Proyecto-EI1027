@@ -14,8 +14,8 @@ public class ResNatAreaServiceRowMapper implements RowMapper<ResNatAreaService> 
         ResNatAreaService res_natArea_ser = new ResNatAreaService();
         res_natArea_ser.setCode_area(rs.getString("code_area"));
         res_natArea_ser.setCode(rs.getString("code"));
-        res_natArea_ser.setStartTime(rs.getObject("start_Time", LocalDate.class));
-        res_natArea_ser.setEndTime(rs.getObject("end_Time",LocalDate.class));
+        res_natArea_ser.setStartTime(rs.getObject("start_time", LocalDate.class));
+        res_natArea_ser.setEndTime(rs.getObject("end_time",LocalDate.class));
         return res_natArea_ser;
     }
 }

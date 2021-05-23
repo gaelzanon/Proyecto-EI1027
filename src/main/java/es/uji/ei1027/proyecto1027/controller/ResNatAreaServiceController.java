@@ -71,7 +71,7 @@ public class ResNatAreaServiceController {
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
 
-        return "redirect:/";
+        return "redirect:/list";
     }
 
     @RequestMapping("/porArea/{code_area}")
