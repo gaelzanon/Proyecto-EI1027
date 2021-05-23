@@ -26,6 +26,7 @@
         <tr th:each="resNatAreaSer: ${resNatAreaSersPA}">
             <td th:text="${resNatAreaSer.code_area}"></td>
             <td th:text="${resNatAreaSer.code}"></td>
+            <td></td>
             <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
@@ -34,20 +35,23 @@
                   th:object="${codarea}" method="post">
 
                 <td th:text="${codarea.code_area}">
-                    <input type="text" id="code_area" th:field="*{code_area}" />
-                    <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
+                    <input type="text" th:field="*{code_area}" />
                 </td>
-
                 <td>
                     <select id ="code" th:field ="*{code}">
-                        <option th:each="code:${services}"
+                        <div th:if="${#lists.isEmpty(services)}">
+                            <option value="NoDisp">No hay disponibles</option>
+                        </div>
+                        <option th:unless="${#lists.isEmpty(services)}" th:each="code:${services}"
                                 th:value="${code}"
                                 th:text="${code}">
                         </option>
                     </select>
                     <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
                 </td>
-
+                <td>
+                    <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />
+                </td>
                 <td>
                     <button type="submit" class="btn btn-success">Añadir</button>
                 </td>
@@ -56,6 +60,9 @@
         </tr>
         </tbody>
     </table>
+    <form>
+        <a href="/naturalArea/list" class="btn btn-primary" th:align="left">Volver</a>
+    </form>
 </div>
 </body>
 </html>

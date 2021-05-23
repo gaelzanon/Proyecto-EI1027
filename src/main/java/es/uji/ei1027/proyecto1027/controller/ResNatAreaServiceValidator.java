@@ -15,6 +15,9 @@ public class ResNatAreaServiceValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         ResNatAreaService rnas = (ResNatAreaService) obj;
+        if(rnas.getCode().trim().equals("NoDisp"))
+            errors.rejectValue("code", "obligatori",
+                    "No existen más servicios disponibles");
         if (rnas.getCode_area().trim().equals(""))
             errors.rejectValue("code_area", "obligatori",
                     "Se debe introducir un valor");
