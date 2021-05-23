@@ -15,6 +15,7 @@ Service service = new Service();
 service.setCode(rs.getString( "code" ));
 service.setType_of_service(rs.getString( "type_of_service" ));
 service.setDescription(rs.getString( "description" ));
+service.setFechaReg(rs.getObject("registration_date",LocalDate.class));
 service.setTemp(rs.getBoolean( "temp"));
 return service;
 }

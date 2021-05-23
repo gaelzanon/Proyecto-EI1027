@@ -56,7 +56,7 @@ public class ResNatAreaServiceController {
                                    BindingResult bindingResult) {
 //        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
 //        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
-        System.out.println(resNatAreaService);
+
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";
         try {

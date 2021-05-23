@@ -26,16 +26,14 @@ public void setDataSource(DataSource dataSource) {
 
 // add service
 public void addService(Service service) {
-	try {
+
         jdbcTemplate.update( 
-        "INSERT INTO service VALUES(?, ?, ?, ?)" ,
-        service.getCode() , service.getType_of_service() , service.getDescription() ,
+        "INSERT INTO service VALUES(?, ?, ?, ?, ?)" ,
+        service.getCode() , service.getType_of_service() , service.getDescription() ,service.getFechaReg(),
         service.getTemp());
-	}catch(Exception e ){
-		System.out.println("Entrada duplicada no se ha podido insertar");
-		
-	}    
-}
+	}
+
+
 
 /* Esborra  */
     public void deleteService(Service service) {
@@ -57,8 +55,8 @@ public void addService(Service service) {
 (excepte el code, que és la clau primària) */
 public void updateService(Service service) {
     jdbcTemplate.update(
-    "UPDATE service SET type_of_service=?,  description =? , temp =?   WHERE code = ?",
-    service.getType_of_service(), service.getDescription(), service.getTemp() , service.getCode() );
+    "UPDATE service SET type_of_service=?,  description =? , registration_date=?, temp =?   WHERE code = ?",
+    service.getType_of_service(), service.getDescription(), service.getFechaReg(), service.getTemp() , service.getCode() );
     System.out.println("No funciona");
 }
 

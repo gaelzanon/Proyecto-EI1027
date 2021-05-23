@@ -9,6 +9,8 @@ public class Service {
     private String code ;
     private String type_of_service ;
     private String description;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate FechaReg;
     private boolean temp;
 
     @Override
@@ -17,6 +19,7 @@ public class Service {
                 "code='" + code + '\'' +
                 ", type_of_service='" + type_of_service + '\'' +
                 ", description='" + description + '\'' +
+                ", FechaReg=" + FechaReg +
                 ", temp=" + temp +
                 '}';
     }
@@ -43,6 +46,14 @@ public class Service {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDate getFechaReg() {
+        return FechaReg;
+    }
+
+    public void setFechaReg(LocalDate fechaReg) {
+        FechaReg = fechaReg;
     }
 
     public boolean getTemp() {

@@ -40,6 +40,13 @@
             </div>
         </div>
         <div class="form-group row">
+            <label class="control-label col-sm-2" for="FechaReg">Fecha Registro:</label>
+            <div class="col-sm-4">
+                <input type="date" class="form-control" id="FechaReg" th:field="*{FechaReg}" />
+                <div class="error" th:if="${#fields.hasErrors('FechaReg')}" th:errors="*{FechaReg}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
             <label class="control-label col-sm-2" for="temp">Temporal:</label>
             <div class="col-sm-4">
                 <input type="checkbox" class="form-control" id="temp" th:field="*{temp}" />

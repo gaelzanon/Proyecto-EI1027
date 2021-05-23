@@ -54,6 +54,7 @@ public class ServiceController {
                                    final BindingResult bindingResult) {
         ServiceValidator serviceValidator = new ServiceValidator();
         serviceValidator.validate(service, bindingResult);
+        System.out.println(service);
         if (bindingResult.hasErrors()){
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.service",bindingResult);
             attributes.addFlashAttribute("service",service);

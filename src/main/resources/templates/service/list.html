@@ -19,6 +19,7 @@
         <th>Codigo del Servicio</th>
         <th>Tipo de Servicio</th>
         <th>Descripcion</th>
+        <th>Fecha Registro</th>
         <th>Temporal</th>
         <th></th>
         <th></th>
@@ -29,6 +30,7 @@
         <td th:text="${service.code}"></td>
         <td th:text="${service.type_of_service}"></td>
         <td th:text="${service.description}"></td>
+        <td th:text="${service.FechaReg}"></td>
         <td th:text="${service.temp}"></td>
         <td><a th:href="@{/service/update/{code}(code=${service.code})}" class="btn btn-warning" role="button">Editar</a>
         </td>
