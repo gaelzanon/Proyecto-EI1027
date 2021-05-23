@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public void addService(Service service) {
 
         jdbcTemplate.update( 
         "INSERT INTO service VALUES(?, ?, ?, ?, ?)" ,
-        service.getCode() , service.getType_of_service() , service.getDescription() ,service.getFechaReg(),
+        service.getCode() , service.getType_of_service() , service.getDescription() , LocalDate.now(),
         service.getTemp());
 	}
 
@@ -72,12 +73,6 @@ public List<Service> getServices() {
 /* código de servicios */
     public List<String> getServiceCodes() {
         try {
-//            return jdbcTemplate.query("select code from service", new RowMapper<String>() {
-//                @Override
-//                public String mapRow(ResultSet resultSet, int i) throws SQLException {
-//                    return resultSet.getString(1);
-//                }
-//            });
             return jdbcTemplate.queryForList("select code from service", String.class);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<String>();

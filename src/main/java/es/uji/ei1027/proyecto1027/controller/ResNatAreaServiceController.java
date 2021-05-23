@@ -47,7 +47,6 @@ public class ResNatAreaServiceController {
     @RequestMapping(value="/add")
     public String addResNatAreaService(Model model) {
         model.addAttribute("resNatAreaSer", new ResNatAreaService());
-
         return "resNatAreaSer/add";
     }
 

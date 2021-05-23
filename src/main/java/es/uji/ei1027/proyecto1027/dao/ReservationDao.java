@@ -20,7 +20,7 @@ public class ReservationDao {
     }
 
     public void addReservation(Reservation reservation) {
-        jdbcTemplate.update("INSERT INTO reservation VALUES(0, 0, 0, ?, 0, ?, pendiente, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO reservation VALUES(?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 reservation.getAddress(), reservation.getDate(), reservation.getQr(), reservation.getCode(), reservation.getCreationDate(),
                 reservation.getNifCitizen(), reservation.getState(), reservation.getStartTime(), reservation.getEndTime(),
                 reservation.getCols(), reservation.getRow(), reservation.getCodeArea());

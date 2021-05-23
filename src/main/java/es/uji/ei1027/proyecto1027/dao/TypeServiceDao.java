@@ -67,6 +67,14 @@ public List<TypeService> getTypeServices() {
     }
 }
 
+public List<String> getTypeServicesString() {
+    try {
+        return jdbcTemplate.queryForList("select type from Type_of_service", String.class);
+    } catch (EmptyResultDataAccessException e) {
+        return new ArrayList<String>();
+    }
+}
+
 /* Obté el service amb el nom donat. Torna null si no existeix. */
 public TypeService getTypeService(String codeService) {
     try {

@@ -4,6 +4,7 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.ServiceDao;
 import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
 import es.uji.ei1027.proyecto1027.model.Service;
+import es.uji.ei1027.proyecto1027.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -24,15 +25,17 @@ import java.util.List;
 public class ServiceController {
 
     private ServiceDao ServiceDao;
-    private TypeServiceDao typeServiceDao;
+
+    private ServiceService serviceService;
 
     @Autowired
     public void setServiceDao(ServiceDao ServiceDao) {
         this.ServiceDao=ServiceDao;
     }
+
     @Autowired
-    public void setTypeServiceDao(TypeServiceDao typeServiceDao) {
-        this.typeServiceDao=typeServiceDao;
+    public void setServiceService(ServiceService serviceService) {
+        this.serviceService = serviceService;
     }
 
     @RequestMapping("/list")
@@ -43,33 +46,30 @@ public class ServiceController {
     }
     @RequestMapping(value="/add")
     public String addService(Model model) {
-        if(!model.containsAttribute("service"))
-            model.addAttribute("service", new Service());
-        model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
+        model.addAttribute("service", new Service());
+        model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
         return "service/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("service") final Service service, RedirectAttributes attributes,
-                                   final BindingResult bindingResult) {
-        ServiceValidator serviceValidator = new ServiceValidator();
-        serviceValidator.validate(service, bindingResult);
-        System.out.println(service);
-        if (bindingResult.hasErrors()){
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.service",bindingResult);
-            attributes.addFlashAttribute("service",service);
-            return "redirect:/service/add";}
-        try {
-            ServiceDao.addService(service);
-        } catch (
-                DuplicateKeyException e) {
-            throw new ProyectoException(
-                    "Ya existe el servicio "
-                            + service.getCode(), "CPduplicada");
-        } catch (DataAccessException e) {
-            throw new ProyectoException(
-                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
-        }
+    public String processAddSubmit(@ModelAttribute("service") Service service,
+                                   BindingResult bindingResult) {
+//        ServiceValidator serviceValidator = new ServiceValidator();
+//        serviceValidator.validate(service, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "service/add";}
+//        try {
+//            ServiceDao.addService(service);
+//        } catch (
+//                DuplicateKeyException e) {
+//            throw new ProyectoException(
+//                    "Ya existe el servicio "
+//                            + service.getCode(), "CPduplicada");
+//        } catch (DataAccessException e) {
+//            throw new ProyectoException(
+//                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+//        }
+        ServiceDao.addService(service);
         return "redirect:list";
     }
 
@@ -77,7 +77,7 @@ public class ServiceController {
     public String editService(Model model, @PathVariable(required = false) String code) {
         if(!model.containsAttribute("service"))
             model.addAttribute("service", ServiceDao.getService(code));
-        model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
+        model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
         return "service/update";
     }
 

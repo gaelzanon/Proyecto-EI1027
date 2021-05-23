@@ -40,36 +40,36 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="date">Date:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="date" th:field="*{date}" />
+                    <input type="date" class="form-control" id="date" th:field="*{date}" />
                     <div class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="startTime">Hora de inicio:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="startTime" th:field="*{startTime}" />
+                    <input type="time" class="form-control" id="startTime" th:field="*{startTime}" />
                     <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="endTime">Hora de finalización:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="endTime" th:field="*{endTime}" />
+                    <input type="time" class="form-control" id="endTime" th:field="*{endTime}" />
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="cols">Columna:</label>
+                <label class="control-label col-sm-2" for="col">Columna:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="cols" th:field="*{cols}" />
-                    <div class="error" th:if="${#fields.hasErrors('cols')}" th:errors="*{cols}"></div>
+                    <input type="text" class="form-control" id="col" th:field="*{col}" />
+                    <div class="error" th:if="${#fields.hasErrors('col')}" th:errors="*{col}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="rows">Fila:</label>
+                <label class="control-label col-sm-2" for="row">Fila:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="rows" th:field="*{rows}" />
-                    <div class="error" th:if="${#fields.hasErrors('rows')}" th:errors="*{rows}"></div>
+                    <input type="text" class="form-control" id="row" th:field="*{row}" />
+                    <div class="error" th:if="${#fields.hasErrors('row')}" th:errors="*{row}"></div>
                 </div>
             </div>
         <div class="form-group row">
