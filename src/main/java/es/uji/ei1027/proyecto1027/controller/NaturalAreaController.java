@@ -3,8 +3,10 @@ package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
+import es.uji.ei1027.proyecto1027.dao.TypeAreaDao;
 import es.uji.ei1027.proyecto1027.model.NaturalArea;
 
+import es.uji.ei1027.proyecto1027.model.TypeNaturalArea;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
@@ -26,10 +29,15 @@ import java.util.List;
 public class NaturalAreaController {
 
     private NaturalAreaDao NaturalAreaDao;
+    private TypeAreaDao typeAreaDao;
 
     @Autowired
     public void setnaturalAreaDao(NaturalAreaDao NaturalAreaDao) {
         this.NaturalAreaDao=NaturalAreaDao;
+    }
+    @Autowired
+    public void setTypeAreaDao(TypeAreaDao typeAreaDao) {
+        this.typeAreaDao=typeAreaDao;
     }
 
     @RequestMapping("/list")
@@ -44,17 +52,21 @@ public class NaturalAreaController {
     }
     @RequestMapping(value="/add")
     public String addnaturalArea(Model model) {
-        model.addAttribute("naturalArea", new NaturalArea());
+        if(!model.containsAttribute("naturalArea"))
+            model.addAttribute("naturalArea", new NaturalArea());
+        model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
         return "naturalArea/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("naturalArea") NaturalArea naturalArea,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit( @ModelAttribute("naturalArea") final NaturalArea naturalArea, RedirectAttributes attributes,
+                                   final BindingResult bindingResult) {
         NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
         naturalAreaValidator.validate(naturalArea, bindingResult);
-        if (bindingResult.hasErrors())
-            return "naturalArea/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.naturalArea",bindingResult);
+            attributes.addFlashAttribute("naturalArea",naturalArea);
+            return "redirect:/naturalArea/add";}
         try {
             NaturalAreaDao.addNaturalArea(naturalArea);
         } catch (DuplicateKeyException e) {
@@ -71,20 +83,24 @@ public class NaturalAreaController {
 
     @RequestMapping(value="/update/{codeArea}", method = RequestMethod.GET)
     public String editnaturalArea(Model model, @PathVariable String codeArea) {
-        model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
+        if(!model.containsAttribute("naturalArea"))
+            model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
         model.addAttribute("stateList", stateList);
+        model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
         return "naturalArea/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("naturalArea") NaturalArea naturalArea,
-            BindingResult bindingResult) {
+            @ModelAttribute("naturalArea") final NaturalArea naturalArea, RedirectAttributes attributes,
+            final BindingResult bindingResult) {
         NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
         naturalAreaValidator.validate(naturalArea, bindingResult);
-        if (bindingResult.hasErrors())
-            return "naturalArea/update";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.naturalArea",bindingResult);
+            attributes.addFlashAttribute("naturalArea",naturalArea);
+            return "redirect:/naturalArea/update";}
         try {
             NaturalAreaDao.updateNaturalArea(naturalArea);
         } catch (DataAccessException e) {

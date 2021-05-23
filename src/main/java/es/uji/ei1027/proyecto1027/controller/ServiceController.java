@@ -53,7 +53,7 @@ public class ServiceController {
         ServiceValidator serviceValidator = new ServiceValidator();
         serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors())
-            return "service/add";
+            return "redirect:/service/add";
         try {
             ServiceDao.addService(service);
         } catch (
@@ -82,7 +82,7 @@ public class ServiceController {
         ServiceValidator serviceValidator = new ServiceValidator();
         serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors())
-            return "service/update";
+            return "redirect:/service/update";
         try {
             ServiceDao.updateService(service);
         } catch (DataAccessException e) {

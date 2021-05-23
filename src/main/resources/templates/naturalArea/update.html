@@ -57,7 +57,9 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="type_of_area">Tipo:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="type_of_area" th:field="*{type_of_area}" />
+                    <select class="form_control" type="text" id="type_of_area" th:field="*{type_of_area}">
+                        <option th:each="type_of_area: ${types_of_area}" th:value="${type_of_area}" th:text="${type_of_area}"></option>
+                    </select>
                     <div class="error" th:if="${#fields.hasErrors('type_of_area')}" th:errors="*{type_of_area}"></div>
                 </div>
             </div>
