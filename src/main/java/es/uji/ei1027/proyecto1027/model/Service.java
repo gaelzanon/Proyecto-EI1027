@@ -9,7 +9,7 @@ public class Service {
     private String code ;
     private String type_of_service ;
     private String description;
-    private int temp;
+    private boolean temp;
 
     @Override
     public String toString() {
@@ -45,11 +45,11 @@ public class Service {
         this.description = description;
     }
 
-    public int getTemp() {
+    public boolean getTemp() {
         return temp;
     }
 
-    public void setTemp(int temp) {
+    public void setTemp(boolean temp) {
         this.temp = temp;
     }
 }

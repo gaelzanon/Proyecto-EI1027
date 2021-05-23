@@ -27,7 +27,7 @@
             <label class="control-label col-sm-2" for="type_of_service">Tipo:</label>
             <div class="col-sm-4">
                 <select class="form_control" type="text" id="type_of_service" th:field="*{type_of_service}">
-                <option th:each="type: ${type_of_service}" th:value="${type}" th:text="${type}"></option>
+                <option th:each="type_of_service: ${type_of_service}" th:value="${type_of_service}" th:text="${type_of_service}"></option>
             </select>
             <div class="error" th:if="${#fields.hasErrors('type_of_service')}" th:errors="*{type_of_service}"></div>
         </div>
@@ -37,6 +37,13 @@
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="description" th:field="*{description}" />
                 <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="temp">Temporal:</label>
+            <div class="col-sm-4">
+                <input type="checkbox" class="form-control" id="temp" th:field="*{temp}" />
+                <div class="error" th:if="${#fields.hasErrors('temp')}" th:errors="*{temp}"></div>
             </div>
         </div>
         <div class="form-group row">

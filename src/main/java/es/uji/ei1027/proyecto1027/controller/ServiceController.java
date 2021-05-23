@@ -29,6 +29,10 @@ public class ServiceController {
     public void setServiceDao(ServiceDao ServiceDao) {
         this.ServiceDao=ServiceDao;
     }
+    @Autowired
+    public void setTypeServiceDao(TypeServiceDao typeServiceDao) {
+        this.typeServiceDao=typeServiceDao;
+    }
 
     @RequestMapping("/list")
     public String listServices(Model model) {
@@ -67,7 +71,7 @@ public class ServiceController {
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
     public String editService(Model model, @PathVariable String code) {
         model.addAttribute("service", ServiceDao.getService(code));
-
+        model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
         return "service/update";
     }
 

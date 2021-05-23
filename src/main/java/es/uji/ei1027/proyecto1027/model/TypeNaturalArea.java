@@ -11,10 +11,9 @@ public class TypeNaturalArea {
         this.type = type;
     }
 
+    //Lo hacemos asi para que en la vista se vea bien
     @Override
     public String toString() {
-        return "TypeNaturalArea{" +
-                "type='" + type + '\'' +
-                '}';
+        return type;
     }
 }

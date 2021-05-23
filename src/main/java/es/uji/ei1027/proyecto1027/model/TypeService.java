@@ -3,11 +3,10 @@ package es.uji.ei1027.proyecto1027.model;
 public class TypeService {
     private String type;
 
+    //Lo hacemos asi para que en la vista se vea bien
     @Override
     public String toString() {
-        return "TypeService{" +
-                "type='" + type + '\'' +
-                '}';
+        return type;
     }
 
     public String getType() {
