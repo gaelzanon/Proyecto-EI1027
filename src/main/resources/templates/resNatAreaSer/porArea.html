@@ -12,7 +12,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Lista de Servicios asignados al area</h1>
+    <h1 th:text="'Lista de Servicios asignados al area ' +${codarea.code_area}"></h1>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -29,9 +29,26 @@
             <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
+        <tr>
+            <form action="#" th:action="@{/resNatAreaSer/porArea}"
+                  th:object="${codarea}" method="post">
+                <td>
+                    <select id ="code" th:field ="*{code}">
+                    <option th:each="service:${services}"
+                            th:value="${service}"
+                            th:text="${service}"> </option>
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-success">Asignar servicio</button>
+                </td>
+                <td>
+                    <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />
+                </td>
+            </form>
+        </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Añadir Servicio al area</a>
 </div>
 </body>
 </html>

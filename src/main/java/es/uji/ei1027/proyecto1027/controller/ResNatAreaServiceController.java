@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/resNatAreaSer")
 public class ResNatAreaServiceController {
 
-    private ResNatAreaServiceDao ResNatAreaServiceDao;
+    private ResNatAreaServiceDao resNatAreaServiceDao;
 
     private ResNatAreaSerService resNatAreaSerService;
 
@@ -31,13 +31,13 @@ public class ResNatAreaServiceController {
 
     @Autowired
     public void setResNatAreaServiceDao(ResNatAreaServiceDao ResNatAreaServiceDao) {
-        this.ResNatAreaServiceDao=ResNatAreaServiceDao;
+        this.resNatAreaServiceDao=ResNatAreaServiceDao;
     }
 
     @RequestMapping("/list")
     public String listResNatAreaServices(Model model) {
-        model.addAttribute("resNatAreaSers", ResNatAreaServiceDao.getR_NArea_services());
-        System.out.println(ResNatAreaServiceDao.getR_NArea_services());
+        model.addAttribute("resNatAreaSers", resNatAreaServiceDao.getR_NArea_services());
+        System.out.println(resNatAreaServiceDao.getR_NArea_services());
         return "resNatAreaSer/list";
     }
     @RequestMapping(value="/add")
@@ -54,7 +54,7 @@ public class ResNatAreaServiceController {
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";
         try {
-            ResNatAreaServiceDao.addR_NArea_service(resNatAreaService);
+            resNatAreaServiceDao.addR_NArea_service(resNatAreaService);
         } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya existe dado de alta el servicio "
@@ -69,6 +69,10 @@ public class ResNatAreaServiceController {
 
     @RequestMapping("/porArea/{code_area}")
     public String listResNatAreaServicePorArea(Model model, @PathVariable String code_area) {
+        ResNatAreaService resNatAreaService = new ResNatAreaService();
+        resNatAreaService.setCode_area(code_area);
+        model.addAttribute("codarea", resNatAreaService);
+        model.addAttribute("services", resNatAreaSerService.getAllServices());
         model.addAttribute("resNatAreaSersPA", resNatAreaSerService.getResNatAreaServiceByArea(code_area));
         return "resNatAreaSer/porArea";
     }
@@ -76,7 +80,7 @@ public class ResNatAreaServiceController {
     @RequestMapping(value = "/delete/{code_area}/{code}")
     public String processDeleteResNatAreaService(@PathVariable String code_area,
                                                  @PathVariable String code) {
-        ResNatAreaServiceDao.deleteR_NArea_service(code_area, code);
+        resNatAreaServiceDao.deleteR_NArea_service(code_area, code);
         return "redirect:../../list";
     }
 
