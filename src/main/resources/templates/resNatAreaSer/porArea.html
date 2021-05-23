@@ -32,23 +32,26 @@
         <tr>
             <form action="#" th:action="@{/resNatAreaSer/porArea}"
                   th:object="${codarea}" method="post">
-                <td th:text="${codarea}">
-                    <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />
+
+                <td th:text="${codarea.code_area}">
+                    <input type="text" id="code_area" th:field="*{code_area}" />
+                    <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
                 </td>
+
                 <td>
                     <select id ="code" th:field ="*{code}">
-                        <option th:each="service:${services}"
+                        <option th:each="code:${services}"
                                 th:value="${code}"
                                 th:text="${code}">
                         </option>
                     </select>
+                    <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
                 </td>
-                <td>
 
-                </td>
                 <td>
-                    <button type="submit" class="btn btn-success">Asignar servicio</button>
+                    <button type="submit" class="btn btn-success">Añadir</button>
                 </td>
+
             </form>
         </tr>
         </tbody>
