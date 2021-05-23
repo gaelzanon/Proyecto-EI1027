@@ -22,7 +22,7 @@ public class NaturalAreaDao {
     public void addNaturalArea(NaturalArea naturalArea) {
         jdbcTemplate.update("INSERT INTO Natural_Area VALUES(?, ?, ?, 0, ?, ?, ?, CURRENT_DATE, ?, ?, ?, ?)",
                 naturalArea.getCodeArea(), naturalArea.getName(), naturalArea.getAddress(),
-                naturalArea.getMaxCapacity(), naturalArea.getDescripcion(), naturalArea.getType_of_area(), naturalArea.getRegistrationDate(),
+                naturalArea.getMaxCapacity(), naturalArea.getDescripcion(), naturalArea.getType_of_area(),
                  naturalArea.getState(), naturalArea.getStartTime(), naturalArea.getEndTime(), naturalArea.getMunCode());
     }
 
@@ -57,7 +57,7 @@ public class NaturalAreaDao {
             return jdbcTemplate.query("SELECT * from Natural_Area",
                     new NaturalAreaRowMapper());
         } catch (EmptyResultDataAccessException e) {
-            return new ArrayList<NaturalArea>();
+            return new ArrayList<>();
         }
     }
 }

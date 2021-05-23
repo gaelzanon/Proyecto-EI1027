@@ -64,7 +64,6 @@ public class NaturalAreaController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        NaturalAreaDao.addNaturalArea(naturalArea);
         return "redirect:list";
     }
 
@@ -83,7 +82,12 @@ public class NaturalAreaController {
 
         if (bindingResult.hasErrors())
             return "naturalArea/update";
-        NaturalAreaDao.updateNaturalArea(naturalArea);
+        try {
+            NaturalAreaDao.updateNaturalArea(naturalArea);
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
 
