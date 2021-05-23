@@ -81,8 +81,8 @@ public class NaturalAreaController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{codeArea}", method = RequestMethod.GET)
-    public String editnaturalArea(Model model, @PathVariable String codeArea) {
+    @RequestMapping(value={"/update/{codeArea}","/update"}, method = RequestMethod.GET)
+    public String editnaturalArea(Model model, @PathVariable(required = false) String codeArea) {
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
