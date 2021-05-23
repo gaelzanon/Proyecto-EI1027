@@ -40,6 +40,8 @@ public class ZoneController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("zone") Zone zone,
                                    BindingResult bindingResult) {
+        ZoneValidator zoneValidator = new ZoneValidator();
+        zoneValidator.validate(zone, bindingResult);
         if (bindingResult.hasErrors())
             return "zone/add";
         try {
@@ -68,6 +70,8 @@ public class ZoneController {
     public String processUpdateSubmit(
             @ModelAttribute("zone") Zone zone,
             BindingResult bindingResult) {
+        ZoneValidator zoneValidator = new ZoneValidator();
+        zoneValidator.validate(zone, bindingResult);
         if (bindingResult.hasErrors())
             return "zone/update";
         zoneDao.updateZone(zone);
