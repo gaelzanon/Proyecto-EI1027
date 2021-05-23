@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,18 +43,21 @@ public class ServiceController {
     }
     @RequestMapping(value="/add")
     public String addService(Model model) {
-        model.addAttribute("service", new Service());
+        if(!model.containsAttribute("service"))
+            model.addAttribute("service", new Service());
         model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
         return "service/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("service") Service service,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("service") final Service service, RedirectAttributes attributes,
+                                   final BindingResult bindingResult) {
         ServiceValidator serviceValidator = new ServiceValidator();
         serviceValidator.validate(service, bindingResult);
-        if (bindingResult.hasErrors())
-            return "redirect:/service/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.service",bindingResult);
+            attributes.addFlashAttribute("service",service);
+            return "redirect:/service/add";}
         try {
             ServiceDao.addService(service);
         } catch (
@@ -68,21 +72,24 @@ public class ServiceController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
-    public String editService(Model model, @PathVariable String code) {
-        model.addAttribute("service", ServiceDao.getService(code));
+    @RequestMapping(value={"/update/{code}","/update"}, method = RequestMethod.GET)
+    public String editService(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("service"))
+            model.addAttribute("service", ServiceDao.getService(code));
         model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
         return "service/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("service") Service service,
-            BindingResult bindingResult) {
+            @ModelAttribute("service") final Service service, RedirectAttributes attributes,
+            final BindingResult bindingResult) {
         ServiceValidator serviceValidator = new ServiceValidator();
         serviceValidator.validate(service, bindingResult);
-        if (bindingResult.hasErrors())
-            return "redirect:/service/update";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.service",bindingResult);
+            attributes.addFlashAttribute("service",service);
+            return "redirect:/service/update";}
         try {
             ServiceDao.updateService(service);
         } catch (DataAccessException e) {
