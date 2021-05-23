@@ -36,7 +36,7 @@ public class TypeServiceController {
     @RequestMapping(value="/add")
     public String addTypeService(Model model) {
         model.addAttribute("type_of_service", new TypeService());
-        return "service/add";
+        return "typeService/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)

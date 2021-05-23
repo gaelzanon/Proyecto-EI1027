@@ -68,10 +68,10 @@ public List<TypeService> getTypeServices() {
 }
 
 /* Obté el service amb el nom donat. Torna null si no existeix. */
-public Service getTypeService(String codeService) {
+public TypeService getTypeService(String codeService) {
     try {
         return jdbcTemplate.queryForObject("select * FROM Type_of_service WHERE type =?",
-        		new ServiceRowMapper(), codeService);
+        		new TypeServiceRowMapper(), codeService);
     }catch (EmptyResultDataAccessException e) {
         return null;
     }
