@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.UriUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/resNatAreaSer")
@@ -49,8 +53,8 @@ public class ResNatAreaServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
                                    BindingResult bindingResult) {
-        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
-        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
+//        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
+//        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";
         try {
@@ -64,7 +68,7 @@ public class ResNatAreaServiceController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        return "redirect:list";
+        return "redirect:/";
     }
 
     @RequestMapping("/porArea/{code_area}")
@@ -72,16 +76,48 @@ public class ResNatAreaServiceController {
         ResNatAreaService resNatAreaService = new ResNatAreaService();
         resNatAreaService.setCode_area(code_area);
         model.addAttribute("codarea", resNatAreaService);
-        model.addAttribute("services", resNatAreaSerService.getAllServices());
-        model.addAttribute("resNatAreaSersPA", resNatAreaSerService.getResNatAreaServiceByArea(code_area));
+        List<String> serDisp = resNatAreaSerService.getAllServices();
+        List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
+        for (ResNatAreaService servicio : servAsig) {
+            String codSer = servicio.getCode();
+            serDisp.remove(codSer);
+        }
+        model.addAttribute("services", serDisp);
+        model.addAttribute("resNatAreaSersPA", servAsig);
         return "resNatAreaSer/porArea";
+    }
+
+    @RequestMapping(value="/porArea", method=RequestMethod.POST)
+    public String processAddSubmitPerProva(
+            @ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
+            BindingResult bindingResult) {
+        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
+        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
+        String nameUri="redirect:porArea/" + resNatAreaService.getCode_area();
+        nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+        if (bindingResult.hasErrors())
+            return nameUri;
+        try {
+            resNatAreaServiceDao.addR_NArea_service(resNatAreaService);
+        } catch (DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya está asignado el servicio "
+                            + resNatAreaService.getCode() + " al area "
+                            + resNatAreaService.getCode_area(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
+        return nameUri;
     }
 
     @RequestMapping(value = "/delete/{code_area}/{code}")
     public String processDeleteResNatAreaService(@PathVariable String code_area,
                                                  @PathVariable String code) {
         resNatAreaServiceDao.deleteR_NArea_service(code_area, code);
-        return "redirect:../../list";
+        String nameUri="redirect:../../porArea/" + code_area;
+        nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+        return nameUri;
     }
 
 

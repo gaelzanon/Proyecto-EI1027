@@ -15,12 +15,22 @@
     <div class="container">
         <div class="alert" th:classappend="${#strings.equals(errorName, 'CPduplicada')} ? 'alert-danger' : 'alert-info'">
             <h3 th:text="${message}"></h3>
-            <p>Pulsa el botón para volver al menú principal</p>
+            <p>Pulsa un botón para continuar</p>
         </div>
-        <div th:align="center">
-            <a href="/" class="btn btn-primary" th:align="left">Volver</a>
-        </div>
+        <table>
+            <tr>
+                <td>
+                    <a href="/" class="btn btn-primary" th:align="left">Menú principal</a>
+                </td>
+                <td>
+                    <form>
+                        <input type="button" class="btn btn-primary" value="Volver" onclick="history.back()">
+                    </form>
+                </td>
+            </tr>
+        </table>
     </div>
+</div>
 </div>
 </body>
 </html>
