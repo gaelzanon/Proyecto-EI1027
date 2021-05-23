@@ -12,17 +12,32 @@ public class NaturalArea {
     private int currentCapacity;
     private int maxCapacity;
     private String descripcion;
-    private String type;
+    private String type_of_area;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate registrationDate;
     private String state;
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime startTime;
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime endTime;
     private String munCode;
 
-    public NaturalArea() {
+    @Override
+    public String toString() {
+        return "NaturalArea{" +
+                "codeArea='" + codeArea + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", currentCapacity=" + currentCapacity +
+                ", maxCapacity=" + maxCapacity +
+                ", descripcion='" + descripcion + '\'' +
+                ", type_of_area='" + type_of_area + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", state='" + state + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", munCode='" + munCode + '\'' +
+                '}';
     }
 
     public String getCodeArea() {
@@ -73,10 +88,12 @@ public class NaturalArea {
         this.descripcion = descripcion;
     }
 
-    public String getType() { return type; }
+    public String getType_of_area() {
+        return type_of_area;
+    }
 
-    public void setType(String type) {
-        this.type = (type);
+    public void setType_of_area(String type_of_area) {
+        this.type_of_area = type_of_area;
     }
 
     public LocalDate getRegistrationDate() {
@@ -92,7 +109,7 @@ public class NaturalArea {
     }
 
     public void setState(String state) {
-        this.state = (state);
+        this.state = state;
     }
 
     public LocalTime getStartTime() {
@@ -117,23 +134,5 @@ public class NaturalArea {
 
     public void setMunCode(String munCode) {
         this.munCode = munCode;
-    }
-
-    @Override
-    public String toString() {
-        return "naturalArea{" +
-                "codeArea='" + codeArea + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", currentCapacity=" + currentCapacity +
-                ", maxCapacity=" + maxCapacity +
-                ", descripcion='" + descripcion + '\'' +
-                ", type='" + type + '\'' +
-                ", registrationDate=" + registrationDate +
-                ", state='" + state + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", munCode='" + munCode + '\'' +
-                '}';
     }
 }

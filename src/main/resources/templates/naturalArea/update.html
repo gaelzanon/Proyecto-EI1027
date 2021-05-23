@@ -12,72 +12,94 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Modifica Natural Area</h2>
-<form action="#" th:action="@{/naturalArea/update}"
-      th:object="${naturalArea}" method="post">
-    <table>
-        <tr>
-            <td><label>Codigo del Area</label></td>
-            <td><input type="text" th:field="*{codeArea}" /></td>
-        </tr>
-        <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{name}" /></td>
-        </tr>
-        <tr>
-            <td><label>Dirrecion</label></td>
-            <td><input type="text" th:field="*{address}" /></td>
-        </tr>
-        <tr>
-            <td><label>Capacidad Actual</label></td>
-            <td><input type="number" th:field="*{currentCapacity}" /></td>
-        </tr>
-        <tr>
-        <tr>
-            <td><label>Capacidad Maxima</label></td>
-            <td><input type="number" th:field="*{maxCapacity}" /></td>
-        </tr>
-        <tr>
-            <td><label>Descripcion</label></td>
-            <td><input type="text" th:field="*{descripcion}" /></td>
-        </tr>
-        <tr>
-
-        <tr>
-            <td><label>Tipo</label></td>
-            <td><input type="text" th:field="*{type}" /></td>
-        </tr>
-        <tr>
-            <td><label>Fecha de registro</label></td>
-            <td><input type="text" th:field="*{registrationDate}" /></td>
-        </tr>
-        <tr>
-            <td><label>Estado</label></td>
-            <td> <select class="form_control" type="text" th:field="*{state}">
-                <!--option value="No seleccionat">Selecciona el gènere</option-->
-                <option th:each="stateValue : ${stateList}"
-                        th:value="${stateValue}"
-                        th:text="${stateValue}"></option>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <td><label>Hora de apertura</label></td>
-            <td><input type="text" th:field="*{startTime}" /></td>
-        </tr>
-        <tr>
-            <td><label>Hora de Cierre</label></td>
-            <td><input type="text" th:field="*{endTime}" /></td>
-        </tr>
-        <tr>
-            <td><label>Codigo Municipal</label></td>
-            <td><input type="text" th:field="*{munCode}" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Afegeix Natural Area" /></td>
-        </tr>
-    </table>
-</form>
+    <div class="container">
+        <h2>Nuevo Espacio Natural</h2>
+        <form class="form-horizontal" action="#" th:action="@{/naturalArea/update}"
+              th:object="${naturalArea}" method="post">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="hidden" class="form-control" id="codeArea" th:field="*{codeArea}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="hidden" class="form-control" id="registrationDate" th:field="*{registrationDate}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="name">Nombre:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="name" th:field="*{name}" />
+                    <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="address">Dirección:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="address" th:field="*{address}" />
+                    <div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="maxCapacity">Capacidad máxima:</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" id="maxCapacity" th:field="*{maxCapacity}" />
+                    <div class="error" th:if="${#fields.hasErrors('maxCapacity')}" th:errors="*{maxCapacity}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" />
+                    <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="type_of_area">Tipo:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="type_of_area" th:field="*{type_of_area}" />
+                    <div class="error" th:if="${#fields.hasErrors('type_of_area')}" th:errors="*{type_of_area}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="state">Estado:</label>
+                <div class="col-sm-4">
+                    <select class="form_control" type="text" id="state" th:field="*{state}">
+                        <option value="Abierta">Abierta</option>
+                        <option value="Cerrada">Cerrada</option>
+                        <option value="Restringida">Restringida</option>
+                    </select>
+                    <div class="error" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="startTime">Hora de apertura:</label>
+                <div class="col-sm-4">
+                    <input type="time" class="form-control" id="startTime" th:field="*{startTime}" />
+                    <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="endTime">Hora de cierre:</label>
+                <div class="col-sm-4">
+                    <input type="time" class="form-control" id="endTime" th:field="*{endTime}" />
+                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="munCode">Código municipal:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="munCode" th:field="*{munCode}" />
+                    <div class="error" th:if="${#fields.hasErrors('munCode')}" th:errors="*{munCode}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <button type="submit" class="btn btn-primary">Modificar Espacio Natural</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

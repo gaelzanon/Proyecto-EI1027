@@ -20,9 +20,9 @@ public class NaturalAreaDao {
     }
 
     public void addNaturalArea(NaturalArea naturalArea) {
-        jdbcTemplate.update("INSERT INTO Natural_Area VALUES(?, ?, ?, 0, ?, ?, ?, 0, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Natural_Area VALUES(?, ?, ?, 0, ?, ?, ?, CURRENT_DATE, ?, ?, ?, ?)",
                 naturalArea.getCodeArea(), naturalArea.getName(), naturalArea.getAddress(),
-                naturalArea.getMaxCapacity(), naturalArea.getDescripcion(), naturalArea.getType(), naturalArea.getRegistrationDate(),
+                naturalArea.getMaxCapacity(), naturalArea.getDescripcion(), naturalArea.getType_of_area(), naturalArea.getRegistrationDate(),
                  naturalArea.getState(), naturalArea.getStartTime(), naturalArea.getEndTime(), naturalArea.getMunCode());
     }
 
@@ -36,9 +36,9 @@ public class NaturalAreaDao {
     }
 
     public void updateNaturalArea(NaturalArea naturalArea) {
-        jdbcTemplate.update("UPDATE Natural_Area SET name=?, address=?, current_capacity=?, max_capacity=?, description=?, type=?, reg_date=?, state=?, start_time=?, end_time=?, mun_code=? where code_area=?",
+        jdbcTemplate.update("UPDATE Natural_Area SET name=?, address=?, current_capacity=?, max_capacity=?, description=?, type_of_area=?, reg_date=?, state=?, start_time=?, end_time=?, mun_code=? where code_area=?",
                 naturalArea.getName(), naturalArea.getAddress(), naturalArea.getCurrentCapacity(), naturalArea.getMaxCapacity(),
-                naturalArea.getDescripcion(), naturalArea.getType(), naturalArea.getRegistrationDate(), naturalArea.getState(),
+                naturalArea.getDescripcion(), naturalArea.getType_of_area(), naturalArea.getRegistrationDate(), naturalArea.getState(),
                 naturalArea.getStartTime(), naturalArea.getEndTime(), naturalArea.getMunCode(), naturalArea.getCodeArea());
     }
 

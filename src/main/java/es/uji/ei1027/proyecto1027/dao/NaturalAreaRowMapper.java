@@ -19,7 +19,7 @@ public class NaturalAreaRowMapper implements RowMapper<NaturalArea> {
         naturalArea.setCurrentCapacity(rs.getInt("current_capacity"));
         naturalArea.setMaxCapacity(rs.getInt("max_capacity"));
         naturalArea.setDescripcion(rs.getString("description"));
-        naturalArea.setType(rs.getString("type_of_area"));
+        naturalArea.setType_of_area(rs.getString("type_of_area"));
         naturalArea.setRegistrationDate(rs.getObject("reg_date",LocalDate.class));
         naturalArea.setState(rs.getString("state"));
         naturalArea.setStartTime(rs.getObject("start_time", LocalTime.class));
