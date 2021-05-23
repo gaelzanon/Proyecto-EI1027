@@ -12,40 +12,49 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <div class="container">
 <h2>Nuevo Servicio</h2>
-<form action="#" th:action="@{/service/add}"
-      th:object="${service}" method="post">
-    <table>
-        <tr>
-            <td><label>Codigo del Servicio</label></td>
-            <td><input type="text" th:field="*{code}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
-        </tr>
-        <tr>
-            <td><label>Tipo</label></td>
-            <td><select class="form_control" type="text" th:field="*{type}">
+    <form class="form-horizontal" action="#" th:action="@{/service/add}"
+          th:object="${service}" method="post">
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="code">Código del servicio:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="code" th:field="*{code}" />
+                <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="type">Tipo:</label>
+            <div class="col-sm-4">
+                <select class="form_control" type="text" id="type" th:field="*{type}">
                 <option value="No seleccionat">Selecciona el tipo</option>
                 <option value="Piscina">Piscina</option>
                 <option value="Rocodromo">Rocodromo</option>
             </select>
-            </td>
             <div class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
-        </tr>
-        <tr>
-            <td><label>Descripcion</label></td>
-            <td><input type="text" th:field="*{description}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-        </tr>
-        <tr>
-            <td><label>Fecha de Inicio</label></td>
-            <td><input type="text" th:field="*{initial_Date}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('initial_Date')}" th:errors="*{initial_Date}"></div>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Añadir Servicio" /></td>
-        </tr>
-    </table>
+        </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="description">Descripción:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="description" th:field="*{description}" />
+                <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="initial_Date">Fecha de inicio:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="initial_Date" th:field="*{initial_Date}" />
+                <div class="error" th:if="${#fields.hasErrors('initial_Date')}" th:errors="*{initial_Date}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary">Crear Servicio</button>
+            </div>
+        </div>
 </form>
+    </div>
 </div>
 </body>
 </html>

@@ -12,26 +12,32 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Nou Service en un area</h2>
-<form action="#" th:action="@{/resNatAreaSer/add}"
-      th:object="${resNatAreaSer}" method="post">
-    <table>
-        <tr>
-            <td><label>Codigo del Area</label></td>
-            <td><input type="text" th:field="*{code_area}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
-        </tr>
-        <tr>
-            <td><label>Codigo del servicio</label></td>
-            <td><input type="text" th:field="*{code}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
-        </tr>
+    <div class="container">
+<h2>Asignar servicio a un espacio natural</h2>
+        <form class="form-horizontal" action="#" th:action="@{/resNatAreaSer/add}"
+              th:object="${resNatAreaSer}" method="post">
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="code_area">Código del Area:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="code_area" th:field="*{code_area}" />
+                <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="code">Código del servicio:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="code" th:field="*{code}" />
+                <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+            </div>
+        </div>
 
-        <tr>
-            <td colspan="2"><input type="submit" value="Añadir Relacion"/></td>
-        </tr>
-    </table>
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary">Asignar servicio</button>
+            </div>
+        </div>
 </form>
+</div>
 </div>
 </body>
 </html>

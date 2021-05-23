@@ -12,31 +12,45 @@
 </head>
 <body>
 <div layout:fragment="content">
+  <div class="container">
 <h2>Nueva Zona</h2>
-<form action="#" th:action="@{/zone/add}"
-      th:object="${zone}" method="post">
-  <table>
-    <tr>
-      <td><label>Columna</label></td>
-      <td><input type="number" th:field="*{col}" /></td>
-    </tr>
-    <tr>
-      <td><label>Fila</label></td>
-      <td><input type="number" th:field="*{row}" /></td>
-    </tr>
-    <tr>
-      <td><label>Máxima Capacidad</label></td>
-      <td><input type="number" th:field="*{capacity}" /></td>
-    </tr>
-    <tr>
-      <td><label>Código Area</label></td>
-      <td><input type="text" th:field="*{areaCode}" /></td>
-    </tr>
-    <tr>
-      <td colspan="2"><input type="submit" value="Añadir Zona" /></td>
-    </tr>
-  </table>
+  <form class="form-horizontal" action="#" th:action="@{/zone/add}"
+        th:object="${zone}" method="post">
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="col">Columna:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="col" th:field="*{col}" />
+        <div class="error" th:if="${#fields.hasErrors('col')}" th:errors="*{col}"></div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="row">Fila:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="row" th:field="*{row}" />
+        <div class="error" th:if="${#fields.hasErrors('row')}" th:errors="*{row}"></div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="capacity">Capacidad máxima:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="capacity" th:field="*{capacity}" />
+        <div class="error" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="areaCode">Código del area:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="areaCode" th:field="*{areaCode}" />
+        <div class="error" th:if="${#fields.hasErrors('areaCode')}" th:errors="*{areaCode}"></div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-offset-2 col-sm-4">
+        <button type="submit" class="btn btn-primary">Crear Zona</button>
+      </div>
+    </div>
 </form>
+</div>
 </div>
 </body>
 </html>

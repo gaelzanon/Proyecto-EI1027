@@ -12,40 +12,52 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Nou Controller</h2>
-<form action="#" th:action="@{/controller/add}"
-      th:object="${controller}" method="post">
-    <table>
-        <tr>
-            <td><label>NIF</label></td>
-            <td><input type="text" th:field="*{NIF}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('NIF')}" th:errors="*{NIF}"></div>
-        </tr>
-        <tr>
-            <td><label>Name</label></td>
-            <td><input type="text" th:field="*{name}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-        </tr>
-        <tr>
-            <td><label>Surname</label></td>
-            <td><input type="text" th:field="*{surname}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
-        </tr>
-        <tr>
-            <td><label>Code area</label></td>
-            <td><input type="text" th:field="*{code_area}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
-        </tr>
-        <tr>
-            <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" /></td>
-            <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Afegeix Controller" /></td>
-        </tr>
-    </table>
+    <div class="container">
+        <h2>Nuevo Controlador</h2>
+        <form class="form-horizontal" action="#" th:action="@{/controller/add}"
+              th:object="${controller}" method="post">
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="NIF">NIF:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="NIF" th:field="*{NIF}" />
+                    <div class="error" th:if="${#fields.hasErrors('NIF')}" th:errors="*{NIF}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="name">Nombre:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="name" th:field="*{name}" />
+                    <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="surname">Apellidos:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="surname" th:field="*{surname}" />
+                    <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="code_area">Código de Area:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="code_area" th:field="*{code_area}" />
+                    <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="email">Email:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="email" th:field="*{email}" />
+                    <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <button type="submit" class="btn btn-primary">Añadir Controlador</button>
+                </div>
+            </div>
 </form>
+</div>
 </div>
 </body>
 </html>
