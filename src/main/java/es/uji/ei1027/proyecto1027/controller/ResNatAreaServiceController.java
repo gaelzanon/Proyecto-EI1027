@@ -54,8 +54,8 @@ public class ResNatAreaServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
                                    BindingResult bindingResult) {
-//        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
-//        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
+        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
+        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         System.out.println(resNatAreaService);
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";
@@ -71,7 +71,7 @@ public class ResNatAreaServiceController {
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
 
-        return "redirect:/list";
+        return "redirect:list";
     }
 
     @RequestMapping("/porArea/{code_area}")
@@ -118,7 +118,7 @@ public class ResNatAreaServiceController {
     public String processDeleteResNatAreaService(@PathVariable String code_area,
                                                  @PathVariable String code) {
         resNatAreaServiceDao.deleteR_NArea_service(code_area, code);
-        String nameUri="redirect:../../porArea/" + code_area;
+        String nameUri="redirect:../../list";
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;
     }

@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear nou Service</title>
+    <title>Modificar asignacion</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,40 +13,34 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-<h2>Asignar servicio a un espacio natural</h2>
-        <form class="form-horizontal" action="#" th:action="@{/resNatAreaSer/add}"
+<h2>Modificar asignacion servicio a un espacio natural</h2>
+        <form class="form-horizontal" action="#" th:action="@{/resNatAreaSer/update}"
               th:object="${resNatAreaSer}" method="post">
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="code_area">Código del Area:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="code_area" th:field="*{code_area}" />
-                <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
+                <input type="hidden" class="form-control" id="code_area" th:field="*{code_area}" />
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="code">Código del servicio:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="code" th:field="*{code}" />
-                <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+                <input type="hidden" class="form-control" id="code" th:field="*{code}" />
             </div>
         </div>
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="startTime">Fecha Inicio:</label>
                 <div class="col-sm-4">
                     <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />
-                    <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="endTime">Fecha Fin:</label>
                 <div class="col-sm-4">
                     <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
-                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </div>
             </div>
             <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary">Asignar servicio</button>
+                <button type="submit" class="btn btn-primary">Modificar asignacion</button>
             </div>
         </div>
 </form>
