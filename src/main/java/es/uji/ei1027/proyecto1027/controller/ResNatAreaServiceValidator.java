@@ -24,5 +24,16 @@ public class ResNatAreaServiceValidator implements Validator {
         if (rnas.getCode().trim().equals(""))
             errors.rejectValue("code", "obligatori",
                     "Se debe introducir un valor");
+        if (rnas.getStartTime()==null || rnas.getEndTime()==null) {
+            errors.rejectValue("startTime", "obligatori",
+                    "Se debe introducir una fecha de apertura");
+            errors.rejectValue("endTime", "obligatori",
+                    "Se debe introducir una fecha de cierre");
+        } else if (rnas.getStartTime().compareTo(rnas.getEndTime())>=0){
+            errors.rejectValue("startTime", "obligatori",
+                    "La fecha de inicio no puede ser mas grande que la de fin");
+            errors.rejectValue("endTime", "obligatori",
+                    "La fecha de inicio no puede ser mas grande que la de fin");
+        }
     }
 }

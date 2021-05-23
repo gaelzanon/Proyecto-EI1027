@@ -41,12 +41,13 @@ public class ResNatAreaServiceController {
     @RequestMapping("/list")
     public String listResNatAreaServices(Model model) {
         model.addAttribute("resNatAreaSers", resNatAreaServiceDao.getR_NArea_services());
-        System.out.println(resNatAreaServiceDao.getR_NArea_services());
+
         return "resNatAreaSer/list";
     }
     @RequestMapping(value="/add")
     public String addResNatAreaService(Model model) {
         model.addAttribute("resNatAreaSer", new ResNatAreaService());
+
         return "resNatAreaSer/add";
     }
 
@@ -55,6 +56,7 @@ public class ResNatAreaServiceController {
                                    BindingResult bindingResult) {
 //        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
 //        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
+        System.out.println(resNatAreaService);
         if (bindingResult.hasErrors())
             return "resNatAreaSer/add";
         try {
@@ -68,6 +70,7 @@ public class ResNatAreaServiceController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
+
         return "redirect:/";
     }
 

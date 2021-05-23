@@ -21,7 +21,7 @@ public class ResNatAreaServiceDao {
 
     /* Añadir ResNatAreaService a la clase de datos */
     public void addR_NArea_service(ResNatAreaService res_na_ser) {
-        jdbcTemplate.update("INSERT INTO R_NArea_Services VALUES(?, ?)", res_na_ser.getCode_area(), res_na_ser.getCode());
+        jdbcTemplate.update("INSERT INTO R_NArea_Services VALUES(?, ?, ?, ?)", res_na_ser.getCode_area(), res_na_ser.getCode(),res_na_ser.getStartTime(),res_na_ser.getEndTime());
     }
 
     /* Eliminar ResNatAreaService de la base de datos */

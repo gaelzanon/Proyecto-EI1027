@@ -18,6 +18,8 @@
     <tr>
         <th>Codigo del Area</th>
         <th>Codigo del Servicio</th>
+        <th>Fecha inicio</th>
+        <th>Fecha Fin</th>
         <th></th>
         <th></th>
     </tr>
@@ -26,6 +28,8 @@
     <tr th:each="resNatAreaSer: ${resNatAreaSers}">
         <td th:text="${resNatAreaSer.code_area}"></td>
         <td th:text="${resNatAreaSer.code}"></td>
+        <td th:text="${resNatAreaSer.startTime}"></td>
+        <td th:text="${resNatAreaSer.endTime}"></td>
         <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>

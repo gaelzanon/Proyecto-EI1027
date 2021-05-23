@@ -1,8 +1,16 @@
 package es.uji.ei1027.proyecto1027.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class ResNatAreaService {
     private String code_area;
     private String code;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate startTime;
+    private LocalDate endTime;
 
     public String getCode_area() {
         return code_area;
@@ -20,11 +28,29 @@ public class ResNatAreaService {
         this.code = code;
     }
 
+    public LocalDate getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDate startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDate getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDate endTime) {
+        this.endTime = endTime;
+    }
+
     @Override
     public String toString() {
         return "ResNatAreaService{" +
-                "Code_area='" + code_area + '\'' +
+                "code_area='" + code_area + '\'' +
                 ", code='" + code + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 '}';
     }
 }
