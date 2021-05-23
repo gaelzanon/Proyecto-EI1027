@@ -12,24 +12,24 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1>Lista de tipos de service</h1>
+<h1>Lista de tipos de area</h1>
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Tipo de Servicio</th>
+        <th>Tipo de area</th>
         <th></th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="type: ${type_of_service}">
+    <tr th:each="type: ${type_of_area}">
         <td th:text="${type.type}"></td>
-        <td><a th:href="@{/typeService/delete/{type}(type=${type.type})}" class="btn btn-danger" role="button">Borrar</a>
+        <td><a th:href="@{/typeArea/delete/{type}(type=${type.type})}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Añadir Tipo de servicio</a>
+<a href="add" class="btn btn-success" role="button">Añadir Tipo de area</a>
 </div>
 </body>
 </html>

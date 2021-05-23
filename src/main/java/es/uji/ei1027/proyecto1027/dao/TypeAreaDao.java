@@ -70,10 +70,10 @@ public List<TypeNaturalArea> getTypeAreas() {
 }
 
 /* Obté el service amb el nom donat. Torna null si no existeix. */
-public NaturalArea getTypeArea(String codeArea) {
+public TypeNaturalArea getTypeArea(String codeArea) {
     try {
         return jdbcTemplate.queryForObject("select * FROM Type_of_area WHERE type =?",
-        		new NaturalAreaRowMapper(), codeArea);
+        		new TypeAreaRowMapper(), codeArea);
     }catch (EmptyResultDataAccessException e) {
         return null;
     }
