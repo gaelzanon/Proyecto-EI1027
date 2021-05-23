@@ -20,7 +20,7 @@ public class ReservationRowMapper implements RowMapper<Reservation> {
         reservation.setState(rs.getString("state"));
         //reservation.setStartTime(rs.getObject("start_time", LocalDate.class));
         //reservation.setEndTime(rs.getObject("end_time", LocalDate.class));
-        reservation.setCols(rs.getInt("cols"));
+        reservation.setCols(rs.getInt("col"));
         reservation.setRow(rs.getInt("row"));
         reservation.setCodeArea(rs.getString("code_area"));
         return reservation;
