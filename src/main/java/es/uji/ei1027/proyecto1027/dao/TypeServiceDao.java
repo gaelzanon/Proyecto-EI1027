@@ -2,6 +2,7 @@ package es.uji.ei1027.proyecto1027.dao;
 
 
 import es.uji.ei1027.proyecto1027.model.Service;
+import es.uji.ei1027.proyecto1027.model.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository // En Spring els DAOs van anotats amb @Repository
-public class ServiceDao {
+public class TypeServiceDao {
 private JdbcTemplate jdbcTemplate ;
 
 // Obté el jdbcTemplate a partir del Data Source
@@ -22,12 +23,11 @@ public void setDataSource(DataSource dataSource) {
 }
 
 // add service
-public void addService(Service service) {
+public void addTypeService(TypeService typeService) {
 	try {
         jdbcTemplate.update( 
-        "INSERT INTO service VALUES(?, ?, ?, ?)" ,
-        service.getCode() , service.getType_of_service() , service.getDescription() ,
-        service.getTemp());
+        "INSERT INTO Type_of_service VALUES(?)" ,
+        typeService.getType());
 	}catch(Exception e ){
 		System.out.println("Entrada duplicada no se ha podido insertar");
 		
@@ -35,43 +35,42 @@ public void addService(Service service) {
 }
 
 /* Esborra  */
-    public void deleteService(Service service) {
+    public void deleteTypeService(TypeService typeService) {
         jdbcTemplate.update(
-        "DELETE FROM service WHERE code = ?",
-        service.getCode());
+        "DELETE FROM Type_of_service WHERE type = ?",
+        typeService.getType());
 }
 
     /* Esborra  */
-    public void deleteService(String code) {
-        if (getService(code)!=null){
+    public void deleteTypeService(String type) {
+        if (getTypeService(type)!=null){
             //Se puede hacer delete
-            String SQL = "DELETE FROM service WHERE code = ?";
-            jdbcTemplate.update(SQL,code);
+            String SQL = "DELETE FROM Type_of_service WHERE type = ?";
+            jdbcTemplate.update(SQL,type);
         }
     }
 
-/* Actualitza
-(excepte el code, que és la clau primària) */
-public void updateService(Service service) {
+/* No se actualiza, solo tiene la clave primaria
+public void updateTypeService(TypeService typeService) {
     jdbcTemplate.update(
-    "UPDATE service SET type_of_service=?,  description =? , temp =?   WHERE code = ?",
-    service.getType_of_service(), service.getDescription(), service.getTemp() , service.getCode() );
+    "UPDATE Type_of_service SET type=?",
+    typeService.getType() );
     System.out.println("No funciona");
-}
+}*/
 
 /* listar */
-public List<Service> getServices() {
+public List<TypeService> getTypeServices() {
     try {
-        return jdbcTemplate.query("select * from service",new ServiceRowMapper());
+        return jdbcTemplate.query("select * from Type_of_service",new TypeServiceRowMapper());
     }catch (EmptyResultDataAccessException e) {
-        return new ArrayList<Service>();
+        return new ArrayList<TypeService>();
     }
 }
 
 /* Obté el service amb el nom donat. Torna null si no existeix. */
-public Service getService(String codeService) {
+public Service getTypeService(String codeService) {
     try {
-        return jdbcTemplate.queryForObject("select * FROM service WHERE code =?",
+        return jdbcTemplate.queryForObject("select * FROM Type_of_service WHERE type =?",
         		new ServiceRowMapper(), codeService);
     }catch (EmptyResultDataAccessException e) {
         return null;

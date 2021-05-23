@@ -21,8 +21,10 @@ public class ServiceValidator implements Validator {
         if (service.getDescription().trim().equals(""))
             errors.rejectValue("description", "obligatori",
                     "Se debe introducir una descripcion");
-        if (service.getType().trim().equals(""))
-            errors.rejectValue("type", "obligatori",
-                    "Se debe introducir un tipo");
+        if (service.getTemp()!=0 || service.getTemp()!=1)
+            errors.rejectValue("temp", "obligatori",
+                    "Temp tiene que estar entre 1 (temporal) o 0 (permanente)");
+        if (service.getType_of_service().trim().equals(""))
+            errors.rejectValue("type_of_service","obligatori","Se debe asignar un tipo");
     }
 }

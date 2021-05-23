@@ -7,53 +7,49 @@ import java.time.LocalDate;
 
 public class Service {
     private String code ;
-    private String type ;
+    private String type_of_service ;
     private String description;
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
-    private LocalDate initial_Date ;
+    private int temp;
 
+    @Override
+    public String toString() {
+        return "Service{" +
+                "code='" + code + '\'' +
+                ", type_of_service='" + type_of_service + '\'' +
+                ", description='" + description + '\'' +
+                ", temp=" + temp +
+                '}';
+    }
 
-    public Service() {}
-    
     public String getCode() {
-        return code ;
+        return code;
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
-    public String getType() {
-        return type ;
+    public String getType_of_service() {
+        return type_of_service;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType_of_service(String type_of_service) {
+        this.type_of_service = type_of_service;
     }
 
     public String getDescription() {
-        return description ;
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public LocalDate getInitial_Date() {
-        return initial_Date ;
+    public int getTemp() {
+        return temp;
     }
 
-    public void setInitial_Date(LocalDate initial_Date) {
-        this.initial_Date = initial_Date;
+    public void setTemp(int temp) {
+        this.temp = temp;
     }
-
-
-    @Override
-    public String toString() {
-        return "Service{" +"code='" + code + " \' " +
-		", type='" + type + " \' " +
-		", description='" + description + " \' " +
-		", initial_Date=" + initial_Date +
-		"}" ;
-	}
 }

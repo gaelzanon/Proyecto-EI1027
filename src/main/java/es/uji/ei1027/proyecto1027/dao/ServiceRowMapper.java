@@ -13,9 +13,9 @@ public final class ServiceRowMapper implements RowMapper<Service> {
 {
 Service service = new Service();
 service.setCode(rs.getString( "code" ));
-service.setType(rs.getString( "type" ));
+service.setType_of_service(rs.getString( "type_of_service" ));
 service.setDescription(rs.getString( "description" ));
-service.setInitial_Date(rs.getObject( "initial_date" , LocalDate.class));
+service.setTemp(rs.getInt( "temp"));
 return service;
 }
 }

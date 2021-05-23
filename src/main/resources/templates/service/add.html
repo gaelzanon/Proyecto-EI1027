@@ -24,14 +24,12 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="type">Tipo:</label>
+            <label class="control-label col-sm-2" for="type_of_service">Tipo:</label>
             <div class="col-sm-4">
-                <select class="form_control" type="text" id="type" th:field="*{type}">
-                <option value="No seleccionat">Selecciona el tipo</option>
-                <option value="Piscina">Piscina</option>
-                <option value="Rocodromo">Rocodromo</option>
+                <select class="form_control" type="text" id="type_of_service" th:field="*{type_of_service}">
+                <option th:each="type: ${type_of_service}" th:value="${type}" th:text="${type}"></option>
             </select>
-            <div class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+            <div class="error" th:if="${#fields.hasErrors('type_of_service')}" th:errors="*{type_of_service}"></div>
         </div>
         </div>
         <div class="form-group row">
@@ -39,13 +37,6 @@
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="description" th:field="*{description}" />
                 <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="initial_Date">Fecha de inicio:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="initial_Date" th:field="*{initial_Date}" />
-                <div class="error" th:if="${#fields.hasErrors('initial_Date')}" th:errors="*{initial_Date}"></div>
             </div>
         </div>
         <div class="form-group row">

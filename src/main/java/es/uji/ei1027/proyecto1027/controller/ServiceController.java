@@ -2,6 +2,7 @@ package es.uji.ei1027.proyecto1027.controller;
 
 
 import es.uji.ei1027.proyecto1027.dao.ServiceDao;
+import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
 import es.uji.ei1027.proyecto1027.model.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -22,6 +23,7 @@ import java.util.List;
 public class ServiceController {
 
     private ServiceDao ServiceDao;
+    private TypeServiceDao typeServiceDao;
 
     @Autowired
     public void setServiceDao(ServiceDao ServiceDao) {
@@ -37,6 +39,7 @@ public class ServiceController {
     @RequestMapping(value="/add")
     public String addService(Model model) {
         model.addAttribute("service", new Service());
+        model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
         return "service/add";
     }
 
@@ -64,20 +67,24 @@ public class ServiceController {
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
     public String editService(Model model, @PathVariable String code) {
         model.addAttribute("service", ServiceDao.getService(code));
-        List<String> typeList = Arrays.asList("Piscina", "Rocodromo");
-        model.addAttribute("typeList", typeList);
 
         return "service/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("service") Service Service,
+            @ModelAttribute("service") Service service,
             BindingResult bindingResult) {
-        System.out.println(Service.getInitial_Date());
+        ServiceValidator serviceValidator = new ServiceValidator();
+        serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors())
             return "service/update";
-        ServiceDao.updateService(Service);
+        try {
+            ServiceDao.updateService(service);
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
         return "redirect:list";
     }
     @RequestMapping(value="/delete/{code}")
