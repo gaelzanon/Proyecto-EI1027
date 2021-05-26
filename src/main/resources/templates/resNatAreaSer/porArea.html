@@ -26,6 +26,8 @@
         <tr th:each="resNatAreaSer: ${resNatAreaSersPA}">
             <td th:text="${resNatAreaSer.code_area}"></td>
             <td th:text="${resNatAreaSer.code}"></td>
+            <td th:text="${resNatAreaSer.startTime}"></td>
+            <td th:text="${resNatAreaSer.endTime}"></td>
             <td></td>
             <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
@@ -51,6 +53,14 @@
                 </td>
                 <td>
                     <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />
+                </td>
+                <td>
+                    <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />
+                    <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
+                </td>
+                <td>
+                    <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
+                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </td>
                 <td>
                     <button type="submit" class="btn btn-success">Añadir</button>

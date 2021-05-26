@@ -116,7 +116,7 @@ public class ResNatAreaServiceController {
     public String processDeleteResNatAreaService(@PathVariable String code_area,
                                                  @PathVariable String code) {
         resNatAreaServiceDao.deleteR_NArea_service(code_area, code);
-        String nameUri="redirect:../../list";
+        String nameUri="redirect:../../porArea/" + code_area;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;
     }

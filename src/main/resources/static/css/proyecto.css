@@ -34,3 +34,15 @@ h2 {
 	text-align: right;
 margin-right: 10pt;
 }
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vl {
+  border-left: 6px solid black;
+  height: 500px;
+}
+
+.tab { margin-left: 20px; }

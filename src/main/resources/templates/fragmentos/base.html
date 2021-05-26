@@ -17,11 +17,11 @@
 </head>
 
 <body class="container">
-    <header class="page-header">
-        <h1>Aplicación Sana</h1>
-    </header>
-    <div th:replace="fragmentos/nav"></div>
-    <div th:replace="fragmentos/logininfo"></div>
+    <div class="menu bg-dark">
+        <div th:replace="fragmentos/nav"></div>
+        <div class="v1"></div>
+        <div th:replace="fragmentos/logininfo"></div>
+    </div>
     <div layout:fragment="content"></div>
     <footer>
         <hr>
