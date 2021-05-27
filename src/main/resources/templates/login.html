@@ -13,29 +13,29 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-    <h1>Acceso</h1>
-    <form class="form-horizontal" action="#" th:action="@{/login}"
-          th:object="${user}" method="post">
-        <p>
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="username">Usuario:</label>
-            <div class="col-sm-4">
-                <input class="form_control" type="text" id="username" th:field="*{username}"/>
-                <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        <h1>Acceso</h1>
+        <form class="form-horizontal" action="#" th:action="@{/login}"
+              th:object="${user}" method="post">
+            <p>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="username">Usuario:</label>
+                <div class="col-sm-4">
+                    <input class="form_control" type="text"  maxlength="20" id="username" th:field="*{username}"/>
+                    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                </div>
             </div>
-        </div>
-        </p>
-        <p>
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="password">Contraseña:</label>
-            <div class="col-sm-4">
-                <input class="form_control" type="password" id="password" th:field="*{password}"/>
-                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </p>
+            <p>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="password">Contraseña:</label>
+                <div class="col-sm-4">
+                    <input class="form_control" type="password"  maxlength="20" id="password" th:field="*{password}"/>
+                    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                </div>
             </div>
-        </div>
-        </p>
-        <input type="submit" value="Acceder" />
-    </form>
+            </p>
+            <input type="submit" value="Acceder" />
+        </form>
     </div>
 </div>
 </body>
