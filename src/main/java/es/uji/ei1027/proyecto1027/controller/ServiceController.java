@@ -48,6 +48,8 @@ public class ServiceController {
     public String addService(Model model) {
         model.addAttribute("service", new Service());
         model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
+        List<String> temp = Arrays.asList("True", "False");
+        model.addAttribute("temp", temp);
         return "service/add";
     }
 
@@ -78,6 +80,8 @@ public class ServiceController {
         if(!model.containsAttribute("service"))
             model.addAttribute("service", ServiceDao.getService(code));
         model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
+        List<String> temp = Arrays.asList("True", "False");
+        model.addAttribute("temp", temp);
         return "service/update";
     }
 

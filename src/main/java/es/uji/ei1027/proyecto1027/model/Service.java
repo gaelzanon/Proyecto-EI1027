@@ -11,7 +11,7 @@ public class Service {
     private String description;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate FechaReg;
-    private boolean temp;
+    private String temp;
 
     @Override
     public String toString() {
@@ -56,11 +56,11 @@ public class Service {
         FechaReg = fechaReg;
     }
 
-    public boolean getTemp() {
+    public String getTemp() {
         return temp;
     }
 
-    public void setTemp(boolean temp) {
+    public void setTemp(String temp) {
         this.temp = temp;
     }
 }

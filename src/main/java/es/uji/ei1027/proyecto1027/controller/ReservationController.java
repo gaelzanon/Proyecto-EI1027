@@ -47,6 +47,7 @@ public class ReservationController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservation") Reservation reservation,
                                    BindingResult bindingResult) {
+        System.out.println(reservation);
         if (bindingResult.hasErrors())
             return "reservation/add";
         try {
@@ -66,14 +67,17 @@ public class ReservationController {
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
     public String editReservation(Model model, @PathVariable String code) {
         model.addAttribute("reservation", ReservationDao.getReservation(code));
+
         return "reservation/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("reservation") Reservation Reservation,
             BindingResult bindingResult) {
+        System.out.println(Reservation);
         if (bindingResult.hasErrors())
             return "reservation/update";
+
         ReservationDao.updateReservation(Reservation);
         return "redirect:list";
     }

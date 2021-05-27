@@ -47,7 +47,9 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="temp">Temporal:</label>
                 <div class="col-sm-4">
-                    <input type="checkbox" class="form-control" id="temp" th:field="*{temp}" />
+                    <select class="form_control" type="text" id="temp" th:field="*{temp}">
+                        <option th:each="temp: ${temp}" th:value="${temp}" th:text="${temp}"></option>
+                    </select>
                     <div class="error" th:if="${#fields.hasErrors('temp')}" th:errors="*{temp}"></div>
                 </div>
             </div>

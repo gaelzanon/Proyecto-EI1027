@@ -3,18 +3,22 @@ package es.uji.ei1027.proyecto1027.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Reservation {
     private String address;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date;
     private String qr;
     private String code;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate creationDate;
     private String nifCitizen;
     private String state;
-    private LocalDate startTime;
     @DateTimeFormat(pattern = "HH:mm:ss.SSS")
-    private LocalDate endTime;
+    private LocalTime startTime;
+    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    private LocalTime endTime;
     private int cols;
     private int row;
     private String codeArea;
@@ -78,19 +82,19 @@ public class Reservation {
         this.state = state;
     }
 
-    public LocalDate getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDate getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 
