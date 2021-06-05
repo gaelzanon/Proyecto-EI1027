@@ -1,10 +1,13 @@
 package es.uji.ei1027.proyecto1027.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Municipality {
     private String code;
     private String name;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate registrationDate;
 
     public Municipality() {

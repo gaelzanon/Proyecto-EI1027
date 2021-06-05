@@ -16,14 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RequestMapping("/municipality")
 public class MunicipalityController {
 
     private MunicipalityDao municipalityDao;
+    private int codigos;
 
     @Autowired
-    public void SetMunicipalityManagerDao(MunicipalityManagerDao managerDao) {
+    public void SetMunicipalityDao(MunicipalityDao municipalityDao) {
         this.municipalityDao = municipalityDao;
     }
 
@@ -44,6 +48,9 @@ public class MunicipalityController {
                                    BindingResult bindingResult) {
         //MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
         //municipalityManagerValidator.validate(mun, bindingResult);
+        codigos = (int)(Math.random()*100000);
+        municipality.setCode( String.valueOf(codigos));
+        System.out.println(municipality);
         if (bindingResult.hasErrors())
             return "municipality/add";
         try {
@@ -82,6 +89,13 @@ public class MunicipalityController {
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
         return "redirect:list";
+    }
+    @RequestMapping(value={"/details/{code}"}, method = RequestMethod.GET)
+    public String detailsnaturalArea(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("municipality"))
+            model.addAttribute("municipality", municipalityDao.getMunicipality(code));
+
+        return "municipality/details";
     }
 
     @RequestMapping(value="/delete/{code}")

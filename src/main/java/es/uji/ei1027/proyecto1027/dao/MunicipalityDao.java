@@ -55,7 +55,9 @@ public class MunicipalityDao {
 
     /* Obté tots els municipis. Torna una llista buida si no n'hi ha cap. */
     public List<Municipality> getMunicipality() {
+        System.out.println("Hola");
         try {
+
             return jdbcTemplate.query("SELECT * from municipality",
                     new MunicipalityRowMapper());
         } catch (EmptyResultDataAccessException e) {
