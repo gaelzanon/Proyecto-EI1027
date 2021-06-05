@@ -1,6 +1,7 @@
 package es.uji.ei1027.proyecto1027.controller;
 
 
+import es.uji.ei1027.proyecto1027.dao.MunicipalityDao;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
 import es.uji.ei1027.proyecto1027.dao.TypeAreaDao;
@@ -30,7 +31,8 @@ public class NaturalAreaController {
 
     private NaturalAreaDao NaturalAreaDao;
     private TypeAreaDao typeAreaDao;
-
+    private MunicipalityDao municipalityDao;
+    private static double codigos;
     @Autowired
     public void setnaturalAreaDao(NaturalAreaDao NaturalAreaDao) {
         this.NaturalAreaDao=NaturalAreaDao;
@@ -55,14 +57,21 @@ public class NaturalAreaController {
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", new NaturalArea());
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
+
+        //System.out.println(municipalityDao.getMunicipality());
+        //model.addAttribute("munCode", municipalityDao.getMunicipality());
         return "naturalArea/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit( @ModelAttribute("naturalArea") final NaturalArea naturalArea, RedirectAttributes attributes,
                                    final BindingResult bindingResult) {
+
+        codigos = (int)(Math.random()*100000);
+        naturalArea.setCodeArea( String.valueOf(codigos));
         NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
         naturalAreaValidator.validate(naturalArea, bindingResult);
+
         System.out.println(naturalArea);
         if (bindingResult.hasErrors()){
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.naturalArea",bindingResult);
@@ -110,6 +119,17 @@ public class NaturalAreaController {
         }
         return "redirect:list";
     }
+
+    @RequestMapping(value={"/details/{codeArea}","/details"}, method = RequestMethod.GET)
+    public String detailsnaturalArea(Model model, @PathVariable(required = false) String codeArea) {
+        if(!model.containsAttribute("naturalArea"))
+            model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
+        List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
+        model.addAttribute("stateList", stateList);
+        model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
+        return "naturalArea/details";
+    }
+
 
     @RequestMapping(value="/delete/{codeArea}")
     public String processDelete(@PathVariable String codeArea) {

@@ -36,7 +36,7 @@ public class Municipality {
 
     @Override
     public String toString() {
-        return "Municipality{" +
+        return "municipality{" +
                 "code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", registrationDate=" + registrationDate +

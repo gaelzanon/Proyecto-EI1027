@@ -16,18 +16,11 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Codigo del Area</th>
+
         <th>Nombre</th>
         <th>Direccion</th>
-        <th>Capacidad Actual</th>
-        <th>Capacidad Maxima</th>
         <th>Descripcion</th>
         <th>Tipo</th>
-        <th>Fecha de registro</th>
-        <th>Estado</th>
-        <th>Hora de apertura</th>
-        <th>Hora de cierre</th>
-        <th>Codigo Municipal</th>
 
         <th></th>
         <th></th>
@@ -35,20 +28,16 @@
     </thead>
     <tbody>
     <tr th:each="naturalArea: ${naturalArea}">
-        <td th:text="${naturalArea.codeArea}"></td>
+
         <td th:text="${naturalArea.name}"></td>
         <td th:text="${naturalArea.address}"></td>
-        <td th:text="${naturalArea.currentCapacity}"></td>
-        <td th:text="${naturalArea.maxCapacity}"></td>
         <td th:text="${naturalArea.descripcion}"></td>
         <td th:text="${naturalArea.type_of_area}"></td>
-        <td th:text="${naturalArea.registrationDate}"></td>
-        <td th:text="${naturalArea.state}"></td>
-        <td th:text="${naturalArea.startTime}"></td>
-        <td th:text="${naturalArea.endTime}"></td>
-        <td th:text="${naturalArea.munCode}"></td>
 
-        <td><a th:href="@{/resNatAreaSer/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-primary" role="button">Gestionar servicios</a>
+        <td><a th:href="@{/naturalArea/details/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Detalles</a>
+        </td>
+
+        <td><a th:href="@{/resNatAreaSer/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Gestionar servicios</a>
         </td>
         <td><a th:href="@{/naturalArea/update/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
         </td>

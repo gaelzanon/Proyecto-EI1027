@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Gestionar Municipios</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Lista de Servicios asignados a cada Area</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Codigo del Municipio</th>
+            <th>Nombre</th>
+            <th>Fecha Registro</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="municipality: ${municipality}">
+            <td th:text="${municipality.code}"></td>
+            <td th:text="${municipality.name}"></td>
+            <td th:text="${municipality.registrationDate}"></td>
+
+
+            <td><a th:href="@{/municipality/delete/{code}/{code} (code=${municipality.code}, code=${municipality.code})}" class="btn btn-danger" role="button">Borrar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Añadir Municipality</a>
+    <a href="/"class="btn btn-primary" role="button">Volver</a>
+</div>
+</body>
+</html>
