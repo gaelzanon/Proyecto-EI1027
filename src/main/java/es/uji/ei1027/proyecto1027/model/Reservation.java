@@ -15,9 +15,9 @@ public class Reservation {
     private LocalDate creationDate;
     private String nifCitizen;
     private String state;
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime startTime;
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime endTime;
     private int cols;
     private int row;

@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/reservation")
 public class ReservationController {
 
     private ReservationDao ReservationDao;
-
+    private int codigos;
     @Autowired
     public void setReservationDao(ReservationDao ReservationDao) {
         this.ReservationDao=ReservationDao;
@@ -47,6 +49,9 @@ public class ReservationController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservation") Reservation reservation,
                                    BindingResult bindingResult) {
+
+        codigos = (int)(Math.random()*100000);
+        reservation.setCode( String.valueOf(codigos));
         System.out.println(reservation);
         if (bindingResult.hasErrors())
             return "reservation/add";
@@ -81,6 +86,13 @@ public class ReservationController {
         ReservationDao.updateReservation(Reservation);
         return "redirect:list";
     }
+    @RequestMapping(value={"/details/{code}","/details"}, method = RequestMethod.GET)
+    public String detailsReservation(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("reservation"))
+            model.addAttribute("reservation", ReservationDao.getReservation(code));
+        return "reservation/details";
+    }
+
     @RequestMapping(value="/delete/{nom}")
     public String processDelete(@PathVariable String code) {
         ReservationDao.deleteReservation(code);

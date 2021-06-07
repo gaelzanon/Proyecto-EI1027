@@ -12,66 +12,84 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Nou Reservation</h2>
+<h2>Modificar la Reserva </h2>
 <form action="#" th:action="@{/Reservation/update}"
       th:object="${reservation}" method="post">
-    <table>
-        <tr>
-            <td><label>Address</label></td>
-            <td><input type="text" th:field="*{address}" /></td>
-        </tr>
-        <tr>
-            <td><label>Date</label></td>
-            <td><input type="date" th:field="*{date}" /></td>
-        </tr>
-        <tr>
-            <td><label>QR</label></td>
-            <td><input type="text" th:field="*{qr}" /></td>
-        </tr>
-        <tr>
-            <td><label>Code</label></td>
-            <td><input type="text" th:field="*{code}" /></td>
-        </tr>
-        <tr>
-        <tr>
-            <td><label>creationDate</label></td>
-            <td><input type="text" th:field="*{creationDate}" /></td>
-        </tr>
-        <tr>
-            <td><label>nifCitizen</label></td>
-            <td><input type="text" th:field="*{nifCitizen}" /></td>
-        </tr>
-        <tr>
-
-        <tr>
-            <td><label>state</label></td>
-            <td><input type="text" th:field="*{state}" /></td>
-        </tr>
-        <tr>
-            <td><label>startTime</label></td>
-            <td><input type="text" th:field="*{startTime}" /></td>
-        </tr>
-        <tr>
-            <td><label>endTime</label></td>
-            <td><input type="text" th:field="*{endTime}" /></td>
-        </tr>
-        <tr>
-            <td><label>cols</label></td>
-            <td><input type="text" th:field="*{cols}" /></td>
-        </tr>
-        <tr>
-            <td><label>rows</label></td>
-            <td><input type="text" th:field="*{row}" /></td>
-        </tr>
-        <tr>
-            <td><label>codeArea</label></td>
-            <td><input type="text" th:field="*{codeArea}" /></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Afegeix Reservation" /></td>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Date">Fecha de la Reserva:</label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" id="Date" th:field="*{Date}" readonly="readonly"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="qr">QR:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="qr" th:field="*{qr}" readonly="readonly"/>
+            <div class="error" th:if="${#fields.hasErrors('qr')}" th:errors="*{qr}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="creationDate">Fecha de Creacion:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
+            <div class="error" th:if="${#fields.hasErrors('creationDate')}" th:errors="*{creationDate}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="NifCitizen">NIF :</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="NifCitizen" th:field="*{NifCitizen}" readonly="readonly"/>
+            <div class="error" th:if="${#fields.hasErrors('NifCitizen')}" th:errors="*{NifCitizen}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="State">Estado:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="State" th:field="*{State}"/>
+            <div class="error" th:if="${#fields.hasErrors('State')}" th:errors="*{State}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="startTime">Hora de comienzo:</label>
+        <div class="col-sm-4">
+            <input type="time" class="form-control" id="startTime" th:field="*{startTime}" />
+            <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="endTime">Hora de cierre:</label>
+        <div class="col-sm-4">
+            <input type="time" class="form-control" id="endTime" th:field="*{endTime}" />
+            <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Cols">Cólumna de la Reserva:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" id="Cols" th:field="*{Cols}" />
+            <div class="error" th:if="${#fields.hasErrors('Cols')}" th:errors="*{Cols}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="row">Fila de la Reserva :</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" id="row" th:field="*{row}" />
+            <div class="error" th:if="${#fields.hasErrors('row')}" th:errors="*{row}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="CodeArea">Código del area:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="CodeArea" th:field="*{CodeArea}" readonly="readonly"/>
+            <div class="error" th:if="${#fields.hasErrors('CodeArea')}" th:errors="*{CodeArea}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-4">
+            <button type="submit" class="btn btn-primary">Modificar Espacio Reserva</button>
             <a href="/reservation/list"class="btn btn-primary" role="button">Volver</a>
-        </tr>
-    </table>
+        </div>
+    </div>
 </form>
 </div>
 </body>

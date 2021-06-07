@@ -18,16 +18,9 @@
     <tr>
         <th>Address</th>
         <th>Date</th>
-        <th>QR</th>
-        <th>Code</th>
         <th>CreationDate</th>
-        <th>NifCitizen</th>
-        <th>State</th>
         <th>StartTime</th>
         <th>EndTime</th>
-        <th>Cols</th>
-        <th>Rows</th>
-        <th>CodeArea</th>
         <th></th>
         <th></th>
     </tr>
@@ -36,16 +29,11 @@
     <tr th:each="reservation: ${reservation}">
         <td th:text="${reservation.address}"></td>
         <td th:text="${reservation.date}"></td>
-        <td th:text="${reservation.qr}"></td>
-        <td th:text="${reservation.code}"></td>
         <td th:text="${#temporals.format(reservation.creationDate,'dd/MM/yyyy')}"></td>
-        <td th:text="${reservation.nifCitizen}"></td>
-        <td th:text="${reservation.state}"></td>
         <td th:text="${reservation.startTime}"></td>
         <td th:text="${reservation.endTime}"></td>
-        <td th:text="${reservation.cols}"></td>
-        <td th:text="${reservation.row}"></td>
-        <td th:text="${reservation.codeArea}"></td>
+        <td><a th:href="@{/reservation/details/{code}(code=${reservation.code})}" class="btn btn-primary" role="button">Detallesa</a>
+        </td>
         <td><a th:href="@{/reservation/update/{code}(code=${reservation.code})}" class="btn btn-warning" role="button">Editar</a>
         </td>
         <td><a th:href="@{/reservation/delete/{code}(code=${reservation.code})}" class="btn btn-danger" role="button">Borrar</a>
