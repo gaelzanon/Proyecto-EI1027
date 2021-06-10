@@ -28,6 +28,8 @@ public class ServiceController {
 
     private ServiceService serviceService;
 
+    int codigos;
+
     @Autowired
     public void setServiceDao(ServiceDao ServiceDao) {
         this.ServiceDao=ServiceDao;
@@ -56,6 +58,8 @@ public class ServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("service") Service service,
                                    BindingResult bindingResult) {
+        codigos = (int)(Math.random()*100000);
+        service.setCode( String.valueOf(codigos));
 //        ServiceValidator serviceValidator = new ServiceValidator();
 //        serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors()) {

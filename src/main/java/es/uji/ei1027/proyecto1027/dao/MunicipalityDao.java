@@ -31,6 +31,7 @@ public class MunicipalityDao {
         jdbcTemplate.update("DELETE from municipality where code=?",
                 codeMunicipality);
     }
+
     public void deleteMunicipality(Municipality municipality) {
         jdbcTemplate.update("DELETE from municipality where code=?",
                 municipality.getCode());
@@ -47,21 +48,45 @@ public class MunicipalityDao {
         try {
             return jdbcTemplate.queryForObject("SELECT * from municipality WHERE code=?",
                     new MunicipalityRowMapper(), codeMunicipality);
-        }
-        catch(EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
     /* Obté tots els municipis. Torna una llista buida si no n'hi ha cap. */
     public List<Municipality> getMunicipality() {
-        System.out.println("Hola");
+
         try {
 
             return jdbcTemplate.query("SELECT * from municipality",
                     new MunicipalityRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<Municipality>();
+        }
+    }
+
+    public List<String> getMunicipalityNames() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<Municipality> lista = jdbcTemplate.query("SELECT * from municipality",
+                    new MunicipalityRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getName());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
+    public String getMunicipalityCode(String name){
+        try{
+            List<Municipality> lista = jdbcTemplate.query("SELECT * from municipality WHERE name=?",
+                    new MunicipalityRowMapper(),name );
+            return lista.get(0).getCode();
+        } catch (EmptyResultDataAccessException e) {
+            return new String();
         }
     }
 

@@ -41,6 +41,10 @@ public class NaturalAreaController {
     public void setTypeAreaDao(TypeAreaDao typeAreaDao) {
         this.typeAreaDao=typeAreaDao;
     }
+    @Autowired
+    public void setmunicipalityDao(MunicipalityDao municipalityDao) {
+        this.municipalityDao=municipalityDao;
+    }
 
     @RequestMapping("/list")
     public String listnaturalAreas(HttpSession session, Model model) {
@@ -58,8 +62,7 @@ public class NaturalAreaController {
             model.addAttribute("naturalArea", new NaturalArea());
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
 
-        //System.out.println(municipalityDao.getMunicipality());
-        //model.addAttribute("munCode", municipalityDao.getMunicipality());
+        model.addAttribute("munCode",municipalityDao.getMunicipalityNames() );
         return "naturalArea/add";
     }
 
@@ -69,6 +72,7 @@ public class NaturalAreaController {
 
         codigos = (int)(Math.random()*100000);
         naturalArea.setCodeArea( String.valueOf(codigos));
+        naturalArea.setMunCode(municipalityDao.getMunicipalityCode(naturalArea.getMunCode()));
         NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
         naturalAreaValidator.validate(naturalArea, bindingResult);
 
@@ -98,6 +102,9 @@ public class NaturalAreaController {
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
         model.addAttribute("stateList", stateList);
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
+
+        model.addAttribute("munCode",municipalityDao.getMunicipalityNames() );
+
         return "naturalArea/update";
     }
 
@@ -105,6 +112,7 @@ public class NaturalAreaController {
     public String processUpdateSubmit(
             @ModelAttribute("naturalArea") final NaturalArea naturalArea, RedirectAttributes attributes,
             final BindingResult bindingResult) {
+        naturalArea.setMunCode(municipalityDao.getMunicipalityCode(naturalArea.getMunCode()));
         NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
         naturalAreaValidator.validate(naturalArea, bindingResult);
         if (bindingResult.hasErrors()){

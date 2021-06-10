@@ -60,4 +60,28 @@ public class NaturalAreaDao {
             return new ArrayList<>();
         }
     }
+    public List<String> getNaturalAreaNames() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<NaturalArea> lista = jdbcTemplate.query("SELECT * from Natural_Area",
+                    new NaturalAreaRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getName());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
+    public String getNaturalAreaCode(String name){
+        try{
+            List<NaturalArea> lista = jdbcTemplate.query("SELECT * from Natural_Area WHERE name=?",
+                    new NaturalAreaRowMapper(),name );
+            return lista.get(0).getCodeArea();
+        } catch (EmptyResultDataAccessException e) {
+            return new String();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package es.uji.ei1027.proyecto1027.controller;
 
+import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
 import es.uji.ei1027.proyecto1027.dao.ReservationDao;
 import es.uji.ei1027.proyecto1027.model.Reservation;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,11 +25,16 @@ import java.util.List;
 @RequestMapping("/reservation")
 public class ReservationController {
 
+    private NaturalAreaDao NaturalAreaDao;
     private ReservationDao ReservationDao;
     private int codigos;
     @Autowired
     public void setReservationDao(ReservationDao ReservationDao) {
         this.ReservationDao=ReservationDao;
+    }
+    @Autowired
+    public void setnaturalAreaDao(NaturalAreaDao NaturalAreaDao) {
+        this.NaturalAreaDao=NaturalAreaDao;
     }
 
     @RequestMapping("/list")
@@ -43,6 +50,7 @@ public class ReservationController {
     @RequestMapping(value="/add")
     public String addReservation(Model model) {
         model.addAttribute("reservation", new Reservation());
+        model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
         return "reservation/add";
     }
 
@@ -52,6 +60,11 @@ public class ReservationController {
 
         codigos = (int)(Math.random()*100000);
         reservation.setCode( String.valueOf(codigos));
+        reservation.setQr( "q" + (codigos));
+        reservation.setState("Confirmada");
+        reservation.setCreationDate(LocalDate.now());
+        reservation.setAddress(reservation.getCodeArea());
+        reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
         System.out.println(reservation);
         if (bindingResult.hasErrors())
             return "reservation/add";
@@ -67,23 +80,25 @@ public class ReservationController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
+        ReservationDao.addReservation(reservation);
         return "redirect:list";
     }
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
     public String editReservation(Model model, @PathVariable String code) {
         model.addAttribute("reservation", ReservationDao.getReservation(code));
-
+        model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
         return "reservation/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("reservation") Reservation Reservation,
+            @ModelAttribute("reservation") Reservation reservation,
             BindingResult bindingResult) {
-        System.out.println(Reservation);
+        reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
+        System.out.println(reservation);
         if (bindingResult.hasErrors())
             return "reservation/update";
 
-        ReservationDao.updateReservation(Reservation);
+        ReservationDao.updateReservation(reservation);
         return "redirect:list";
     }
     @RequestMapping(value={"/details/{code}","/details"}, method = RequestMethod.GET)
@@ -93,7 +108,7 @@ public class ReservationController {
         return "reservation/details";
     }
 
-    @RequestMapping(value="/delete/{nom}")
+    @RequestMapping(value="/delete/{code}")
     public String processDelete(@PathVariable String code) {
         ReservationDao.deleteReservation(code);
         return "redirect:../list";
