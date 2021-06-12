@@ -54,6 +54,7 @@ public class NaturalAreaController {
             return "login";
         }
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
+        model.addAttribute("municipality",municipalityDao.getMunicipality());
         return "naturalArea/list";
     }
 

@@ -1,5 +1,6 @@
 package es.uji.ei1027.proyecto1027.controller;
 
+import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.dao.ZoneDao;
 import es.uji.ei1027.proyecto1027.model.Citizen;
 import es.uji.ei1027.proyecto1027.model.Zone;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ZoneController {
 
     private ZoneDao zoneDao;
+    private NaturalAreaDao naturalAreaDao;
 
     @Autowired
     public void SetZoneDao(ZoneDao zoneDao) {
@@ -64,6 +66,11 @@ public class ZoneController {
     public String editZone(Model model, @PathVariable int col, @PathVariable int row, @PathVariable String areaCode) {
         model.addAttribute("zone", zoneDao.getZone(col, row, areaCode));
         return "zone/update";
+    }
+    @RequestMapping(value="/porArea/{codeArea}")
+    public String zonePorArea(Model model, @PathVariable String codeArea){
+        model.addAttribute("codarea", naturalAreaDao.getNaturalArea(codeArea));
+        return "zone/porArea";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)

@@ -12,7 +12,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="'Lista de zonas asignados al area ' +${codarea.code_area}"></h1>
+    <h1 th:text="'Lista de zonas asignados al area ' +${codarea.name}"></h1>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -24,21 +24,21 @@
         </thead>
         <tbody>
         <tr th:each="resNatAreaSer: ${resNatAreaSersPA}">
-            <td th:text="${resNatAreaSer.code_area}"></td>
+            <td th:text="${resNatAreaSer.codeArea}"></td>
             <td th:text="${resNatAreaSer.code}"></td>
             <td></td>
             <td th:text="${resNatAreaSer.startTime}"></td>
             <td th:text="${resNatAreaSer.endTime}"></td>
             <td></td>
-            <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
+            <td><a th:href="@{/resNatAreaSer/delete/{codeArea}/{code} (code_area=${resNatAreaSer.codeArea}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
         <tr>
             <form action="#" th:action="@{/resNatAreaSer/porArea}"
                   th:object="${codarea}" method="post">
 
-                <td th:text="${codarea.code_area}">
-                    <input type="text" th:field="*{code_area}" />
+                <td th:text="${codarea.codeArea}">
+                    <input type="text" th:field="*{codeArea}" />
                 </td>
                 <td>
                     <select id ="code" th:field ="*{code}">
@@ -53,7 +53,7 @@
                     <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
                 </td>
                 <td>
-                    <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />
+                    <input type="text" hidden="hidden" id="code_area" th:field="*{codeArea}" />
                 </td>
                 <td>
                     <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />

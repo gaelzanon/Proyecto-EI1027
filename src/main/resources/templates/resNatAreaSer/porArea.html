@@ -18,15 +18,14 @@
         <tr>
             <th>CodeArea</th>
             <th>Code</th>
-            <th></th>
-            <th></th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="resNatAreaSer: ${resNatAreaSersPA}">
             <td th:text="${resNatAreaSer.code_area}"></td>
             <td th:text="${resNatAreaSer.code}"></td>
-            <td></td>
             <td th:text="${resNatAreaSer.startTime}"></td>
             <td th:text="${resNatAreaSer.endTime}"></td>
             <td></td>
@@ -52,9 +51,7 @@
                     </select>
                     <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
                 </td>
-                <td>
-                    <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />
-                </td>
+
                 <td>
                     <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />
                     <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
@@ -63,7 +60,9 @@
                     <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </td>
-                <td></td>
+                <td>
+                    <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />
+                </td>
                 <td>
                     <button type="submit" class="btn btn-success">Añadir</button>
                 </td>
