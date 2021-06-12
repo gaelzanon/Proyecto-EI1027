@@ -12,13 +12,12 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Lista de Servicios asignados a cada Area</h1>
+    <h1>Lista de Municipios</h1>
     <table class="table table-striped">
         <thead>
         <tr>
 
             <th>Nombre</th>
-
             <th></th>
             <th></th>
         </tr>
@@ -26,14 +25,14 @@
         <tbody>
         <tr th:each="municipality: ${municipality}">
             <td th:text="${municipality.name}"></td>
-            <td><a th:href="@{/municipality/details/{code} (code=${municipality.code})}" class="btn btn-danger" role="button">Detalles</a>
-            <td><a th:href="@{/municipality/update/{code} (code=${municipality.code})}" class="btn btn-danger" role="button">Editar</a>
+            <td><a th:href="@{/municipality/details/{code} (code=${municipality.code})}" class="btn btn-primary" role="button">Detalles</a>
+            <td><a th:href="@{/municipality/update/{code} (code=${municipality.code})}" class="btn btn-warning" role="button">Editar</a>
             <td><a th:href="@{/municipality/delete/{code} (code=${municipality.code})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Añadir Municipality</a>
+    <a href="add" class="btn btn-success" role="button">Añadir Municipio</a>
     <a href="/mainMenu"class="btn btn-primary" role="button">Volver</a>
 </div>
 </body>

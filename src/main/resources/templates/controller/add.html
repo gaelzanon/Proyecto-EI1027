@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear nou Controller</title>
+    <title>Crear Controlador</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,7 +13,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2>Nuevo Controlador</h2>
+        <h2>Crear Controlador</h2>
         <form class="form-horizontal" action="#" th:action="@{/controller/add}"
               th:object="${controller}" method="post">
             <div class="form-group row">

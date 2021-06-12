@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear nuevo Citizen</title>
+    <title>Modificar Ciudadano</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,7 +13,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2>Modificar Usuario</h2>
+        <h2>Modificar Ciudadano</h2>
         <form class="form-horizontal" action="#" th:action="@{/citizen/update}"
               th:object="${citizen}" method="post">
 
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <button type="submit" class="btn btn-primary">Modificar Usuario</button>
+                    <button type="submit" class="btn btn-success">Modificar Ciudadano</button>
                     <a href="/citizen/list"class="btn btn-primary" role="button">Volver</a>
                 </div>
             </div>

@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Gestionar Managers Municipales</title>
+    <title>Crear Managers Municipales</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,7 +13,7 @@
 <body>
 <div layout:fragment="content">
 <div class="container">
-    <h2>Nuevo manager</h2>
+    <h2>Crear Manager</h2>
     <form class="form-horizontal" action="#" th:action="@{/municipalityManager/add}"
           th:object="${municipalityManager}" method="post">
 
@@ -51,7 +51,7 @@
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary">Añadir Manager</button>
+                <button type="submit" class="btn btn-success">Añadir Manager</button>
                 <a href="/municipalityManager/list"class="btn btn-primary" role="button">Volver</a>
             </div>
         </div>
