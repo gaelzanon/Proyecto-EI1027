@@ -53,4 +53,13 @@ public class ZoneDao {
         }
     }
 
+    /* Obtener todas las zonas de un natural area*/
+    public List<Zone> getZonesArea(String codeArea) {
+        try {
+            return jdbcTemplate.query("SELECT * from Zone WHERE code_area=?", new ZoneRowMapper(), codeArea);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Zone>();
+        }
+    }
+
 }
