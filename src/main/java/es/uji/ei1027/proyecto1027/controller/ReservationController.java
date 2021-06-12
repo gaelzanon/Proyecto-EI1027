@@ -5,6 +5,7 @@ import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.dao.ReservationDao;
 import es.uji.ei1027.proyecto1027.model.Reservation;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.UriUtils;
 
+import javax.naming.Binding;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -27,11 +30,19 @@ public class ReservationController {
 
     private NaturalAreaDao NaturalAreaDao;
     private ReservationDao ReservationDao;
+    private ReservationService reservationService;
     private int codigos;
+
+    @Autowired
+    public void setReservationService(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
+
     @Autowired
     public void setReservationDao(ReservationDao ReservationDao) {
         this.ReservationDao=ReservationDao;
     }
+
     @Autowired
     public void setnaturalAreaDao(NaturalAreaDao NaturalAreaDao) {
         this.NaturalAreaDao=NaturalAreaDao;
@@ -114,7 +125,36 @@ public class ReservationController {
         return "redirect:../list";
     }
 
+    @RequestMapping("/porArea")
+    public String reservationPorArea(Model model, @PathVariable String code_area) {
+//        Reservation reservation = new Reservation();
+//        reservation.setCodeArea(code_area);
+        model.addAttribute("codArea", code_area);
+        return "reservation/porArea";
+    }
 
+    @RequestMapping(value="/porArea", method=RequestMethod.POST)
+    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult) {
+        String nameUri="redirect:porArea/" + reservation.getCodeArea();
+        nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+        if(bindingResult.hasErrors()){
+            return nameUri;
+        }
+        try {
+            ReservationDao.addReservation(reservation);
+        } catch (DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya existe una reserva para el cliente "
+                            + reservation.getNifCitizen() + " en el espacio natural "
+                            + reservation.getCode() + " para la fecha "
+                            + reservation.getDate(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
+        ReservationDao.addReservation(reservation);
+        return nameUri;
+    }
 
 
 

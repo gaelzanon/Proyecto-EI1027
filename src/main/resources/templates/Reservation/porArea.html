@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Realizar reserva en </title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 th:text="'Introducir los datos para la reserva' +${codArea.code_area}"></h1>
+    <form class="form-horizontal" action="#" th:action="@{/reservation/add}"
+          th:object="${reservation}" method="post">
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="codArea">Area:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="codArea" th:field="*{codArea}"/>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="nifCitizen">NIF:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="nifCitizen" th:field="*{nifCitizen}" />
+                <div class="error" th:if="${#fields.hasErrors('nifCitizen')}" th:errors="*{nifCitizen}"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="date">Date:</label>
+            <div class="col-sm-4">
+                <input type="date" class="form-control" id="date" th:field="*{date}" />
+                <div class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="startTime">Hora de inicio:</label>
+            <div class="col-sm-4">
+                <input type="time" class="form-control" id="startTime" th:field="*{startTime}" />
+                <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="endTime">Hora de finalización:</label>
+            <div class="col-sm-4">
+                <input type="time" class="form-control" id="endTime" th:field="*{endTime}" />
+                <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="cols">Columna:</label>
+            <div class="col-sm-4">
+                <select>
+                    <div th:if="${#lists.isEmpty(services)}">
+                        <option value="NoDisp">No hay disponibles</option>
+                    </div>
+                    <option th:unless="${#lists.isEmpty(services)}" th:each="code:${services}"
+                            th:value="${code}"
+                            th:text="${code}">
+                    </option>
+                </select>
+                <input type="number" class="form-control" id="cols" th:field="*{cols}" />
+                <div class="error" th:if="${#fields.hasErrors('cols')}" th:errors="*{cols}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="row">Fila:</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" id="row" th:field="*{row}" />
+                <div class="error" th:if="${#fields.hasErrors('row')}" th:errors="*{row}"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary">Crear reserva</button>
+                <a href="/reservation/list"class="btn btn-primary" role="button">Volver</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
