@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear nou Service</title>
+    <title>Crear nuevo Tipo Área</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,11 +13,13 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-<h2>Nuevo Tipo de area</h2>
+        <br>
+        <h1>Nuevo Tipo de Área</h1>
+        <hr color="blue" size=3>
     <form class="form-horizontal" action="#" th:action="@{/typeArea/add}"
           th:object="${type_of_area}" method="post">
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="type">Tipo de area:</label>
+            <label class="control-label col-sm-2" for="type">Tipo de área:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="type" th:field="*{type}" />
                 <div class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
@@ -25,7 +27,7 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary">Crear Tipo de area</button>
+                <button type="submit" class="btn btn-primary">Crear tipo de área</button>
                 <a href="/typeArea/list"class="btn btn-primary" role="button">Volver</a>
             </div>
         </div>

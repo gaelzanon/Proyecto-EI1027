@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Gestionar Natural Area</title>
+    <title>Gestionar Natural Área</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -12,15 +12,17 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1>Lista de Areas Naturales</h1>
+    <br>
+<h1>Lista de Áreas Naturales</h1>
+    <hr color="blue" size=3>
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Nombre</th>
         <th>Municipio</th>
         <th>Tipo</th>
-        <th>Descripcion</th>
-        <th>Direccion</th>
+        <th>Descripción</th>
+        <th>Dirección</th>
         <th></th>
         <th></th>
 
@@ -42,7 +44,7 @@
         </td>
         <td><a th:href="@{/resNatAreaSer/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Gestionar servicios</a>
         </td>
-        <td><a th:href="@{/zone/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Gestionar zonas</a>
+        <td><a th:href="@{/zone/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Gestionar zonas</a>
         </td>
         <td><a th:href="@{/naturalArea/update/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
         </td>
@@ -51,7 +53,7 @@
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Añadir Natural Area</a>
+<a href="add" class="btn btn-success" role="button">Añadir natural area</a>
 <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
 
 </div>

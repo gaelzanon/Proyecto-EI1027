@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear nou Service</title>
+    <title>Crear Nuevo Servicio</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,7 +13,9 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-<h2>Asignar servicio a un espacio natural</h2>
+        <br>
+<h1>Asignar Servicio a un Espacio Natural</h1>
+        <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/resNatAreaSer/add}"
               th:object="${resNatAreaSer}" method="post">
         <div class="form-group row">
