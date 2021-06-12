@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Controller
@@ -131,26 +132,31 @@ public class ReservationController {
         model.addAttribute("codeArea", reservation);
         List<Zone> zonas = reservationService.getAllZonesPerArea(code_area);
         List<String> col_row = new ArrayList<>();
+        LinkedHashSet<Integer> col = new LinkedHashSet<>();
+        LinkedHashSet<Integer> row = new LinkedHashSet<>();
         for (Zone zona: zonas) {
             col_row.add("(" + zona.getRow() + "," + zona.getCol() + ")");
+            col.add(zona.getRow());
+            row.add(zona.getCol());
         }
         model.addAttribute("zonas", col_row);
+        model.addAttribute("cols", col);
+        model.addAttribute("rows", row);
         return "reservation/porArea";
     }
 
     @RequestMapping(value="/porArea", method=RequestMethod.POST)
-    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, @PathVariable(value="coordenadas") String coordenadas, BindingResult bindingResult) {
-        System.out.println(coordenadas);
-        String[] coord = coordenadas.split(",");
-        reservation.setCols(Integer.parseInt(coord[0]));
-        reservation.setRow(Integer.parseInt(coord[1]));
+    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult) {
+//        System.out.println(coordenadas);
+//        String[] coord = coordenadas.split(",");
+//        reservation.setCols(Integer.parseInt(coord[0]));
+//        reservation.setRow(Integer.parseInt(coord[1]));
         codigos = (int)(Math.random()*100000);
         reservation.setCode( String.valueOf(codigos));
         reservation.setQr( "q" + (codigos));
         reservation.setState("Confirmada");
         reservation.setCreationDate(LocalDate.now());
-        reservation.setAddress(reservation.getCodeArea());
-        reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
+        reservation.setAddress(reservationService.getAddress(reservation.getCodeArea()));
         String nameUri="redirect:porArea/" + reservation.getCodeArea();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         if(bindingResult.hasErrors()){
