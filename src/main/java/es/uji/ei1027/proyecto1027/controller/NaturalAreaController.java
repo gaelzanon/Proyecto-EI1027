@@ -56,6 +56,18 @@ public class NaturalAreaController {
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
         return "naturalArea/list";
     }
+
+    @RequestMapping("/listCliente")
+    public String listClienteNaturalAreas(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
+        model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
+        return "naturalArea/listCliente";
+    }
+
     @RequestMapping(value="/add")
     public String addnaturalArea(Model model) {
         if(!model.containsAttribute("naturalArea"))
