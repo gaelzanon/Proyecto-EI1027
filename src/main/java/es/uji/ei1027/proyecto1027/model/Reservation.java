@@ -24,6 +24,7 @@ public class Reservation {
     private String codeArea;
 
     public Reservation() {
+
     }
 
     public String getAddress() {

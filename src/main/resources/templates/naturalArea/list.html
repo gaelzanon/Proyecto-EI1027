@@ -34,10 +34,11 @@
         <td th:text="${naturalArea.descripcion}"></td>
         <td th:text="${naturalArea.type_of_area}"></td>
 
-        <td><a th:href="@{/naturalArea/details/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Detalles</a>
+        <td><a th:href="@{/naturalArea/details/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-primary" role="button">Detalles</a>
         </td>
-
         <td><a th:href="@{/resNatAreaSer/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Gestionar servicios</a>
+        </td>
+        <td><a th:href="@{/zone/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Gestionar zonas</a>
         </td>
         <td><a th:href="@{/naturalArea/update/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
         </td>

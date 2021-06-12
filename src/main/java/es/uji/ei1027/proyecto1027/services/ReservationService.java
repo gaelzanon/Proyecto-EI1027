@@ -8,4 +8,5 @@ import java.util.List;
 public interface ReservationService {
     public List<NaturalArea> getAllNaturalAreas();
     public List<Zone> getAllZonesPerArea(String codeArea);
+    public String getAddress(String codeArea);
 }

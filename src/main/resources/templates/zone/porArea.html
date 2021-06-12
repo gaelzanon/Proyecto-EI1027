@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Gestionar Servicios asignados</title>
+    <title>Gestionar zonas del espacio natural</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -12,11 +12,11 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="'Lista de Servicios asignados al area ' +${codarea.code_area}"></h1>
+    <h1 th:text="'Lista de zonas asignados al area ' +${codarea.code_area}"></h1>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>CodeArea</th>
+            <th>Area</th>
             <th>Code</th>
             <th></th>
             <th></th>
