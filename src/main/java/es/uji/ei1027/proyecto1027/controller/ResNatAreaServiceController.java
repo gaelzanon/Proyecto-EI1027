@@ -99,10 +99,6 @@ public class ResNatAreaServiceController {
         model.addAttribute("codarea", resNatAreaService);
         List<String> serDisp = resNatAreaSerService.getAllServices();
         List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
-        for (ResNatAreaService servicio : servAsig) {
-            String codSer = servicio.getCode();
-            serDisp.remove(codSer);
-        }
         model.addAttribute("services", serDisp);
         model.addAttribute("resNatAreaSersPA", servAsig);
         return "resNatAreaSer/porArea";
