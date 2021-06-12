@@ -38,10 +38,10 @@ public class FakeUserProvider implements UserDao {
         knownUsers.put("environmental", userEnvironmental);
 
         UserDetails userAdmin = new UserDetails();
-        userEnvironmental.setUsername("admin");
-        userEnvironmental.setPassword(passwordEncryptor.encryptPassword("admin"));
-        userEnvironmental.setUserType("Admin");
-        knownUsers.put("admin", userEnvironmental);
+        userAdmin.setUsername("admin");
+        userAdmin.setPassword(passwordEncryptor.encryptPassword("admin"));
+        userAdmin.setUserType("Admin");
+        knownUsers.put("admin", userAdmin);
     }
 
     @Override
