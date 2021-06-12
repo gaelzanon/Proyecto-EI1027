@@ -1,6 +1,7 @@
 package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.ControllerDao;
+import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -19,11 +20,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ControllerController {
 
     private ControllerDao ControllerDao;
+    private NaturalAreaDao naturalAreaDao;
 
     @Autowired
     public void setControllerDao(ControllerDao controllerDao) {
         this.ControllerDao=controllerDao;
     }
+
+    @Autowired
+    public void setNaturalAreaDao(NaturalAreaDao naturalAreaDao) {
+        this.naturalAreaDao=naturalAreaDao;
+    }
+    //TODO: usar este dao para mostrar el nombre de area en la lista
+    // y en add/update un desplegable para seleccional el nombre de area en vez de introducir el codigo
 
     @RequestMapping("/list")
     public String listController(Model model) {

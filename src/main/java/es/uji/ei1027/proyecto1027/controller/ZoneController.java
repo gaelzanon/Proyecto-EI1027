@@ -27,6 +27,11 @@ public class ZoneController {
         this.zoneDao = zoneDao;
     }
 
+    @Autowired
+    public void setNaturalAreaDao(NaturalAreaDao naturalAreaDao) {
+        this.naturalAreaDao = naturalAreaDao;
+    }
+
     @RequestMapping("/list")
     public String listZone(Model model) {
         model.addAttribute("zone", zoneDao.getZones());
