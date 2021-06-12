@@ -125,11 +125,12 @@ public class ReservationController {
         return "redirect:../list";
     }
 
-    @RequestMapping("/porArea")
+    @RequestMapping("/porArea/{code_area}")
     public String reservationPorArea(Model model, @PathVariable String code_area) {
-//        Reservation reservation = new Reservation();
-//        reservation.setCodeArea(code_area);
-        model.addAttribute("codArea", code_area);
+        Reservation reservation = new Reservation();
+        reservation.setCodeArea(code_area);
+
+        model.addAttribute("codeArea", reservation);
         return "reservation/porArea";
     }
 

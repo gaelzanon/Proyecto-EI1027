@@ -94,7 +94,7 @@
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
                     <a href="/naturalArea/list" class="btn btn-primary" role="button">Volver</a>
-                    <a href="/reservation/porArea/{codeArea}(codeArea=${naturalArea.codeArea})" class="btn btn-success" role="button">Realizar reserva</a>
+                    <a th:href="@{/reservation/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Realizar reserva</a>
                 </div>
             </div>
         </form>

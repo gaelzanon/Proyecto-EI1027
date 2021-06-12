@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Realizar reserva en </title>
+    <title>Realizar reserva en espacio natural</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -12,15 +12,13 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="'Introducir los datos para la reserva' +${codArea.code_area}"></h1>
-    <form class="form-horizontal" action="#" th:action="@{/reservation/add}"
-          th:object="${reservation}" method="post">
+    <h1>Introducir los datos para realizar la reserva: </h1>
+    <form class="form-horizontal" action="#" th:action="@{/reservation/porArea}" th:object="${codeArea}" method="post">
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="codArea">Area:</label>
+            <label class="control-label col-sm-2" for="area_code">Area:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="codArea" th:field="*{codArea}"/>
+                <input type="text" class="form-control" id="area_code" th:field="*{codeArea}" readonly="readonly">
             </div>
-
         </div>
         <div class="form-group row">
             <label class="control-label col-sm-2" for="nifCitizen">NIF:</label>
