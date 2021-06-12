@@ -88,4 +88,29 @@ public Service getService(String codeService) {
         return null;
     }
 }
+    public List<String> getServiceNames() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<Service> lista = jdbcTemplate.query("SELECT * from Service",
+                    new ServiceRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getType_of_service());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
+    public String getServiceCode(String name){
+        try{
+            List<Service> lista = jdbcTemplate.query("SELECT * from Service WHERE Type_of_service=?",
+                    new ServiceRowMapper(),name );
+            return lista.get(0).getCode();
+        } catch (EmptyResultDataAccessException e) {
+            return new String();
+        }
+    }
+
 }

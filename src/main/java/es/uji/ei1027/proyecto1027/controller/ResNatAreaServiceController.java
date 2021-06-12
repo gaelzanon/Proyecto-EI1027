@@ -2,7 +2,9 @@ package es.uji.ei1027.proyecto1027.controller;
 
 
 //import com.sun.org.apache.xpath.internal.operations.Mod;
+import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
+import es.uji.ei1027.proyecto1027.dao.ServiceDao;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import es.uji.ei1027.proyecto1027.services.ResNatAreaSerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,10 @@ public class ResNatAreaServiceController {
 
     private ResNatAreaSerService resNatAreaSerService;
 
+    private NaturalAreaDao naturalAreaDao;
+
+    private ServiceDao serviceDao;
+
     @Autowired
     public void setResNatAreaSerService(ResNatAreaSerService resNatAreaSerService) {
         this.resNatAreaSerService = resNatAreaSerService;
@@ -36,6 +42,16 @@ public class ResNatAreaServiceController {
     @Autowired
     public void setResNatAreaServiceDao(ResNatAreaServiceDao ResNatAreaServiceDao) {
         this.resNatAreaServiceDao=ResNatAreaServiceDao;
+    }
+
+    @Autowired
+    public void setResNatAreaNaturalAreaDao(NaturalAreaDao NaturalAreaDao) {
+        this.naturalAreaDao=NaturalAreaDao;
+    }
+
+    @Autowired
+    public void setServiceDao(ServiceDao ServiceDao) {
+        this.serviceDao=ServiceDao;
     }
 
     @RequestMapping("/list")
@@ -47,12 +63,16 @@ public class ResNatAreaServiceController {
     @RequestMapping(value="/add")
     public String addResNatAreaService(Model model) {
         model.addAttribute("resNatAreaSer", new ResNatAreaService());
+        model.addAttribute("code_area", naturalAreaDao.getNaturalAreaNames());
+        model.addAttribute("code",serviceDao.getServiceNames());
         return "resNatAreaSer/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
                                    BindingResult bindingResult) {
+        resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
+        resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
         ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
         resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         if (bindingResult.hasErrors())
