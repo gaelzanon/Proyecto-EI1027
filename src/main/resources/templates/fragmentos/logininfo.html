@@ -1,6 +1,6 @@
 <div class="loggeduser text-muted" th:object="${session}">
     <p th:if="*{user == null}">
-        No conectado <br>
+        <span class="unloggeduser"> No conectado</span>
         <a href="/login" th:href="@{/login}" class="btn btn-outline-light my-2 my-sm-0" role="button">Entrar</a>
     </p>
     <p th:unless="*{user == null}">

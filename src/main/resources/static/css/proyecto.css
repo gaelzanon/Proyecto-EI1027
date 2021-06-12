@@ -28,11 +28,11 @@ h2 {
      background-color:yellow;
 }
 
-/* usuario logueago */
+/* usuario logueado */
 .loggeduser {
 	color: gray;
 	text-align: right;
-margin-right: 10pt;
+    margin-right: 10pt;
 }
 
 .menu {
@@ -46,3 +46,27 @@ margin-right: 10pt;
 }
 
 .tab { margin-left: 20px; }
+
+/* ------------------------------------Adiciones ricardo --------------------------------------------*/
+
+/*Para los botones del menu principal*/
+ul.menuMain{
+    list-style: none;
+    line-height: 150%;
+}
+
+/*añadida mas separacion entre los elementos de las listas ordenadas*/
+li{
+    margin-top: 10px;
+    border:1px black;
+}
+
+li:first-child {
+    margin-top:0;
+}
+
+/* usuario no logueado */
+.unloggeduser {
+    font-size: large;
+	color: red;
+}
