@@ -13,16 +13,14 @@
 
 <body>
 <div layout:fragment="content">
+    <br>
     <h1>Lista de usuarios</h1>
+    <hr color="blue" size=3>
     <div th:if="${#lists.isEmpty(users)}">
         No hay usuarios
     </div>
     <table th:unless="${#lists.isEmpty(users)}"  class="table table-condensed">
-        <thead>
-        <tr>
-            <th>Nombre de usuario</th>
-        </tr>
-        </thead>
+
 
         <tbody>
         <tr th:each="user: ${users}">

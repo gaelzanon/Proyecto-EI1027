@@ -13,11 +13,13 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2>Detalles del Natural Area</h2>
+        <br>
+        <h1>Detalles del Natural Área</h1>
+        <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/naturalArea/details}"
               th:object="${naturalArea}" method="post">
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="name">Codigo:</label>
+                <label class="control-label col-sm-2" for="name">Código:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="codeArea" th:field="*{codeArea}" readonly="readonly" />
                 </div>
