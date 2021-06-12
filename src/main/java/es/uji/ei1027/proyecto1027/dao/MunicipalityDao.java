@@ -86,7 +86,7 @@ public class MunicipalityDao {
                     new MunicipalityRowMapper(),name );
             return lista.get(0).getCode();
         } catch (EmptyResultDataAccessException e) {
-            return new String();
+            return "";
         }
     }
 

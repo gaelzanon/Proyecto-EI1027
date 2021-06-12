@@ -16,11 +16,11 @@
     <table class="table table-striped">
         <thead>
         <tr>
-
             <th>Nombre</th>
-            <th>Direccion</th>
-            <th>Descripcion</th>
+            <th>Municipio</th>
             <th>Tipo</th>
+            <th>Descripcion</th>
+            <th>Direccion</th>
             <th></th>
             <th></th>
         </tr>
@@ -29,16 +29,18 @@
         <tr th:each="naturalArea: ${naturalArea}">
 
             <td th:text="${naturalArea.name}"></td>
-            <td th:text="${naturalArea.address}"></td>
-            <td th:text="${naturalArea.descripcion}"></td>
+            <th:block th:each="mun: ${municipality}">
+                <td th:if="${naturalArea.munCode == mun.code}" th:text="${mun.name}"></td>
+            </th:block>
             <td th:text="${naturalArea.type_of_area}"></td>
+            <td th:text="${naturalArea.descripcion}"></td>
+            <td th:text="${naturalArea.address}"></td>
             <td></td>
             <td><a th:href="@{/naturalArea/details/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Detalles</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Añadir Natural Area</a>
     <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
 
 </div>

@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="name">Fecha de Registro:</label>
+                <label class="control-label col-sm-2" for="registrationDate">Fecha de Registro:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="registrationDate" th:field="*{registrationDate}" readonly="readonly" />
                 </div>
@@ -93,8 +93,14 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <a href="/naturalArea/list" class="btn btn-primary" role="button">Volver</a>
-                    <a th:href="@{/reservation/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Realizar reserva</a>
+                    <th:block th:if="${user_type == 'Citizen'}">
+                        <a  th:href="@{/reservation/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Realizar reserva</a>
+                        <a href="/naturalArea/listCliente" class="btn btn-primary" role="button">Volver</a>
+                    </th:block>
+                    <th:block th:unless="${user_type == 'Citizen'}">
+                        <a href="/naturalArea/list" class="btn btn-primary" role="button">Volver</a>
+                    </th:block>
+
                 </div>
             </div>
         </form>

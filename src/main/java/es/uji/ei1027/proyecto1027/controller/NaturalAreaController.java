@@ -65,6 +65,7 @@ public class NaturalAreaController {
             return "login";
         }
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
+        model.addAttribute("municipality",municipalityDao.getMunicipality());
         return "naturalArea/listCliente";
     }
 
@@ -141,7 +142,15 @@ public class NaturalAreaController {
     }
 
     @RequestMapping(value={"/details/{codeArea}","/details"}, method = RequestMethod.GET)
-    public String detailsnaturalArea(Model model, @PathVariable(required = false) String codeArea) {
+    public String detailsnaturalArea(HttpSession session,Model model, @PathVariable(required = false) String codeArea) {
+        UserDetails userDetails=(UserDetails) session.getAttribute("user");
+        if (userDetails == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        } else{
+            model.addAttribute("user_type",userDetails.getUserType());
+        }
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
