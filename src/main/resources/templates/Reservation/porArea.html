@@ -50,26 +50,17 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="cols">Columna:</label>
+            <label class="control-label col-sm-2" for="coordenadas">Zona:</label>
             <div class="col-sm-4">
                 <select>
-                    <div th:if="${#lists.isEmpty(services)}">
-                        <option value="NoDisp">No hay disponibles</option>
+                    <div th:if="${#lists.isEmpty(zonas)}">
+                        <option value="NoDisp">No hay zonas disponibles</option>
                     </div>
-                    <option th:unless="${#lists.isEmpty(services)}" th:each="code:${services}"
-                            th:value="${code}"
-                            th:text="${code}">
+                    <option th:unless="${#lists.isEmpty(zonas)}" th:each="coord:${zonas}" id="coordenadas"
+                            th:value="${coordenadas}"
+                            th:text="${coordenadas}">
                     </option>
                 </select>
-                <input type="number" class="form-control" id="cols" th:field="*{cols}" />
-                <div class="error" th:if="${#fields.hasErrors('cols')}" th:errors="*{cols}"></div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="row">Fila:</label>
-            <div class="col-sm-4">
-                <input type="number" class="form-control" id="row" th:field="*{row}" />
-                <div class="error" th:if="${#fields.hasErrors('row')}" th:errors="*{row}"></div>
             </div>
         </div>
         <div class="form-group row">

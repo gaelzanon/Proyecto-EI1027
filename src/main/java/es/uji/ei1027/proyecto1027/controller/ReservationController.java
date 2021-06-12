@@ -5,6 +5,7 @@ import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.dao.ReservationDao;
 import es.uji.ei1027.proyecto1027.model.Reservation;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.Zone;
 import es.uji.ei1027.proyecto1027.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -12,15 +13,13 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
 import javax.naming.Binding;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -129,13 +128,29 @@ public class ReservationController {
     public String reservationPorArea(Model model, @PathVariable String code_area) {
         Reservation reservation = new Reservation();
         reservation.setCodeArea(code_area);
-
         model.addAttribute("codeArea", reservation);
+        List<Zone> zonas = reservationService.getAllZonesPerArea(code_area);
+        List<String> col_row = new ArrayList<>();
+        for (Zone zona: zonas) {
+            col_row.add("(" + zona.getRow() + "," + zona.getCol() + ")");
+        }
+        model.addAttribute("zonas", col_row);
         return "reservation/porArea";
     }
 
     @RequestMapping(value="/porArea", method=RequestMethod.POST)
-    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult) {
+    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, @PathVariable(value="coordenadas") String coordenadas, BindingResult bindingResult) {
+        System.out.println(coordenadas);
+        String[] coord = coordenadas.split(",");
+        reservation.setCols(Integer.parseInt(coord[0]));
+        reservation.setRow(Integer.parseInt(coord[1]));
+        codigos = (int)(Math.random()*100000);
+        reservation.setCode( String.valueOf(codigos));
+        reservation.setQr( "q" + (codigos));
+        reservation.setState("Confirmada");
+        reservation.setCreationDate(LocalDate.now());
+        reservation.setAddress(reservation.getCodeArea());
+        reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
         String nameUri="redirect:porArea/" + reservation.getCodeArea();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         if(bindingResult.hasErrors()){
