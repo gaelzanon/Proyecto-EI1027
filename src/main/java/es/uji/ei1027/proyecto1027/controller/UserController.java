@@ -33,4 +33,27 @@ public class UserController {
         model.addAttribute("users", userDao.listAllUsers());
         return "user/list";
     }
+
+    @RequestMapping("/self")
+    public String gestionPerfilPropio(HttpSession session){
+        UserDetails userDetails=(UserDetails) session.getAttribute("user");
+        if (userDetails == null){
+            return "login";
+        }
+        String redirect="";
+        switch (userDetails.getUserType()){
+            case  "Citizen":
+                redirect="citizen";
+                break;
+            case  "Controller":
+                redirect="controller";
+                break;
+            case  "MunicipalManager":
+                redirect="municipalityManager";
+                break;
+            default:
+                return "redirect:/mainMenu";
+        }
+        return "redirect:/"+redirect+"/update/"+userDetails.getNIF();
+    }
 }

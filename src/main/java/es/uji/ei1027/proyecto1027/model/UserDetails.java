@@ -4,6 +4,7 @@ public class UserDetails {
     String username;
     String password;
     UserDetailsEnum userType;
+    String NIF;
 
     public String getUsername() {
         return username;
@@ -27,5 +28,13 @@ public class UserDetails {
 
     public void setUserType(String userType) {
         this.userType = UserDetailsEnum.valueOf(userType);
+    }
+
+    public String getNIF() {
+        return NIF;
+    }
+
+    public void setNIF(String NIF) {
+        this.NIF = NIF;
     }
 }

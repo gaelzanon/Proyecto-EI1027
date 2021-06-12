@@ -17,18 +17,21 @@ public class FakeUserProvider implements UserDao {
         userClient.setUsername("citizen");
         userClient.setPassword(passwordEncryptor.encryptPassword("citizen"));
         userClient.setUserType("Citizen");
+        userClient.setNIF("00000000A");
         knownUsers.put("citizen", userClient);
 
         UserDetails userController = new UserDetails();
         userController.setUsername("controller");
         userController.setPassword(passwordEncryptor.encryptPassword("controller"));
         userController.setUserType("Controller");
+        userController.setNIF("1111111A");
         knownUsers.put("controller", userController);
 
         UserDetails userMunicipal = new UserDetails();
         userMunicipal.setUsername("municipal");
         userMunicipal.setPassword(passwordEncryptor.encryptPassword("municipal"));
         userMunicipal.setUserType("MunicipalManager");
+        userMunicipal.setNIF("22222222A");
         knownUsers.put("municipal", userMunicipal);
 
         UserDetails userEnvironmental = new UserDetails();
