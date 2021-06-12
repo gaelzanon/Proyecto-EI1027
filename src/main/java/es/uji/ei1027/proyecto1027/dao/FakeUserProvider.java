@@ -13,20 +13,35 @@ public class FakeUserProvider implements UserDao {
 
     public FakeUserProvider() {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-        UserDetails userDavid = new UserDetails();
-        userDavid.setUsername("david");
-        userDavid.setPassword(passwordEncryptor.encryptPassword("david"));
-        knownUsers.put("david", userDavid);
+        UserDetails userClient = new UserDetails();
+        userClient.setUsername("citizen");
+        userClient.setPassword(passwordEncryptor.encryptPassword("citizen"));
+        userClient.setUserType("Citizen");
+        knownUsers.put("citizen", userClient);
 
-        UserDetails userFelipe = new UserDetails();
-        userFelipe.setUsername("felipe");
-        userFelipe.setPassword(passwordEncryptor.encryptPassword("felipe"));
-        knownUsers.put("felipe", userFelipe);
+        UserDetails userController = new UserDetails();
+        userController.setUsername("controller");
+        userController.setPassword(passwordEncryptor.encryptPassword("controller"));
+        userController.setUserType("Controller");
+        knownUsers.put("controller", userController);
+
+        UserDetails userMunicipal = new UserDetails();
+        userMunicipal.setUsername("municipal");
+        userMunicipal.setPassword(passwordEncryptor.encryptPassword("municipal"));
+        userMunicipal.setUserType("MunicipalManager");
+        knownUsers.put("municipal", userMunicipal);
+
+        UserDetails userEnvironmental = new UserDetails();
+        userEnvironmental.setUsername("environmental");
+        userEnvironmental.setPassword(passwordEncryptor.encryptPassword("environmental"));
+        userEnvironmental.setUserType("EnvironmentalManager");
+        knownUsers.put("environmental", userEnvironmental);
 
         UserDetails userAdmin = new UserDetails();
-        userAdmin.setUsername("admin");
-        userAdmin.setPassword(passwordEncryptor.encryptPassword("admin"));
-        knownUsers.put("admin", userAdmin);
+        userEnvironmental.setUsername("admin");
+        userEnvironmental.setPassword(passwordEncryptor.encryptPassword("admin"));
+        userEnvironmental.setUserType("Admin");
+        knownUsers.put("admin", userEnvironmental);
     }
 
     @Override
