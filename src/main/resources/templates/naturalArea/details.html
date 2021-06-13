@@ -14,7 +14,7 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <h1>Detalles del Natural Área</h1>
+        <h1>Detalles del Espacio Natural</h1>
         <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/naturalArea/details}"
               th:object="${naturalArea}" method="post">
@@ -93,6 +93,28 @@
                     <div class="error" th:if="${#fields.hasErrors('munCode')}" th:errors="*{munCode}"></div>
                 </div>
             </div>
+            <br>
+            <br>
+            <hr color="blue" size=3>
+            <h1>Zonas del espacio natural</h1>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Area</th>
+                    <th>Col</th>
+                    <th>Row</th>
+                    <th>Capacity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="zone: ${zones}">
+                    <td th:text="${zone.areaCode}"></td>
+                    <td th:text="${zone.col}"></td>
+                    <td th:text="${zone.row}"></td>
+                    <td th:text="${zone.capacity}"></td>
+                </tr>
+                </tbody>
+            </table>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
                     <th:block th:if="${user_type == 'Citizen'}">

@@ -9,6 +9,8 @@ import es.uji.ei1027.proyecto1027.model.NaturalArea;
 
 import es.uji.ei1027.proyecto1027.model.TypeNaturalArea;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.Zone;
+import es.uji.ei1027.proyecto1027.services.NaturalAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -32,6 +34,7 @@ public class NaturalAreaController {
     private NaturalAreaDao NaturalAreaDao;
     private TypeAreaDao typeAreaDao;
     private MunicipalityDao municipalityDao;
+    private NaturalAreaService naturalAreaService;
     private static double codigos;
     @Autowired
     public void setnaturalAreaDao(NaturalAreaDao NaturalAreaDao) {
@@ -44,6 +47,10 @@ public class NaturalAreaController {
     @Autowired
     public void setmunicipalityDao(MunicipalityDao municipalityDao) {
         this.municipalityDao=municipalityDao;
+    }
+    @Autowired
+    public void setNaturalAreaService(NaturalAreaService naturalAreaService) {
+        this.naturalAreaService=naturalAreaService;
     }
 
     @RequestMapping("/list")
@@ -152,6 +159,8 @@ public class NaturalAreaController {
         } else{
             model.addAttribute("user_type",userDetails.getUserType());
         }
+        List<Zone> zonas = naturalAreaService.getAllNatAreaZones(codeArea);
+        model.addAttribute("zones", zonas);
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");

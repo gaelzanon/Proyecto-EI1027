@@ -4,6 +4,5 @@ import es.uji.ei1027.proyecto1027.model.Zone;
 
 import java.util.List;
 
-public interface NaturalAreaService {
-    public List<Zone> getAllNatAreaZones(String code_area);
+public interface ZoneService {
 }

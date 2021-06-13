@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.UriUtils;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/zone")
@@ -72,11 +75,6 @@ public class ZoneController {
         model.addAttribute("zone", zoneDao.getZone(col, row, areaCode));
         return "zone/update";
     }
-    @RequestMapping(value="/porArea/{codeArea}")
-    public String zonePorArea(Model model, @PathVariable String codeArea){
-        model.addAttribute("codarea", naturalAreaDao.getNaturalArea(codeArea));
-        return "zone/porArea";
-    }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
@@ -93,7 +91,40 @@ public class ZoneController {
     @RequestMapping(value="/delete/{col}/{row}/{areaCode}")
     public String processDeleteZone(@PathVariable int col, @PathVariable int row, @PathVariable String areaCode) {
         zoneDao.deleteZone(col, row, areaCode);
-        return "redirect:../../../list";
+        String nameUri="redirect:../../../porArea/" + areaCode;
+        nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+        return nameUri;
+    }
+
+    @RequestMapping("/porArea/{code_area}")
+    public String listZonePorArea(Model model, @PathVariable String code_area) {
+        Zone zone = new Zone();
+        zone.setAreaCode(code_area);
+        model.addAttribute("codeArea", zone);
+        List<Zone> zones = zoneDao.getZonesArea(code_area);
+        model.addAttribute("zones", zones);
+        return "zone/porArea";
+    }
+
+    @RequestMapping(value="/porArea", method = RequestMethod.POST)
+    public String processAddSubmitPerArea(@ModelAttribute("zone") Zone zone, BindingResult bindingResult) {
+        String nameUri="redirect:porArea/" + zone.getAreaCode();
+        nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+        if (bindingResult.hasErrors())
+            return nameUri;
+        try {
+            zoneDao.addZone(zone);
+        } catch (DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya está asignada la zona con columna "
+                            + zone.getCol() + " y fila "
+                            + zone.getRow() + "al area "
+                            + zone.getAreaCode(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
+        return nameUri;
     }
 
 }

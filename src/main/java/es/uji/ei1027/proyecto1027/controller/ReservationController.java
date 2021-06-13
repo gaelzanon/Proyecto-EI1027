@@ -173,8 +173,7 @@ public class ReservationController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        ReservationDao.addReservation(reservation);
-        return nameUri;
+        return "redirect:reservation/list";
     }
 
 

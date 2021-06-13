@@ -12,58 +12,49 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="'Lista de zonas asignados al area ' +${codarea.name}"></h1>
+    <h1 th:text="'Lista de zonas asignados al area ' +${codeArea.areaCode}"></h1>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Area</th>
-            <th>Code</th>
-            <th></th>
-            <th></th>
+            <th>Col</th>
+            <th>Row</th>
+            <th>Capacity</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="resNatAreaSer: ${resNatAreaSersPA}">
-            <td th:text="${resNatAreaSer.codeArea}"></td>
-            <td th:text="${resNatAreaSer.code}"></td>
+        <tr th:each="zone: ${zones}">
+            <td th:text="${zone.areaCode}"></td>
+            <td th:text="${zone.col}"></td>
+            <td th:text="${zone.row}"></td>
+            <td th:text="${zone.capacity}"></td>
             <td></td>
-            <td th:text="${resNatAreaSer.startTime}"></td>
-            <td th:text="${resNatAreaSer.endTime}"></td>
-            <td></td>
-            <td><a th:href="@{/resNatAreaSer/delete/{codeArea}/{code} (code_area=${resNatAreaSer.codeArea}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
+            <td><a th:href="@{/zone/delete/{col}/{row}/{areaCode} (areaCode=${zone.areaCode}, col=${zone.col}, row=${zone.row})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
         <tr>
-            <form action="#" th:action="@{/resNatAreaSer/porArea}"
-                  th:object="${codarea}" method="post">
+            <form action="#" th:action="@{/zone/porArea}"
+                  th:object="${codeArea}" method="post">
 
-                <td th:text="${codarea.codeArea}">
-                    <input type="text" th:field="*{codeArea}" />
+                <td th:text="${codeArea.areaCode}">
+                    <input type="text" th:field="*{areaCode}" />
+                </td>
+
+                <td>
+                    <input type="number" class="form-control" id="col" th:field="*{col}">
+                    <div class="error" th:if="${#fields.hasErrors('col')}" th:errors="*{col}"></div>
                 </td>
                 <td>
-                    <select id ="code" th:field ="*{code}">
-                        <div th:if="${#lists.isEmpty(services)}">
-                            <option value="NoDisp">No hay disponibles</option>
-                        </div>
-                        <option th:unless="${#lists.isEmpty(services)}" th:each="code:${services}"
-                                th:value="${code}"
-                                th:text="${code}">
-                        </option>
-                    </select>
-                    <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+                    <input type="number" class="form-control" id="row" th:field="*{row}" />
+                    <div class="error" th:if="${#fields.hasErrors('row')}" th:errors="*{row}"></div>
                 </td>
                 <td>
-                    <input type="text" hidden="hidden" id="code_area" th:field="*{codeArea}" />
+                    <input type="number" class="form-control" id="capacity" th:field="*{capacity}" />
+                    <div class="error" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
                 </td>
                 <td>
-                    <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />
-                    <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
+                    <input type="text" hidden="hidden" id="areaCode" th:field="*{areaCode}" />
                 </td>
-                <td>
-                    <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
-                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
-                </td>
-                <td></td>
                 <td>
                     <button type="submit" class="btn btn-success">Añadir</button>
                 </td>
