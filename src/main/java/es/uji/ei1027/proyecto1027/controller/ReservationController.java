@@ -3,6 +3,7 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
 import es.uji.ei1027.proyecto1027.dao.ReservationDao;
+import es.uji.ei1027.proyecto1027.model.Citizen;
 import es.uji.ei1027.proyecto1027.model.Reservation;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
 import es.uji.ei1027.proyecto1027.model.Zone;
@@ -91,7 +92,7 @@ public class ReservationController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        return "redirect:list";
+        return "redirect:reservation/porCitizen";
     }
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
     public String editReservation(Model model, @PathVariable String code) {
@@ -121,7 +122,7 @@ public class ReservationController {
     @RequestMapping(value="/delete/{code}")
     public String processDelete(@PathVariable String code) {
         ReservationDao.deleteReservation(code);
-        return "redirect:../list";
+        return "redirect:../porCitizen";
     }
 
     @RequestMapping("/porArea/{code_area}")
@@ -173,11 +174,16 @@ public class ReservationController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        return "redirect:reservation/list";
+        return "redirect:porCitizen";
     }
 
-
-
+    @RequestMapping("/porCitizen")
+    public String reservationPorCitizen(HttpSession session, Model model) {
+        UserDetails userDetails=(UserDetails) session.getAttribute("user");
+        List<Reservation> reservas = ReservationDao.getReservationPerCitizen(userDetails.getNIF());
+        model.addAttribute("reservas", reservas);
+        return "reservation/porCitizen";
+    }
 
 }
 

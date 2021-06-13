@@ -1,7 +1,9 @@
 package es.uji.ei1027.proyecto1027.services;
 
+import es.uji.ei1027.proyecto1027.dao.CitizenDao;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.dao.ZoneDao;
+import es.uji.ei1027.proyecto1027.model.Citizen;
 import es.uji.ei1027.proyecto1027.model.NaturalArea;
 import es.uji.ei1027.proyecto1027.model.Zone;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class ReservationSvc implements ReservationService {
     @Autowired
     ZoneDao zoneDao;
 
+    @Autowired
+    CitizenDao citizenDao;
+
     @Override
     public List<NaturalArea> getAllNaturalAreas() {
         return naturalAreaDao.getNaturalArea();
@@ -31,5 +36,10 @@ public class ReservationSvc implements ReservationService {
     @Override
     public String getAddress(String codeArea) {
         return naturalAreaDao.getNaturalArea(codeArea).getAddress();
+    }
+
+    @Override
+    public Citizen getCitizen(String nif) {
+        return citizenDao.getCitizen(nif);
     }
 }

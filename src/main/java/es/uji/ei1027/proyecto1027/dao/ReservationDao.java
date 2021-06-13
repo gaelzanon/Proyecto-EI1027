@@ -61,5 +61,14 @@ public class ReservationDao {
         }
     }
 
+    public List<Reservation> getReservationPerCitizen(String nif) {
+        try {
+            return jdbcTemplate.query("SELECT * from reservation WHERE nif_citizen=?",
+                    new ReservationRowMapper(), nif);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Reservation>();
+        }
+    }
+
 
 }
