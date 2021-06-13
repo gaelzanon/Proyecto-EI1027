@@ -4,12 +4,15 @@ body {
    background-color: white;
 }
 
+
 /* Cabecera de nivel 1 */
 h1 {
     font-family: 'Oswald';font-size: 28px; }
     font-size: x-large;
     color: black;
 }
+
+
 
 /* Cabecera de nivel 2 */
 h2 {
@@ -59,6 +62,7 @@ li{
     margin-top: 10px;
     border:1px black;
 }
+
 
 li:first-child {
     margin-top:0;
