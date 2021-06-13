@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear nou Reserva</title>
+    <title>Modificar Reserva</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -12,7 +12,9 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Modificar la Reserva </h2>
+    <br>
+<h1>Modificar la Reserva </h1>
+    <hr color="blue" size=3>
 <form action="#" th:action="@{/Reservation/update}"
       th:object="${reservation}" method="post">
     <div class="form-group row">
@@ -29,7 +31,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="creationDate">Fecha de Creacion:</label>
+        <label class="control-label col-sm-2" for="creationDate">Fecha de Creación:</label>
         <div class="col-sm-4">
             <input type="number" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
             <div class="error" th:if="${#fields.hasErrors('creationDate')}" th:errors="*{creationDate}"></div>
@@ -78,7 +80,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="CodeArea">Area:</label>
+        <label class="control-label col-sm-2" for="CodeArea">Área:</label>
         <div class="col-sm-4">
             <select class="form_control" type="text" id="codeArea" th:field="*{codeArea}">
                 <option th:each="codeArea: ${codeArea}" th:value="${codeArea}" th:text="${codeArea}"></option>

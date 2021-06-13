@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Gestionar service</title>
+    <title>Lista Servicios</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -12,15 +12,11 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1>Lista de tipos de service</h1>
+    <br>
+<h1>Lista de Tipos de Servicios</h1>
+    <hr color="blue" size=3>
 <table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Tipo de Servicio</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
+
     <tbody>
     <tr th:each="type: ${type_of_service}">
         <td th:text="${type.type}"></td>
