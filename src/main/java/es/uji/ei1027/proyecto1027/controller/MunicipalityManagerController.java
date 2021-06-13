@@ -20,6 +20,8 @@ public class MunicipalityManagerController {
 
     private MunicipalityManagerDao managerDao;
 
+    private int codigos;
+
     @Autowired
     public void SetMunicipalityManagerDao(MunicipalityManagerDao managerDao) {
         this.managerDao = managerDao;
@@ -40,6 +42,8 @@ public class MunicipalityManagerController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("municipalityManager") MunicipalityManager munManager,
                                    BindingResult bindingResult) {
+        codigos = (int)(Math.random()*100000);
+        munManager.setCode( String.valueOf(codigos));
         MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
         municipalityManagerValidator.validate(munManager, bindingResult);
         if (bindingResult.hasErrors())

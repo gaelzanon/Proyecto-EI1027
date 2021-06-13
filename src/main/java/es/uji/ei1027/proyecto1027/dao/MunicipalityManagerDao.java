@@ -20,7 +20,7 @@ public class MunicipalityManagerDao {
 
     /* Añadir manager a la clase de datos */
     public void addMunicipalityManager(MunicipalityManager munManager) {
-        jdbcTemplate.update("INSERT INTO Municipality_manager VALUES(?, ?, ?, ?)", munManager.getNIF(), munManager.getCode(), munManager.getMunicipalityName(), munManager.getEmail());
+        jdbcTemplate.update("INSERT INTO Municipality_manager VALUES(?, ?, ?, ?, ?)", munManager.getNIF(), munManager.getCode(), munManager.getName(),munManager.getMunicipalityName(), munManager.getEmail());
     }
 
     /* Eliminar manager de la base de datos */
@@ -30,7 +30,7 @@ public class MunicipalityManagerDao {
 
     /* Modificar los datos de un manager */
     public void updateMunicipalityManager(MunicipalityManager munManager) {
-        jdbcTemplate.update("UPDATE Municipality_manager SET code=?, mun_name=?, email=? where NIF=?", munManager.getCode(), munManager.getMunicipalityName(), munManager.getEmail(), munManager.getNIF());
+        jdbcTemplate.update("UPDATE Municipality_manager SET code=?,name=? ,mun_name=?, email=? where NIF=?", munManager.getCode(),munManager.getName(), munManager.getMunicipalityName(), munManager.getEmail(), munManager.getNIF());
     }
 
     /* Obtener una zona mediante su NIF */
