@@ -72,7 +72,7 @@ public class CitizenController {
         if (bindingResult.hasErrors())
             return "citizen/update";
         CitizenDao.updateCitizen(citizen);
-        return "redirect:list";
+        return "redirect:../../../";
     }
 
     @RequestMapping(value="/delete/{NIF}")
