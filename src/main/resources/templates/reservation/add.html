@@ -60,15 +60,6 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="cols">Columna:</label>
                 <div class="col-sm-4">
-                    <select>
-                        <div th:if="${#lists.isEmpty(services)}">
-                            <option value="NoDisp">No hay disponibles</option>
-                        </div>
-                        <option th:unless="${#lists.isEmpty(services)}" th:each="code:${services}"
-                                th:value="${code}"
-                                th:text="${code}">
-                        </option>
-                    </select>
                     <input type="number" class="form-control" id="cols" th:field="*{cols}" />
                     <div class="error" th:if="${#fields.hasErrors('cols')}" th:errors="*{cols}"></div>
                 </div>

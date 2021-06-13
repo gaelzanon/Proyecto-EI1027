@@ -12,6 +12,7 @@ public class MunicipalityManagerRowMapper implements RowMapper<MunicipalityManag
         MunicipalityManager munManager = new MunicipalityManager();
         munManager.setNIF(rs.getString("NIF"));
         munManager.setCode(rs.getString("code"));
+        munManager.setName(rs.getString("Name"));
         munManager.setMunicipalityName(rs.getString("mun_name"));
         munManager.setEmail(rs.getString("email"));
         return munManager;
