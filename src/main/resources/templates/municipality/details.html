@@ -13,11 +13,13 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2>Detalles del Municipio</h2>
+        <br>
+        <h1>Detalles del Municipio</h1>
+        <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/municipality/details}"
               th:object="${municipality}" method="post">
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="code">Código del municipality:</label>
+                <label class="control-label col-sm-2" for="code">Código del municipio:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="code" th:field="*{code}" readonly="readonly"/>
                     <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>

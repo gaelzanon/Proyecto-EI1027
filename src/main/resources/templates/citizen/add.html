@@ -13,7 +13,9 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2>Nuevo Ciudadano</h2>
+        <br>
+        <h1>Nuevo Ciudadano</h1>
+        <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/citizen/add}"
               th:object="${citizen}" method="post">
 
@@ -54,7 +56,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <button type="submit" class="btn btn-primary">Añadir Ciudadano</button>
+                    <button type="submit" class="btn btn-success">Añadir Ciudadano</button>
                     <a href="/citizen/list"class="btn btn-primary" role="button">Volver</a>
                 </div>
             </div>

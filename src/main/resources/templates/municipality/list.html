@@ -12,16 +12,11 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <br>
     <h1>Lista de Municipios</h1>
+    <hr color="blue" size=3>
     <table class="table table-striped">
-        <thead>
-        <tr>
 
-            <th>Nombre</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
         <tbody>
         <tr th:each="municipality: ${municipality}">
             <td th:text="${municipality.name}"></td>
