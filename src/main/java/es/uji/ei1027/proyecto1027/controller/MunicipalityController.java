@@ -50,7 +50,6 @@ public class MunicipalityController {
         //municipalityManagerValidator.validate(mun, bindingResult);
         codigos = (int)(Math.random()*100000);
         municipality.setCode( String.valueOf(codigos));
-        System.out.println(municipality);
         if (bindingResult.hasErrors())
             return "municipality/add";
         try {

@@ -30,7 +30,7 @@ public class TypeAreaController {
     @RequestMapping("/list")
     public String listTypeAreas(Model model) {
         model.addAttribute("type_of_area", typeAreaDao.getTypeAreas());
-        System.out.println(typeAreaDao.getTypeAreas());
+
         return "typeArea/list";
     }
     @RequestMapping(value="/add")

@@ -43,7 +43,7 @@ public class ServiceController {
     @RequestMapping("/list")
     public String listServices(Model model) {
         model.addAttribute("service", ServiceDao.getServices());
-        System.out.println(ServiceDao.getServices());
+
         return "service/list";
     }
     @RequestMapping(value="/add")

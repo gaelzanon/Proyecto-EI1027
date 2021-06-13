@@ -58,7 +58,7 @@ public void updateService(Service service) {
     jdbcTemplate.update(
     "UPDATE service SET type_of_service=?,  description =? , registration_date=?, temp =?   WHERE code = ?",
     service.getType_of_service(), service.getDescription(), service.getFechaReg(), service.getTemp() , service.getCode() );
-    System.out.println("No funciona");
+
 }
 
 /* listar */

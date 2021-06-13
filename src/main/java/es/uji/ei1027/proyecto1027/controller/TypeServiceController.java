@@ -30,7 +30,6 @@ public class TypeServiceController {
     @RequestMapping("/list")
     public String listTypeServices(Model model) {
         model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
-        System.out.println(typeServiceDao.getTypeServices());
         return "typeService/list";
     }
     @RequestMapping(value="/add")

@@ -77,7 +77,7 @@ public class ReservationController {
         reservation.setCreationDate(LocalDate.now());
         reservation.setAddress(reservation.getCodeArea());
         reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
-        System.out.println(reservation);
+
         if (bindingResult.hasErrors())
             return "reservation/add";
         try {
@@ -105,7 +105,7 @@ public class ReservationController {
             @ModelAttribute("reservation") Reservation reservation,
             BindingResult bindingResult) {
         reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
-        System.out.println(reservation);
+
         if (bindingResult.hasErrors())
             return "reservation/update";
 

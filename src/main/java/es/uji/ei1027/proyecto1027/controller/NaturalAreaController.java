@@ -97,7 +97,6 @@ public class NaturalAreaController {
         NaturalAreaValidator naturalAreaValidator = new NaturalAreaValidator();
         naturalAreaValidator.validate(naturalArea, bindingResult);
 
-        System.out.println(naturalArea);
         if (bindingResult.hasErrors()){
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.naturalArea",bindingResult);
             attributes.addFlashAttribute("naturalArea",naturalArea);
