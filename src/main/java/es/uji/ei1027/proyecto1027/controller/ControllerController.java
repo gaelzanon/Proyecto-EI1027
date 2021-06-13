@@ -37,11 +37,13 @@ public class ControllerController {
     @RequestMapping("/list")
     public String listController(Model model) {
         model.addAttribute("controller", ControllerDao.getControllers());
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         return "controller/list";
     }
     @RequestMapping(value="/add")
     public String addController(Model model) {
         model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         return "controller/add";
     }
 
@@ -68,6 +70,7 @@ public class ControllerController {
     @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
     public String editController(Model model, @PathVariable String NIF) {
         model.addAttribute("controller", ControllerDao.getController(NIF));
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         return "controller/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)

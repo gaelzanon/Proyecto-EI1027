@@ -24,7 +24,7 @@ public class FakeUserProvider implements UserDao {
         userController.setUsername("controller");
         userController.setPassword(passwordEncryptor.encryptPassword("controller"));
         userController.setUserType("Controller");
-        userController.setNIF("1111111A");
+        userController.setNIF("11111111A");
         knownUsers.put("controller", userController);
 
         UserDetails userMunicipal = new UserDetails();

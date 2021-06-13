@@ -21,7 +21,7 @@
         <th>NIF</th>
         <th>Nombre</th>
         <th>Apellidos</th>
-        <th>Código Área</th>
+        <th>Área</th>
         <th>Email</th>
         <th></th>
         <th></th>
@@ -32,7 +32,9 @@
         <td th:text="${controller.NIF}"></td>
         <td th:text="${controller.name}"></td>
         <td th:text="${controller.surname}"></td>
-        <td th:text="${controller.code_area}"></td>
+        <th:block th:each="area: ${naturalArea}">
+            <td th:if="${controller.code_area == area.codeArea}" th:text="${area.name}"></td>
+        </th:block>
         <td th:text="${controller.email}"></td>
         <td><a th:href="@{/controller/update/{NIF}(NIF=${controller.NIF})}" class="btn btn-warning" role="button">Editar</a>
         </td>
