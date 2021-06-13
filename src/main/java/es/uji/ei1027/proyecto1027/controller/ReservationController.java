@@ -91,7 +91,6 @@ public class ReservationController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        ReservationDao.addReservation(reservation);
         return "redirect:list";
     }
     @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
