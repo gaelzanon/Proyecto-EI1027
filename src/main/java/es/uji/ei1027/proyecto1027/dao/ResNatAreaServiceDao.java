@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class ResNatAreaServiceDao {
     }
 
     /* Eliminar ResNatAreaService de la base de datos */
-    public void deleteR_NArea_service(String code_area, String code) {
-        jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=?", code_area, code);
+    public void deleteR_NArea_service(String code_area, String code, String start_time, String end_time) {
+        jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=? AND start_time=? AND end_time=?", code_area, code, LocalDate.parse(start_time), LocalDate.parse(end_time));
     }
 
 

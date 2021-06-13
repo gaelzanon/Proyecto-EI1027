@@ -18,8 +18,8 @@
     <table class="table table-striped">
     <thead>
     <tr>
-        <th>Código del Área</th>
-        <th>Código del Servicio</th>
+        <th>Área</th>
+        <th>Servicio</th>
         <th>Fecha inicio</th>
         <th>Fecha Fin</th>
         <th></th>
@@ -28,8 +28,15 @@
     </thead>
     <tbody>
     <tr th:each="resNatAreaSer: ${resNatAreaSers}">
-        <td th:text="${resNatAreaSer.code_area}"></td>
-        <td th:text="${resNatAreaSer.code}"></td>
+
+        <th:block th:each="area: ${naturalArea}">
+            <td th:if="${resNatAreaSer.code_area == area.codeArea}" th:text="${area.name}"></td>
+        </th:block>
+
+        <th:block th:each="ser: ${service}">
+            <td th:if="${resNatAreaSer.code == ser.code}" th:text="${ser.description}"></td>
+        </th:block>
+
         <td th:text="${resNatAreaSer.startTime}"></td>
         <td th:text="${resNatAreaSer.endTime}"></td>
 

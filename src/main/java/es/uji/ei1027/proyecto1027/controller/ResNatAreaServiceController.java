@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,14 +58,16 @@ public class ResNatAreaServiceController {
     @RequestMapping("/list")
     public String listResNatAreaServices(Model model) {
         model.addAttribute("resNatAreaSers", resNatAreaServiceDao.getR_NArea_services());
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        model.addAttribute("service",serviceDao.getServices());
 
         return "resNatAreaSer/list";
     }
     @RequestMapping(value="/add")
     public String addResNatAreaService(Model model) {
         model.addAttribute("resNatAreaSer", new ResNatAreaService());
-        model.addAttribute("code_area", naturalAreaDao.getNaturalAreaNames());
-        model.addAttribute("code",serviceDao.getServiceNames());
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        model.addAttribute("service",serviceDao.getServices());
         return "resNatAreaSer/add";
     }
 
@@ -101,6 +104,9 @@ public class ResNatAreaServiceController {
         List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
         model.addAttribute("services", serDisp);
         model.addAttribute("resNatAreaSersPA", servAsig);
+
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        model.addAttribute("serviceList",serviceDao.getServices());
         return "resNatAreaSer/porArea";
     }
 
@@ -128,11 +134,11 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{code_area}/{code}")
+    @RequestMapping(value = "/delete/{code_area}/{code}/{start_time}/{end_time}")
     public String processDeleteResNatAreaService(@PathVariable String code_area,
-                                                 @PathVariable String code) {
-        resNatAreaServiceDao.deleteR_NArea_service(code_area, code);
-        String nameUri="redirect:../../porArea/" + code_area;
+                                                 @PathVariable String code, @PathVariable String start_time, @PathVariable String end_time) {
+        resNatAreaServiceDao.deleteR_NArea_service(code_area, code, start_time, end_time);
+        String nameUri="redirect:../../../../porArea/" + code_area;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;
     }
