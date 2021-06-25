@@ -46,10 +46,11 @@ public class MunicipalityController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("municipality") Municipality municipality,
                                    BindingResult bindingResult) {
-        //MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
-        //municipalityManagerValidator.validate(mun, bindingResult);
+
         codigos = (int)(Math.random()*100000);
         municipality.setCode( String.valueOf(codigos));
+        MunicipalityValidator municipalityValidator = new MunicipalityValidator();
+        municipalityValidator.validate(municipality, bindingResult);
         if (bindingResult.hasErrors())
             return "municipality/add";
         try {
@@ -77,8 +78,8 @@ public class MunicipalityController {
     public String processUpdateSubmit(
             @ModelAttribute("municipality") Municipality mun,
             BindingResult bindingResult) {
-        //MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
-        //municipalityManagerValidator.validate(mun, bindingResult);
+        MunicipalityValidator municipalityValidator = new MunicipalityValidator();
+        municipalityValidator.validate(mun, bindingResult);
         if (bindingResult.hasErrors())
             return "municipality/update";
         try {

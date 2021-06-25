@@ -41,7 +41,7 @@
         <td th:text="${resNatAreaSer.endTime}"></td>
 
 
-        <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
+        <td><a th:href="@{/resNatAreaSer/delete/{codearea}/{code}/{startTime}/{endtime} (codearea=${resNatAreaSer.code_area}, code=${resNatAreaSer.code}, startTime=$(resNatAreaSer.startTime), endtime=$(resNatAreaSer.endTime)}" class="btn btn-danger" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>

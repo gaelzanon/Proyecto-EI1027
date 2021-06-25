@@ -36,7 +36,7 @@ public class ReservationDao {
     }
 
     public void updateReservation(Reservation reservation) {
-        jdbcTemplate.update("UPDATE reservation SET address=?, date=?, qr=?, creation_date=?, nif_citizen=?, state=?, start_time=?, end_time=?, cols=?, row=?, code_area=? where code=?",
+        jdbcTemplate.update("UPDATE reservation SET address=?, date=?, qr=?, creation_date=?, nif_citizen=?, state=?, start_time=?, end_time=?, col=?, row=?, code_area=? where code=?",
                 reservation.getAddress(), reservation.getDate(), reservation.getQr(), reservation.getCreationDate(), reservation.getNifCitizen(),
                 reservation.getState(), reservation.getStartTime(), reservation.getEndTime(), reservation.getCols(), reservation.getRow(),
                 reservation.getCodeArea(), reservation.getCode());

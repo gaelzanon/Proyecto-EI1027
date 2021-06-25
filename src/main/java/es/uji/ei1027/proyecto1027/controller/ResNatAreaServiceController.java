@@ -74,8 +74,9 @@ public class ResNatAreaServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
                                    BindingResult bindingResult) {
-        resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
-        resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
+        System.out.println(resNatAreaService);
+        //resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
+        //resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
         ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
         resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         if (bindingResult.hasErrors())
@@ -134,11 +135,13 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{code_area}/{code}/{start_time}/{end_time}")
-    public String processDeleteResNatAreaService(@PathVariable String code_area,
-                                                 @PathVariable String code, @PathVariable String start_time, @PathVariable String end_time) {
-        resNatAreaServiceDao.deleteR_NArea_service(code_area, code, start_time, end_time);
-        String nameUri="redirect:../../../../porArea/" + code_area;
+    @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}/{endtime}")
+    public String processDeleteResNatAreaService(@PathVariable String codearea,
+                                                 @PathVariable String code, @PathVariable String startTime, @PathVariable String endtime) {
+        System.out.print(endtime);
+
+        resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime, endtime);
+        String nameUri="redirect:../../../../porArea/" + codearea;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;
     }
