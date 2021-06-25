@@ -13,16 +13,10 @@
 <body>
 <div layout:fragment="content">
     <br>
-<h1>Lista de tipos de Área</h1>
+<h1>Lista de Tipos de Área</h1>
     <hr color="blue" size=3>
 <table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Tipo de area</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
+
     <tbody>
     <tr th:each="type: ${type_of_area}">
         <td th:text="${type.type}"></td>
@@ -31,7 +25,7 @@
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Añadir Tipo de área</a>
+<a href="add" class="btn btn-success" role="button">Añadir tipo de área</a>
     <a href="/mainMenu"class="btn btn-primary" role="button">Volver</a>
 </div>
 </body>

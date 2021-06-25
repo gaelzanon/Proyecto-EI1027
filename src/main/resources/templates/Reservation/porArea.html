@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Realizar reserva en espacio natural</title>
+    <title>Realizar reserva en Espacio Natural</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -12,10 +12,12 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Introducir los datos para realizar la reserva: </h1>
+    <br>
+    <h1>Introducir los datos para realizar la Reserva: </h1>
+    <hr color="blue" size=3>
     <form class="form-horizontal" action="#" th:action="@{/reservation/porArea}" th:object="${codeArea}" method="post">
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="area_code">Area:</label>
+            <label class="control-label col-sm-2" for="area_code">Área:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="area_code" th:field="*{codeArea}" readonly="readonly">
             </div>
@@ -29,7 +31,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="date">Date:</label>
+            <label class="control-label col-sm-2" for="date">Fecha:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" id="date" th:field="*{date}" />
                 <div class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
