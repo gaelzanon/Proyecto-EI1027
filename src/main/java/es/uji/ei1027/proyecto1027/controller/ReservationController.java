@@ -125,6 +125,15 @@ public class ReservationController {
         return "redirect:../porCitizen";
     }
 
+    @RequestMapping(value={"/detailsCitizen/{code}","/detailsCitizen"}, method = RequestMethod.GET)
+    public String detailsCitizenReservation(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("reservation"))
+            model.addAttribute("reservation", ReservationDao.getReservation(code));
+        return "reservation/detailsCitizen";
+    }
+
+
+
     @RequestMapping("/porArea/{code_area}")
     public String reservationPorArea(Model model, @PathVariable String code_area) {
         Reservation reservation = new Reservation();
