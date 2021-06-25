@@ -13,42 +13,51 @@
 <body>
 <div layout:fragment="content">
     <br>
-    <h1 th:text="'Lista de Servicios asignados al area ' +${codarea.code_area}"></h1>
+    <h1>Lista de Servicios asignados al area</h1>
     <hr color="blue" size=3>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>CodeArea</th>
-            <th>Code</th>
+            <th>Área</th>
+            <th>Servicio</th>
             <th>Fecha inicio</th>
             <th>Fecha fin</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="resNatAreaSer: ${resNatAreaSersPA}">
-            <td th:text="${resNatAreaSer.code_area}"></td>
-            <td th:text="${resNatAreaSer.code}"></td>
+
+            <th:block th:each="area: ${naturalArea}">
+                <td th:if="${resNatAreaSer.code_area == area.codeArea}" th:text="${area.name}"></td>
+            </th:block>
+
+            <th:block th:each="serv: ${serviceList}">
+                <td th:if="${resNatAreaSer.code == serv.code}" th:text="${serv.description}"></td>
+            </th:block>
             <td th:text="${resNatAreaSer.startTime}"></td>
             <td th:text="${resNatAreaSer.endTime}"></td>
             <td></td>
-            <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code})}" class="btn btn-danger" role="button">Borrar</a>
+            <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code}/{start_time}/{end_time} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code}, start_time=${resNatAreaSer.startTime}, end_time=${resNatAreaSer.endTime})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
         <tr>
             <form action="#" th:action="@{/resNatAreaSer/porArea}"
                   th:object="${codarea}" method="post">
 
-                <td th:text="${codarea.code_area}">
-                    <input type="text" th:field="*{code_area}" />
-                </td>
+
+
+                <th:block th:each="area: ${naturalArea}">
+                    <td th:if="${codarea.code_area == area.codeArea}" th:text="${area.name}"><input type="text" th:field="*{code_area}" /></td>
+                </th:block>
+
                 <td>
                     <select id ="code" th:field ="*{code}">
-                        <div th:if="${#lists.isEmpty(services)}">
+                        <div th:if="${#lists.isEmpty(serviceList)}">
                             <option value="NoDisp">No hay disponibles</option>
                         </div>
-                        <option th:unless="${#lists.isEmpty(services)}" th:each="code:${services}"
-                                th:value="${code}"
-                                th:text="${code}">
+                        <option th:unless="${#lists.isEmpty(serviceList)}" th:each="serv:${serviceList}"
+                                th:value="${serv.code}"
+                                th:text="${serv.description}">
                         </option>
                     </select>
                     <div class="error" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>

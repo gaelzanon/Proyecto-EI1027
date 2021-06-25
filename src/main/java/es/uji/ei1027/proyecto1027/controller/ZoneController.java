@@ -103,6 +103,7 @@ public class ZoneController {
         model.addAttribute("codeArea", zone);
         List<Zone> zones = zoneDao.getZonesArea(code_area);
         model.addAttribute("zones", zones);
+        model.addAttribute("naturalArea", naturalAreaDao.getNaturalArea(code_area));
         return "zone/porArea";
     }
 
@@ -110,6 +111,8 @@ public class ZoneController {
     public String processAddSubmitPerArea(@ModelAttribute("zone") Zone zone, BindingResult bindingResult) {
         String nameUri="redirect:porArea/" + zone.getAreaCode();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+        ZoneValidator zoneValidator = new ZoneValidator();
+        zoneValidator.validate(zone, bindingResult);
         if (bindingResult.hasErrors())
             return nameUri;
         try {

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,22 +58,25 @@ public class ResNatAreaServiceController {
     @RequestMapping("/list")
     public String listResNatAreaServices(Model model) {
         model.addAttribute("resNatAreaSers", resNatAreaServiceDao.getR_NArea_services());
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        model.addAttribute("service",serviceDao.getServices());
 
         return "resNatAreaSer/list";
     }
     @RequestMapping(value="/add")
     public String addResNatAreaService(Model model) {
         model.addAttribute("resNatAreaSer", new ResNatAreaService());
-        model.addAttribute("code_area", naturalAreaDao.getNaturalAreaNames());
-        model.addAttribute("code",serviceDao.getServiceNames());
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        model.addAttribute("service",serviceDao.getServices());
         return "resNatAreaSer/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
                                    BindingResult bindingResult) {
-        resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
-        resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
+        System.out.println(resNatAreaService);
+        //resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
+        //resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
         ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
         resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         if (bindingResult.hasErrors())
@@ -101,6 +105,9 @@ public class ResNatAreaServiceController {
         List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
         model.addAttribute("services", serDisp);
         model.addAttribute("resNatAreaSersPA", servAsig);
+
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        model.addAttribute("serviceList",serviceDao.getServices());
         return "resNatAreaSer/porArea";
     }
 
@@ -128,11 +135,13 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{code_area}/{code}")
-    public String processDeleteResNatAreaService(@PathVariable String code_area,
-                                                 @PathVariable String code) {
-        resNatAreaServiceDao.deleteR_NArea_service(code_area, code);
-        String nameUri="redirect:../../porArea/" + code_area;
+    @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}/{endtime}")
+    public String processDeleteResNatAreaService(@PathVariable String codearea,
+                                                 @PathVariable String code, @PathVariable String startTime, @PathVariable String endtime) {
+        System.out.print(endtime);
+
+        resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime, endtime);
+        String nameUri="redirect:../../../../porArea/" + codearea;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;
     }

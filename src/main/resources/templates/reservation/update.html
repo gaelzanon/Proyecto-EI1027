@@ -15,8 +15,14 @@
     <br>
 <h1>Modificar la Reserva </h1>
     <hr color="blue" size=3>
-<form action="#" th:action="@{/Reservation/update}"
+<form action="#" th:action="@{/reservation/update}"
       th:object="${reservation}" method="post">
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="address">Dirección:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="address" th:field="*{address}" readonly="readonly" />
+        </div>
+    </div>
     <div class="form-group row">
         <label class="control-label col-sm-2" for="Date">Fecha de la Reserva:</label>
         <div class="col-sm-4">
@@ -31,9 +37,15 @@
         </div>
     </div>
     <div class="form-group row">
+        <div class="col-sm-4">
+            <input type="hidden" class="form-control" id="Code" th:field="*{Code}" readonly="readonly"/>
+            <div class="error" th:if="${#fields.hasErrors('Code')}" th:errors="*{Code}"></div>
+        </div>
+    </div>
+    <div class="form-group row">
         <label class="control-label col-sm-2" for="creationDate">Fecha de Creación:</label>
         <div class="col-sm-4">
-            <input type="number" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
+            <input type="date" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
             <div class="error" th:if="${#fields.hasErrors('creationDate')}" th:errors="*{creationDate}"></div>
         </div>
     </div>

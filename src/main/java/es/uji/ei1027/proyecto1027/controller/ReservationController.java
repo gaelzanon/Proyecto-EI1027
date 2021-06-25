@@ -77,7 +77,7 @@ public class ReservationController {
         reservation.setCreationDate(LocalDate.now());
         reservation.setAddress(reservation.getCodeArea());
         reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
-        System.out.println(reservation);
+
         if (bindingResult.hasErrors())
             return "reservation/add";
         try {
@@ -124,6 +124,15 @@ public class ReservationController {
         ReservationDao.deleteReservation(code);
         return "redirect:../porCitizen";
     }
+
+    @RequestMapping(value={"/detailsCitizen/{code}","/detailsCitizen"}, method = RequestMethod.GET)
+    public String detailsCitizenReservation(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("reservation"))
+            model.addAttribute("reservation", ReservationDao.getReservation(code));
+        return "reservation/detailsCitizen";
+    }
+
+
 
     @RequestMapping("/porArea/{code_area}")
     public String reservationPorArea(Model model, @PathVariable String code_area) {

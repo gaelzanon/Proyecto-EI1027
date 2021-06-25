@@ -3,16 +3,19 @@ package es.uji.ei1027.proyecto1027.dao;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ResNatAreaServiceDao {
     private JdbcTemplate jdbcTemplate;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -25,8 +28,8 @@ public class ResNatAreaServiceDao {
     }
 
     /* Eliminar ResNatAreaService de la base de datos */
-    public void deleteR_NArea_service(String code_area, String code) {
-        jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=?", code_area, code);
+    public void deleteR_NArea_service(String code_area, String code, String start_time, String end_time) {
+        jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=? AND start_time=? AND end_time=?", code_area, code, start_time, end_time);
     }
 
 

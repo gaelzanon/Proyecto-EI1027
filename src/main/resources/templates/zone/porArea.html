@@ -12,7 +12,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 th:text="'Lista de zonas asignados al area ' +${codeArea.areaCode}"></h1>
+    <h1 th:text="'Lista de zonas asignados al area ' +${naturalArea.name}"></h1>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         <tr th:each="zone: ${zones}">
-            <td th:text="${zone.areaCode}"></td>
+            <td th:text="${naturalArea.name}"></td>
             <td th:text="${zone.col}"></td>
             <td th:text="${zone.row}"></td>
             <td th:text="${zone.capacity}"></td>
@@ -36,7 +36,7 @@
             <form action="#" th:action="@{/zone/porArea}"
                   th:object="${codeArea}" method="post">
 
-                <td th:text="${codeArea.areaCode}">
+                <td th:text="${naturalArea.name}">
                     <input type="text" th:field="*{areaCode}" />
                 </td>
 

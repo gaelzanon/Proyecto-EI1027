@@ -31,8 +31,6 @@ public class ControllerController {
     public void setNaturalAreaDao(NaturalAreaDao naturalAreaDao) {
         this.naturalAreaDao=naturalAreaDao;
     }
-    //TODO: usar este dao para mostrar el nombre de area en la lista
-    // y en add/update un desplegable para seleccional el nombre de area en vez de introducir el codigo
 
     @RequestMapping("/list")
     public String listController(Model model) {
