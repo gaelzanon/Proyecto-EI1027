@@ -41,10 +41,10 @@
             </div>
 
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="area">Área:</label>
+                <label class="control-label col-sm-2" for="code_area">Área:</label>
                 <div class="col-sm-4">
-                    <select class="form_control" type="text" id="area" th:field="*{code_area}">
-                        <option th:each="area: ${naturalArea}" th:value="${area.codeArea}" th:text="${area.name}"></option>
+                    <select class="form_control" type="text" id="code_area" th:field="*{code_area}">
+                        <option th:each="code_area: ${code_area}" th:value="${code_area}" th:text="${code_area}"></option>
                     </select>
                     <div class="error" th:if="${#fields.hasErrors('code_area')}" th:errors="*{code_area}"></div>
                 </div>

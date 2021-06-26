@@ -41,13 +41,14 @@ public class ControllerController {
     @RequestMapping(value="/add")
     public String addController(Model model) {
         model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
-        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        model.addAttribute("code_area",naturalAreaDao.getNaturalAreaNames());
         return "controller/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
                                        BindingResult bindingResult) {
+        controller.setCode_area(naturalAreaDao.getNaturalAreaCode(controller.getCode_area()));
         ControllerValidator controllerValidator = new ControllerValidator();
         controllerValidator.validate(controller, bindingResult);
         if (bindingResult.hasErrors())

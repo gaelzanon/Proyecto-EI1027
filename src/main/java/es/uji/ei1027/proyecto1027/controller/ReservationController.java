@@ -77,7 +77,8 @@ public class ReservationController {
         reservation.setCreationDate(LocalDate.now());
         reservation.setAddress(reservation.getCodeArea());
         reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
-
+        ReservationValidator reservationValidator = new ReservationValidator();
+        reservationValidator.validate(reservation, bindingResult);
         if (bindingResult.hasErrors())
             return "reservation/add";
         try {
@@ -108,6 +109,8 @@ public class ReservationController {
         System.out.println(reservation);
         if (bindingResult.hasErrors())
             return "reservation/update";
+        ReservationValidator reservationValidator = new ReservationValidator();
+        reservationValidator.validate(reservation, bindingResult);
 
         ReservationDao.updateReservation(reservation);
         return "redirect:list";

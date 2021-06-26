@@ -50,6 +50,6 @@ public class ReservationValidator implements Validator {
         if (reservation.getDate()==null)
             errors.rejectValue("code", "obligatori",
                     "Se debe introducir un Fecha para la reserva");
-        
+
     }
 }
