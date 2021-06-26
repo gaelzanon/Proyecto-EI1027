@@ -38,7 +38,7 @@
             </td>
             <td><a th:href="@{/reservation/update/{code}(code=${reservation.code})}" class="btn btn-warning" role="button">Editar</a>
             </td>
-            <td><a th:href="@{/reservation/delete/{code}(code=${reservation.code})}" class="btn btn-danger" role="button">Borrar</a>
+            <td><a th:href="@{/reservation/delete/{code}(code=${reservation.code})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
             </td>
         </tr>
         </tbody>

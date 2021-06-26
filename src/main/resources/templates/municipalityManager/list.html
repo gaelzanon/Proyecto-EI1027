@@ -33,7 +33,7 @@
             <td th:text="${municipalityManager.municipalityName}"></td>
             <td th:text="${{municipalityManager.email}}"></td>
             <td><a th:href="@{/municipalityManager/update/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-warning" role="button">Editar</a></td>
-            <td><a th:href="@{/municipalityManager/delete/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-danger" role="button">Borrar</a></td>
+            <td><a th:href="@{/municipalityManager/delete/{NIF}(NIF=${municipalityManager.NIF})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a></td>
         </tr>
         </tbody>
     </table>
