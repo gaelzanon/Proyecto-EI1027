@@ -2,6 +2,7 @@ package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.MunicipalityDao;
 import es.uji.ei1027.proyecto1027.dao.MunicipalityManagerDao;
+import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.model.Municipality;
 import es.uji.ei1027.proyecto1027.model.MunicipalityManager;
 import es.uji.ei1027.proyecto1027.model.NaturalArea;
@@ -22,7 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/municipality")
 public class MunicipalityController {
-
+    private NaturalAreaDao naturalAreaDao;
     private MunicipalityDao municipalityDao;
     private int codigos;
 
@@ -30,6 +31,11 @@ public class MunicipalityController {
     public void SetMunicipalityDao(MunicipalityDao municipalityDao) {
         this.municipalityDao = municipalityDao;
     }
+    @Autowired
+    public void setNaturalAreaDao(NaturalAreaDao naturalAreaDao) {
+        this.naturalAreaDao=naturalAreaDao;
+    }
+
 
     @RequestMapping("/list")
     public String listMunicipality(Model model) {
@@ -100,6 +106,11 @@ public class MunicipalityController {
 
     @RequestMapping(value="/delete/{code}")
     public String processDeleteMunicipality(@PathVariable String code) {
+        List<String> list = naturalAreaDao.getNaturalAreaMunicipios();
+        if(list.contains(code)){
+            throw new ProyectoException(
+                    "Lo sentimos pero este municipio tiene reservas sin terminar", "ErrorAccedintDades");
+        }
         municipalityDao.deleteMunicipality(code);
         return "redirect:../list";
     }

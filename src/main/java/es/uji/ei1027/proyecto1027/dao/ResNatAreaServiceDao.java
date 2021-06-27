@@ -53,5 +53,36 @@ public class ResNatAreaServiceDao {
             return new ArrayList<ResNatAreaService>();
         }
     }
+    public List<String> getCodes() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<ResNatAreaService> lista = jdbcTemplate.query("SELECT * from r_narea_services",
+                    new ResNatAreaServiceRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getCode());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
+    public List<String> getCodesArea() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<ResNatAreaService> lista = jdbcTemplate.query("SELECT * from r_narea_services",
+                    new ResNatAreaServiceRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getCode_area());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
+
 
 }

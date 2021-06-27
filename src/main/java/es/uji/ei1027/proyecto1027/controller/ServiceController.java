@@ -1,8 +1,10 @@
 package es.uji.ei1027.proyecto1027.controller;
 
 
+import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
 import es.uji.ei1027.proyecto1027.dao.ServiceDao;
 import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
+import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import es.uji.ei1027.proyecto1027.model.Service;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
 import es.uji.ei1027.proyecto1027.services.ServiceService;
@@ -30,6 +32,7 @@ public class ServiceController {
 
     private ServiceService serviceService;
 
+    private ResNatAreaServiceDao resNatAreaServiceDao;
     int codigos;
 
     @Autowired
@@ -40,6 +43,11 @@ public class ServiceController {
     @Autowired
     public void setServiceService(ServiceService serviceService) {
         this.serviceService = serviceService;
+    }
+
+    @Autowired
+    public void setResNatAreaServiceDao(ResNatAreaServiceDao resNatAreaServiceDao) {
+        this.resNatAreaServiceDao = resNatAreaServiceDao;
     }
 
     @RequestMapping("/list")
@@ -120,6 +128,11 @@ public class ServiceController {
     }
     @RequestMapping(value="/delete/{code}")
     public String processDelete(@PathVariable String code) {
+        List<String> list = resNatAreaServiceDao.getCodes();
+        if(list.contains(code)){
+            throw new ProyectoException(
+                    "Lo sentimos pero este servicio aun esta vinculado a una Area Natural", "ErrorAccedintDades");
+        }
         ServiceDao.deleteService(code);
         return "redirect:../list";
     }

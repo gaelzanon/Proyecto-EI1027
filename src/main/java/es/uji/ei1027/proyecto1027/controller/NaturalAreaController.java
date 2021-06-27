@@ -4,6 +4,7 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.MunicipalityDao;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
+import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
 import es.uji.ei1027.proyecto1027.dao.TypeAreaDao;
 import es.uji.ei1027.proyecto1027.model.NaturalArea;
 
@@ -35,6 +36,7 @@ public class NaturalAreaController {
     private TypeAreaDao typeAreaDao;
     private MunicipalityDao municipalityDao;
     private NaturalAreaService naturalAreaService;
+    private ResNatAreaServiceDao resNatAreaServiceDao;
     private static double codigos;
     @Autowired
     public void setnaturalAreaDao(NaturalAreaDao NaturalAreaDao) {
@@ -51,6 +53,10 @@ public class NaturalAreaController {
     @Autowired
     public void setNaturalAreaService(NaturalAreaService naturalAreaService) {
         this.naturalAreaService=naturalAreaService;
+    }
+    @Autowired
+    public void setresNatAreaServiceDao(ResNatAreaServiceDao resNatAreaServiceDao) {
+        this.resNatAreaServiceDao=resNatAreaServiceDao;
     }
 
     @RequestMapping("/list")
@@ -176,6 +182,11 @@ public class NaturalAreaController {
 
     @RequestMapping(value="/delete/{codeArea}")
     public String processDelete(@PathVariable String codeArea) {
+        List<String> list = resNatAreaServiceDao.getCodesArea();
+        if(list.contains(codeArea)){
+            throw new ProyectoException(
+                    "Lo sentimos pero este area aun esta vinculado a servicios disponibles", "ErrorAccedintDades");
+        }
         NaturalAreaDao.deleteNaturalArea(codeArea);
         return "redirect:../list";
     }

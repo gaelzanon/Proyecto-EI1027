@@ -99,4 +99,19 @@ public class NaturalAreaDao {
             return new ArrayList<String>();
         }
     }
+    public List<String> getNaturalAreaMunicipios() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<NaturalArea> lista = jdbcTemplate.query("SELECT * from Natural_Area",
+                    new NaturalAreaRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getMunCode());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
 }
