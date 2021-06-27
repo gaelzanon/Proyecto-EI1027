@@ -16,15 +16,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/typeService")
 public class TypeServiceController {
 
     private TypeServiceDao typeServiceDao;
+    private ServiceDao serviceDao;
 
     @Autowired
     public void setTypeServiceDao(TypeServiceDao typeServiceDao) {
         this.typeServiceDao=typeServiceDao;
+    }
+
+    @Autowired
+    public void setServiceDao(ServiceDao ServiceDao) {
+        this.serviceDao=ServiceDao;
     }
 
     @RequestMapping("/list")
@@ -86,6 +94,11 @@ public class TypeServiceController {
 
     @RequestMapping(value="/delete/{type}")
     public String processDelete(@PathVariable String type) {
+        List<String> list = serviceDao.getServicesTypes();
+        if(list.contains(type)){
+            throw new ProyectoException(
+                    "Lo sentimos pero este tipo de servicio aun se esta ofreciendo en algunas areas", "ErrorAccedintDades");
+        }
         typeServiceDao.deleteTypeService(type);
         return "redirect:../list";
     }

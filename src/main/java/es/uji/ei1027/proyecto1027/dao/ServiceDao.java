@@ -112,5 +112,20 @@ public Service getService(String codeService) {
             return new String();
         }
     }
+    public List<String> getServicesTypes() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<Service> lista = jdbcTemplate.query("SELECT * from Service",
+                    new ServiceRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getType_of_service());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
 
 }

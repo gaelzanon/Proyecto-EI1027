@@ -84,4 +84,19 @@ public class NaturalAreaDao {
             return new String();
         }
     }
+    public List<String> getNaturalAreaTypes() {
+        try {
+            List<String> res=new ArrayList<String>();
+            List<NaturalArea> lista = jdbcTemplate.query("SELECT * from Natural_Area",
+                    new NaturalAreaRowMapper());
+
+
+            for (int i = 0; i < lista.size(); i++) {
+                res.add(lista.get(i).getType_of_area());
+            }
+            return res;
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<String>();
+        }
+    }
 }

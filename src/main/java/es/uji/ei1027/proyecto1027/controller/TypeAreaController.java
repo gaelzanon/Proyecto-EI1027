@@ -1,6 +1,7 @@
 package es.uji.ei1027.proyecto1027.controller;
 
 
+import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.dao.TypeAreaDao;
 import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
 import es.uji.ei1027.proyecto1027.model.TypeNaturalArea;
@@ -16,15 +17,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/typeArea")
 public class TypeAreaController {
 
     private TypeAreaDao typeAreaDao;
+    private NaturalAreaDao naturalAreaDao;
 
     @Autowired
     public void setTypeAreaDao(TypeAreaDao typeAreaDao) {
         this.typeAreaDao=typeAreaDao;
+    }
+    @Autowired
+    public void setNaturalAreaDao(NaturalAreaDao naturalAreaDao) {
+        this.naturalAreaDao=naturalAreaDao;
     }
 
     @RequestMapping("/list")
@@ -87,6 +95,11 @@ public class TypeAreaController {
 
     @RequestMapping(value="/delete/{type}")
     public String processDelete(@PathVariable String type) {
+        List<String> list = naturalAreaDao.getNaturalAreaTypes();
+        if(list.contains(type)){
+            throw new ProyectoException(
+                    "Lo sentimos pero este tipo de area aun corresponde con alguna de las areas que ofrecemos", "ErrorAccedintDades");
+        }
         typeAreaDao.deleteTypeArea(type);
         return "redirect:../list";
     }
