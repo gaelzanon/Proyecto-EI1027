@@ -20,6 +20,9 @@ public class MunicipalityManagerValidator implements Validator {
         if (municipalityManager.getCode().trim().equals(""))
             errors.rejectValue("code", "obligatori",
                     "Se debe introducir un codigo");
+        if (municipalityManager.getName().trim().equals(""))
+            errors.rejectValue("name", "obligatori",
+                    "Se debe introducir un nombre");
         if (municipalityManager.getMunicipalityName().trim().equals(""))
             errors.rejectValue("municipalityName", "obligatori",
                     "Se debe introducir un nombre de municipalidad");

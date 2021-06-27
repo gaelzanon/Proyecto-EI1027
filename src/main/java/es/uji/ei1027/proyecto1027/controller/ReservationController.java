@@ -62,6 +62,8 @@ public class ReservationController {
     }
     @RequestMapping(value="/add")
     public String addReservation(Model model) {
+        if(!model.containsAttribute("reservation"))
+            model.addAttribute("reservation", new Reservation());
         model.addAttribute("reservation", new Reservation());
         model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
         return "reservation/add";

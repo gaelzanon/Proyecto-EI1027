@@ -65,6 +65,7 @@ public class ServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("service") final Service service, RedirectAttributes attributes,
                                    final BindingResult bindingResult) {
+        System.out.println(service);
         codigos = (int)(Math.random()*100000);
         service.setCode( String.valueOf(codigos));
         ServiceValidator serviceValidator = new ServiceValidator();
