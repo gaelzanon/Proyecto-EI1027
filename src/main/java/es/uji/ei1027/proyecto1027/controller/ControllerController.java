@@ -2,6 +2,7 @@ package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.ControllerDao;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
+import es.uji.ei1027.proyecto1027.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -33,26 +36,35 @@ public class ControllerController {
     }
 
     @RequestMapping("/list")
-    public String listController(Model model) {
+    public String listController(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
         model.addAttribute("controller", ControllerDao.getControllers());
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         return "controller/list";
     }
     @RequestMapping(value="/add")
     public String addController(Model model) {
-        model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
+        if(!model.containsAttribute("controller"))
+            model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
+        //model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
         model.addAttribute("code_area",naturalAreaDao.getNaturalAreaNames());
         return "controller/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
-                                       BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("controller") final es.uji.ei1027.proyecto1027.model.Controller controller, RedirectAttributes attributes,
+                                       final BindingResult bindingResult) {
         controller.setCode_area(naturalAreaDao.getNaturalAreaCode(controller.getCode_area()));
         ControllerValidator controllerValidator = new ControllerValidator();
         controllerValidator.validate(controller, bindingResult);
-        if (bindingResult.hasErrors())
-            return "controller/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.controller",bindingResult);
+            attributes.addFlashAttribute("controller",controller);
+            return "redirect:/controller/add"; }
         try {
             ControllerDao.addController(controller);
         } catch (

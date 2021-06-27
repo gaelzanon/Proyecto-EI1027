@@ -6,6 +6,7 @@ import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
 import es.uji.ei1027.proyecto1027.dao.ServiceDao;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
+import es.uji.ei1027.proyecto1027.model.UserDetails;
 import es.uji.ei1027.proyecto1027.services.ResNatAreaSerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +59,12 @@ public class ResNatAreaServiceController {
     }
 
     @RequestMapping("/list")
-    public String listResNatAreaServices(Model model) {
+    public String listResNatAreaServices(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
         model.addAttribute("resNatAreaSers", resNatAreaServiceDao.getR_NArea_services());
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         model.addAttribute("service",serviceDao.getServices());
@@ -72,15 +80,18 @@ public class ResNatAreaServiceController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
+    public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService, RedirectAttributes attributes,
                                    BindingResult bindingResult) {
         System.out.println(resNatAreaService);
         //resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
         //resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
         ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
         resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
-        if (bindingResult.hasErrors())
-            return "resNatAreaSer/add";
+        if (bindingResult.hasErrors()) {
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.resNatAreaService", bindingResult);
+            attributes.addFlashAttribute("resNatAreaService", resNatAreaService);
+            return "redirect:/resNatAreaSer/add";
+        }
         try {
             resNatAreaServiceDao.addR_NArea_service(resNatAreaService);
         } catch (DuplicateKeyException e) {

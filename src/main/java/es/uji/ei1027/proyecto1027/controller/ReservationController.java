@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 
 import javax.naming.Binding;
@@ -67,7 +68,7 @@ public class ReservationController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("reservation") Reservation reservation,
+    public String processAddSubmit(@ModelAttribute("reservation") Reservation reservation, RedirectAttributes attributes,
                                    BindingResult bindingResult) {
 
         codigos = (int)(Math.random()*100000);
@@ -79,8 +80,10 @@ public class ReservationController {
         reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
         ReservationValidator reservationValidator = new ReservationValidator();
         reservationValidator.validate(reservation, bindingResult);
-        if (bindingResult.hasErrors())
-            return "reservation/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.reservation",bindingResult);
+            attributes.addFlashAttribute("reservation",reservation);
+            return "redirect:/reservation/add";}
         try {
             ReservationDao.addReservation(reservation);
         } catch (DuplicateKeyException e) {

@@ -78,7 +78,12 @@ public class NaturalAreaController {
     }
 
     @RequestMapping(value="/add")
-    public String addnaturalArea(Model model) {
+    public String addnaturalArea(HttpSession session,Model model) {
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", new NaturalArea());
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());

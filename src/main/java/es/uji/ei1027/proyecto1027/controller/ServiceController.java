@@ -4,6 +4,7 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.ServiceDao;
 import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
 import es.uji.ei1027.proyecto1027.model.Service;
+import es.uji.ei1027.proyecto1027.model.UserDetails;
 import es.uji.ei1027.proyecto1027.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,7 +43,12 @@ public class ServiceController {
     }
 
     @RequestMapping("/list")
-    public String listServices(Model model) {
+    public String listServices(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        }
         model.addAttribute("service", ServiceDao.getServices());
 
         return "service/list";
@@ -56,26 +63,29 @@ public class ServiceController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("service") Service service,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("service") final Service service, RedirectAttributes attributes,
+                                   final BindingResult bindingResult) {
         codigos = (int)(Math.random()*100000);
         service.setCode( String.valueOf(codigos));
-//        ServiceValidator serviceValidator = new ServiceValidator();
-//        serviceValidator.validate(service, bindingResult);
+        ServiceValidator serviceValidator = new ServiceValidator();
+        serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors()) {
-            return "service/add";}
-//        try {
-//            ServiceDao.addService(service);
-//        } catch (
-//                DuplicateKeyException e) {
-//            throw new ProyectoException(
-//                    "Ya existe el servicio "
-//                            + service.getCode(), "CPduplicada");
-//        } catch (DataAccessException e) {
-//            throw new ProyectoException(
-//                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
-//        }
-        ServiceDao.addService(service);
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.service",bindingResult);
+            attributes.addFlashAttribute("service",service);
+            return "redirect:/service/add";
+        }
+        try {
+            ServiceDao.addService(service);
+        } catch (
+                DuplicateKeyException e) {
+            throw new ProyectoException(
+                    "Ya existe el servicio "
+                            + service.getCode(), "CPduplicada");
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
+
         return "redirect:list";
     }
 
