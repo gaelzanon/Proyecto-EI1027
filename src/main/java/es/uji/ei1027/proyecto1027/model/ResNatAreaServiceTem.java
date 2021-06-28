@@ -5,11 +5,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ResNatAreaService {
+public class ResNatAreaServiceTem {
     private String code_area;
     private String code;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate startTime;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate endTime;
 
     public String getCode_area() {
         return code_area;
@@ -35,14 +37,21 @@ public class ResNatAreaService {
         this.startTime = startTime;
     }
 
+    public LocalDate getEndTime() {
+        return endTime;
+    }
 
+    public void setEndTime(LocalDate endTime) {
+        this.endTime = endTime;
+    }
 
     @Override
     public String toString() {
-        return "ResNatAreaService{" +
+        return "ResNatAreaSerTem{" +
                 "code_area='" + code_area + '\'' +
                 ", code='" + code + '\'' +
                 ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 '}';
     }
 }

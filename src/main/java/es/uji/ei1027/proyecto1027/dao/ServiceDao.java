@@ -29,9 +29,8 @@ public void setDataSource(DataSource dataSource) {
 public void addService(Service service) {
 
         jdbcTemplate.update( 
-        "INSERT INTO service VALUES(?, ?, ?, ?, ?)" ,
-        service.getCode() , service.getType_of_service() , service.getDescription() , LocalDate.now(),
-        service.getTemp());
+        "INSERT INTO service VALUES(?, ?, ?, ?)" ,
+        service.getCode() , service.getType_of_service() , service.getDescription() , LocalDate.now());
 	}
 
 
@@ -56,8 +55,8 @@ public void addService(Service service) {
 (excepte el code, que és la clau primària) */
 public void updateService(Service service) {
     jdbcTemplate.update(
-    "UPDATE service SET type_of_service=?,  description =? , registration_date=?, temp =?   WHERE code = ?",
-    service.getType_of_service(), service.getDescription(), service.getFechaReg(), service.getTemp() , service.getCode() );
+    "UPDATE service SET type_of_service=?,  description =? , registration_date=?  WHERE code = ?",
+    service.getType_of_service(), service.getDescription(), service.getFechaReg(),  service.getCode() );
 
 }
 

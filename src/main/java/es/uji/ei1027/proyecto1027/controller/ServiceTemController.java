@@ -3,9 +3,12 @@ package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
 import es.uji.ei1027.proyecto1027.dao.ServiceDao;
+import es.uji.ei1027.proyecto1027.dao.ServiceTemDao;
+import es.uji.ei1027.proyecto1027.dao.ServiceTemDao;
 import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import es.uji.ei1027.proyecto1027.model.Service;
+import es.uji.ei1027.proyecto1027.model.ServiceTem;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
 import es.uji.ei1027.proyecto1027.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +28,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/service")
-public class ServiceController {
+@RequestMapping("/servicetem")
+public class ServiceTemController {
 
-    private ServiceDao ServiceDao;
+    private ServiceTemDao ServiceTemDao;
 
     private ServiceService serviceService;
 
@@ -36,8 +39,8 @@ public class ServiceController {
     int codigos;
 
     @Autowired
-    public void setServiceDao(ServiceDao ServiceDao) {
-        this.ServiceDao=ServiceDao;
+    public void setServiceTemDao(ServiceTemDao ServiceTemDao) {
+        this.ServiceTemDao=ServiceTemDao;
     }
 
     @Autowired
@@ -51,43 +54,43 @@ public class ServiceController {
     }
 
     @RequestMapping("/list")
-    public String listServices(HttpSession session, Model model) {
+    public String listServicesTem(HttpSession session, Model model) {
         if (session.getAttribute("user") == null)
         {
             model.addAttribute("user", new UserDetails());
             return "login";
         }
-        model.addAttribute("service", ServiceDao.getServices());
+        model.addAttribute("servicetem", ServiceTemDao.getServicesTem());
 
-        return "service/list";
+        return "servicetem/list";
     }
     @RequestMapping(value="/add")
-    public String addService(Model model) {
-        model.addAttribute("service", new Service());
+    public String addServiceTem(Model model) {
+        model.addAttribute("servicetem", new ServiceTem());
         model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
-        return "service/add";
+        return "servicetem/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("service") final Service service, RedirectAttributes attributes,
+    public String processAddSubmit(@ModelAttribute("servicetem") final ServiceTem serviceTem, RedirectAttributes attributes,
                                    final BindingResult bindingResult) {
-        System.out.println(service);
+        System.out.println(serviceTem);
         codigos = (int)(Math.random()*100000);
-        service.setCode( String.valueOf(codigos));
-        ServiceValidator serviceValidator = new ServiceValidator();
-        serviceValidator.validate(service, bindingResult);
+        serviceTem.setCode( String.valueOf(codigos));
+        ServiceTemValidator serviceTemValidator = new ServiceTemValidator();
+        serviceTemValidator.validate(serviceTem, bindingResult);
         if (bindingResult.hasErrors()) {
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.service",bindingResult);
-            attributes.addFlashAttribute("service",service);
-            return "redirect:/service/add";
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.servicetem",bindingResult);
+            attributes.addFlashAttribute("servicetem",serviceTem);
+            return "redirect:/servicetem/add";
         }
         try {
-            ServiceDao.addService(service);
+            ServiceTemDao.addServiceTem(serviceTem);
         } catch (
                 DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya existe el servicio "
-                            + service.getCode(), "CPduplicada");
+                            + serviceTem.getCode(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
@@ -97,27 +100,27 @@ public class ServiceController {
     }
 
     @RequestMapping(value={"/update/{code}","/update"}, method = RequestMethod.GET)
-    public String editService(Model model, @PathVariable(required = false) String code) {
-        if(!model.containsAttribute("service"))
-            model.addAttribute("service", ServiceDao.getService(code));
+    public String editServiceTem(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("servicetem"))
+            model.addAttribute("servicetem", ServiceTemDao.getServiceTem(code));
         model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
 
 
-        return "service/update";
+        return "servicetem/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("service") final Service service, RedirectAttributes attributes,
+            @ModelAttribute("servicetem") final ServiceTem serviceTem, RedirectAttributes attributes,
             final BindingResult bindingResult) {
-        ServiceValidator serviceValidator = new ServiceValidator();
-        serviceValidator.validate(service, bindingResult);
+        ServiceTemValidator serviceTemValidator = new ServiceTemValidator();
+        serviceTemValidator.validate(serviceTem, bindingResult);
         if (bindingResult.hasErrors()){
-            attributes.addFlashAttribute("org.springframework.validation.BindingResult.service",bindingResult);
-            attributes.addFlashAttribute("service",service);
-            return "redirect:/service/update";}
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.servicetem",bindingResult);
+            attributes.addFlashAttribute("servicetem",serviceTem);
+            return "redirect:/servicetem/update";}
         try {
-            ServiceDao.updateService(service);
+            ServiceTemDao.updateServiceTem(serviceTem);
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
@@ -129,9 +132,9 @@ public class ServiceController {
         List<String> list = resNatAreaServiceDao.getCodes();
         if(list.contains(code)){
             throw new ProyectoException(
-                    "Lo sentimos pero este servicio aun esta vinculado a una Area Natural", "ErrorAccedintDades");
+                    "Lo sentimos pero este servicio temporal aun esta vinculado a una Area Natural", "ErrorAccedintDades");
         }
-        ServiceDao.deleteService(code);
+        ServiceTemDao.deleteServiceTem(code);
         return "redirect:../list";
     }
 
@@ -141,4 +144,3 @@ public class ServiceController {
 
 
 }
-

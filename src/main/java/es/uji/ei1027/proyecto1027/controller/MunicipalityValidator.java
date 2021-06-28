@@ -9,7 +9,7 @@ package es.uji.ei1027.proyecto1027.controller;
 public class MunicipalityValidator implements Validator {
     @Override
     public boolean supports(Class<?> cls) {
-        return MunicipalityManager.class.equals(cls);
+        return Municipality.class.equals(cls);
     }
 
     @Override

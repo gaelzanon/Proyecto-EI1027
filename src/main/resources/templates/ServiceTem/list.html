@@ -13,31 +13,35 @@
 <body>
 <div layout:fragment="content">
     <br>
-<h1>Lista de Servicios</h1>
+<h1>Lista de Servicios Temporales</h1>
     <hr color="blue" size=3>
 <table class="table table-striped">
     <thead>
     <tr>
+        <th>Código</th>
         <th>Tipo de Servicio</th>
         <th>Descripción</th>
         <th>Fecha Registro</th>
+        <th>Fecha de Finalizacion</th>
         <th></th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="service: ${service}">
-        <td th:text="${service.type_of_service}"></td>
-        <td th:text="${service.description}"></td>
-        <td th:text="${service.FechaReg}"></td>
-        <td><a th:href="@{/service/update/{code}(code=${service.code})}" class="btn btn-warning" role="button">Editar</a>
+    <tr th:each="servicetem: ${servicetem}">
+        <td th:text="${servicetem.code}"></td>
+        <td th:text="${servicetem.type_of_service}"></td>
+        <td th:text="${servicetem.description}"></td>
+        <td th:text="${servicetem.FechaReg}"></td>
+        <td th:text="${servicetem.FechaEnd}"></td>
+        <td><a th:href="@{/servicetem/update/{code}(code=${servicetem.code})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/service/delete/{code}(code=${service.code})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
+        <td><a th:href="@{/servicetem/delete/{code}(code=${servicetem.code})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="add" class="btn btn-success" role="button">Añadir servicios</a>
+<a href="add" class="btn btn-success" role="button">Añadir Servicios Temporales</a>
     <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
 </div>
 </body>

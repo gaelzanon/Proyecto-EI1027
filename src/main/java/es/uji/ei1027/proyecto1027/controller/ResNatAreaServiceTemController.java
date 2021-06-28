@@ -2,10 +2,10 @@ package es.uji.ei1027.proyecto1027.controller;
 
 
 //import com.sun.org.apache.xpath.internal.operations.Mod;
-import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
-import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
-import es.uji.ei1027.proyecto1027.dao.ServiceDao;
+import es.uji.ei1027.proyecto1027.dao.*;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
+import es.uji.ei1027.proyecto1027.model.ResNatAreaServiceTem;
+import es.uji.ei1027.proyecto1027.model.ServiceTem;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
 import es.uji.ei1027.proyecto1027.services.ResNatAreaSerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/resNatAreaSer")
-public class ResNatAreaServiceController {
+@RequestMapping("/resNatAreaSerTem")
+public class ResNatAreaServiceTemController {
 
-    private ResNatAreaServiceDao resNatAreaServiceDao;
+    private ResNatAreaServiceTemDao resNatAreaServiceTemDao;
 
     private ResNatAreaSerService resNatAreaSerService;
 
     private NaturalAreaDao naturalAreaDao;
 
-    private ServiceDao serviceDao;
+    private ServiceTemDao serviceTemDao;
+
+    private ServiceTem serviceTem;
 
     @Autowired
     public void setResNatAreaSerService(ResNatAreaSerService resNatAreaSerService) {
@@ -44,8 +46,8 @@ public class ResNatAreaServiceController {
     }
 
     @Autowired
-    public void setResNatAreaServiceDao(ResNatAreaServiceDao ResNatAreaServiceDao) {
-        this.resNatAreaServiceDao=ResNatAreaServiceDao;
+    public void setResNatAreaServiceTemDao(ResNatAreaServiceTemDao ResNatAreaServiceTemDao) {
+        this.resNatAreaServiceTemDao=ResNatAreaServiceTemDao;
     }
 
     @Autowired
@@ -54,51 +56,58 @@ public class ResNatAreaServiceController {
     }
 
     @Autowired
-    public void setServiceDao(ServiceDao ServiceDao) {
-        this.serviceDao=ServiceDao;
+    public void setServiceTemDao(ServiceTemDao ServiceTemDao) {
+        this.serviceTemDao=ServiceTemDao;
     }
 
     @RequestMapping("/list")
-    public String listResNatAreaServices(HttpSession session, Model model) {
+    public String listResNatAreaServicesTem(HttpSession session, Model model) {
         if (session.getAttribute("user") == null)
         {
             model.addAttribute("user", new UserDetails());
             return "login";
         }
-        model.addAttribute("resNatAreaSers", resNatAreaServiceDao.getR_NArea_services());
+        model.addAttribute("resNatAreaSerTems", resNatAreaServiceTemDao.getR_NArea_servicesTem());
+        System.out.println(resNatAreaServiceTemDao.getR_NArea_servicesTem());
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
-        model.addAttribute("service",serviceDao.getServices());
+        model.addAttribute("service",serviceTemDao.getServicesTem());
 
-        return "resNatAreaSer/list";
+        return "resNatAreaSerTem/list";
     }
     @RequestMapping(value="/add")
-    public String addResNatAreaService(Model model) {
-        model.addAttribute("resNatAreaSer", new ResNatAreaService());
+    public String addResNatAreaServiceTem(Model model) {
+        model.addAttribute("resNatAreaSerTem", new ResNatAreaServiceTem());
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
-        model.addAttribute("service",serviceDao.getServices());
-        return "resNatAreaSer/add";
+        model.addAttribute("service",serviceTemDao.getServicesTem());
+        return "resNatAreaSerTem/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService, RedirectAttributes attributes,
+    public String processAddSubmit(@ModelAttribute("resNatAreaSerTem") ResNatAreaServiceTem resNatAreaServiceTem, RedirectAttributes attributes,
                                    BindingResult bindingResult) {
-        System.out.println(resNatAreaService);
+        System.out.println(resNatAreaServiceTem);
         //resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
         //resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
-        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
-        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
+        //ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
+        //resNatAreaServiceValidator.validate(resNatAreaServiceTem, bindingResult);
+        boolean puede = serviceTemDao.getServiceTemEnd(resNatAreaServiceTem.getCode(),resNatAreaServiceTem.getStartTime());
+
+        if(puede==false){
+            throw new ProyectoException(
+                    "Lo sentimos pero ese Servicio Terminara antes de que lo puedas poner en Area Natural", "ErrorAccedintDades");
+        }
         if (bindingResult.hasErrors()) {
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.resNatAreaService", bindingResult);
-            attributes.addFlashAttribute("resNatAreaService", resNatAreaService);
-            return "redirect:/resNatAreaSer/add";
+            attributes.addFlashAttribute("resNatAreaServiceTem", resNatAreaServiceTem);
+            return "redirect:/resNatAreaSerTem/add";
         }
         try {
-            resNatAreaServiceDao.addR_NArea_service(resNatAreaService);
+            resNatAreaServiceTemDao.addR_NArea_serviceTem(resNatAreaServiceTem);
         } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya existe dado de alta el servicio "
-                            + resNatAreaService.getCode() + " en el area "
-                            + resNatAreaService.getCode_area(), "CPduplicada");
+                            + resNatAreaServiceTem.getCode() + " en el area "
+                            + resNatAreaServiceTem.getCode_area(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
@@ -108,37 +117,37 @@ public class ResNatAreaServiceController {
     }
 
     @RequestMapping("/porArea/{code_area}")
-    public String listResNatAreaServicePorArea(Model model, @PathVariable String code_area) {
-        ResNatAreaService resNatAreaService = new ResNatAreaService();
-        resNatAreaService.setCode_area(code_area);
-        model.addAttribute("codarea", resNatAreaService);
+    public String listResNatAreaServiceTemPorArea(Model model, @PathVariable String code_area) {
+        ResNatAreaServiceTem resNatAreaServiceTem = new ResNatAreaServiceTem();
+        resNatAreaServiceTem.setCode_area(code_area);
+        model.addAttribute("codarea", resNatAreaServiceTem);
         List<String> serDisp = resNatAreaSerService.getAllServices();
         List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
         model.addAttribute("services", serDisp);
-        model.addAttribute("resNatAreaSersPA", servAsig);
+        model.addAttribute("resNatAreaSersTemPA", servAsig);
 
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
-        model.addAttribute("serviceList",serviceDao.getServices());
-        return "resNatAreaSer/porArea";
+        model.addAttribute("serviceList",serviceTemDao.getServicesTem());
+        return "resNatAreaSerTem/porArea";
     }
 
     @RequestMapping(value="/porArea", method=RequestMethod.POST)
     public String processAddSubmitPerProva(
-            @ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
+            @ModelAttribute("resNatAreaSerTem") ResNatAreaServiceTem resNatAreaServiceTem,
             BindingResult bindingResult) {
-        ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
-        resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
-        String nameUri="redirect:porArea/" + resNatAreaService.getCode_area();
+        //ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
+        //resNatAreaServiceValidator.validate(resNatAreaServiceTem, bindingResult);
+        String nameUri="redirect:porArea/" + resNatAreaServiceTem.getCode_area();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         if (bindingResult.hasErrors())
             return nameUri;
         try {
-            resNatAreaServiceDao.addR_NArea_service(resNatAreaService);
+            resNatAreaServiceTemDao.addR_NArea_serviceTem(resNatAreaServiceTem);
         } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya está asignado el servicio "
-                            + resNatAreaService.getCode() + " al area "
-                            + resNatAreaService.getCode_area(), "CPduplicada");
+                            + resNatAreaServiceTem.getCode() + " al area "
+                            + resNatAreaServiceTem.getCode_area(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
@@ -146,12 +155,12 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}")
+    @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}/{endtime}")
     public String processDeleteResNatAreaService(@PathVariable String codearea,
-                                                 @PathVariable String code, @PathVariable String startTime) {
+                                                 @PathVariable String code, @PathVariable String startTime, @PathVariable String endtime) {
+        System.out.print(endtime);
 
-
-        resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime);
+        resNatAreaServiceTemDao.deleteR_NArea_serviceTem(codearea, code, startTime, endtime);
         String nameUri="redirect:../../../../porArea/" + codearea;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;

@@ -1,0 +1,69 @@
+package es.uji.ei1027.proyecto1027.model;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
+
+public class ServiceTem {
+    private String code ;
+    private String type_of_service ;
+    private String description;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate FechaReg;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate FechaEnd;
+
+
+    @Override
+    public String toString() {
+        return "ServiceTem{" +
+                "code='" + code + '\'' +
+                ", type_of_service='" + type_of_service + '\'' +
+                ", description='" + description + '\'' +
+                ", FechaReg=" + FechaReg +
+                ", FechaEnd=" + FechaEnd +
+                '}';
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getType_of_service() {
+        return type_of_service;
+    }
+
+    public void setType_of_service(String type_of_service) {
+        this.type_of_service = type_of_service;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getFechaReg() {
+        return FechaReg;
+    }
+
+    public void setFechaReg(LocalDate fechaReg) {
+        FechaReg = fechaReg;
+    }
+
+    public LocalDate getFechaEnd() {
+        return FechaEnd;
+    }
+
+    public void setFechaEnd(LocalDate fechaEnd) {
+        FechaEnd = fechaEnd;
+    }
+
+}

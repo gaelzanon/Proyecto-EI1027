@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Gestionar Servicios asignados</title>
+    <title>Gestionar Servicios Temporales asignados</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -13,33 +13,35 @@
 <body>
 <div layout:fragment="content">
 <br>
-<h1>Lista de Servicios asignados a cada Área</h1>
+<h1>Lista de Servicios Temporales asignados a cada Área</h1>
     <hr color="blue" size=3>
     <table class="table table-striped">
     <thead>
     <tr>
         <th>Área</th>
-        <th>Servicio</th>
-        <th>Fecha En que se asigno el Servicio al Area</th>
+        <th>Servicio Temporal</th>
+        <th>Fecha inicio</th>
+        <th>Fecha Fin</th>
         <th></th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="resNatAreaSer: ${resNatAreaSers}">
+    <tr th:each="resNatAreaSerTem: ${resNatAreaSerTems}">
 
         <th:block th:each="area: ${naturalArea}">
-            <td th:if="${resNatAreaSer.code_area == area.codeArea}" th:text="${area.name}"></td>
+            <td th:if="${resNatAreaSerTem.code_area == area.codeArea}" th:text="${area.name}"></td>
         </th:block>
 
         <th:block th:each="ser: ${service}">
-            <td th:if="${resNatAreaSer.code == ser.code}" th:text="${ser.description}"></td>
+            <td th:if="${resNatAreaSerTem.code == ser.code}" th:text="${ser.description}"></td>
         </th:block>
 
-        <td th:text="${resNatAreaSer.startTime}"></td>
+        <td th:text="${resNatAreaSerTem.startTime}"></td>
+        <td th:text="${resNatAreaSerTem.endTime}"></td>
 
 
-        <td><a th:href="@{/resNatAreaSer/delete/{codearea}/{code}/{startTime}/{endtime} (codearea=${resNatAreaSer.code_area}, code=${resNatAreaSer.code}, startTime=$(resNatAreaSer.startTime), endtime=$(resNatAreaSer.endTime)}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
+        <td><a th:href="@{/resNatAreaSerTem/delete/{codearea}/{code}/{startTime}/{endtime} (codearea=${resNatAreaSerTem.code_area}, code=${resNatAreaSerTem.code}, startTime=$(resNatAreaSer.startTime), endtime=$(resNatAreaSerTem.endTime)}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>

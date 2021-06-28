@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear Nuevo Servicio</title>
+    <title>Crear una Nueva Relacion Servicio Temportal a un Area Natural</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -14,10 +14,10 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-<h1>Asignar Servicio a un Espacio Natural</h1>
+<h1>Asignar Servicio Temporal a un Espacio Natural</h1>
         <hr color="blue" size=3>
-        <form class="form-horizontal" action="#" th:action="@{/resNatAreaSer/add}"
-              th:object="${resNatAreaSer}" method="post">
+        <form class="form-horizontal" action="#" th:action="@{/resNatAreaSerTem/add}"
+              th:object="${resNatAreaSerTem}" method="post">
         <div class="form-group row">
             <label class="control-label col-sm-2" for="code_area">Area:</label>
             <div class="col-sm-4">
@@ -44,9 +44,16 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label class="control-label col-sm-2" for="endTime">Fecha Fin:</label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
+                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
                 <button type="submit" class="btn btn-success">Asignar servicio</button>
-                <a href="/resNatAreaSer/list"class="btn btn-primary" role="button">Volver</a>
+                <a href="/resNatAreaSerTem/list"class="btn btn-primary" role="button">Volver</a>
             </div>
         </div>
 </form>

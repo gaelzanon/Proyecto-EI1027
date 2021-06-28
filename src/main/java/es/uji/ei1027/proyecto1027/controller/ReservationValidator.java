@@ -8,7 +8,7 @@ package es.uji.ei1027.proyecto1027.controller;
 public class ReservationValidator implements Validator {
     @Override
     public boolean supports(Class<?> cls) {
-        return Service.class.equals(cls);
+        return Reservation.class.equals(cls);
         // o, si volguérem tractar també les subclasses:
         // return Nadador.class.isAssignableFrom(cls);
     }
