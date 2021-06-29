@@ -38,8 +38,15 @@
         <div class="form-group row">
             <label class="control-label col-sm-2" for="munName">Nombre Municipalidad:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="munName" th:field="*{municipalityName}" />
-                <div class="error" th:if="${#fields.hasErrors('municipalityName')}" th:errors="*{municipalityName}"></div>
+                <select id ="munName">
+                    <div th:if="${#lists.isEmpty(municipiosDisponibles)}">
+                        <option value="NoDisp">No hay municipios registrados</option>
+                    </div>
+                    <option th:unless="${#lists.isEmpty(municipiosDisponibles)}" th:each="municipality:${municipiosDisponibles}"
+                            th:value="${municipality.name}"
+                            th:text="${municipality.name}">
+                    </option>
+                </select>
             </div>
         </div>
 

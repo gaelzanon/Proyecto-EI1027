@@ -1,8 +1,10 @@
 package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.MunicipalityManagerDao;
+import es.uji.ei1027.proyecto1027.model.Municipality;
 import es.uji.ei1027.proyecto1027.model.MunicipalityManager;
 import es.uji.ei1027.proyecto1027.model.NaturalArea;
+import es.uji.ei1027.proyecto1027.services.MunicipalityManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -14,13 +16,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/municipalityManager")
 public class MunicipalityManagerController {
 
     private MunicipalityManagerDao managerDao;
+    private MunicipalityManagerService municipalityManagerService;
+
     private boolean deUnUso;
     private int codigos;
+
+    @Autowired
+    public void setMunicipalityManagerService(MunicipalityManagerService municipalityManagerService) {
+        this.municipalityManagerService = municipalityManagerService;
+    }
 
     @Autowired
     public void SetMunicipalityManagerDao(MunicipalityManagerDao managerDao) {
@@ -36,6 +48,8 @@ public class MunicipalityManagerController {
     @RequestMapping(value="/add")
     public String addMunicipalityManager(Model model) {
         model.addAttribute("municipalityManager", new MunicipalityManager());
+        List<Municipality> municipiosDisponibles = municipalityManagerService.getAllMunicipalities();
+        model.addAttribute("municipiosDisponibles", municipiosDisponibles);
         return "municipalityManager/add";
     }
 
@@ -66,6 +80,8 @@ public class MunicipalityManagerController {
     @RequestMapping(value="/update/{NIF}", method= RequestMethod.GET)
     public String editMunicipalityManager(Model model, @PathVariable String NIF) {
         model.addAttribute("municipalityManager", managerDao.getMunicipalityManager(NIF));
+        List<Municipality> municipiosDisponibles = municipalityManagerService.getAllMunicipalities();
+        model.addAttribute("municipiosDisponibles", municipiosDisponibles);
         return "municipalityManager/update";
     }
 
