@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class MunicipalityController {
 
         codigos = (int)(Math.random()*100000);
         municipality.setCode( String.valueOf(codigos));
+        municipality.setRegistrationDate(LocalDate.now());
         MunicipalityValidator municipalityValidator = new MunicipalityValidator();
         municipalityValidator.validate(municipality, bindingResult);
         if (bindingResult.hasErrors())

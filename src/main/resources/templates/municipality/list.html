@@ -20,6 +20,7 @@
         <tbody>
         <tr th:each="municipality: ${municipality}">
             <td th:text="${municipality.name}"></td>
+
             <td><a th:href="@{/municipality/details/{code} (code=${municipality.code})}" class="btn btn-primary" role="button">Detalles</a>
             <td><a th:href="@{/municipality/update/{code} (code=${municipality.code})}" class="btn btn-warning" role="button">Editar</a>
             <td><a th:href="@{/municipality/delete/{code} (code=${municipality.code})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
