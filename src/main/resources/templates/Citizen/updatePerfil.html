@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Modificar Ciudadano</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br>
+        <h1>Modificar Ciudadano</h1>
+        <hr color="blue" size=3>
+        <form class="form-horizontal" action="#" th:action="@{/citizen/update}"
+              th:object="${citizen}" method="post">
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="hidden" class="form-control" id="NIF" th:field="*{NIF}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="name">Nombre:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="name" th:field="*{name}" />
+                    <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="surname">Apellidos:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="surname" th:field="*{surname}" />
+                    <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="Address">Dirección:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="Address" th:field="*{Address}" />
+                    <div class="error" th:if="${#fields.hasErrors('Address')}" th:errors="*{Address}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="Email">Email:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="Email" th:field="*{Email}" />
+                    <div class="error" th:if="${#fields.hasErrors('Email')}" th:errors="*{Email}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <button type="submit" class="btn btn-success">Modificar datos</button>
+                    <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

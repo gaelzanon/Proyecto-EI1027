@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/controller")
 public class ControllerController {
-
+    boolean deUnUso=false;
     private ControllerDao ControllerDao;
     private NaturalAreaDao naturalAreaDao;
 
@@ -90,11 +90,27 @@ public class ControllerController {
             BindingResult bindingResult) {
         ControllerValidator controllerValidator = new ControllerValidator();
         controllerValidator.validate(controller, bindingResult);
+        System.out.println(deUnUso);
+        if (deUnUso==true) {
+            if (bindingResult.hasErrors())
+                return "controller/update";
+            deUnUso=false;
+            ControllerDao.updateController(controller);
+            return "redirect:/mainMenu";
+        }
         if (bindingResult.hasErrors())
             return "controller/update";
         ControllerDao.updateController(controller);
         return "redirect:list";
     }
+    @RequestMapping(value="/updatePerfil/{NIF}", method = RequestMethod.GET)
+    public String editControllerPerfil(Model model, @PathVariable String NIF) {
+        model.addAttribute("controller", ControllerDao.getController(NIF));
+        model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
+        deUnUso=true;
+        return "controller/update";
+    }
+
     @RequestMapping(value="/delete/{NIF}")
     public String processDelete(@PathVariable String NIF) {
         ControllerDao.deleteController(NIF);

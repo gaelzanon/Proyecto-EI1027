@@ -54,6 +54,6 @@ public class UserController {
             default:
                 return "redirect:/mainMenu";
         }
-        return "redirect:/"+redirect+"/update/"+userDetails.getNIF();
+        return "redirect:/"+redirect+"/updatePerfil/"+userDetails.getNIF();
     }
 }

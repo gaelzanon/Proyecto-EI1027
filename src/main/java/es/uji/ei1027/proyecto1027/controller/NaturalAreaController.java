@@ -179,6 +179,25 @@ public class NaturalAreaController {
         return "naturalArea/details";
     }
 
+    @RequestMapping(value={"/detailsCitizen/{codeArea}","/details"}, method = RequestMethod.GET)
+    public String detailsCitizennaturalArea(HttpSession session,Model model, @PathVariable(required = false) String codeArea) {
+        UserDetails userDetails=(UserDetails) session.getAttribute("user");
+        if (userDetails == null)
+        {
+            model.addAttribute("user", new UserDetails());
+            return "login";
+        } else{
+            model.addAttribute("user_type",userDetails.getUserType());
+        }
+        List<Zone> zonas = naturalAreaService.getAllNatAreaZones(codeArea);
+        model.addAttribute("zones", zonas);
+        if(!model.containsAttribute("naturalArea"))
+            model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
+        List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
+        model.addAttribute("stateList", stateList);
+        model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
+        return "naturalArea/detailsCitizen";
+    }
 
     @RequestMapping(value="/delete/{codeArea}")
     public String processDelete(@PathVariable String codeArea) {

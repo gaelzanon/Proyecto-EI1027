@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MunicipalityManagerController {
 
     private MunicipalityManagerDao managerDao;
-
+    private boolean deUnUso;
     private int codigos;
 
     @Autowired
@@ -69,12 +69,36 @@ public class MunicipalityManagerController {
         return "municipalityManager/update";
     }
 
+    @RequestMapping(value="/updatePerfil/{NIF}", method= RequestMethod.GET)
+    public String editMunicipalityManagerPerfil(Model model, @PathVariable String NIF) {
+        model.addAttribute("municipalityManager", managerDao.getMunicipalityManager(NIF));
+        deUnUso=true;
+        return "municipalityManager/update";
+    }
+
+
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("municipalityManager") MunicipalityManager munManager,
             BindingResult bindingResult) {
         MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
         municipalityManagerValidator.validate(munManager, bindingResult);
+
+        if (deUnUso==true) {
+            deUnUso=false;
+            if (bindingResult.hasErrors())
+                return "municipalityManager/updatePerfil";
+
+            try {
+            managerDao.updateMunicipalityManager(munManager);
+            deUnUso=false;
+            } catch (DataAccessException e) {
+                throw new ProyectoException(
+                        "Error en el acceso a la base de datos", "ErrorAccedintDades");
+            }
+            return "redirect:/mainMenu";
+        }
+
         if (bindingResult.hasErrors())
             return "municipalityManager/update";
         try {

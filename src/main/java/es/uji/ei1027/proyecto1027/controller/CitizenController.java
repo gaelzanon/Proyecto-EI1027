@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CitizenController {
 
     private CitizenDao CitizenDao;
-
+    private boolean deUnUso;
     @Autowired
     public void setCitizenDao(CitizenDao citizenDao) {
         this.CitizenDao=citizenDao;
@@ -62,6 +62,12 @@ public class CitizenController {
         model.addAttribute("citizen", CitizenDao.getCitizen(NIF));
         return "citizen/update";
     }
+    @RequestMapping(value="/updatePerfil/{NIF}", method = RequestMethod.GET)
+    public String editCitizenPerfil(Model model, @PathVariable String NIF) {
+        model.addAttribute("citizen", CitizenDao.getCitizen(NIF));
+        deUnUso=true;
+        return "citizen/update";
+    }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
@@ -69,6 +75,13 @@ public class CitizenController {
             BindingResult bindingResult) {
         CitizenValidator citizenValidator = new CitizenValidator();
         citizenValidator.validate(citizen, bindingResult);
+        if (deUnUso==true) {
+            if (bindingResult.hasErrors())
+                return "controller/update";
+            deUnUso=false;
+            CitizenDao.updateCitizen(citizen);
+            return "redirect:/mainMenu";
+        }
         if (bindingResult.hasErrors())
             return "citizen/update";
         CitizenDao.updateCitizen(citizen);

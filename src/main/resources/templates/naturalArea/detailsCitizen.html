@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Detalles del Espacio Natural</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br>
+        <h1>Detalles del Espacio Natural</h1>
+        <hr color="blue" size=3>
+        <form class="form-horizontal" action="#" th:action="@{/naturalArea/details}"
+              th:object="${naturalArea}" method="post">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="hidden" class="form-control" id="codeArea" th:field="*{codeArea}" readonly="readonly" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="hidden" class="form-control" id="registrationDate" th:field="*{registrationDate}" readonly="readonly" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="name">Nombre:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="name" th:field="*{name}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="address">Dirección:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="address" th:field="*{address}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="maxCapacity">Capacidad máxima:</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" id="maxCapacity" th:field="*{maxCapacity}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('maxCapacity')}" th:errors="*{maxCapacity}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="type_of_area">Tipo:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="type_of_area" th:field="*{type_of_area}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('type_of_area')}" th:errors="*{type_of_area}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="state">Estado:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="state" th:field="*{state}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="startTime">Hora de apertura:</label>
+                <div class="col-sm-4">
+                    <input type="time" class="form-control" id="startTime" th:field="*{startTime}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="control-label col-sm-2" for="endTime">Hora de cierre:</label>
+                <div class="col-sm-4">
+                    <input type="time" class="form-control" id="endTime" th:field="*{endTime}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="hidden" class="form-control" id="munCode" th:field="*{munCode}" readonly="readonly"/>
+                    <div class="error" th:if="${#fields.hasErrors('munCode')}" th:errors="*{munCode}"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <hr color="blue" size=3>
+            <h1>Zonas del Espacio Natural</h1>
+            <hr color="blue" size=3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Columna</th>
+                    <th>Fila</th>
+                    <th>Capacidad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="zone: ${zones}">
+                    <td th:text="${zone.col}"></td>
+                    <td th:text="${zone.row}"></td>
+                    <td th:text="${zone.capacity}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <th:block th:if="${user_type == 'Citizen'}">
+                        <a  th:href="@{/reservation/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Realizar reserva</a>
+                        <a href="/naturalArea/listCliente" class="btn btn-primary" role="button">Volver</a>
+                    </th:block>
+                    <th:block th:unless="${user_type == 'Citizen'}">
+                        <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
+                    </th:block>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
