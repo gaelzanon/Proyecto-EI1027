@@ -18,7 +18,6 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Código</th>
         <th>Tipo de Servicio</th>
         <th>Descripción</th>
         <th>Fecha Registro</th>
@@ -29,7 +28,6 @@
     </thead>
     <tbody>
     <tr th:each="servicetem: ${servicetem}">
-        <td th:text="${servicetem.code}"></td>
         <td th:text="${servicetem.type_of_service}"></td>
         <td th:text="${servicetem.description}"></td>
         <td th:text="${servicetem.FechaReg}"></td>

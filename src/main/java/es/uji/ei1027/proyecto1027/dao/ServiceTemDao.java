@@ -56,7 +56,7 @@ public class ServiceTemDao {
     (excepte el code, que és la clau primària) */
     public void updateServiceTem(ServiceTem serviceTem) {
         jdbcTemplate.update(
-                "UPDATE service SET type_of_service=?,  description =? , registration_date=?, end_date=?  WHERE code = ?",
+                "UPDATE serviceTem SET type_of_service=?,  description =? , registration_date=?, end_date=?  WHERE code = ?",
                 serviceTem.getType_of_service(), serviceTem.getDescription(), serviceTem.getFechaReg(),serviceTem.getFechaEnd() ,  serviceTem.getCode() );
 
     }

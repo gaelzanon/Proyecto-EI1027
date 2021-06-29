@@ -74,10 +74,11 @@ public class ServiceTemController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("servicetem") final ServiceTem serviceTem, RedirectAttributes attributes,
                                    final BindingResult bindingResult) {
-        System.out.println(serviceTem);
+
         codigos = (int)(Math.random()*100000);
         serviceTem.setCode( String.valueOf(codigos));
         ServiceTemValidator serviceTemValidator = new ServiceTemValidator();
+        System.out.println(serviceTem);
         serviceTemValidator.validate(serviceTem, bindingResult);
         if (bindingResult.hasErrors()) {
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.servicetem",bindingResult);
@@ -111,16 +112,17 @@ public class ServiceTemController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("servicetem") final ServiceTem serviceTem, RedirectAttributes attributes,
+            @ModelAttribute("servicetem") final ServiceTem servicetem, RedirectAttributes attributes,
             final BindingResult bindingResult) {
         ServiceTemValidator serviceTemValidator = new ServiceTemValidator();
-        serviceTemValidator.validate(serviceTem, bindingResult);
+        serviceTemValidator.validate(servicetem, bindingResult);
+        System.out.println(servicetem);
         if (bindingResult.hasErrors()){
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.servicetem",bindingResult);
-            attributes.addFlashAttribute("servicetem",serviceTem);
+            attributes.addFlashAttribute("servicetem",servicetem);
             return "redirect:/servicetem/update";}
         try {
-            ServiceTemDao.updateServiceTem(serviceTem);
+            ServiceTemDao.updateServiceTem(servicetem);
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
