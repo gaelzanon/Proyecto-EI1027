@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class Citizen {
     private String NIF;
+    private String password;
+    private String tipoUsuario;
     private String name;
     private String surname;
     private String email;
@@ -18,6 +20,22 @@ public class Citizen {
 
     public void setNIF(String NIF) {
         this.NIF = NIF;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = this.password;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = this.tipoUsuario;
     }
 
     public String getName() {
@@ -68,6 +86,8 @@ public class Citizen {
     public String toString() {
         return "Citizen{" +
                 "NIF='" + NIF + '\'' +
+                ", password='" + password + "\'" +
+                ", tipoUsuario='" + tipoUsuario + "\'" +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +

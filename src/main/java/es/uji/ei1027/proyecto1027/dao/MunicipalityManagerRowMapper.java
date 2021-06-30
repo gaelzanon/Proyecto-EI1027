@@ -11,6 +11,8 @@ public class MunicipalityManagerRowMapper implements RowMapper<MunicipalityManag
     public MunicipalityManager mapRow(ResultSet rs, int rowNum) throws SQLException {
         MunicipalityManager munManager = new MunicipalityManager();
         munManager.setNIF(rs.getString("NIF"));
+        munManager.setPassword(rs.getString("password"));
+        munManager.setTipoUsuario(rs.getString("tipoUsuario"));
         munManager.setCode(rs.getString("code"));
         munManager.setName(rs.getString("Name"));
         munManager.setMunicipalityName(rs.getString("mun_name"));

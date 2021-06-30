@@ -58,6 +58,7 @@ public class MunicipalityManagerController {
                                    BindingResult bindingResult) {
         codigos = (int)(Math.random()*100000);
         munManager.setCode( String.valueOf(codigos));
+        munManager.setTipoUsuario("municipalManager");
         MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
         municipalityManagerValidator.validate(munManager, bindingResult);
         if (bindingResult.hasErrors())

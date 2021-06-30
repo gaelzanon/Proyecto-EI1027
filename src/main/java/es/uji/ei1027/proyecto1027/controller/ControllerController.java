@@ -59,6 +59,7 @@ public class ControllerController {
     public String processAddSubmit(@ModelAttribute("controller") final es.uji.ei1027.proyecto1027.model.Controller controller, RedirectAttributes attributes,
                                        final BindingResult bindingResult) {
         controller.setCode_area(naturalAreaDao.getNaturalAreaCode(controller.getCode_area()));
+        controller.setTipoUsuario("controller");
         ControllerValidator controllerValidator = new ControllerValidator();
         controllerValidator.validate(controller, bindingResult);
         if (bindingResult.hasErrors()){

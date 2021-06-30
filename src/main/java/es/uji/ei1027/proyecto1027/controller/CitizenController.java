@@ -39,6 +39,7 @@ public class CitizenController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("citizen") Citizen citizen,
                                    BindingResult bindingResult) {
+        citizen.setTipoUsuario("citizen");
         CitizenValidator citizenValidator = new CitizenValidator();
         citizenValidator.validate(citizen, bindingResult);
         if (bindingResult.hasErrors())

@@ -11,6 +11,8 @@ public class CitizenRowMapper implements RowMapper<Citizen>{
     public Citizen mapRow(ResultSet rs, int rowNum) throws SQLException {
         Citizen citizen = new Citizen();
         citizen.setNIF(rs.getString("NIF"));
+        citizen.setPassword(rs.getString("password"));
+        citizen.setTipoUsuario(rs.getString("tipoUsuario"));
         citizen.setName(rs.getString("name"));
         citizen.setSurname(rs.getString("surname"));
         citizen.setAddress(rs.getString("address"));

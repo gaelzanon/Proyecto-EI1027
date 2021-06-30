@@ -23,8 +23,8 @@ public class ControllerDao {
 
     public void addController(Controller controller) {
         jdbcTemplate.update(
-                "INSERT INTO controller VALUES(?, ?, ?, ?, ?)",
-                controller.getName(),controller.getSurname(),controller.getNIF(),controller.getEmail(), controller.getCode_area());
+                "INSERT INTO controller VALUES(?, ?, ?, ?, ?, ?, ?)",
+                controller.getName(),controller.getSurname(),controller.getNIF(),controller.getEmail(), controller.getCode_area(), controller.getPassword(), controller.getTipoUsuario());
     }
 
 
@@ -46,8 +46,8 @@ public class ControllerDao {
 
     public void updateController(Controller controller) {
 
-        String SQL = "update controller set name = ?, surname = ?, code_area = ?, email = ? where NIF = ?";
-        jdbcTemplate.update(SQL, controller.getName(),controller.getSurname(),controller.getCode_area(),controller.getEmail(), controller.getNIF());
+        String SQL = "update controller set name = ?, surname = ?, code_area = ?, email = ?, password = ? where NIF = ?";
+        jdbcTemplate.update(SQL, controller.getName(),controller.getSurname(),controller.getCode_area(),controller.getEmail(), controller.getPassword(), controller.getNIF());
 
     }
 

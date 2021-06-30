@@ -2,6 +2,8 @@ package es.uji.ei1027.proyecto1027.model;
 
 public class MunicipalityManager {
     private String NIF;
+    private String password;
+    private String tipoUsuario;
     private String code;
     private String name;
     private String municipalityName;
@@ -13,6 +15,22 @@ public class MunicipalityManager {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = this.password;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = this.tipoUsuario;
     }
 
     public String getNIF() {
@@ -51,6 +69,8 @@ public class MunicipalityManager {
     public String toString() {
         return "MunicipalityManager{" +
                 "NIF='" + NIF + '\'' +
+                ", password='" + password + "\'" +
+                ", tipoUsuario='" + tipoUsuario + "\'" +
                 ", code='" + code + '\'' +
                 ", Name='" + name + '\'' +
                 ", municipalityName='" + municipalityName + '\'' +

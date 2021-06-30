@@ -2,6 +2,8 @@ package es.uji.ei1027.proyecto1027.model;
 
 public class Controller {
     private String NIF;
+    private String password;
+    private String tipoUsuario;
     private String name;
     private String surname;
     private String email;
@@ -17,6 +19,22 @@ public class Controller {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = this.password;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = this.tipoUsuario;
     }
 
     public String getSurname() {
@@ -54,7 +72,9 @@ public class Controller {
     public String toString() {
         return "citizen{" +
                 "nif='" + NIF + "\'" +
-                "nom='" + name + "\'" +
+                ", password='" + password + "\'" +
+                ", tipoUsuario='" + tipoUsuario + "\'" +
+                ", nom='" + name + "\'" +
                 ", surname='" + surname + "\'" +
                 ", email='" + email + "\'" +
                 ", Code_area=" + code_area +

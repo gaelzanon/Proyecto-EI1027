@@ -10,6 +10,8 @@ public class ControllerRowMapper implements RowMapper<Controller> {
     public Controller mapRow(ResultSet rs, int rowNum) throws SQLException {
         Controller controller = new Controller();
         controller.setNIF(rs.getString("nif"));
+        controller.setPassword(rs.getString("password"));
+        controller.setTipoUsuario(rs.getString("tipoUsuario"));
         controller.setName(rs.getString("name"));
         controller.setSurname(rs.getString("surname"));
         controller.setCode_area(rs.getString("code_area"));
