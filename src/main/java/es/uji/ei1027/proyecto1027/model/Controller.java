@@ -9,8 +9,28 @@ public class Controller {
     private String email;
     private String code_area;
 
-    public Controller(){
+    public String getNIF() {
+        return NIF;
+    }
 
+    public void setNIF(String NIF) {
+        this.NIF = NIF;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public String getName() {
@@ -19,22 +39,6 @@ public class Controller {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = this.password;
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = this.tipoUsuario;
     }
 
     public String getSurname() {
@@ -61,23 +65,16 @@ public class Controller {
         this.code_area = code_area;
     }
 
-    public String getNIF() {
-        return NIF;
-    }
-
-    public void setNIF(String NIF) {
-        this.NIF = NIF;
-    }
     @Override
     public String toString() {
-        return "citizen{" +
-                "nif='" + NIF + "\'" +
-                ", password='" + password + "\'" +
-                ", tipoUsuario='" + tipoUsuario + "\'" +
-                ", nom='" + name + "\'" +
-                ", surname='" + surname + "\'" +
-                ", email='" + email + "\'" +
-                ", Code_area=" + code_area +
-                "}";
+        return "Controller{" +
+                "NIF='" + NIF + '\'' +
+                ", password='" + password + '\'' +
+                ", tipoUsuario='" + tipoUsuario + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", code_area='" + code_area + '\'' +
+                '}';
     }
 }

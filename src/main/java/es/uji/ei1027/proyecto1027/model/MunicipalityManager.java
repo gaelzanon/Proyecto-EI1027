@@ -9,30 +9,6 @@ public class MunicipalityManager {
     private String municipalityName;
     private String email;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = this.password;
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = this.tipoUsuario;
-    }
-
     public String getNIF() {
         return NIF;
     }
@@ -41,12 +17,36 @@ public class MunicipalityManager {
         this.NIF = NIF;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public String getCode() {
         return code;
     }
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMunicipalityName() {
@@ -69,10 +69,10 @@ public class MunicipalityManager {
     public String toString() {
         return "MunicipalityManager{" +
                 "NIF='" + NIF + '\'' +
-                ", password='" + password + "\'" +
-                ", tipoUsuario='" + tipoUsuario + "\'" +
+                ", password='" + password + '\'' +
+                ", tipoUsuario='" + tipoUsuario + '\'' +
                 ", code='" + code + '\'' +
-                ", Name='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", municipalityName='" + municipalityName + '\'' +
                 ", email='" + email + '\'' +
                 '}';

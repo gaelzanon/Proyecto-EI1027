@@ -92,7 +92,7 @@ public class ControllerController {
         ControllerValidator controllerValidator = new ControllerValidator();
         controllerValidator.validate(controller, bindingResult);
         System.out.println(deUnUso);
-        if (deUnUso==true) {
+        if (deUnUso) {
             if (bindingResult.hasErrors())
                 return "controller/update";
             deUnUso=false;

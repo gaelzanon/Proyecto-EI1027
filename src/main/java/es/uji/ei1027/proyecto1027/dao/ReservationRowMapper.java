@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class ReservationRowMapper implements RowMapper<Reservation> {
     public Reservation mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -21,7 +20,7 @@ public class ReservationRowMapper implements RowMapper<Reservation> {
         reservation.setState(rs.getString("state"));
         reservation.setStartTime(rs.getObject("start_time", LocalTime.class));
         reservation.setEndTime(rs.getObject("end_time", LocalTime.class));
-        reservation.setCols(rs.getInt("col"));
+        reservation.setCol(rs.getInt("col"));
         reservation.setRow(rs.getInt("row"));
         reservation.setCodeArea(rs.getString("code_area"));
         return reservation;

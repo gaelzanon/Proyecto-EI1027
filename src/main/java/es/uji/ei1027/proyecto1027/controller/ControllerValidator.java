@@ -17,6 +17,9 @@ public class ControllerValidator implements Validator {
         if (controller.getNIF().trim().equals(""))
             errors.rejectValue("NIF", "obligatori",
                     "Se debe introducir un valor");
+        if (controller.getPassword().trim().equals(""))
+            errors.rejectValue("password", "obligatori",
+                    "Se debe introducir una contraseña");
         if (controller.getName().trim().equals(""))
             errors.rejectValue("name", "obligatori",
                     "Se debe introducir un nombre");

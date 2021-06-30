@@ -11,7 +11,8 @@ public class Service {
     private String description;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate FechaReg;
-
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    private LocalDate FechaEnd;
 
     @Override
     public String toString() {
@@ -20,6 +21,7 @@ public class Service {
                 ", type_of_service='" + type_of_service + '\'' +
                 ", description='" + description + '\'' +
                 ", FechaReg=" + FechaReg +
+                ", FechaEnd=" + FechaEnd +
                 '}';
     }
 
@@ -55,4 +57,11 @@ public class Service {
         FechaReg = fechaReg;
     }
 
+    public LocalDate getFechaEnd() {
+        return FechaEnd;
+    }
+
+    public void setFechaEnd(LocalDate fechaEnd) {
+        FechaEnd = fechaEnd;
+    }
 }

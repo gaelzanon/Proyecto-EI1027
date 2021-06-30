@@ -2,16 +2,13 @@ package es.uji.ei1027.proyecto1027.model;
 import java.time.LocalDate;
 
 
-public class Citizen {
+public class EnvironmentalManager {
     private String NIF;
     private String password;
     private String tipoUsuario;
     private String name;
     private String surname;
     private String email;
-    private String address;
-    private LocalDate date_of_birth;
-    private LocalDate registration_date;
 
     public String getNIF() {
         return NIF;
@@ -61,42 +58,15 @@ public class Citizen {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public LocalDate getDate_of_birth() {
-        return date_of_birth;
-    }
-
-    public void setDate_of_birth(LocalDate date_of_birth) {
-        this.date_of_birth = date_of_birth;
-    }
-
-    public LocalDate getRegistration_date() {
-        return registration_date;
-    }
-
-    public void setRegistration_date(LocalDate registration_date) {
-        this.registration_date = registration_date;
-    }
-
     @Override
     public String toString() {
-        return "Citizen{" +
+        return "EnvironmentalManager{" +
                 "NIF='" + NIF + '\'' +
                 ", password='" + password + '\'' +
                 ", tipoUsuario='" + tipoUsuario + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", date_of_birth=" + date_of_birth +
-                ", registration_date=" + registration_date +
                 '}';
     }
 }

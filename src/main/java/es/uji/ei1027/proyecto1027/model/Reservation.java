@@ -19,7 +19,7 @@ public class Reservation {
     private LocalTime startTime;
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime endTime;
-    private int cols;
+    private int col;
     private int row;
     private String codeArea;
 
@@ -99,12 +99,12 @@ public class Reservation {
         this.endTime = endTime;
     }
 
-    public int getCols() {
-        return cols;
+    public int getCol() {
+        return col;
     }
 
-    public void setCols(int cols) {
-        this.cols = cols;
+    public void setCol(int col) {
+        this.col = col;
     }
 
     public int getRow() {
@@ -135,7 +135,7 @@ public class Reservation {
                 ", state=" + state +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", cols=" + cols +
+                ", col=" + col +
                 ", row=" + row +
                 ", codeArea='" + codeArea + '\'' +
                 '}';
