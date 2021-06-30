@@ -24,7 +24,7 @@ public class CitizenDao {
 
     public void addCitizen(Citizen citizen) {
         jdbcTemplate.update(
-                "INSERT INTO citizen VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO citizen VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 citizen.getNIF(),citizen.getName(),citizen.getSurname(),citizen.getEmail(), citizen.getAddress(),citizen.getdate_of_birth(),citizen.getregistration_date(), citizen.getPassword(), citizen.getTipoUsuario());
     }
 

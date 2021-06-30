@@ -35,6 +35,12 @@ public class CitizenController {
         model.addAttribute("citizen", new Citizen());
         return "citizen/add";
     }
+    @RequestMapping(value="/addRegistro")
+    public String addCitizenRegistro(Model model) {
+        model.addAttribute("citizen", new Citizen());
+        deUnUso=true;
+        return "citizen/add";
+    }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("citizen") Citizen citizen,
@@ -42,6 +48,13 @@ public class CitizenController {
         citizen.setTipoUsuario("citizen");
         CitizenValidator citizenValidator = new CitizenValidator();
         citizenValidator.validate(citizen, bindingResult);
+        if (deUnUso==true) {
+            if (bindingResult.hasErrors())
+                return "citizen/add";
+            deUnUso=false;
+            CitizenDao.updateCitizen(citizen);
+            return "citizen/Registrado";
+        }
         if (bindingResult.hasErrors())
             return "citizen/add";
         try {
@@ -78,7 +91,7 @@ public class CitizenController {
         citizenValidator.validate(citizen, bindingResult);
         if (deUnUso==true) {
             if (bindingResult.hasErrors())
-                return "controller/update";
+                return "citizen/update";
             deUnUso=false;
             CitizenDao.updateCitizen(citizen);
             return "redirect:/mainMenu";
