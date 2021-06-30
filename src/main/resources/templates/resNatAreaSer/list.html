@@ -39,7 +39,7 @@
         <td th:text="${resNatAreaSer.startTime}"></td>
 
 
-        <td><a th:href="@{/resNatAreaSer/delete/{codearea}/{code}/{startTime}/{endtime} (codearea=${resNatAreaSer.code_area}, code=${resNatAreaSer.code}, startTime=$(resNatAreaSer.startTime), endtime=$(resNatAreaSer.endTime)}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
+        <td><a th:href="@{/resNatAreaSer/delete/{codearea}/{code} (codearea=${resNatAreaSer.code_area}, code=${resNatAreaSer.code}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>

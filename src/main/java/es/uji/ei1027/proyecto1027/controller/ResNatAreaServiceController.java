@@ -146,12 +146,12 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}")
+    @RequestMapping(value = "/delete/{codearea}/{code}")
     public String processDeleteResNatAreaService(@PathVariable String codearea,
-                                                 @PathVariable String code, @PathVariable String startTime) {
+                                                 @PathVariable String code) {
 
 
-        resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime);
+        resNatAreaServiceDao.deleteR_NArea_service(codearea, code);
         String nameUri="redirect:../../../../porArea/" + codearea;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;

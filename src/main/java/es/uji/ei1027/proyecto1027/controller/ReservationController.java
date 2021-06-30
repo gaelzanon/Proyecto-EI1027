@@ -3,6 +3,7 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
 import es.uji.ei1027.proyecto1027.dao.ReservationDao;
+import es.uji.ei1027.proyecto1027.dao.UserDao;
 import es.uji.ei1027.proyecto1027.model.Citizen;
 import es.uji.ei1027.proyecto1027.model.Reservation;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
@@ -34,6 +35,7 @@ public class ReservationController {
     private ReservationDao ReservationDao;
     private ReservationService reservationService;
     private int codigos;
+    private UserDetails userDetails;
 
     @Autowired
     public void setReservationService(ReservationService reservationService) {
@@ -143,7 +145,8 @@ public class ReservationController {
 
 
     @RequestMapping("/porArea/{code_area}")
-    public String reservationPorArea(Model model, @PathVariable String code_area) {
+    public String reservationPorArea(Model model,HttpSession session ,@PathVariable String code_area) {
+        System.out.println(session.getAttribute("user").toString());
         Reservation reservation = new Reservation();
         reservation.setCodeArea(code_area);
         model.addAttribute("codeArea", reservation);

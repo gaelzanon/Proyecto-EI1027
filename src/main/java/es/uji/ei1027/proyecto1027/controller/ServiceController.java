@@ -71,9 +71,10 @@ public class ServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("service") final Service service, RedirectAttributes attributes,
                                    final BindingResult bindingResult) {
-        System.out.println(service);
+
         codigos = (int)(Math.random()*100000);
         service.setCode( String.valueOf(codigos));
+        System.out.println(service);
         ServiceValidator serviceValidator = new ServiceValidator();
         serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -110,6 +111,7 @@ public class ServiceController {
     public String processUpdateSubmit(
             @ModelAttribute("service") final Service service, RedirectAttributes attributes,
             final BindingResult bindingResult) {
+        System.out.println(service);
         ServiceValidator serviceValidator = new ServiceValidator();
         serviceValidator.validate(service, bindingResult);
         if (bindingResult.hasErrors()){
