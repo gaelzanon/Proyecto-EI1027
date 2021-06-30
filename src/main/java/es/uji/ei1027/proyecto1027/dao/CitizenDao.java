@@ -25,7 +25,7 @@ public class CitizenDao {
     public void addCitizen(Citizen citizen) {
         jdbcTemplate.update(
                 "INSERT INTO citizen VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                citizen.getNIF(),citizen.getName(),citizen.getSurname(),citizen.getEmail(), citizen.getAddress(),citizen.getdate_of_birth(),citizen.getregistration_date(), citizen.getPassword(), citizen.getTipoUsuario());
+                citizen.getNIF(),citizen.getName(),citizen.getSurname(),citizen.getEmail(), citizen.getAddress(),citizen.getDate_of_birth(),citizen.getRegistration_date(), citizen.getPassword(), citizen.getTipoUsuario());
     }
 
 
@@ -48,7 +48,7 @@ public class CitizenDao {
     public void updateCitizen(Citizen citizen) {
 
         String SQL = "update citizen set name = ?, surname = ?, Address = ?, Email = ?, date_of_birth = ?, registration_date = ?, password = ? where NIF = ?";
-        jdbcTemplate.update(SQL, citizen.getName(),citizen.getSurname(),citizen.getAddress(),citizen.getEmail(),citizen.getdate_of_birth(), citizen.getregistration_date(), citizen.getPassword(), citizen.getNIF());
+        jdbcTemplate.update(SQL, citizen.getName(),citizen.getSurname(),citizen.getAddress(),citizen.getEmail(),citizen.getDate_of_birth(), citizen.getRegistration_date(), citizen.getPassword(), citizen.getNIF());
 
     }
 
