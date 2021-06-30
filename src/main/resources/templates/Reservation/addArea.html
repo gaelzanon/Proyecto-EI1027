@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Seleccionar Natural Area</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <br>
+    <h1>Lista de Áreas Naturales</h1>
+    <hr color="blue" size=3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Municipio</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="naturalArea: ${naturalArea}">
+
+            <td th:text="${naturalArea.name}"></td>
+            <th:block th:each="mun: ${municipality}">
+                <td th:if="${naturalArea.munCode == mun.code}" th:text="${mun.name}"></td>
+            </th:block>
+            <td><a  th:href="@{/reservation/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Realizar reserva en este area</a>
+            </td>
+            <td><a th:href="@{/naturalArea/detailsCitizen/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Detalles</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
+
+</div>
+
+</body>
+</html>
+
+

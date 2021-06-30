@@ -4,10 +4,7 @@ import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
 import es.uji.ei1027.proyecto1027.dao.ReservationDao;
 import es.uji.ei1027.proyecto1027.dao.UserDao;
-import es.uji.ei1027.proyecto1027.model.Citizen;
-import es.uji.ei1027.proyecto1027.model.Reservation;
-import es.uji.ei1027.proyecto1027.model.UserDetails;
-import es.uji.ei1027.proyecto1027.model.Zone;
+import es.uji.ei1027.proyecto1027.model.*;
 import es.uji.ei1027.proyecto1027.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -205,5 +202,12 @@ public class ReservationController {
         return "reservation/porCitizen";
     }
 
+    @RequestMapping("/addArea")
+    public String reservationAddArea(HttpSession session, Model model) {
+        UserDetails userDetails=(UserDetails) session.getAttribute("user");
+        List<NaturalArea> naturalArea = NaturalAreaDao.getNaturalArea();
+        model.addAttribute("naturalArea", naturalArea);
+        return "reservation/addArea";
+    }
 }
 
