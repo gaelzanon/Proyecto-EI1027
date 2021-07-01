@@ -17,6 +17,9 @@ public class MunicipalityManagerValidator implements Validator {
         if (municipalityManager.getNIF().trim().equals(""))
             errors.rejectValue("NIF", "obligatori",
                     "Se debe introducir un valor");
+        if (municipalityManager.getPassword().trim().equals(""))
+            errors.rejectValue("password", "obligatori",
+                    "Se debe introducir una contraseña");
         if (municipalityManager.getCode().trim().equals(""))
             errors.rejectValue("code", "obligatori",
                     "Se debe introducir un codigo");

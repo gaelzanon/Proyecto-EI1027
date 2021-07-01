@@ -21,7 +21,7 @@ public class FakeUserProvider implements UserDao {
     private CitizenDao citizenDao;
     private ControllerDao controllerDao;
     private MunicipalityManagerDao municipalityManagerDao;
-    //private EnvironmentalManagerDao environmentalManagerDao;
+    private EnvironmentalManagerDao environmentalManagerDao;
 
     @Autowired
     public void setCitizenDao(CitizenDao citizenDao) {
@@ -35,21 +35,23 @@ public class FakeUserProvider implements UserDao {
     public void setMunicipalityManagerDao(MunicipalityManagerDao municipalityManagerDao) {
         this.municipalityManagerDao=municipalityManagerDao;
     }
-    /*@Autowired
+    @Autowired
     public void setEnvironmentalManagerDao(EnvironmentalManagerDao environmentalManagerDao) {
         this.environmentalManagerDao=environmentalManagerDao;
-    }*/
+    }
 
     public FakeUserProvider() {}
 
     @PostConstruct
     private void loadUsers(){
+        knownUsers.clear();
+
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
         List<Citizen> citizenList= citizenDao.getCitizens();
         List<Controller> controllerList= controllerDao.getControllers();
         List<MunicipalityManager> municipalityManagerList= municipalityManagerDao.getMunicipalityManagers();
-        //List<EnvironmentalManager> environmentalManagerList= environmentalManagerDao.getEnvironmentalManagers();
+        List<EnvironmentalManager> environmentalManagerList= environmentalManagerDao.getEnvironmentalManagers();
 
         for(Citizen citizen:citizenList){
             UserDetails userClient = new UserDetails();
@@ -79,14 +81,14 @@ public class FakeUserProvider implements UserDao {
         }
 
 
-        /*for(EnvironmentalManager environmentalManager:environmentalManagerList){
+        for(EnvironmentalManager environmentalManager:environmentalManagerList){
             UserDetails userClient = new UserDetails();
             userClient.setUsername(environmentalManager.getName());
             userClient.setPassword(passwordEncryptor.encryptPassword(environmentalManager.getPassword()));
             userClient.setNIF(environmentalManager.getNIF());
             userClient.setUserType(UserDetailsEnum.EnvironmentalManager.toString());
             knownUsers.put(userClient.getNIF(), userClient);
-        }*/
+        }
 
 
         UserDetails userClient = new UserDetails();
@@ -126,6 +128,7 @@ public class FakeUserProvider implements UserDao {
 
     @Override
     public UserDetails loadUserByUsername(String username, String password) {
+        loadUsers();
         UserDetails user = knownUsers.get(username.trim());
         if (user == null)
             return null; // Usuari no trobat
