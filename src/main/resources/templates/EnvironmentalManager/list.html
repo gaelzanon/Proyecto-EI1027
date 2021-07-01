@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Gestionar EnvironmentalManager</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <br>
+    <h1>Lista de EnvironmentalManager</h1>
+    <hr color="blue" size=3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>NIF</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="environmentalManager: ${environmentalManager}">
+            <td th:text="${environmentalManager.NIF}"></td>
+            <td th:text="${environmentalManager.name}"></td>
+            <td th:text="${environmentalManager.surname}"></td>
+            <td th:text="${environmentalManager.email}"></td>
+            <td><a th:href="@{/environmentalManager/update/{NIF}(NIF=${environmentalManager.NIF})}" class="btn btn-warning" role="button">Editar</a>
+            </td>
+            <td><a th:href="@{/environmentalManager/delete/{NIF}(NIF=${environmentalManager.NIF})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Añadir EnvironmentalManager</a>
+    <a href="/mainMenu"class="btn btn-primary" role="button">Volver</a>
+</div>
+</body>
+</html>
