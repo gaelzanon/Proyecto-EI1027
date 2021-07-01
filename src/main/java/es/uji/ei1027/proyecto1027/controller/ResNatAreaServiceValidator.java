@@ -28,5 +28,13 @@ public class ResNatAreaServiceValidator implements Validator {
             errors.rejectValue("startTime", "obligatori",
                     "Se debe introducir una fecha de apertura");
         }
+        if (rnas.getEndTime()==null) {
+            errors.rejectValue("endTime", "obligatori",
+                    "Se debe introducir una fecha de cierre");
+        }
+        if (rnas.getEndTime().compareTo(rnas.getStartTime()) < 0) {
+            errors.rejectValue("endTime", "obligatori",
+                    "Se debe introducir una fecha posterior a la fecha de apertura");
+        }
     }
 }

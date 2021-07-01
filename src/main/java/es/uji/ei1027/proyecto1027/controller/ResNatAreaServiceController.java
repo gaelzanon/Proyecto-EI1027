@@ -24,6 +24,7 @@ import org.springframework.web.util.UriUtils;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -146,12 +147,12 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{codearea}/{code}")
+    @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}/{endTime}")
     public String processDeleteResNatAreaService(@PathVariable String codearea,
-                                                 @PathVariable String code) {
+                                                 @PathVariable String code, @PathVariable Date startTime, @PathVariable Date endTime) {
 
 
-        resNatAreaServiceDao.deleteR_NArea_service(codearea, code);
+        resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime, endTime);
         String nameUri="redirect:../../../../porArea/" + codearea;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;

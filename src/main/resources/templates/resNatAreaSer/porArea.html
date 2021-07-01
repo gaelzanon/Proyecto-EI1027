@@ -21,7 +21,7 @@
             <th>Área</th>
             <th>Servicio</th>
             <th>Fecha inicio</th>
-
+            <th>Fecha final</th>
         </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                 <td th:if="${resNatAreaSer.code == serv.code}" th:text="${serv.description}"></td>
             </th:block>
             <td th:text="${resNatAreaSer.startTime}"></td>
-            <td></td>
+            <td th:text="${resNatAreaSer.endTime}"></td>
             <td><a th:href="@{/resNatAreaSer/delete/{code_area}/{code}/{start_time}/{end_time} (code_area=${resNatAreaSer.code_area}, code=${resNatAreaSer.code}, start_time=${resNatAreaSer.startTime}, end_time=${resNatAreaSer.endTime})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
@@ -65,6 +65,10 @@
                 <td>
                     <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />
                     <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
+                </td>
+                <td>
+                    <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
+                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </td>
                 <td>
                     <input type="text" hidden="hidden" id="code_area" th:field="*{code_area}" />

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,12 @@ public class ResNatAreaServiceDao {
 
     /* Añadir ResNatAreaService a la clase de datos */
     public void addR_NArea_service(ResNatAreaService res_na_ser) {
-        jdbcTemplate.update("INSERT INTO R_NArea_Services VALUES(?, ?, ?)", res_na_ser.getCode_area(), res_na_ser.getCode(),res_na_ser.getStartTime());
+        jdbcTemplate.update("INSERT INTO R_NArea_Services VALUES(?, ?, ?, ?)", res_na_ser.getCode_area(), res_na_ser.getCode(),res_na_ser.getStartTime(), res_na_ser.getEndTime());
     }
 
     /* Eliminar ResNatAreaService de la base de datos */
-    public void deleteR_NArea_service(String code_area, String code) {
-        jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=? ", code_area, code);
+    public void deleteR_NArea_service(String code_area, String code, Date startTime, Date endTime) {
+        jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=? AND start_time=? AND end_time=?", code_area, code, startTime, endTime);
     }
 
 
