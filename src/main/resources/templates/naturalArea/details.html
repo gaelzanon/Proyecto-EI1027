@@ -101,7 +101,6 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Área</th>
                     <th>Col</th>
                     <th>Row</th>
                     <th>Capacidad</th>
@@ -109,7 +108,6 @@
                 </thead>
                 <tbody>
                 <tr th:each="zone: ${zones}">
-                    <td th:text="${zone.areaCode}"></td>
                     <td th:text="${zone.col}"></td>
                     <td th:text="${zone.row}"></td>
                     <td th:text="${zone.capacity}"></td>
@@ -123,7 +121,7 @@
                         <a href="/naturalArea/listCliente" class="btn btn-primary" role="button">Volver</a>
                     </th:block>
                     <th:block th:unless="${user_type == 'Citizen'}">
-                        <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
+                        <a href="/naturalArea/list" class="btn btn-primary" role="button">Volver</a>
                     </th:block>
 
                 </div>
