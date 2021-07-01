@@ -89,7 +89,6 @@ public class ResNatAreaServiceController {
                                    BindingResult bindingResult) {
         codigos = (int)(Math.random()*100000);
         resNatAreaService.setCode_relacion( String.valueOf(codigos));
-        System.out.println(resNatAreaService);
         //resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
         //resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
         ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();

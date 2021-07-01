@@ -110,7 +110,6 @@ public class ReservationController {
             @ModelAttribute("reservation") Reservation reservation,
             BindingResult bindingResult) {
         reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
-        System.out.println(reservation);
         if (bindingResult.hasErrors())
             return "reservation/update";
         ReservationValidator reservationValidator = new ReservationValidator();
@@ -165,7 +164,6 @@ public class ReservationController {
 
     @RequestMapping(value="/porArea", method=RequestMethod.POST)
     public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult, HttpSession session) {
-//        System.out.println(coordenadas);
 //        String[] coord = coordenadas.split(",");
 //        reservation.setCols(Integer.parseInt(coord[0]));
 //        reservation.setRow(Integer.parseInt(coord[1]));

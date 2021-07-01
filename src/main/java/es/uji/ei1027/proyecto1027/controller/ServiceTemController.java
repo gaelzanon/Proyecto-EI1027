@@ -78,7 +78,6 @@ public class ServiceTemController {
         codigos = (int)(Math.random()*100000);
         serviceTem.setCode( String.valueOf(codigos));
         ServiceTemValidator serviceTemValidator = new ServiceTemValidator();
-        System.out.println(serviceTem);
         serviceTemValidator.validate(serviceTem, bindingResult);
         if (bindingResult.hasErrors()) {
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.servicetem",bindingResult);
@@ -116,7 +115,6 @@ public class ServiceTemController {
             final BindingResult bindingResult) {
         ServiceTemValidator serviceTemValidator = new ServiceTemValidator();
         serviceTemValidator.validate(servicetem, bindingResult);
-        System.out.println(servicetem);
         if (bindingResult.hasErrors()){
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.servicetem",bindingResult);
             attributes.addFlashAttribute("servicetem",servicetem);

@@ -69,7 +69,6 @@ public class ResNatAreaServiceTemController {
             return "login";
         }
         model.addAttribute("resNatAreaSerTems", resNatAreaServiceTemDao.getR_NArea_servicesTem());
-        System.out.println(resNatAreaServiceTemDao.getR_NArea_servicesTem());
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         model.addAttribute("service",serviceTemDao.getServicesTem());
 
@@ -86,7 +85,6 @@ public class ResNatAreaServiceTemController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSerTem") ResNatAreaServiceTem resNatAreaServiceTem, RedirectAttributes attributes,
                                    BindingResult bindingResult) {
-        System.out.println(resNatAreaServiceTem);
         //resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
         //resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
         //ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
@@ -159,7 +157,6 @@ public class ResNatAreaServiceTemController {
     @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}/{endtime}")
     public String processDeleteResNatAreaService(@PathVariable String codearea,
                                                  @PathVariable String code, @PathVariable String startTime, @PathVariable String endtime) {
-        System.out.print(endtime);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");String date = "16/08/2016";//convert String to LocalDateLocalDate localDate = LocalDate.parse(date, formatter);
         resNatAreaServiceTemDao.deleteR_NArea_serviceTem(codearea, code, startTime, endtime);
         String nameUri="redirect:../../../../porArea/" + codearea;

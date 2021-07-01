@@ -59,7 +59,6 @@ public class MunicipalityManagerController {
         codigos = (int)(Math.random()*100000);
         munManager.setCode( String.valueOf(codigos));
         munManager.setTipoUsuario("municipalManager");
-        System.out.println(munManager);
         MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
         municipalityManagerValidator.validate(munManager, bindingResult);
         if (bindingResult.hasErrors())
