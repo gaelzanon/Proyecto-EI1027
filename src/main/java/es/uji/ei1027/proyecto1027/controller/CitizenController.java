@@ -52,7 +52,7 @@ public class CitizenController {
             if (bindingResult.hasErrors())
                 return "citizen/add";
             deUnUso=false;
-            CitizenDao.updateCitizen(citizen);
+            CitizenDao.addCitizen(citizen);
             return "citizen/Registrado";
         }
         if (bindingResult.hasErrors())

@@ -11,6 +11,7 @@ import es.uji.ei1027.proyecto1027.services.ResNatAreaSerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
@@ -149,10 +151,18 @@ public class ResNatAreaServiceController {
 
     @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}/{endTime}")
     public String processDeleteResNatAreaService(@PathVariable String codearea,
-                                                 @PathVariable String code, @PathVariable Date startTime, @PathVariable Date endTime) {
-
-
-        resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime, endTime);
+                                                 @PathVariable String code, @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate startTime, @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate endTime) {
+        System.out.println(code);
+        System.out.println(codearea);
+        System.out.println(startTime);
+        System.out.println("TUS MUERTOS FUNCIONA");
+        System.out.println(endTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        /*String date = startTime;//convert String to LocalDate
+        String dateEnd = endTime;
+        LocalDate day = LocalDate.parse(date, formatter);
+        LocalDate dayend = LocalDate.parse(date, formatter);*/
+        //resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime, endTime);
         String nameUri="redirect:../../../../porArea/" + codearea;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;

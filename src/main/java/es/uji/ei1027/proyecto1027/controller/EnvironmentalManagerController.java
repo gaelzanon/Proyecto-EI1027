@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-@RequestMapping("/environmental")
+@RequestMapping("/environmentalManager")
 public class EnvironmentalManagerController {
     boolean deUnUso=false;
     private ControllerDao ControllerDao;

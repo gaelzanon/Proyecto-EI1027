@@ -29,7 +29,7 @@ public class ResNatAreaServiceDao {
     }
 
     /* Eliminar ResNatAreaService de la base de datos */
-    public void deleteR_NArea_service(String code_area, String code, Date startTime, Date endTime) {
+    public void deleteR_NArea_service(String code_area, String code, LocalDate startTime,LocalDate endTime) {
         jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=? AND start_time=? AND end_time=?", code_area, code, startTime, endTime);
     }
 

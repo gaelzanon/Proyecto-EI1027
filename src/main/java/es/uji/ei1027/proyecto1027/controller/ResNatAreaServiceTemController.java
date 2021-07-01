@@ -23,6 +23,7 @@ import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,7 +160,7 @@ public class ResNatAreaServiceTemController {
     public String processDeleteResNatAreaService(@PathVariable String codearea,
                                                  @PathVariable String code, @PathVariable String startTime, @PathVariable String endtime) {
         System.out.print(endtime);
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");String date = "16/08/2016";//convert String to LocalDateLocalDate localDate = LocalDate.parse(date, formatter);
         resNatAreaServiceTemDao.deleteR_NArea_serviceTem(codearea, code, startTime, endtime);
         String nameUri="redirect:../../../../porArea/" + codearea;
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
