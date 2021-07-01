@@ -18,6 +18,11 @@
         <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/resNatAreaSer/update}"
               th:object="${resNatAreaSer}" method="post">
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <input type="hidden" class="form-control" id="code_relacion" th:field="*{code_relacion}" readonly="readonly"/>
+                </div>
+            </div>
         <div class="form-group row">
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="code_area" th:field="*{code_area}" readonly="readonly"/>

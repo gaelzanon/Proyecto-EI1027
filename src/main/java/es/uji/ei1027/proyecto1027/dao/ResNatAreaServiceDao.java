@@ -25,21 +25,21 @@ public class ResNatAreaServiceDao {
 
     /* Añadir ResNatAreaService a la clase de datos */
     public void addR_NArea_service(ResNatAreaService res_na_ser) {
-        jdbcTemplate.update("INSERT INTO R_NArea_Services VALUES(?, ?, ?, ?)", res_na_ser.getCode_area(), res_na_ser.getCode(),res_na_ser.getStartTime(), res_na_ser.getEndTime());
+        jdbcTemplate.update("INSERT INTO R_NArea_Services VALUES(?, ?, ?, ?, ?)",res_na_ser.getCode_relacion(), res_na_ser.getCode_area(), res_na_ser.getCode(),res_na_ser.getStartTime(), res_na_ser.getEndTime());
     }
 
     /* Eliminar ResNatAreaService de la base de datos */
-    public void deleteR_NArea_service(String code_area, String code, LocalDate startTime,LocalDate endTime) {
-        jdbcTemplate.update("DELETE from R_NArea_Services where code_area=? AND code=? AND start_time=? AND end_time=?", code_area, code, startTime, endTime);
+    public void deleteR_NArea_service(String code_relacion) {
+        jdbcTemplate.update("DELETE from R_NArea_Services where code_relacion=? ", code_relacion);
     }
 
 
     /* Obtener un ResNatAreaService por area */
-    public List<ResNatAreaService> getResNatAreaServicePorArea(String code_area) {
+    public List<ResNatAreaService> getResNatAreaServicePorArea(String code_relacion) {
         try {
             return this.jdbcTemplate.query(
-                    "SELECT * FROM R_NArea_Services WHERE code_area=?",
-                    new Object[] {code_area}, new ResNatAreaServiceRowMapper());
+                    "SELECT * FROM R_NArea_Services WHERE code_relacion=?",
+                    new Object[] {code_relacion}, new ResNatAreaServiceRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<ResNatAreaService>();

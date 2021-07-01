@@ -41,6 +41,8 @@ public class ResNatAreaServiceController {
 
     private ServiceDao serviceDao;
 
+    private int codigos;
+
     @Autowired
     public void setResNatAreaSerService(ResNatAreaSerService resNatAreaSerService) {
         this.resNatAreaSerService = resNatAreaSerService;
@@ -85,6 +87,8 @@ public class ResNatAreaServiceController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService, RedirectAttributes attributes,
                                    BindingResult bindingResult) {
+        codigos = (int)(Math.random()*100000);
+        resNatAreaService.setCode_relacion( String.valueOf(codigos));
         System.out.println(resNatAreaService);
         //resNatAreaService.setCode_area(naturalAreaDao.getNaturalAreaCode(resNatAreaService.getCode_area()));
         //resNatAreaService.setCode(serviceDao.getServiceCode(resNatAreaService.getCode()));
@@ -129,6 +133,8 @@ public class ResNatAreaServiceController {
     public String processAddSubmitPerProva(
             @ModelAttribute("resNatAreaSer") ResNatAreaService resNatAreaService,
             BindingResult bindingResult) {
+        codigos = (int)(Math.random()*100000);
+        resNatAreaService.setCode_relacion( String.valueOf(codigos));
         ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
         resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         String nameUri="redirect:porArea/" + resNatAreaService.getCode_area();
@@ -149,23 +155,11 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{codearea}/{code}/{startTime}/{endTime}")
-    public String processDeleteResNatAreaService(@PathVariable String codearea,
-                                                 @PathVariable String code, @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate startTime, @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate endTime) {
-        System.out.println(code);
-        System.out.println(codearea);
-        System.out.println(startTime);
-        System.out.println("TUS MUERTOS FUNCIONA");
-        System.out.println(endTime);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        /*String date = startTime;//convert String to LocalDate
-        String dateEnd = endTime;
-        LocalDate day = LocalDate.parse(date, formatter);
-        LocalDate dayend = LocalDate.parse(date, formatter);*/
-        //resNatAreaServiceDao.deleteR_NArea_service(codearea, code, startTime, endTime);
-        String nameUri="redirect:../../../../porArea/" + codearea;
-        nameUri = UriUtils.encodePath(nameUri, "UTF-8");
-        return nameUri;
+    @RequestMapping(value = "/delete/{Code_relacion}")
+    public String processDeleteResNatAreaService(@PathVariable String Code_relacion) {
+
+        resNatAreaServiceDao.deleteR_NArea_service(Code_relacion);
+        return "redirect:/resNatAreaSer/list";
     }
 
 
