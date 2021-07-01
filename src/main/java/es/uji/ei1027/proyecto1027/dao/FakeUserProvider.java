@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 @Repository
@@ -39,7 +40,10 @@ public class FakeUserProvider implements UserDao {
         this.environmentalManagerDao=environmentalManagerDao;
     }*/
 
-    public FakeUserProvider() {
+    public FakeUserProvider() {}
+
+    @PostConstruct
+    private void loadUsers(){
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
         List<Citizen> citizenList= citizenDao.getCitizens();
@@ -102,7 +106,7 @@ public class FakeUserProvider implements UserDao {
         UserDetails userMunicipal = new UserDetails();
         userMunicipal.setUsername("municipal");
         userMunicipal.setPassword(passwordEncryptor.encryptPassword("municipal"));
-        userMunicipal.setUserType("MunicipalManager");
+        userMunicipal.setUserType(UserDetailsEnum.MunicipalManager.toString());
         userMunicipal.setNIF("22222222A");
         knownUsers.put("municipal", userMunicipal);
 
@@ -118,6 +122,7 @@ public class FakeUserProvider implements UserDao {
         userAdmin.setUserType("Admin");
         knownUsers.put("admin", userAdmin);
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username, String password) {

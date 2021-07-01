@@ -17,8 +17,8 @@ public class CitizenRowMapper implements RowMapper<Citizen>{
         citizen.setSurname(rs.getString("surname"));
         citizen.setAddress(rs.getString("address"));
         citizen.setEmail(rs.getString("email"));
-        citizen.setdate_of_birth(rs.getObject("date_of_birth", LocalDate.class));
-        citizen.setregistration_date(rs.getObject("registration_date", LocalDate.class));
+        citizen.setDate_of_birth(rs.getObject("date_of_birth", LocalDate.class));
+        citizen.setRegistration_date(rs.getObject("registration_date", LocalDate.class));
         return citizen;
     }
 }

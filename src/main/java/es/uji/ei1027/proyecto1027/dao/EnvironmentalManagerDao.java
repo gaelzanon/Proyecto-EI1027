@@ -24,7 +24,7 @@ public class EnvironmentalManagerDao {
 
     public void addEnvironmentalManager(EnvironmentalManager environmentalManager) {
         jdbcTemplate.update(
-                "INSERT INTO Environmental_manager VALUES(?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO Environmental_manager VALUES(?, ?, ?, ?, ?, ?)",
                 environmentalManager.getNIF(),environmentalManager.getName(),environmentalManager.getSurname(),environmentalManager.getEmail(), environmentalManager.getPassword(), environmentalManager.getTipoUsuario());
     }
 
