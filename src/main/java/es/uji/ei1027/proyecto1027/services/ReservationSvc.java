@@ -42,4 +42,9 @@ public class ReservationSvc implements ReservationService {
     public Citizen getCitizen(String nif) {
         return citizenDao.getCitizen(nif);
     }
+
+    @Override
+    public String getAreaName(String codeArea) {
+        return naturalAreaDao.getNaturalArea(codeArea).getName();
+    }
 }

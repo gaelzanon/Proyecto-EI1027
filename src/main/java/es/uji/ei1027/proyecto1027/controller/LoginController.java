@@ -41,6 +41,7 @@ public class LoginController {
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
         session.setAttribute("user", user);
+        session.setAttribute("nif", user.getNIF());
         return "redirect:/mainMenu";
     }
 

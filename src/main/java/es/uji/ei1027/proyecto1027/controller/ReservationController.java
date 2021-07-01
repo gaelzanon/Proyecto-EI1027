@@ -142,12 +142,13 @@ public class ReservationController {
 
 
     @RequestMapping("/porArea/{code_area}")
-    public String reservationPorArea(Model model,HttpSession session ,@PathVariable String code_area) {
-        System.out.println(session.getAttribute("user").toString());
+    public String reservationPorArea(Model model,@PathVariable String code_area) {
         Reservation reservation = new Reservation();
         reservation.setCodeArea(code_area);
         model.addAttribute("codeArea", reservation);
         List<Zone> zonas = reservationService.getAllZonesPerArea(code_area);
+        String nombre = reservationService.getAreaName(code_area);
+        model.addAttribute("nombreArea", nombre);
         List<String> col_row = new ArrayList<>();
         LinkedHashSet<Integer> col = new LinkedHashSet<>();
         LinkedHashSet<Integer> row = new LinkedHashSet<>();
@@ -163,11 +164,13 @@ public class ReservationController {
     }
 
     @RequestMapping(value="/porArea", method=RequestMethod.POST)
-    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult) {
+    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult, HttpSession session) {
 //        System.out.println(coordenadas);
 //        String[] coord = coordenadas.split(",");
 //        reservation.setCols(Integer.parseInt(coord[0]));
 //        reservation.setRow(Integer.parseInt(coord[1]));
+        String nif = session.getAttribute("nif").toString();
+        reservation.setNifCitizen(nif);
         codigos = (int)(Math.random()*100000);
         reservation.setCode( String.valueOf(codigos));
         reservation.setQr( "q" + (codigos));
