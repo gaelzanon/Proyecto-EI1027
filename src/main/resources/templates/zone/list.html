@@ -32,8 +32,8 @@
             <td th:text="${zone.row}"></td>
             <td th:text="${zone.capacity}"></td>
             <td th:text="${{zone.areaCode}}"></td>
-            <td><a th:href="@{/zone/update/{col}/{row}/{areaCode}(col=${zone.col},row=${zone.row},areaCode=${zone.areaCode})}" class="btn btn-warning" role="button">Editar</a></td>
-            <td><a th:href="@{/zone/delete/{col}/{row}/{areaCode}(col=${zone.col},row=${zone.row},areaCode=${zone.areaCode})}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger" role="button">Borrar</a></td>
+            <td><a th:href="@{/zone/update/{code} (code=${zone.code})}" class="btn btn-warning" role="button">Editar</a></td>
+            <td><a th:href="@{/zone/delete/{code}/{codeArea} (codeArea=${zone.codeArea} code=${zone.code})}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-danger" role="button">Borrar</a></td>
         </tr>
         </tbody>
     </table>

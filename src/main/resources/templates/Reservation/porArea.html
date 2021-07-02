@@ -64,51 +64,21 @@
             </div>
         </div>
 
-        <!-- Mostrar Fila + Columna como coordenada unica (Faltaría enviar el valor al controlador al hacer submit) -->
-
-        <!--<div class="form-group row">-->
-            <!--<label class="control-label col-sm-2" for="coordenadas">Zona:</label>-->
-            <!--<div class="col-sm-4">-->
-                <!--<select>-->
-                    <!--<div th:if="${#lists.isEmpty(zonas)}">-->
-                        <!--<option value="NoDisp">No hay zonas disponibles</option>-->
-                    <!--</div>-->
-                    <!--<option th:unless="${#lists.isEmpty(zonas)}" th:each="coord:${zonas}" id="coordenadas"-->
-                            <!--th:value="${coord}"-->
-                            <!--th:text="${coord}">-->
-                    <!--</option>-->
-                <!--</select>-->
-            <!--</div>-->
-        <!--</div>-->
-
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="col">Columna:</label>
+            <label class="control-label col-sm-2" for="zonas">Zona del espacio:</label>
             <div class="col-sm-4">
                 <select>
-                <div th:if="${#lists.isEmpty(cols)}">
-                    <option value="NoDisp">No quedan disponibles</option>
-                </div>
-                <option th:unless="${#lists.isEmpty(cols)}" th:each="col:${cols}" id="col"
-                        th:value="${col}"
-                        th:text="${col}">
-                </option>
+                    <div th:if="${#lists.isEmpty(zonas)}">
+                        <option value="NoDisp">No quedan disponibles</option>
+                    </div>
+                    <option th:unless="${#lists.isEmpty(zonas)}" th:each="zona:${zonas}" id="zonas"
+                            th:value="${zona.code}"
+                            th:text="${'(' + zona.col + ', ' + zona.row + ')'}">
+                    </option>
                 </select>
             </div>
         </div>
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="row">Fila:</label>
-            <div class="col-sm-4">
-                <select>
-                <div th:if="${#lists.isEmpty(rows)}">
-                    <option value="NoDisp">No quedan disponibles</option>
-                </div>
-                <option th:unless="${#lists.isEmpty(rows)}" th:each="row:${rows}" id="row"
-                        th:value="${row}"
-                        th:text="${row}">
-                </option>
-                </select>
-            </div>
-        </div>
+
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
                 <button type="submit" class="btn btn-success">Crear reserva</button>

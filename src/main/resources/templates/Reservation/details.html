@@ -78,20 +78,6 @@
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="control-label col-sm-2" for="Col">Cólumna de la Reserva:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="Col" th:field="*{Col}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('Col')}" th:errors="*{Col}"></div>
-                </div>
-            </div>
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="row">Fila de la Reserva :</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="row" th:field="*{row}" readonly="readonly"/>
-                <div class="error" th:if="${#fields.hasErrors('row')}" th:errors="*{row}"></div>
-            </div>
-        </div>
         <div class="form-group row">
             <label class="control-label col-sm-2" for="CodeArea">Código del área:</label>
             <div class="col-sm-4">
@@ -99,6 +85,13 @@
                 <div class="error" th:if="${#fields.hasErrors('CodeArea')}" th:errors="*{CodeArea}"></div>
             </div>
         </div>
+        <!--<div class="form-group row">-->
+            <!--<label class="control-label col-sm-2" for="zone">Zona del area:</label>-->
+            <!--<div class="col-sm-4">-->
+                <!--<input type="text" class="form-control" id="zone" th:field="*{coord}" readonly="readonly"/>-->
+                <!--<div class="error" th:if="${#fields.hasErrors('coord')}" th:errors="*{coord}"></div>-->
+            <!--</div>-->
+        <!--</div>-->
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
                     <a href="/mainMenu"class="btn btn-primary" role="button">Volver</a>

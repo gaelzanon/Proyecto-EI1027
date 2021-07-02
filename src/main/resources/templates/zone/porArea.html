@@ -29,7 +29,7 @@
             <td th:text="${zone.row}"></td>
             <td th:text="${zone.capacity}"></td>
             <td></td>
-            <td><a th:href="@{/zone/delete/{col}/{row}/{areaCode} (areaCode=${zone.areaCode}, col=${zone.col}, row=${zone.row})}" class="btn btn-danger" role="button">Borrar</a>
+            <td><a th:href="@{/zone/delete/{code} (code=${zone.code})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
         <tr>

@@ -1,10 +1,19 @@
 package es.uji.ei1027.proyecto1027.model;
 
 public class Zone {
+    private String code;
     private int col;
     private int row;
     private int capacity;
     private String areaCode;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public int getCol() {
         return col;
@@ -41,7 +50,8 @@ public class Zone {
     @Override
     public String toString() {
         return "Zone{" +
-                "col=" + col +
+                "code=" + code +
+                ", col=" + col +
                 ", row=" + row +
                 ", capacity=" + capacity +
                 ", areaCode='" + areaCode + '\'' +

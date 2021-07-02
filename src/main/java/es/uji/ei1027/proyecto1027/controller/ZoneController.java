@@ -50,6 +50,8 @@ public class ZoneController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("zone") Zone zone,
                                    BindingResult bindingResult) {
+        int codigos = (int)(Math.random()*100000);
+        zone.setCode( String.valueOf(codigos));
         ZoneValidator zoneValidator = new ZoneValidator();
         zoneValidator.validate(zone, bindingResult);
         if (bindingResult.hasErrors())
@@ -70,9 +72,9 @@ public class ZoneController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{col}/{row}/{areaCode}", method=RequestMethod.GET)
-    public String editZone(Model model, @PathVariable int col, @PathVariable int row, @PathVariable String areaCode) {
-        model.addAttribute("zone", zoneDao.getZone(col, row, areaCode));
+    @RequestMapping(value="/update/{code}", method=RequestMethod.GET)
+    public String editZone(Model model, @PathVariable String code) {
+        model.addAttribute("zone", zoneDao.getZone(code));
         return "zone/update";
     }
 
@@ -88,10 +90,13 @@ public class ZoneController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{col}/{row}/{areaCode}")
-    public String processDeleteZone(@PathVariable int col, @PathVariable int row, @PathVariable String areaCode) {
-        zoneDao.deleteZone(col, row, areaCode);
-        String nameUri="redirect:../../../porArea/" + areaCode;
+    @RequestMapping(value="/delete/{code}")
+    public String processDeleteZone(@PathVariable String code) {
+        String areaCode = zoneDao.getZone(code).getAreaCode();
+        zoneDao.deleteZone(code);
+        System.out.println(areaCode);
+        String nameUri="redirect:../porArea/" + areaCode;
+        System.out.println(nameUri);
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         return nameUri;
     }
@@ -110,6 +115,8 @@ public class ZoneController {
     @RequestMapping(value="/porArea", method = RequestMethod.POST)
     public String processAddSubmitPerArea(@ModelAttribute("zone") Zone zone, BindingResult bindingResult) {
         String nameUri="redirect:porArea/" + zone.getAreaCode();
+        int codigos = (int)(Math.random()*100000);
+        zone.setCode( String.valueOf(codigos));
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         ZoneValidator zoneValidator = new ZoneValidator();
         zoneValidator.validate(zone, bindingResult);
@@ -121,7 +128,7 @@ public class ZoneController {
             throw new ProyectoException(
                     "Ya está asignada la zona con columna "
                             + zone.getCol() + " y fila "
-                            + zone.getRow() + "al area "
+                            + zone.getRow() + " al area "
                             + zone.getAreaCode(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(

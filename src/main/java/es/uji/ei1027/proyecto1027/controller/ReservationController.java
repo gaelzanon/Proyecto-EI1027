@@ -103,6 +103,8 @@ public class ReservationController {
     public String editReservation(Model model, @PathVariable String code) {
         model.addAttribute("reservation", ReservationDao.getReservation(code));
         model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
+        List<Zone> zonas = reservationService.getAllZonesPerArea(ReservationDao.getReservation(code).getCodeArea());
+        model.addAttribute("zonas", zonas);
         return "reservation/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
@@ -120,8 +122,12 @@ public class ReservationController {
     }
     @RequestMapping(value={"/details/{code}","/details"}, method = RequestMethod.GET)
     public String detailsReservation(Model model, @PathVariable(required = false) String code) {
+        Reservation reservation = ReservationDao.getReservation(code);
         if(!model.containsAttribute("reservation"))
-            model.addAttribute("reservation", ReservationDao.getReservation(code));
+            model.addAttribute("reservation", reservation);
+        Zone zone = reservationService.getZone(reservation.getCodeZone());
+        String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
+        model.addAttribute("coord", coord);
         return "reservation/details";
     }
 
@@ -135,6 +141,9 @@ public class ReservationController {
     public String detailsCitizenReservation(Model model, @PathVariable(required = false) String code) {
         if(!model.containsAttribute("reservation"))
             model.addAttribute("reservation", ReservationDao.getReservation(code));
+        Zone zone = reservationService.getZone(ReservationDao.getReservation(code).getCodeZone());
+        String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
+        model.addAttribute("coord", coord);
         return "reservation/detailsCitizen";
     }
 
@@ -143,27 +152,18 @@ public class ReservationController {
     @RequestMapping("/porArea/{code_area}")
     public String reservationPorArea(Model model,@PathVariable String code_area, HttpSession session) {
         Reservation reservation = new Reservation();
+
         reservation.setCodeArea(code_area);
         model.addAttribute("codeArea", reservation);
 
-        List<Zone> zonas = reservationService.getAllZonesPerArea(code_area);
         String nombre = reservationService.getAreaName(code_area);
         model.addAttribute("nombreArea", nombre);
 
         String nif = session.getAttribute("nif").toString();
         model.addAttribute("citizen", reservationService.getCitizen(nif));
 
-        List<String> col_row = new ArrayList<>();
-        LinkedHashSet<Integer> col = new LinkedHashSet<>();
-        LinkedHashSet<Integer> row = new LinkedHashSet<>();
-        for (Zone zona: zonas) {
-            col_row.add("(" + zona.getRow() + "," + zona.getCol() + ")");
-            col.add(zona.getRow());
-            row.add(zona.getCol());
-        }
-        model.addAttribute("zonas", col_row);
-        model.addAttribute("cols", col);
-        model.addAttribute("rows", row);
+        List<Zone> zonas = reservationService.getAllZonesPerArea(code_area);
+        model.addAttribute("zonas", zonas);
         return "reservation/porArea";
     }
 
@@ -182,6 +182,8 @@ public class ReservationController {
         reservation.setAddress(reservationService.getAddress(reservation.getCodeArea()));
         String nameUri="redirect:porArea/" + reservation.getCodeArea();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+//        ReservationValidator reservationValidator = new ReservationValidator();
+//        reservationValidator.validate(reservation, bindingResult);
         if(bindingResult.hasErrors()){
             return nameUri;
         }

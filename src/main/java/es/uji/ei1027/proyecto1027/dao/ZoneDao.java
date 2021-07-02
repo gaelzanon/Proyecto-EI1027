@@ -21,23 +21,23 @@ public class ZoneDao {
 
     /* Añadir zona a la clase de datos */
     public void addZone(Zone zone) {
-        jdbcTemplate.update("INSERT INTO Zone VALUES(?, ?, ?, ?)", zone.getCol(), zone.getRow(), zone.getCapacity(), zone.getAreaCode());
+        jdbcTemplate.update("INSERT INTO Zone VALUES(?, ?, ?, ?, ?)",zone.getCode(), zone.getCol(), zone.getRow(), zone.getCapacity(), zone.getAreaCode());
     }
 
     /* Eliminar zona de la base de datos */
-    public void deleteZone(int col, int row, String areaCode) {
-        jdbcTemplate.update("DELETE from Zone where col=? AND row=? AND code_area=?", col, row, areaCode);
+    public void deleteZone(String code) {
+        jdbcTemplate.update("DELETE from Zone where code=?", code);
     }
 
     /* Modificar los datos de una zona (suponemos que la posición y el area a la que pertenece nunca cambiarán) */
     public void updateZone(Zone zone) {
-        jdbcTemplate.update("UPDATE Zone SET max_capacity=? where col=? AND row=? AND code_area=?", zone.getCapacity(), zone.getCol(), zone.getRow(), zone.getAreaCode());
+        jdbcTemplate.update("UPDATE Zone SET max_capacity=? where code=?", zone.getCapacity(), zone.getCode());
     }
 
     /* Obtener una zona mediante su fila, columna y area a la que pertenece */
-    public Zone getZone(int col, int row, String areaCode) {
+    public Zone getZone(String code) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * from Zone where col=? and row=? and code_area=?", new ZoneRowMapper(), col, row, areaCode);
+            return jdbcTemplate.queryForObject("SELECT * from Zone where code=?", new ZoneRowMapper(), code);
         }
         catch (EmptyResultDataAccessException e) {
             return null;

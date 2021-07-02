@@ -47,4 +47,9 @@ public class ReservationSvc implements ReservationService {
     public String getAreaName(String codeArea) {
         return naturalAreaDao.getNaturalArea(codeArea).getName();
     }
+
+    @Override
+    public Zone getZone(String code) {
+        return zoneDao.getZone(code);
+    }
 }

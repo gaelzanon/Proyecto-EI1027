@@ -12,4 +12,5 @@ public interface ReservationService {
     public String getAddress(String codeArea);
     public Citizen getCitizen(String nif);
     public String getAreaName(String codeArea);
+    public Zone getZone(String code);
 }

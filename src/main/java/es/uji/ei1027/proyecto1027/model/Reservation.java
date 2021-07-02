@@ -19,8 +19,16 @@ public class Reservation {
     private LocalTime startTime;
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime endTime;
-    private int col;
-    private int row;
+
+    public String getCodeZone() {
+        return codeZone;
+    }
+
+    public void setCodeZone(String codeZone) {
+        this.codeZone = codeZone;
+    }
+
+    private String codeZone;
     private String codeArea;
 
     public Reservation() {
@@ -99,22 +107,6 @@ public class Reservation {
         this.endTime = endTime;
     }
 
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public String getCodeArea() {
         return codeArea;
     }
@@ -135,8 +127,7 @@ public class Reservation {
                 ", state=" + state +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", col=" + col +
-                ", row=" + row +
+                ", codeZone='" + codeZone + '\'' +
                 ", codeArea='" + codeArea + '\'' +
                 '}';
     }
