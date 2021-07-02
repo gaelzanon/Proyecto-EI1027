@@ -4,6 +4,5 @@ public enum UserDetailsEnum {
     Citizen,
     Controller,
     MunicipalManager,
-    EnvironmentalManager,
-    Admin
+    EnvironmentalManager
 }

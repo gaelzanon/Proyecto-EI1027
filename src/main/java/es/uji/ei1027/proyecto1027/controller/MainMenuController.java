@@ -31,8 +31,6 @@ public class MainMenuController {
             case  "EnvironmentalManager":
                 redirect="mainMenuEnvironmental";
                 break;
-            case "Admin":
-                return "redirect:/";
         }
         return "mainMenu/"+redirect;
     }

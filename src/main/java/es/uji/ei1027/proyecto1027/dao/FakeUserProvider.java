@@ -91,37 +91,10 @@ public class FakeUserProvider implements UserDao {
         }
 
 
-        UserDetails userClient = new UserDetails();
-        userClient.setUsername("citizen");
-        userClient.setPassword(passwordEncryptor.encryptPassword("citizen"));
-        userClient.setUserType(UserDetailsEnum.Citizen.toString());
-        userClient.setNIF("00000000A");
-        knownUsers.put("citizen", userClient);
-
-        UserDetails userController = new UserDetails();
-        userController.setUsername("controller");
-        userController.setPassword(passwordEncryptor.encryptPassword("controller"));
-        userController.setUserType(UserDetailsEnum.Controller.toString());
-        userController.setNIF("11111111A");
-        knownUsers.put("controller", userController);
-
-        UserDetails userMunicipal = new UserDetails();
-        userMunicipal.setUsername("municipal");
-        userMunicipal.setPassword(passwordEncryptor.encryptPassword("municipal"));
-        userMunicipal.setUserType(UserDetailsEnum.MunicipalManager.toString());
-        userMunicipal.setNIF("22222222A");
-        knownUsers.put("municipal", userMunicipal);
-
-        UserDetails userEnvironmental = new UserDetails();
-        userEnvironmental.setUsername("environmental");
-        userEnvironmental.setPassword(passwordEncryptor.encryptPassword("environmental"));
-        userEnvironmental.setUserType(UserDetailsEnum.EnvironmentalManager.toString());
-        knownUsers.put("environmental", userEnvironmental);
-
         UserDetails userAdmin = new UserDetails();
         userAdmin.setUsername("admin");
         userAdmin.setPassword(passwordEncryptor.encryptPassword("admin"));
-        userAdmin.setUserType("Admin");
+        userAdmin.setUserType(UserDetailsEnum.EnvironmentalManager.toString());
         knownUsers.put("admin", userAdmin);
     }
 

@@ -25,7 +25,7 @@ public class IndexController {
             model.addAttribute("user", new UserDetails());
             return "login";
         }
-        return "index";
+        return "redirect:mainMenu";
     }
 
 }
