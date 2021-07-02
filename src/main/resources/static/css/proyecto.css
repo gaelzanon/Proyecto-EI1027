@@ -16,8 +16,9 @@ h1 {
 
 /* Cabecera de nivel 2 */
 h2 {
+    font-weight: bold;
     font-size: large;
-    color: black;
+    color: LightSlateGray;
 }
 
 /* Clase CSS error */
@@ -72,4 +73,7 @@ li:first-child {
 .unloggeduser {
     font-size: large;
 	color: red;
+}
+label {
+    font-weight: bold;
 }

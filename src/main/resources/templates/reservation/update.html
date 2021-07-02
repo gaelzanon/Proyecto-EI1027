@@ -59,7 +59,7 @@
     <div class="form-group row">
         <label class="control-label col-sm-2" for="State">Estado:</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="State" th:field="*{State}"/>
+            <input type="text" class="form-control" id="State" th:field="*{State}" readonly="readonly"/>
             <div class="error" th:if="${#fields.hasErrors('State')}" th:errors="*{State}"></div>
         </div>
     </div>

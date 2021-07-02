@@ -141,13 +141,18 @@ public class ReservationController {
 
 
     @RequestMapping("/porArea/{code_area}")
-    public String reservationPorArea(Model model,@PathVariable String code_area) {
+    public String reservationPorArea(Model model,@PathVariable String code_area, HttpSession session) {
         Reservation reservation = new Reservation();
         reservation.setCodeArea(code_area);
         model.addAttribute("codeArea", reservation);
+
         List<Zone> zonas = reservationService.getAllZonesPerArea(code_area);
         String nombre = reservationService.getAreaName(code_area);
         model.addAttribute("nombreArea", nombre);
+
+        String nif = session.getAttribute("nif").toString();
+        model.addAttribute("citizen", reservationService.getCitizen(nif));
+
         List<String> col_row = new ArrayList<>();
         LinkedHashSet<Integer> col = new LinkedHashSet<>();
         LinkedHashSet<Integer> row = new LinkedHashSet<>();
