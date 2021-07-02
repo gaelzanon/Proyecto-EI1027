@@ -3,6 +3,7 @@ package es.uji.ei1027.proyecto1027.controller;
 import es.uji.ei1027.proyecto1027.dao.ControllerDao;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.UserDetailsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -37,10 +38,10 @@ public class ControllerController {
 
     @RequestMapping("/list")
     public String listController(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null)
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.MunicipalManager.toString()))
         {
-            model.addAttribute("user", new UserDetails());
-            return "login";
+            return "redirect:/";
         }
         model.addAttribute("controller", ControllerDao.getControllers());
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());

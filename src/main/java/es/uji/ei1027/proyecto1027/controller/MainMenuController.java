@@ -2,6 +2,7 @@ package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.UserDao;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.UserDetailsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,10 @@ public class MainMenuController {
     @RequestMapping("/mainMenu")
     public String checkMenu(HttpSession session){
         UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null)
+        {
+            return "redirect:";
+        }
         String redirect="";
         switch (user.getUserType()){
             case  "Citizen":

@@ -6,11 +6,8 @@ import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 
 import es.uji.ei1027.proyecto1027.dao.ResNatAreaServiceDao;
 import es.uji.ei1027.proyecto1027.dao.TypeAreaDao;
-import es.uji.ei1027.proyecto1027.model.NaturalArea;
+import es.uji.ei1027.proyecto1027.model.*;
 
-import es.uji.ei1027.proyecto1027.model.TypeNaturalArea;
-import es.uji.ei1027.proyecto1027.model.UserDetails;
-import es.uji.ei1027.proyecto1027.model.Zone;
 import es.uji.ei1027.proyecto1027.services.NaturalAreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -61,10 +58,10 @@ public class NaturalAreaController {
 
     @RequestMapping("/list")
     public String listnaturalAreas(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null)
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.MunicipalManager.toString()))
         {
-            model.addAttribute("user", new UserDetails());
-            return "login";
+            return "redirect:/";
         }
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
         model.addAttribute("municipality",municipalityDao.getMunicipality());
@@ -93,7 +90,6 @@ public class NaturalAreaController {
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", new NaturalArea());
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
-
         model.addAttribute("munCode",municipalityDao.getMunicipalityNames() );
         return "naturalArea/add";
     }
@@ -133,7 +129,6 @@ public class NaturalAreaController {
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
         model.addAttribute("stateList", stateList);
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
-
         model.addAttribute("munCode",municipalityDao.getMunicipalityNames() );
 
         return "naturalArea/update";

@@ -1,9 +1,7 @@
 package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.MunicipalityManagerDao;
-import es.uji.ei1027.proyecto1027.model.Municipality;
-import es.uji.ei1027.proyecto1027.model.MunicipalityManager;
-import es.uji.ei1027.proyecto1027.model.NaturalArea;
+import es.uji.ei1027.proyecto1027.model.*;
 import es.uji.ei1027.proyecto1027.services.MunicipalityManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,7 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class MunicipalityManagerController {
     private MunicipalityManagerDao managerDao;
     private MunicipalityManagerService municipalityManagerService;
 
-    private boolean deUnUso;
+    //private boolean deUnUso;
     private int codigos;
 
     @Autowired
@@ -40,29 +40,37 @@ public class MunicipalityManagerController {
     }
 
     @RequestMapping("/list")
-    public String listMunicipalityManager(Model model) {
+    public String listMunicipalityManager(HttpSession session, Model model) {
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.EnvironmentalManager.toString()))
+        {
+            return "redirect:/";
+        }
         model.addAttribute("municipalityManager", managerDao.getMunicipalityManagers());
         return "municipalityManager/list";
     }
 
     @RequestMapping(value="/add")
     public String addMunicipalityManager(Model model) {
-        model.addAttribute("municipalityManager", new MunicipalityManager());
+        if(!model.containsAttribute("municipalityManager"))
+            model.addAttribute("municipalityManager", new MunicipalityManager());
         List<Municipality> municipiosDisponibles = municipalityManagerService.getAllMunicipalities();
         model.addAttribute("municipiosDisponibles", municipiosDisponibles);
         return "municipalityManager/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("municipalityManager") MunicipalityManager munManager,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("municipalityManager") final MunicipalityManager munManager,
+                                   RedirectAttributes attributes, final BindingResult bindingResult) {
         codigos = (int)(Math.random()*100000);
         munManager.setCode( String.valueOf(codigos));
-        munManager.setTipoUsuario("municipalManager");
+        munManager.setTipoUsuario(UserDetailsEnum.MunicipalManager.toString());
         MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
         municipalityManagerValidator.validate(munManager, bindingResult);
-        if (bindingResult.hasErrors())
-            return "municipalityManager/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.municipalityManager",bindingResult);
+            attributes.addFlashAttribute("municipalityManager",munManager);
+            return "redirect:/municipalityManager/add";}
         try {
             managerDao.addMunicipalityManager(munManager);
         } catch (
@@ -78,30 +86,31 @@ public class MunicipalityManagerController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{NIF}", method= RequestMethod.GET)
-    public String editMunicipalityManager(Model model, @PathVariable String NIF) {
-        model.addAttribute("municipalityManager", managerDao.getMunicipalityManager(NIF));
+    @RequestMapping(value={"/update/{NIF}","/update"}, method= RequestMethod.GET)
+    public String editMunicipalityManager(Model model, @PathVariable(required = false) String NIF) {
+        if(!model.containsAttribute("municipalityManager"))
+            model.addAttribute("municipalityManager", managerDao.getMunicipalityManager(NIF));
         List<Municipality> municipiosDisponibles = municipalityManagerService.getAllMunicipalities();
         model.addAttribute("municipiosDisponibles", municipiosDisponibles);
         return "municipalityManager/update";
     }
 
-    @RequestMapping(value="/updatePerfil/{NIF}", method= RequestMethod.GET)
+    /*@RequestMapping(value="/updatePerfil/{NIF}", method= RequestMethod.GET)
     public String editMunicipalityManagerPerfil(Model model, @PathVariable String NIF) {
         model.addAttribute("municipalityManager", managerDao.getMunicipalityManager(NIF));
         deUnUso=true;
         return "municipalityManager/update";
-    }
+    }*/
 
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("municipalityManager") MunicipalityManager munManager,
-            BindingResult bindingResult) {
+            @ModelAttribute("municipalityManager") final MunicipalityManager munManager,
+            RedirectAttributes attributes, final BindingResult bindingResult) {
         MunicipalityManagerValidator municipalityManagerValidator = new MunicipalityManagerValidator();
         municipalityManagerValidator.validate(munManager, bindingResult);
 
-        if (deUnUso==true) {
+        /*if (deUnUso==true) {
             deUnUso=false;
             if (bindingResult.hasErrors())
                 return "municipalityManager/updatePerfil";
@@ -114,10 +123,12 @@ public class MunicipalityManagerController {
                         "Error en el acceso a la base de datos", "ErrorAccedintDades");
             }
             return "redirect:/mainMenu";
-        }
+        }*/
 
-        if (bindingResult.hasErrors())
-            return "municipalityManager/update";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.municipalityManager",bindingResult);
+            attributes.addFlashAttribute("municipalityManager",munManager);
+            return "redirect:/municipalityManager/update";}
         try {
             managerDao.updateMunicipalityManager(munManager);
         } catch (DataAccessException e) {

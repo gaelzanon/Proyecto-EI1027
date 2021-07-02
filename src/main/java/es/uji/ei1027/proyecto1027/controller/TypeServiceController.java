@@ -5,6 +5,8 @@ import es.uji.ei1027.proyecto1027.dao.ServiceDao;
 import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
 import es.uji.ei1027.proyecto1027.model.Service;
 import es.uji.ei1027.proyecto1027.model.TypeService;
+import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.UserDetailsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -36,7 +39,12 @@ public class TypeServiceController {
     }
 
     @RequestMapping("/list")
-    public String listTypeServices(Model model) {
+    public String listTypeServices(HttpSession session, Model model) {
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.EnvironmentalManager.toString()))
+        {
+            return "redirect:/";
+        }
         model.addAttribute("type_of_service", typeServiceDao.getTypeServices());
         return "typeService/list";
     }

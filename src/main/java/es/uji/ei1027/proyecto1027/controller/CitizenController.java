@@ -3,6 +3,8 @@ package es.uji.ei1027.proyecto1027.controller;
 
 import es.uji.ei1027.proyecto1027.dao.CitizenDao;
 import es.uji.ei1027.proyecto1027.model.Citizen;
+import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.UserDetailsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/citizen")
@@ -26,7 +30,12 @@ public class CitizenController {
     }
 
     @RequestMapping("/list")
-    public String listCitizens(Model model) {
+    public String listCitizens(HttpSession session,Model model) {
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.MunicipalManager.toString()))
+        {
+            return "redirect:/";
+        }
         model.addAttribute("citizen", CitizenDao.getCitizens());
         return "citizen/list";
     }
