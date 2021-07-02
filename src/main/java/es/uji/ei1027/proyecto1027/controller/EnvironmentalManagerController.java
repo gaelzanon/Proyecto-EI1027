@@ -5,6 +5,7 @@ import es.uji.ei1027.proyecto1027.dao.EnvironmentalManagerDao;
 import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
 import es.uji.ei1027.proyecto1027.model.EnvironmentalManager;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.UserDetailsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -45,10 +46,11 @@ public class EnvironmentalManagerController {
 
     @RequestMapping("/list")
     public String listEnvironmentalManager(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null)
+        //return "redirect:/"; //nadie accede a la lista de environmental managers
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.Admin.toString()))
         {
-            model.addAttribute("user", new UserDetails());
-            return "login";
+            return "redirect:/";
         }
         model.addAttribute("environmentalManager", environmentalManagerDao.getEnvironmentalManagers());
         model.addAttribute("controller", ControllerDao.getControllers());
@@ -58,14 +60,13 @@ public class EnvironmentalManagerController {
     @RequestMapping(value="/add")
     public String addEnvironmentalManager(Model model) {
         if(!model.containsAttribute("environmentalManager"))
-            model.addAttribute("environmentalManager", new es.uji.ei1027.proyecto1027.model.EnvironmentalManager());
-        //model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
+            model.addAttribute("environmentalManager", new EnvironmentalManager());
 
         return "environmentalManager/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("environmentalManager") final es.uji.ei1027.proyecto1027.model.EnvironmentalManager environmentalManager, RedirectAttributes attributes,
+    public String processAddSubmit(@ModelAttribute("environmentalManager") final EnvironmentalManager environmentalManager, RedirectAttributes attributes,
                                    final BindingResult bindingResult) {
 
         environmentalManager.setTipoUsuario("EnvironmentalManager");
@@ -88,29 +89,34 @@ public class EnvironmentalManagerController {
         }
         return "redirect:list";
     }
-    @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
-    public String editEnvironmentalManager(Model model, @PathVariable String NIF) {
-        model.addAttribute("environmentalManager", environmentalManagerDao.getEnvironmentalManager(NIF));
+    @RequestMapping(value={"/update/{NIF}","/update"}, method = RequestMethod.GET)
+    public String editEnvironmentalManager(Model model, @PathVariable(required = false) String NIF) {
+        if(!model.containsAttribute("environmentalManager"))
+            model.addAttribute("environmentalManager", environmentalManagerDao.getEnvironmentalManager(NIF));
 
         return "environmentalManager/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("environmentalManager") es.uji.ei1027.proyecto1027.model.EnvironmentalManager environmentalManager,
-            BindingResult bindingResult) {
+            @ModelAttribute("environmentalManager") final EnvironmentalManager environmentalManager, RedirectAttributes attributes,
+            final BindingResult bindingResult) {
         EnvironmentalManagerValidator environmentalManagerValidator = new EnvironmentalManagerValidator();
         environmentalManagerValidator.validate(environmentalManager, bindingResult);
-        System.out.println(deUnUso);
-        if (deUnUso) {
-            if (bindingResult.hasErrors())
-                return "environmentalManager/update";
-            deUnUso=false;
-            environmentalManagerDao.updateEnvironmentalManager(environmentalManager);
-            return "redirect:/mainMenu";
-        }
+
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.environmentalManager",bindingResult);
+            attributes.addFlashAttribute("environmentalManager",environmentalManager);
+            return "redirect:/environmentalManager/update";}
+
         if (bindingResult.hasErrors())
             return "environmentalManager/update";
-        environmentalManagerDao.updateEnvironmentalManager(environmentalManager);
+        try{
+            environmentalManagerDao.updateEnvironmentalManager(environmentalManager);
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
+
         return "redirect:list";
     }
     @RequestMapping(value="/updatePerfil/{NIF}", method = RequestMethod.GET)

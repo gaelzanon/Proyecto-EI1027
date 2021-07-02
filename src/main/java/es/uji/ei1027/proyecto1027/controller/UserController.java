@@ -38,7 +38,7 @@ public class UserController {
     public String gestionPerfilPropio(HttpSession session){
         UserDetails userDetails=(UserDetails) session.getAttribute("user");
         if (userDetails == null){
-            return "login";
+            return "redirect:/";
         }
         String redirect="";
         switch (userDetails.getUserType()){
@@ -51,9 +51,12 @@ public class UserController {
             case  "MunicipalManager":
                 redirect="municipalityManager";
                 break;
-            default:
-                return "redirect:/mainMenu";
+            case  "EnvironmentalManager":
+                redirect="environmentalManager";
+                break;
+            case "Admin":
+                return "redirect:/";
         }
-        return "redirect:/"+redirect+"/updatePerfil/"+userDetails.getNIF();
+        return "redirect:/"+redirect+"/update/"+userDetails.getNIF();
     }
 }

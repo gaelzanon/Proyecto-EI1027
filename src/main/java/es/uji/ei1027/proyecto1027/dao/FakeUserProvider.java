@@ -94,7 +94,7 @@ public class FakeUserProvider implements UserDao {
         UserDetails userAdmin = new UserDetails();
         userAdmin.setUsername("admin");
         userAdmin.setPassword(passwordEncryptor.encryptPassword("admin"));
-        userAdmin.setUserType(UserDetailsEnum.EnvironmentalManager.toString());
+        userAdmin.setUserType(UserDetailsEnum.Admin.toString());
         knownUsers.put("admin", userAdmin);
     }
 

@@ -20,7 +20,7 @@ public class MainMenuController {
         UserDetails user=(UserDetails) session.getAttribute("user");
         if ( user== null)
         {
-            return "redirect:";
+            return "redirect:/";
         }
         String redirect="";
         switch (user.getUserType()){
@@ -36,6 +36,8 @@ public class MainMenuController {
             case  "EnvironmentalManager":
                 redirect="mainMenuEnvironmental";
                 break;
+            case "Admin":
+                return "/index";
         }
         return "mainMenu/"+redirect;
     }
