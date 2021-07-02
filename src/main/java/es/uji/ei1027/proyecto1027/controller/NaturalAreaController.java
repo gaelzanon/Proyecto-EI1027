@@ -72,8 +72,7 @@ public class NaturalAreaController {
     public String listClienteNaturalAreas(HttpSession session, Model model) {
         if (session.getAttribute("user") == null)
         {
-            model.addAttribute("user", new UserDetails());
-            return "login";
+            return "redirect:/";
         }
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
         model.addAttribute("municipality",municipalityDao.getMunicipality());
@@ -84,8 +83,7 @@ public class NaturalAreaController {
     public String addnaturalArea(HttpSession session,Model model) {
         if (session.getAttribute("user") == null)
         {
-            model.addAttribute("user", new UserDetails());
-            return "login";
+            return "redirect:/";
         }
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", new NaturalArea());

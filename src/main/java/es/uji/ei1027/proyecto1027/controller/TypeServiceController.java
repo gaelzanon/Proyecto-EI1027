@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -26,17 +27,12 @@ import java.util.List;
 public class TypeServiceController {
 
     private TypeServiceDao typeServiceDao;
-    private ServiceDao serviceDao;
 
     @Autowired
     public void setTypeServiceDao(TypeServiceDao typeServiceDao) {
         this.typeServiceDao=typeServiceDao;
     }
 
-    @Autowired
-    public void setServiceDao(ServiceDao ServiceDao) {
-        this.serviceDao=ServiceDao;
-    }
 
     @RequestMapping("/list")
     public String listTypeServices(HttpSession session, Model model) {
@@ -50,17 +46,20 @@ public class TypeServiceController {
     }
     @RequestMapping(value="/add")
     public String addTypeService(Model model) {
-        model.addAttribute("type_of_service", new TypeService());
+        if(!model.containsAttribute("type_of_service"))
+            model.addAttribute("type_of_service", new TypeService());
         return "typeService/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("type_of_service") TypeService typeService,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("type_of_service") final TypeService typeService,
+                                   RedirectAttributes attributes, final BindingResult bindingResult) {
         TypeServiceValidator typeServiceValidator = new TypeServiceValidator();
         typeServiceValidator.validate(typeService, bindingResult);
-        if (bindingResult.hasErrors())
-            return "typeService/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.type_of_service",bindingResult);
+            attributes.addFlashAttribute("type_of_service",typeService);
+            return "redirect:/typeService/add";}
         try {
             typeServiceDao.addTypeService(typeService);
         } catch (
@@ -102,13 +101,15 @@ public class TypeServiceController {
 
     @RequestMapping(value="/delete/{type}")
     public String processDelete(@PathVariable String type) {
-        List<String> list = serviceDao.getServicesTypes();
-        if(list.contains(type)){
+
+        try{
+            typeServiceDao.deleteTypeService(type);
+            return "redirect:../list";
+        } catch (Exception e){
             throw new ProyectoException(
-                    "Lo sentimos pero este tipo de servicio aun se esta ofreciendo en algunas areas", "ErrorAccedintDades");
+                    "Lo sentimos pero existen servicios con este tipo de servicio asignado.", "ErrorAccedintDades");
         }
-        typeServiceDao.deleteTypeService(type);
-        return "redirect:../list";
+
     }
 
 

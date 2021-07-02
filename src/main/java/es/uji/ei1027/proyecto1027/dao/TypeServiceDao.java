@@ -1,6 +1,7 @@
 package es.uji.ei1027.proyecto1027.dao;
 
 
+import es.uji.ei1027.proyecto1027.controller.ProyectoException;
 import es.uji.ei1027.proyecto1027.model.Service;
 import es.uji.ei1027.proyecto1027.model.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,8 @@ public void addTypeService(TypeService typeService) {
         "INSERT INTO Type_of_service VALUES(?)" ,
         typeService.getType());
 	}catch(Exception e ){
-		System.out.println("Entrada duplicada no se ha podido insertar");
+        throw new ProyectoException(
+                "El tipo de servicio "+typeService.getType()+" ya existe. Por favor utiliza un nombre distinto.", "ErrorAccedintDades");
 		
 	}    
 }

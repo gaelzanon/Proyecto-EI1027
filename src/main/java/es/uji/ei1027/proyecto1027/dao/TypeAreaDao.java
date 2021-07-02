@@ -1,6 +1,7 @@
 package es.uji.ei1027.proyecto1027.dao;
 
 
+import es.uji.ei1027.proyecto1027.controller.ProyectoException;
 import es.uji.ei1027.proyecto1027.model.NaturalArea;
 import es.uji.ei1027.proyecto1027.model.Service;
 import es.uji.ei1027.proyecto1027.model.TypeNaturalArea;
@@ -31,7 +32,8 @@ public void addTypeArea(TypeNaturalArea typeNaturalArea) {
         "INSERT INTO Type_of_area VALUES(?)" ,
         typeNaturalArea.getType());
 	}catch(Exception e ){
-		System.out.println("Entrada duplicada no se ha podido insertar");
+        throw new ProyectoException(
+                "El tipo de area "+typeNaturalArea.getType()+" ya existe. Por favor utiliza un nombre distinto.", "ErrorAccedintDades");
 		
 	}    
 }

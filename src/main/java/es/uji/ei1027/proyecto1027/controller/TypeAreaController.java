@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -27,15 +28,10 @@ import java.util.List;
 public class TypeAreaController {
 
     private TypeAreaDao typeAreaDao;
-    private NaturalAreaDao naturalAreaDao;
 
     @Autowired
     public void setTypeAreaDao(TypeAreaDao typeAreaDao) {
         this.typeAreaDao=typeAreaDao;
-    }
-    @Autowired
-    public void setNaturalAreaDao(NaturalAreaDao naturalAreaDao) {
-        this.naturalAreaDao=naturalAreaDao;
     }
 
     @RequestMapping("/list")
@@ -50,17 +46,20 @@ public class TypeAreaController {
     }
     @RequestMapping(value="/add")
     public String addTypeArea(Model model) {
-        model.addAttribute("type_of_area", new TypeNaturalArea());
+        if(!model.containsAttribute("type_of_area"))
+            model.addAttribute("type_of_area", new TypeNaturalArea());
         return "typeArea/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("type_of_area") TypeNaturalArea typeNaturalArea,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("type_of_area") final TypeNaturalArea typeNaturalArea,
+                                   RedirectAttributes attributes, final BindingResult bindingResult) {
         TypeAreaValidator typeAreaValidator = new TypeAreaValidator();
         typeAreaValidator.validate(typeNaturalArea, bindingResult);
-        if (bindingResult.hasErrors())
-            return "typeArea/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.type_of_area",bindingResult);
+            attributes.addFlashAttribute("type_of_area",typeNaturalArea);
+            return "redirect:/typeArea/add";}
         try {
             typeAreaDao.addTypeArea(typeNaturalArea);
         } catch (
@@ -75,40 +74,18 @@ public class TypeAreaController {
         return "redirect:list";
     }
 
-    /* No se actualiza, solo hay clave primaria
-    @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
-    public String editService(Model model, @PathVariable String code) {
-        model.addAttribute("service", ServiceDao.getService(code));
-
-        return "typeService/update";
-    }
-
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("service") Service service,
-            BindingResult bindingResult) {
-        ServiceValidator serviceValidator = new ServiceValidator();
-        serviceValidator.validate(service, bindingResult);
-        if (bindingResult.hasErrors())
-            return "typeService/update";
-        try {
-            ServiceDao.updateService(service);
-        } catch (DataAccessException e) {
-            throw new ProyectoException(
-                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
-        }
-        return "redirect:list";
-    }*/
 
     @RequestMapping(value="/delete/{type}")
     public String processDelete(@PathVariable String type) {
-        List<String> list = naturalAreaDao.getNaturalAreaTypes();
-        if(list.contains(type)){
+
+        try{
+            typeAreaDao.deleteTypeArea(type);
+            return "redirect:../list";
+        } catch (Exception e){
             throw new ProyectoException(
-                    "Lo sentimos pero este tipo de area aun corresponde con alguna de las areas que ofrecemos", "ErrorAccedintDades");
+                    "Lo sentimos pero existen areas con este tipo de area asignado.", "ErrorAccedintDades");
         }
-        typeAreaDao.deleteTypeArea(type);
-        return "redirect:../list";
+
     }
 
 
