@@ -140,8 +140,13 @@ public class MunicipalityManagerController {
 
     @RequestMapping(value="/delete/{NIF}")
     public String processDeleteMunicipalityManager(@PathVariable String NIF) {
-        managerDao.deleteMunicipalityManager(NIF);
-        return "redirect:../list";
+        try{
+            managerDao.deleteMunicipalityManager(NIF);
+            return "redirect:../list";
+        } catch (Exception e){
+        throw new ProyectoException(
+                "Ha ocurrido un error accediendo a la base de datos. Intentalo de nuevo mas tarde.", "ErrorAccedintDades");
+        }
     }
 
 }

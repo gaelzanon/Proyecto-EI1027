@@ -18,23 +18,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
 @RequestMapping("/municipality")
 public class MunicipalityController {
-    private NaturalAreaDao naturalAreaDao;
     private MunicipalityDao municipalityDao;
     private int codigos;
 
     @Autowired
     public void SetMunicipalityDao(MunicipalityDao municipalityDao) {
         this.municipalityDao = municipalityDao;
-    }
-    @Autowired
-    public void setNaturalAreaDao(NaturalAreaDao naturalAreaDao) {
-        this.naturalAreaDao=naturalAreaDao;
     }
 
 
@@ -121,13 +117,13 @@ public class MunicipalityController {
 
     @RequestMapping(value="/delete/{code}")
     public String processDeleteMunicipality(@PathVariable String code) {
-        List<String> list = naturalAreaDao.getNaturalAreaMunicipios();
-        if(list.contains(code)){
+        try{
+            municipalityDao.deleteMunicipality(code);
+            return "redirect:../list";
+        } catch (Exception e){
             throw new ProyectoException(
-                    "Lo sentimos pero este municipio tiene reservas sin terminar", "ErrorAccedintDades");
+                    "Lo sentimos pero este municipio está en uso. Comprueba que no tiene áreas naturales ni gestores municipales asignados.", "ErrorAccedintDades");
         }
-        municipalityDao.deleteMunicipality(code);
-        return "redirect:../list";
     }
 
 }
