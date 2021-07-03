@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear Managers Municipales</title>
+    <title>Crear Controladores Municipales</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -14,7 +14,7 @@
 <div layout:fragment="content">
 <div class="container">
     <br>
-    <h1>Crear Manager</h1>
+    <h1>Crear Controlador Municipales</h1>
     <hr color="blue" size=3>
     <form class="form-horizontal" action="#" th:action="@{/municipalityManager/add}"
           th:object="${municipalityManager}" method="post">
@@ -26,15 +26,6 @@
                 <div class="error" th:if="${#fields.hasErrors('NIF')}" th:errors="*{NIF}"></div>
             </div>
         </div>
-
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="password">Password:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="password" th:field="*{password}" />
-                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-            </div>
-        </div>
-
         <div class="form-group row">
             <label class="control-label col-sm-2" for="name">Nombre:</label>
             <div class="col-sm-4">
@@ -44,7 +35,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="municipalityName">Nombre Municipalidad:</label>
+            <label class="control-label col-sm-2" for="municipalityName">Nombre del Municipio:</label>
             <div class="col-sm-4">
                 <select name= "municipalityName" id ="municipalityName" th:field="*{municipalityName}">
                     <div th:if="${#lists.isEmpty(municipiosDisponibles)}">
@@ -66,10 +57,16 @@
                 <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
         </div>
-
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="password">Contraseña:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="password" th:field="*{password}" />
+                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+        </div>
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-success">Añadir manager</button>
+                <button type="submit" class="btn btn-success">Añadir Controlador Municipal</button>
                 <a href="/municipalityManager/list"class="btn btn-primary" role="button">Volver</a>
             </div>
         </div>

@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Modificar environmentalManager</title>
+    <title>Modificar Controladores Medio Ambientales</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -14,7 +14,7 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <h1>Modificar environmentalManager</h1>
+        <h1>Modificar Controladores Medio Ambientales</h1>
         <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/environmentalManager/update}"
               th:object="${environmentalManager}" method="post">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="password">Password:</label>
+                <label class="control-label col-sm-2" for="password">Contraseña:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="password" th:field="*{password}" />
                     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <button type="submit" class="btn btn-success">Modificar EnvironmentalManager</button>
+                    <button type="submit" class="btn btn-success">Modificar Controlador Medio Ambiental</button>
                     <a href="/mainMenu"class="btn btn-primary" role="button">Volver</a>
                 </div>
             </div>

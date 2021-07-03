@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Modificar Managers Municipales</title>
+    <title>Modificar Controlador Municipal</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -14,7 +14,7 @@
 <div layout:fragment="content">
 <div class="container">
     <br>
-    <h1>Modificar Manager</h1>
+    <h1>Modificar Controlador Municipal</h1>
     <hr color="blue" size=3>
     <form class="form-horizontal" action="#" th:action="@{/municipalityManager/update}"
           th:object="${municipalityManager}" method="post">
@@ -38,14 +38,6 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="password">Password:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="password" th:field="*{password}" />
-                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-            </div>
-        </div>
-
-        <div class="form-group row">
             <label class="control-label col-sm-2" for="municipalityName">Nombre Municipalidad:</label>
             <div class="col-sm-4">
                 <select name= "municipalityName" id ="municipalityName" th:field="*{municipalityName}">
@@ -68,10 +60,17 @@
                 <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
         </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="password">Password:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="password" th:field="*{password}" />
+                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+        </div>
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-success">Editar manager</button>
+                <button type="submit" class="btn btn-success">Editar Controlador Municipal</button>
                 <a href="/municipalityManager/list" class="btn btn-primary" role="button">Volver</a>
             </div>
         </div>

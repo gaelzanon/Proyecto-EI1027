@@ -30,9 +30,9 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="qr">QR:</label>
+
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="qr" th:field="*{qr}" readonly="readonly"/>
+                <input type="hidden" class="form-control" id="qr" th:field="*{qr}" readonly="readonly"/>
                 <div class="error" th:if="${#fields.hasErrors('qr')}" th:errors="*{qr}"></div>
             </div>
         </div>
