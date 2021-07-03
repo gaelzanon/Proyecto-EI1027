@@ -7,6 +7,7 @@ import es.uji.ei1027.proyecto1027.dao.TypeServiceDao;
 import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import es.uji.ei1027.proyecto1027.model.Service;
 import es.uji.ei1027.proyecto1027.model.UserDetails;
+import es.uji.ei1027.proyecto1027.model.UserDetailsEnum;
 import es.uji.ei1027.proyecto1027.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -28,7 +29,7 @@ import java.util.List;
 @RequestMapping("/service")
 public class ServiceController {
 
-    private ServiceDao ServiceDao;
+    private ServiceDao serviceDao;
 
     private ServiceService serviceService;
 
@@ -36,8 +37,8 @@ public class ServiceController {
     int codigos;
 
     @Autowired
-    public void setServiceDao(ServiceDao ServiceDao) {
-        this.ServiceDao=ServiceDao;
+    public void setServiceDao(ServiceDao serviceDao) {
+        this.serviceDao=serviceDao;
     }
 
     @Autowired
@@ -52,18 +53,19 @@ public class ServiceController {
 
     @RequestMapping("/list")
     public String listServices(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null)
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.MunicipalManager.toString()))
         {
-            model.addAttribute("user", new UserDetails());
-            return "login";
+            return "redirect:/";
         }
-        model.addAttribute("service", ServiceDao.getServices());
+        model.addAttribute("service", serviceDao.getServices());
 
         return "service/list";
     }
     @RequestMapping(value="/add")
     public String addService(Model model) {
-        model.addAttribute("service", new Service());
+        if(!model.containsAttribute("service"))
+            model.addAttribute("service", new Service());
         model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
         return "service/add";
     }
@@ -82,7 +84,14 @@ public class ServiceController {
             return "redirect:/service/add";
         }
         try {
-            ServiceDao.addService(service);
+            for(Service ser:serviceDao.getServices()){
+                if(service.getType_of_service().equals(ser.getType_of_service()) && service.getDescription().equals(ser.getDescription())){
+                    throw new ProyectoException(
+                            "Ya existe el servicio "
+                                    + service.getDescription() + " con el tipo de servicio "+service.getType_of_service(), "CPduplicada");
+                }
+            }
+            serviceDao.addService(service);
         } catch (
                 DuplicateKeyException e) {
             throw new ProyectoException(
@@ -99,7 +108,7 @@ public class ServiceController {
     @RequestMapping(value={"/update/{code}","/update"}, method = RequestMethod.GET)
     public String editService(Model model, @PathVariable(required = false) String code) {
         if(!model.containsAttribute("service"))
-            model.addAttribute("service", ServiceDao.getService(code));
+            model.addAttribute("service", serviceDao.getService(code));
         model.addAttribute("type_of_service", serviceService.getAllServiceTypes());
 
 
@@ -117,7 +126,14 @@ public class ServiceController {
             attributes.addFlashAttribute("service",service);
             return "redirect:/service/update";}
         try {
-            ServiceDao.updateService(service);
+            for(Service ser:serviceDao.getServices()){
+                if(service.getType_of_service().equals(ser.getType_of_service()) && service.getDescription().equals(ser.getDescription())){
+                    throw new ProyectoException(
+                            "Ya existe el servicio "
+                                    + service.getDescription() + " con el tipo de servicio "+service.getType_of_service(), "CPduplicada");
+                }
+            }
+            serviceDao.updateService(service);
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
@@ -126,18 +142,16 @@ public class ServiceController {
     }
     @RequestMapping(value="/delete/{code}")
     public String processDelete(@PathVariable String code) {
-        List<String> list = resNatAreaServiceDao.getCodes();
-        if(list.contains(code)){
+
+        try{
+            serviceDao.deleteService(code);
+            return "redirect:../list";
+        } catch (Exception e) {
             throw new ProyectoException(
-                    "Lo sentimos pero este servicio aun esta vinculado a una Area Natural", "ErrorAccedintDades");
+                    "Lo sentimos pero este servicio está en uso. Comprueba que no hay áreas naturales usandolo.", "ErrorAccedintDades");
+
         }
-        ServiceDao.deleteService(code);
-        return "redirect:../list";
     }
-
-
-
-
 
 
 }
