@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Lista de Solicitudes de Nuevos Tipos de Servicios</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <br>
+    <h1>Lista de Solicitudes de Nuevos Tipos de Servicios</h1>
+    <hr color="blue" size=3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Fecha Solicitud</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="solicitud: ${solicitud}">
+            <td th:text="${solicitud.name}"></td>
+            <td th:text="${solicitud.descripcion}"></td>
+            <td th:text="${solicitud.Fecha}"></td>
+            <td></td>
+
+            <td><a th:href="@{/solicitud/details/{code}(code=${solicitud.code})}" class="btn btn-primary" role="button">Mas información</a>
+            </td>
+            <td><a th:href="@{/solicitud/delete/{code}(code=${solicitud.code})}" class="btn btn-danger" onclick="return confirm('¿Estas seguro de que quieres eliminar este elemento?');" role="button">Borrar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/mainMenu"class="btn btn-primary" role="button">Volver</a>
+</div>
+</body>
+</html>
