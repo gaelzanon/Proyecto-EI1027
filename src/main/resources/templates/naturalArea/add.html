@@ -35,7 +35,7 @@
     <div class="form-group row">
         <label class="control-label col-sm-2" for="maxCapacity">Capacidad máxima:</label>
         <div class="col-sm-4">
-            <input type="number" class="form-control" id="maxCapacity" th:field="*{maxCapacity}" />
+            <input type="number" class="form-control" id="maxCapacity" th:field="*{maxCapacity}" min="1"/>
             <div class="error" th:if="${#fields.hasErrors('maxCapacity')}" th:errors="*{maxCapacity}"></div>
         </div>
     </div>
@@ -91,7 +91,7 @@
     </div>
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-succes">Añadir Espacio Natural</button>
+                <button type="submit" class="btn btn-success">Añadir Espacio Natural</button>
                 <a href="/naturalArea/list"class="btn btn-primary" role="button">Volver</a>
             </div>
         </div>

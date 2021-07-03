@@ -169,7 +169,6 @@ public class NaturalAreaController {
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
         model.addAttribute("stateList", stateList);
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
-        model.addAttribute("municipio",municipalityDao.getMunicipality(NaturalAreaDao.getNaturalArea(codeArea).getMunCode()).getName());
         return "naturalArea/details";
     }
 
