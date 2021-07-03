@@ -51,7 +51,6 @@ public class ControllerController {
     public String addController(Model model) {
         if(!model.containsAttribute("controller"))
             model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
-        //model.addAttribute("controller", new es.uji.ei1027.proyecto1027.model.Controller());
         model.addAttribute("code_area",naturalAreaDao.getNaturalAreaNames());
         return "controller/add";
     }
@@ -80,30 +79,32 @@ public class ControllerController {
         }
         return "redirect:list";
     }
-    @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
-    public String editController(Model model, @PathVariable String NIF) {
-        model.addAttribute("controller", ControllerDao.getController(NIF));
+    @RequestMapping(value={"/update/{NIF}","/update"}, method = RequestMethod.GET)
+    public String editController(Model model, @PathVariable(required = false) String NIF) {
+        if(!model.containsAttribute("controller"))
+            model.addAttribute("controller", ControllerDao.getController(NIF));
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         return "controller/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
-            BindingResult bindingResult) {
+            RedirectAttributes attributes, final BindingResult bindingResult) {
         ControllerValidator controllerValidator = new ControllerValidator();
         controllerValidator.validate(controller, bindingResult);
-        System.out.println(deUnUso);
-        if (deUnUso) {
-            if (bindingResult.hasErrors())
-                return "controller/update";
-            deUnUso=false;
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.controller",bindingResult);
+            attributes.addFlashAttribute("controller",controller);
+            return "redirect:/controller/update"; }
+
+        try{
             ControllerDao.updateController(controller);
-            return "redirect:/mainMenu";
+            return "redirect:list";
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        if (bindingResult.hasErrors())
-            return "controller/update";
-        ControllerDao.updateController(controller);
-        return "redirect:list";
+
     }
     @RequestMapping(value="/updatePerfil/{NIF}", method = RequestMethod.GET)
     public String editControllerPerfil(Model model, @PathVariable String NIF) {
@@ -115,8 +116,13 @@ public class ControllerController {
 
     @RequestMapping(value="/delete/{NIF}")
     public String processDelete(@PathVariable String NIF) {
-        ControllerDao.deleteController(NIF);
-        return "redirect:../list";
+        try{
+            ControllerDao.deleteController(NIF);
+            return "redirect:../list";
+        } catch (Exception e){
+            throw new ProyectoException(
+                    "Ha ocurrido un error accediendo a la base de datos. Intentalo de nuevo mas tarde.", "ErrorAccedintDades");
+        }
     }
 
 

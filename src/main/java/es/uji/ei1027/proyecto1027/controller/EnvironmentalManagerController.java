@@ -108,8 +108,6 @@ public class EnvironmentalManagerController {
             attributes.addFlashAttribute("environmentalManager",environmentalManager);
             return "redirect:/environmentalManager/update";}
 
-        if (bindingResult.hasErrors())
-            return "environmentalManager/update";
         try{
             environmentalManagerDao.updateEnvironmentalManager(environmentalManager);
         } catch (DataAccessException e) {
@@ -128,8 +126,13 @@ public class EnvironmentalManagerController {
 
     @RequestMapping(value="/delete/{NIF}")
     public String processDelete(@PathVariable String NIF) {
-        environmentalManagerDao.deleteEnvironmentalManager(NIF);
-        return "redirect:../list";
+        try{
+            environmentalManagerDao.deleteEnvironmentalManager(NIF);
+            return "redirect:../list";
+        } catch (Exception e){
+            throw new ProyectoException(
+                    "Ha ocurrido un error accediendo a la base de datos. Intentalo de nuevo mas tarde.", "ErrorAccedintDades");
+        }
     }
 
 
