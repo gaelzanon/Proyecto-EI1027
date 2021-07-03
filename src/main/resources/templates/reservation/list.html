@@ -9,13 +9,14 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
           th:href="@{/css/proyecto.css}"/>
+
 </head>
 <body>
 <div layout:fragment="content">
     <br>
 <h1>Lista de Reservas</h1>
     <hr color="blue" size=3>
-<table class="table table-striped">
+<table class="table table-striped" , class="sortable-table">
     <thead>
     <tr>
         <th>Dirección</th>
@@ -38,7 +39,7 @@
         </td>
         <td><a th:href="@{/reservation/update/{code}(code=${reservation.code})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/reservation/delete/{code}(code=${reservation.code})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
+        <td><a th:href="@{/reservation/delete/{code}(code=${reservation.code})}" class="btn btn-danger" onclick="return confirm('¿Estas seguro de que quieres eliminar este elemento?');" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>

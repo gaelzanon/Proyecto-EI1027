@@ -38,7 +38,7 @@
         <td th:text="${controller.email}"></td>
         <td><a th:href="@{/controller/update/{NIF}(NIF=${controller.NIF})}" class="btn btn-warning" role="button">Editar</a>
         </td>
-        <td><a th:href="@{/controller/delete/{NIF}(NIF=${controller.NIF})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" role="button">Borrar</a>
+        <td><a th:href="@{/controller/delete/{NIF}(NIF=${controller.NIF})}" class="btn btn-danger" onclick="return confirm('¿Estas seguro de que quieres eliminar este elemento?');" role="button">Borrar</a>
         </td>
     </tr>
     </tbody>
