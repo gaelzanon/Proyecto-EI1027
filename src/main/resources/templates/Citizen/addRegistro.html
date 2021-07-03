@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragmentos/base}">
 <head>
-    <title>Crear Ciudadano</title>
+    <title>Registro</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -14,48 +14,48 @@
 <div layout:fragment="content">
     <div class="container">
         <br>
-        <h1>Nuevo Ciudadano</h1>
+        <h1>Registrate como Usuario de Sana</h1>
         <hr color="blue" size=3>
         <form class="form-horizontal" action="#" th:action="@{/citizen/add}"
               th:object="${citizen}" method="post">
 
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="NIF">NIF:</label>
+                <label class="control-label col-sm-2" for="NIF">NIF*:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="NIF" th:field="*{NIF}" />
                     <div class="error" th:if="${#fields.hasErrors('NIF')}" th:errors="*{NIF}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="name">Nombre:</label>
+                <label class="control-label col-sm-2" for="name">Nombre*:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="name" th:field="*{name}" />
                     <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="surname">Apellidos:</label>
+                <label class="control-label col-sm-2" for="surname">Apellidos*:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="surname" th:field="*{surname}" />
                     <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="Address">Dirección:</label>
+                <label class="control-label col-sm-2" for="Address">Dirección*:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="Address" th:field="*{Address}" />
                     <div class="error" th:if="${#fields.hasErrors('Address')}" th:errors="*{Address}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="password">Password:</label>
+                <label class="control-label col-sm-2" for="password">Contraseña*:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="password" th:field="*{password}" />
                     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="Email">Email:</label>
+                <label class="control-label col-sm-2" for="Email">Email*:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="Email" th:field="*{Email}" />
                     <div class="error" th:if="${#fields.hasErrors('Email')}" th:errors="*{Email}"></div>
@@ -63,7 +63,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <button type="submit" class="btn btn-success">Añadir ciudadano</button>
+                    <button type="submit" class="btn btn-success">Crear Cuenta</button>
                     <a href="/login"class="btn btn-primary" role="button">Volver</a>
                 </div>
             </div>

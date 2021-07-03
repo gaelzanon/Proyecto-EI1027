@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="registrationDate">Fecha de registro:</label>
+                <label class="control-label col-sm-2" for="registrationDate">Fecha de Registro:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="registrationDate" th:field="*{registrationDate}" readonly="readonly"/>
                     <div class="error" th:if="${#fields.hasErrors('registrationDate')}" th:errors="*{registrationDate}"></div>
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <button type="submit" class="btn btn-success">Modificar municipio</button>
+                    <button type="submit" class="btn btn-success">Modificar Municipio</button>
                     <a href="/municipality/list"class="btn btn-primary" role="button">Volver</a>
                 </div>
             </div>
