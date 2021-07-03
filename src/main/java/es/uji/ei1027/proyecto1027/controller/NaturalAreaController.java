@@ -169,6 +169,7 @@ public class NaturalAreaController {
         List<String> stateList = Arrays.asList("Abierta", "Cerrada","Restringida");
         model.addAttribute("stateList", stateList);
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
+        model.addAttribute("municipio",municipalityDao.getMunicipality(NaturalAreaDao.getNaturalArea(codeArea).getMunCode()).getName());
         return "naturalArea/details";
     }
 
@@ -194,13 +195,15 @@ public class NaturalAreaController {
 
     @RequestMapping(value="/delete/{codeArea}")
     public String processDelete(@PathVariable String codeArea) {
-        List<String> list = resNatAreaServiceDao.getCodesArea();
-        if(list.contains(codeArea)){
+
+        try{
+            NaturalAreaDao.deleteNaturalArea(codeArea);
+            return "redirect:../list";
+        } catch (Exception e){
             throw new ProyectoException(
-                    "Lo sentimos pero este area aun esta vinculado a servicios disponibles", "ErrorAccedintDades");
+                    "Lo sentimos pero esta área está en uso. Comprueba que no tiene reservas ni controladores asignados.", "ErrorAccedintDades");
         }
-        NaturalAreaDao.deleteNaturalArea(codeArea);
-        return "redirect:../list";
+
     }
 
 }
