@@ -76,6 +76,8 @@ label {
     font-weight: bold;
 }
 
+
+
 /*CAJA DE LOGIN*/
 .centro div{
     background-color: #228B22;
@@ -106,3 +108,55 @@ label {
     background-color: #777777;
     border-color: #6c757d;
 }
+
+/*LOGO ARRIBA A LA IZQUIERDA*/
+.navegacion span{
+	width:180px;
+	padding:11px;
+	margin-top:5px;
+	display:block;
+    color:white;
+    font-weight:bold;
+    border:2px solid #000;
+}
+
+/*ENLACES DEL MENU DE ARRIBA*/
+.navegacion a{
+color:black;
+font-weight:bold;
+border-right:2px solid #000;
+}
+
+.navegacion a:hover{
+color:#444444;
+border-right:2px solid #444444;
+}
+
+.vl {
+  border-left: 6px solid black;
+  height: 500px;
+}
+
+.tab { margin-left: 20px; }
+
+/*Para los botones del menu principal*/
+ul.menuMain{
+    list-style: none;
+    line-height: 150%;
+}
+
+/*añadida mas separacion entre los elementos de las listas ordenadas*/
+li{
+    margin-top: 10px;
+    border:1px black;
+}
+
+li:first-child {
+    margin-top:0;
+}
+
+
+
+/*color fondo del menu superior*/.fondoNavegacion {
+ background-color: #228B22;
+ }
