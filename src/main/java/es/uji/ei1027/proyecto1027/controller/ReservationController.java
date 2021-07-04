@@ -120,6 +120,7 @@ public class ReservationController {
         ReservationDao.updateReservation(reservation);
         return "redirect:list";
     }
+
     @RequestMapping(value={"/details/{code}","/details"}, method = RequestMethod.GET)
     public String detailsReservation(Model model, @PathVariable(required = false) String code) {
         Reservation reservation = ReservationDao.getReservation(code);
@@ -202,12 +203,21 @@ public class ReservationController {
         return "redirect:porCitizen";
     }
 
+    @RequestMapping("/porController")
+    public String reservationListPorArea(Model model, HttpSession session) {
+        String nifController = ((UserDetails) session.getAttribute("user")).getNIF();
+        String area = reservationService.getController(nifController).getCode_area();
+        List<Reservation> reservas = ReservationDao.getReservationPerNaturalArea(area);
+        model.addAttribute("reservas", reservas);
+        return "reservation/porController";
+    }
+
     @RequestMapping("/porCitizen")
     public String reservationPorCitizen(HttpSession session, Model model) {
         UserDetails userDetails=(UserDetails) session.getAttribute("user");
         List<Reservation> reservas = ReservationDao.getReservationPerCitizen(userDetails.getNIF());
         model.addAttribute("reservas", reservas);
-        return "reservation/porCitizen";
+        return "redirect:reservation/porCitizen";
     }
 
     @RequestMapping("/addArea")

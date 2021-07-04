@@ -70,5 +70,13 @@ public class ReservationDao {
         }
     }
 
+    public List<Reservation> getReservationPerNaturalArea(String area) {
+        try {
+            return jdbcTemplate.query("SELECT * from reservation WHERE code_area=?", new ReservationRowMapper(), area);
+        } catch (EmptyResultDataAccessException e) {
+            return new ArrayList<Reservation>();
+        }
+    }
+
 
 }

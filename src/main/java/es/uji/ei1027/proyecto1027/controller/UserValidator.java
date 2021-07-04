@@ -13,7 +13,7 @@ class UserValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         UserDetails userDetails = (UserDetails) obj;
         if (userDetails.getUsername().trim().equals("")) {
-            errors.rejectValue("username", "obligatori", "Se debe introducir un nombre");
+            errors.rejectValue("username", "obligatori", "Introduce tu NIF");
         }
         if (userDetails.getPassword().trim().equals("")) {
             errors.rejectValue("password", "obligatori", "Se debe introducir una contraseña");
