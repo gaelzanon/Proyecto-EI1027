@@ -22,6 +22,6 @@ public class SolicitudValidator implements Validator {
                     "Se debe introducir un nombre");
         if (Solicitud.getDescripcion().trim().equals(""))
             errors.rejectValue("descripcion", "obligatori",
-                    "Se debe introducir una Descripcion");
+                    "Se debe introducir una descripcion");
     }
 }
