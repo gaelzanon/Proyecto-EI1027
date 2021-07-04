@@ -61,7 +61,7 @@ public class NaturalAreaController {
         UserDetails user=(UserDetails) session.getAttribute("user");
         if ( user== null || !user.getUserType().equals(UserDetailsEnum.MunicipalManager.toString()))
         {
-            return "redirect:/";
+            return "redirect:/naturalArea/listCliente";
         }
         model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea());
         model.addAttribute("municipality",municipalityDao.getMunicipality());

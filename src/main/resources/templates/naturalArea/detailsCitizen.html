@@ -121,7 +121,7 @@
                 <div class="col-sm-offset-2 col-sm-4">
                     <th:block th:if="${user_type == 'Citizen'}">
                         <a  th:href="@{/reservation/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Realizar reserva</a>
-                        <a href="/naturalArea/listCliente" class="btn btn-primary" role="button">Volver</a>
+                        <a href="/reservation/addArea" class="btn btn-primary" role="button">Volver</a>
                     </th:block>
                     <th:block th:unless="${user_type == 'Citizen'}">
                         <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
