@@ -75,3 +75,34 @@ li:first-child {
 label {
     font-weight: bold;
 }
+
+/*CAJA DE LOGIN*/
+.centro div{
+    background-color: #228B22;
+    color:white;
+    padding:25px 25px 25px 25px;
+    margin-top:80px;
+    border: solid 3px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.centro:first-child
+{
+    margin-top: 15px;
+}
+
+.centro ul {
+	padding:0;
+}
+
+.centro .btn-secondary {
+	width:250px;
+    color: #eeeeee;
+    background-color: #111111;
+    border-color: #6c757d;
+}
+
+.centro .btn-secondary:hover {
+    background-color: #777777;
+    border-color: #6c757d;
+}
