@@ -1,16 +1,11 @@
 package es.uji.ei1027.proyecto1027.services;
 
-import es.uji.ei1027.proyecto1027.dao.CitizenDao;
-import es.uji.ei1027.proyecto1027.dao.ControllerDao;
-import es.uji.ei1027.proyecto1027.dao.NaturalAreaDao;
-import es.uji.ei1027.proyecto1027.dao.ZoneDao;
-import es.uji.ei1027.proyecto1027.model.Citizen;
-import es.uji.ei1027.proyecto1027.model.Controller;
-import es.uji.ei1027.proyecto1027.model.NaturalArea;
-import es.uji.ei1027.proyecto1027.model.Zone;
+import es.uji.ei1027.proyecto1027.dao.*;
+import es.uji.ei1027.proyecto1027.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +22,12 @@ public class ReservationSvc implements ReservationService {
 
     @Autowired
     ControllerDao controllerDao;
+
+    @Autowired
+    MunicipalityManagerDao municipalityManagerDao;
+
+    @Autowired
+    MunicipalityDao municipalityDao;
 
     @Override
     public List<NaturalArea> getAllNaturalAreas() {
@@ -61,5 +62,17 @@ public class ReservationSvc implements ReservationService {
     @Override
     public Controller getController(String nif) {
         return controllerDao.getController(nif);
+    }
+
+    @Override
+    public List<String> getAreasForMunicipalManager(String nif) {
+        MunicipalityManager municipalityManager = municipalityManagerDao.getMunicipalityManager(nif);
+        String codigoMun = municipalityDao.getMunicipalityCode(municipalityManager.getMunicipalityName());
+        List<NaturalArea> naturalAreas = naturalAreaDao.getNaturalAreasPorMunicipio(codigoMun);
+        List<String> codigosArea = new ArrayList<String>();
+        for (NaturalArea natArea : naturalAreas) {
+            codigosArea.add(natArea.getCodeArea());
+        }
+        return codigosArea;
     }
 }
