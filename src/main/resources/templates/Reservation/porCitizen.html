@@ -34,7 +34,7 @@
             <td th:text="${#temporals.format(reservation.creationDate,'dd/MM/yyyy')}"></td>
             <td th:text="${reservation.startTime}"></td>
             <td th:text="${reservation.endTime}"></td>
-            <td><a th:href="@{/reservation/detailsCitizen/{code}(code=${reservation.code})}" class="btn btn-primary" role="button">Detalles</a>
+            <td><a th:href="@{/reservation/details/{code}(code=${reservation.code})}" class="btn btn-primary" role="button">Detalles</a>
             </td>
             <td><a th:href="@{/reservation/update/{code}(code=${reservation.code})}" class="btn btn-warning" role="button">Editar</a>
             </td>
@@ -43,7 +43,7 @@
         </tr>
         </tbody>
     </table>
-    <a href="/reservation/addArea" class="btn btn-success" role="button">Seleccionar Lugar de la reserva</a>
+    <a href="/naturalArea/listCliente" class="btn btn-success" role="button">Crear nueva reserva</a>
     <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
 </div>
 </body>
