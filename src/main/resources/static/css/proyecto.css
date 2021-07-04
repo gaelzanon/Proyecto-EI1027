@@ -16,9 +16,7 @@ h1 {
 
 /* Cabecera de nivel 2 */
 h2 {
-    font-weight: bold;
-    font-size: large;
-    color: LightSlateGray;
+    color: red;
 }
 
 /* Clase CSS error */
