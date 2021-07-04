@@ -173,7 +173,7 @@ public class NaturalAreaController {
     }
 
     @RequestMapping(value={"/detailsCitizen/{codeArea}","/details"}, method = RequestMethod.GET)
-    public String detailsCitizennaturalArea(HttpSession session,Model model, @PathVariable(required = false) String codeArea) {
+    public String detailsCitizenNaturalArea(HttpSession session,Model model, @PathVariable(required = false) String codeArea) {
         UserDetails userDetails=(UserDetails) session.getAttribute("user");
         if (userDetails == null)
         {
@@ -183,6 +183,7 @@ public class NaturalAreaController {
             model.addAttribute("user_type",userDetails.getUserType());
         }
         List<Zone> zonas = naturalAreaService.getAllNatAreaZones(codeArea);
+        model.addAttribute("municipality", naturalAreaService.getMunicipalityName(NaturalAreaDao.getNaturalArea(codeArea).getMunCode()));
         model.addAttribute("zones", zonas);
         if(!model.containsAttribute("naturalArea"))
             model.addAttribute("naturalArea", NaturalAreaDao.getNaturalArea(codeArea));
@@ -190,6 +191,15 @@ public class NaturalAreaController {
         model.addAttribute("stateList", stateList);
         model.addAttribute("types_of_area", typeAreaDao.getTypeAreas());
         return "naturalArea/detailsCitizen";
+    }
+
+    @RequestMapping("/porMunicipio")
+    public String listNaturalAreasPorMunicipio(Model model, HttpSession httpSession) {
+        String nif = ((UserDetails) httpSession.getAttribute("user")).getNIF();
+        String codigoMunicipio = naturalAreaService.getCodigoMunicipalParaMunicipalManager(nif);
+        List<NaturalArea> naturalAreas = NaturalAreaDao.getNaturalAreasPorMunicipio(codigoMunicipio);
+        model.addAttribute("naturalAreas", naturalAreas);
+        return "naturalArea/porMunicipio";
     }
 
     @RequestMapping(value="/delete/{codeArea}")
@@ -200,7 +210,7 @@ public class NaturalAreaController {
             return "redirect:../list";
         } catch (Exception e){
             throw new ProyectoException(
-                    "Lo sentimos pero esta área está en uso. Comprueba que no tiene reservas ni controladores asignados.", "ErrorAccedintDades");
+                    "Lo sentimos pero esta área tiene personal asignado o reservas pendientes.", "ErrorAccedintDades");
         }
 
     }

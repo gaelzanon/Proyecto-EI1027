@@ -117,7 +117,7 @@ public class NaturalAreaDao {
 
     public List<NaturalArea> getNaturalAreasPorMunicipio(String code) {
         try {
-            return jdbcTemplate.query("SELECT code_area from Natural_Area WHERE mun_code=?", new NaturalAreaRowMapper(), code);
+            return jdbcTemplate.query("SELECT * from Natural_Area WHERE mun_code=?", new NaturalAreaRowMapper(), code);
         } catch (EmptyResultDataAccessException e) {
             return new ArrayList<NaturalArea>();
         }

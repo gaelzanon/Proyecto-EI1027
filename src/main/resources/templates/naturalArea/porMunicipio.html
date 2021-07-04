@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+<head>
+    <title>Gestionar Área Natural</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <br>
+    <h1>Lista de Áreas Naturales</h1>
+    <hr color="blue" size=3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Municipio</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Dirección</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="naturalArea: ${naturalAreas}">
+
+            <td th:text="${naturalArea.name}"></td>
+            <th:block th:each="mun: ${municipality}">
+                <td th:if="${naturalArea.munCode == mun.code}" th:text="${mun.name}"></td>
+            </th:block>
+            <td th:text="${naturalArea.type_of_area}"></td>
+            <td th:text="${naturalArea.descripcion}"></td>
+            <td th:text="${naturalArea.address}"></td>
+            <td></td>
+
+            <td><a th:href="@{/naturalArea/details/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-primary" role="button">Mas información</a>
+            </td>
+            <td><a th:href="@{/zone/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-success" role="button">Gestionar zonas</a>
+            </td>
+            <td><a th:href="@{/resNatAreaSer/porArea/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Gestionar servicios</a>
+            </td>
+            <td><a th:href="@{/naturalArea/update/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-warning" role="button">Editar</a>
+            </td>
+            <td><a th:href="@{/naturalArea/delete/{codeArea}(codeArea=${naturalArea.codeArea})}" class="btn btn-danger" onclick="return confirm('¿Estas seguro de que quieres eliminar este elemento?');" role="button">Borrar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Añadir Área Natural</a>
+    <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
+
+</div>
+
+</body>
+</html>
