@@ -204,7 +204,7 @@ public class ReservationController {
     }
 
     @RequestMapping("/porController")
-    public String reservationListPorArea(Model model, HttpSession session) {
+    public String reservationListPorController(Model model, HttpSession session) {
         String nifController = ((UserDetails) session.getAttribute("user")).getNIF();
         String area = reservationService.getController(nifController).getCode_area();
         List<Reservation> reservas = ReservationDao.getReservationPerNaturalArea(area);
@@ -218,6 +218,18 @@ public class ReservationController {
         List<Reservation> reservas = ReservationDao.getReservationPerCitizen(userDetails.getNIF());
         model.addAttribute("reservas", reservas);
         return "redirect:reservation/porCitizen";
+    }
+
+    @RequestMapping("porMunicipalManager")
+    public String reservationListPorMunicipalManager(Model model, HttpSession session) {
+        String nif = ((UserDetails) session.getAttribute("user")).getNIF();
+        List<String> areas = reservationService.getAreasForMunicipalManager(nif);
+        List<Reservation> reservasPorMunicipio = new ArrayList<Reservation>();
+        for (String area : areas) {
+            reservasPorMunicipio.addAll(ReservationDao.getReservationPerNaturalArea(area));
+        }
+        model.addAttribute("reservas", reservasPorMunicipio);
+        return "reservation/porMunicipalManager";
     }
 
     @RequestMapping("/addArea")
