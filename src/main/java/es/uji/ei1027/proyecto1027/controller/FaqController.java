@@ -17,12 +17,7 @@ import javax.servlet.http.HttpSession;
 public class FaqController {
 
     @RequestMapping("/faq")
-    public String faq(HttpSession session) {
-        UserDetails user=(UserDetails) session.getAttribute("user");
-        if ( user== null)
-        {
-            return "redirect:/";
-        }
+    public String faq() {
         return "faq/faq";
     }
 }
