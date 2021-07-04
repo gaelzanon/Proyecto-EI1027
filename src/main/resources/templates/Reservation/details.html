@@ -26,7 +26,7 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="Date">Fecha de la Reserva:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="Date" th:field="*{Date}" readonly="readonly" />
+                    <input type="date" class="form-control" id="Date" th:field="*{Date}" readonly="readonly" />
                 </div>
             </div>
             <div class="form-group row">
@@ -46,7 +46,7 @@
             <div class="form-group row">
                 <label class="control-label col-sm-2" for="creationDate">Fecha de Creación:</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
+                    <input type="date" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
                     <div class="error" th:if="${#fields.hasErrors('creationDate')}" th:errors="*{creationDate}"></div>
                 </div>
             </div>
@@ -78,13 +78,6 @@
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </div>
             </div>
-        <div class="form-group row">
-            <label class="control-label col-sm-2" for="CodeArea">Código del área:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="CodeArea" th:field="*{CodeArea}" readonly="readonly"/>
-                <div class="error" th:if="${#fields.hasErrors('CodeArea')}" th:errors="*{CodeArea}"></div>
-            </div>
-        </div>
         <!--<div class="form-group row">-->
             <!--<label class="control-label col-sm-2" for="zone">Zona del area:</label>-->
             <!--<div class="col-sm-4">-->

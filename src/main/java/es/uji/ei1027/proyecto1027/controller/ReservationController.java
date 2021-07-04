@@ -127,15 +127,15 @@ public class ReservationController {
         if(!model.containsAttribute("reservation"))
             model.addAttribute("reservation", reservation);
         Zone zone = reservationService.getZone(reservation.getCodeZone());
-        String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
-        model.addAttribute("coord", coord);
+        //String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
+        //model.addAttribute("coord", coord);
         return "reservation/details";
     }
 
     @RequestMapping(value="/delete/{code}")
     public String processDelete(@PathVariable String code) {
         ReservationDao.deleteReservation(code);
-        return "redirect:../porCitizen";
+        return "redirect:/mainMenu";
     }
 
     @RequestMapping(value={"/detailsCitizen/{code}","/detailsCitizen"}, method = RequestMethod.GET)
@@ -143,8 +143,8 @@ public class ReservationController {
         if(!model.containsAttribute("reservation"))
             model.addAttribute("reservation", ReservationDao.getReservation(code));
         Zone zone = reservationService.getZone(ReservationDao.getReservation(code).getCodeZone());
-        String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
-        model.addAttribute("coord", coord);
+        //String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
+        //model.addAttribute("coord", coord);
         return "reservation/detailsCitizen";
     }
 
@@ -217,7 +217,7 @@ public class ReservationController {
         UserDetails userDetails=(UserDetails) session.getAttribute("user");
         List<Reservation> reservas = ReservationDao.getReservationPerCitizen(userDetails.getNIF());
         model.addAttribute("reservas", reservas);
-        return "redirect:reservation/porCitizen";
+        return "reservation/porCitizen";
     }
 
     @RequestMapping("porMunicipalManager")
