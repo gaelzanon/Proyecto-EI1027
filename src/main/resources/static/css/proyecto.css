@@ -33,7 +33,7 @@ h2 {
 
 /* usuario logueado */
 .loggeduser {
-	color: gray;
+	color: black;
 	text-align: right;
     margin-right: 10pt;
 }
@@ -70,7 +70,7 @@ li:first-child {
 /* usuario no logueado */
 .unloggeduser {
     font-size: large;
-	color: red;
+	color: orange;
 }
 label {
     font-weight: bold;
@@ -122,9 +122,9 @@ label {
 
 /*ENLACES DEL MENU DE ARRIBA*/
 .navegacion a{
-color:black;
-font-weight:bold;
-border-right:2px solid #000;
+    color:black;
+    font-weight:bold;
+    border-right:2px solid #000;
 }
 
 .navegacion a:hover{
