@@ -51,10 +51,14 @@ public class ReservationController {
 
     @RequestMapping("/list")
     public String listReservations(HttpSession session, Model model) {
-        if (session.getAttribute("user") == null)
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if (user == null)
         {
-            model.addAttribute("user", new UserDetails());
-            return "login";
+            return "redirect:/";
+        } else if(user.getUserType().equals(UserDetailsEnum.Controller.toString())){
+            return "redirect:/reservation/porController";
+        } else if(user.getUserType().equals(UserDetailsEnum.Citizen.toString())){
+            return "redirect:/reservation/porCitizen";
         }
         model.addAttribute("reservation", ReservationDao.getReservation());
         return "reservation/list";
@@ -134,8 +138,14 @@ public class ReservationController {
 
     @RequestMapping(value="/delete/{code}")
     public String processDelete(@PathVariable String code) {
-        ReservationDao.deleteReservation(code);
-        return "redirect:/mainMenu";
+        try{
+            ReservationDao.deleteReservation(code);
+            return "redirect:/reservation/list";
+        } catch (Exception e) {
+            throw new ProyectoException(
+                    "Error en la base de datos.", "ErrorAccedintDades");
+        }
+
     }
 
     @RequestMapping(value={"/detailsCitizen/{code}","/detailsCitizen"}, method = RequestMethod.GET)
