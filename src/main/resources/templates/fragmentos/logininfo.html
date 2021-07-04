@@ -1,4 +1,4 @@
-<div class="loggeduser text-muted" th:object="${session}">
+<div class="loggeduser" th:object="${session}">
     <p th:if="*{user == null}">
         <span class="unloggeduser"> No conectado</span>
         <a href="/login" th:href="@{/login}" class="btn btn-outline-light my-2 my-sm-0" role="button">Entrar</a>
