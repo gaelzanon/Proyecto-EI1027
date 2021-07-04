@@ -128,7 +128,7 @@ li:first-child {
 
 
 /*pie siempre fijo*/
-footer{position:fixed;
+footer{
    left:0px;
    bottom:0px;
    height:75px;
