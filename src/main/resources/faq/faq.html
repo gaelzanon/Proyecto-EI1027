@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragmentos/base}">
+
+
+
+<head>
+    <meta charset="UTF-8" />
+    <title>FAQ</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/proyecto.css"
+          th:href="@{/css/proyecto.css}"/>
+    <style>
+  h2 {color:red;}
+  ajuste { margin-right: 10px;
+           margin-left: 80px;}
+
+
+</style>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <br>
+    <h1>F.A.Q</h1>
+    <hr color="blue" size=3>
+
+
+
+
+    <h2>¿Qué es SANA?</h2>
+
+    SANA es una iniciativa de la consejería de medio ambiente de la Generalitat Valenciana (GV)
+    para impulsar el uso adecuado de las instalaciones y servicios para controlar la ocupación
+    y mejorar la ocupación que se proporciona a sus ciudadanos.
+
+    <h2>¿Tengo qué pagar por usar este servicio?</h2>
+    No, SANA es una app totalmente gratuita, el único requisito es estar registrado siendo mayor
+    de edad.
+
+    <h2>Soy de otra comunidad o país, ¿Puedo usar SANA?</h2>
+    Sí, la Generalitat Valenciana quiere hacer participe al turimo de sus parajes y servicios
+    únicos de esta región a todo el mundo, el único requisito es registrarse y ser mayor de edad.
+
+    <h2>¿Se cumple las medidas anticovid?</h2>
+    La consejería de medio ambiente pone a su disposición todas las medidas que cumplen la
+    legislación vigente, llevando un registro de ocupación horaria limitada tanto en sus
+    parajes como en sus servicios.
+
+    <h2>¿Cada cuánto tiempo se actualiza la información?</h2>
+    Un equipo de profesionales del sector actualizan la web periódicamente, tanto en cambios
+    puntuales de la legislación como con cambios informativos. Última actualizacion: Julio.
+
+
+    Contacto:
+    Horario de Oficinas: 10:00-12:00
+    (Tlf) 96-555-55-55
+
+
+    <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
+
+</body>
+</html>
