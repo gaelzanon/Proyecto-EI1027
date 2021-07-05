@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,33 +42,31 @@ public class CitizenController {
     }
     @RequestMapping(value="/add")
     public String addCitizen(Model model) {
-        model.addAttribute("citizen", new Citizen());
+        if(!model.containsAttribute("citizen"))
+            model.addAttribute("citizen", new Citizen());
         return "citizen/add";
     }
     @RequestMapping(value="/addRegistro")
     public String addCitizenRegistro(Model model) {
-        model.addAttribute("citizen", new Citizen());
+        if(!model.containsAttribute("citizen"))
+            model.addAttribute("citizen", new Citizen());
         deUnUso=true;
         return "citizen/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("citizen") Citizen citizen,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("citizen") final Citizen citizen,
+                                   RedirectAttributes attributes, final BindingResult bindingResult) {
         citizen.setTipoUsuario("citizen");
         CitizenValidator citizenValidator = new CitizenValidator();
         citizenValidator.validate(citizen, bindingResult);
-        if (deUnUso==true) {
-            if (bindingResult.hasErrors())
-                return "citizen/add";
-            deUnUso=false;
-            CitizenDao.addCitizen(citizen);
-            return "citizen/Registrado";
-        }
-        if (bindingResult.hasErrors())
-            return "citizen/add";
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.citizen",bindingResult);
+            attributes.addFlashAttribute("citizen",citizen);
+            return "redirect:/citizen/add"; }
         try {
             CitizenDao.addCitizen(citizen);
+            return "citizen/Registrado";
         } catch (
                 DuplicateKeyException e) {
             throw new ProyectoException(
@@ -77,12 +76,13 @@ public class CitizenController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        return "redirect:list";
+
     }
 
-    @RequestMapping(value="/update/{NIF}", method = RequestMethod.GET)
-    public String editCitizen(Model model, @PathVariable String NIF) {
-        model.addAttribute("citizen", CitizenDao.getCitizen(NIF));
+    @RequestMapping(value={"/update/{NIF}","/update"}, method = RequestMethod.GET)
+    public String editCitizen(Model model, @PathVariable(required = false) String NIF) {
+        if(!model.containsAttribute("citizen"))
+            model.addAttribute("citizen", CitizenDao.getCitizen(NIF));
         return "citizen/update";
     }
     @RequestMapping(value="/updatePerfil/{NIF}", method = RequestMethod.GET)
@@ -95,29 +95,32 @@ public class CitizenController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("citizen") Citizen citizen,
-            BindingResult bindingResult) {
-        citizen.setTipoUsuario("citizen");
-        System.out.println(citizen);
+            @ModelAttribute("citizen") final Citizen citizen,
+            RedirectAttributes attributes, final BindingResult bindingResult) {
         CitizenValidator citizenValidator = new CitizenValidator();
         citizenValidator.validate(citizen, bindingResult);
-        if (deUnUso==true) {
-            if (bindingResult.hasErrors())
-                return "citizen/update";
-            deUnUso=false;
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.citizen",bindingResult);
+            attributes.addFlashAttribute("citizen",citizen);
+            return "redirect:/citizen/update"; }
+        try{
             CitizenDao.updateCitizen(citizen);
             return "redirect:/mainMenu";
+        } catch (DataAccessException e) {
+            throw new ProyectoException(
+                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        if (bindingResult.hasErrors())
-            return "citizen/update";
-        CitizenDao.updateCitizen(citizen);
-        return "redirect:/mainMenu";
     }
 
     @RequestMapping(value="/delete/{NIF}")
     public String processDelete(@PathVariable String NIF) {
-        CitizenDao.deleteCitizen(NIF);
-        return "redirect:../list";
+        try{
+            CitizenDao.deleteCitizen(NIF);
+            return "redirect:../list";
+        } catch (Exception e){
+            throw new ProyectoException(
+                    "Ha ocurrido un error accediendo a la base de datos. Intentalo de nuevo mas tarde.", "ErrorAccedintDades");
+        }
     }
 
 

@@ -88,7 +88,7 @@ public class ControllerController {
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("controller") es.uji.ei1027.proyecto1027.model.Controller controller,
+            @ModelAttribute("controller") final es.uji.ei1027.proyecto1027.model.Controller controller,
             RedirectAttributes attributes, final BindingResult bindingResult) {
         ControllerValidator controllerValidator = new ControllerValidator();
         controllerValidator.validate(controller, bindingResult);
