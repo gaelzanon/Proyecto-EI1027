@@ -138,8 +138,9 @@ public class ResNatAreaServiceController {
         resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         String nameUri="redirect:porArea/" + resNatAreaService.getCode_area();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             return nameUri;
+        }
         try {
             resNatAreaServiceDao.addR_NArea_service(resNatAreaService);
         } catch (DuplicateKeyException e) {

@@ -35,11 +35,11 @@ public class ResNatAreaServiceDao {
 
 
     /* Obtener un ResNatAreaService por area */
-    public List<ResNatAreaService> getResNatAreaServicePorArea(String code_relacion) {
+    public List<ResNatAreaService> getResNatAreaServicePorArea(String code_area) {
         try {
             return this.jdbcTemplate.query(
-                    "SELECT * FROM R_NArea_Services WHERE code_relacion=?",
-                    new Object[] {code_relacion}, new ResNatAreaServiceRowMapper());
+                    "SELECT * FROM R_NArea_Services WHERE code_area=?",
+                    new ResNatAreaServiceRowMapper(), code_area);
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<ResNatAreaService>();
