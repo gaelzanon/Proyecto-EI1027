@@ -24,12 +24,6 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="Date">Fecha de la Reserva:</label>
-        <div class="col-sm-4">
-            <input type="date" class="form-control" id="Date" th:field="*{Date}" readonly="readonly"/>
-        </div>
-    </div>
-    <div class="form-group row">
         <label class="control-label col-sm-2" for="qr">QR:</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" id="qr" th:field="*{qr}" readonly="readonly"/>
@@ -43,7 +37,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="creationDate">Fecha de Creación:</label>
+        <label class="control-label col-sm-2" for="creationDate">Confirmada en fecha:</label>
         <div class="col-sm-4">
             <input type="date" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
             <div class="error" th:if="${#fields.hasErrors('creationDate')}" th:errors="*{creationDate}"></div>
@@ -64,27 +58,33 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="startTime">Hora de comienzo:</label>
+        <label class="control-label col-sm-2" for="Date">Fecha de la Reserva:</label>
+        <div class="col-sm-4">
+            <input type="date" class="form-control" id="Date" th:field="*{Date}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="startTime">Hora de inicio:</label>
         <div class="col-sm-4">
             <input type="time" class="form-control" id="startTime" th:field="*{startTime}" />
             <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="endTime">Hora de cierre:</label>
+        <label class="control-label col-sm-2" for="endTime">Hora de finalización:</label>
         <div class="col-sm-4">
             <input type="time" class="form-control" id="endTime" th:field="*{endTime}" />
             <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="zonas">Zona del area:</label>
+        <label class="control-label col-sm-2" for="zonas">Zona (Columna, Fila):</label>
         <div class="col-sm-4">
-            <select>
+            <select id="zonas" th:field="*{codeZone}">
                 <div th:if="${#lists.isEmpty(zonas)}">
                     <option value="NoDisp">No quedan disponibles</option>
                 </div>
-                <option th:unless="${#lists.isEmpty(zonas)}" th:each="zona:${zonas}" id="zonas"
+                <option th:unless="${#lists.isEmpty(zonas)}" th:each="zona:${zonas}"
                         th:value="${zona.code}"
                         th:text="${'(' + zona.col + ', ' + zona.row + ')'}">
                 </option>
