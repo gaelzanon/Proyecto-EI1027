@@ -20,7 +20,7 @@
     <br>
     <h2 th:text="${nombreArea}"></h2>
     <br>
-    <form class="form-horizontal" action="#" th:action="@{/reservation/porArea}" th:object="${codeArea}" method="post">
+    <form class="form-horizontal" action="#" th:action="@{/reservation/porArea}" th:object="${reservation}" method="post">
 
         <div class="form-group row">
             <label class="control-label col-sm-2">Usuario:</label>
@@ -69,6 +69,7 @@
                             th:text="${'(' + zona.col + ', ' + zona.row + ')'}">
                     </option>
                 </select>
+                <div class="error" th:if="${#fields.hasErrors('codeZone')}" th:errors="*{codeZone}"></div>
             </div>
         </div>
 
