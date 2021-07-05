@@ -19,7 +19,7 @@
         <form class="form-horizontal" action="#" th:action="@{/resNatAreaSer/add}"
               th:object="${resNatAreaSer}" method="post">
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="code_area">Area:</label>
+            <label class="control-label col-sm-2" for="code_area">Area*:</label>
             <div class="col-sm-4">
                 <select class="form_control" type="text" id="code_area" th:field="*{code_area}">
                     <option th:each="area: ${naturalArea}" th:value="${area.codeArea}" th:text="${area.name}"></option>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="code">Servicio:</label>
+            <label class="control-label col-sm-2" for="code">Servicio*:</label>
             <div class="col-sm-4">
                 <select class="form_control" type="text" id="code" th:field="*{code}">
                     <option th:each="ser: ${service}" th:value="${ser.code}" th:text="${ser.description}"></option>
@@ -37,14 +37,14 @@
             </div>
         </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="startTime">Fecha Inicio:</label>
+                <label class="control-label col-sm-2" for="startTime">Fecha Inicio*:</label>
                 <div class="col-sm-4">
                     <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />
                     <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="endTime">Fecha Inicio:</label>
+                <label class="control-label col-sm-2" for="endTime">Fecha Fin*:</label>
                 <div class="col-sm-4">
                     <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>

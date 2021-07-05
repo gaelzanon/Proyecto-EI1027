@@ -25,20 +25,19 @@ public class ReservationValidator implements Validator {
         if (reservation.getState().trim().equals(""))
             errors.rejectValue("state", "obligatori",
                     "Se debe introducir un state");
-        if (reservation.getStartTime()==null) {
+        if (reservation.getStartTime()==null || reservation.getEndTime()==null) {
             errors.rejectValue("startTime", "obligatori",
-                    "Se debe introducir una hora de comienzo para la reserva");
-        }
-        if (reservation.getEndTime()==null) {
+                    "Se debe introducir una fecha de apertura");
             errors.rejectValue("endTime", "obligatori",
-                    "Se debe introducir una hora de finalizacion para la reserva");
-        }
-        if (reservation.getStartTime().compareTo(reservation.getEndTime())< 0){
+                    "Se debe introducir una fecha de cierre");
+        } else if (reservation.getStartTime().compareTo(reservation.getEndTime())>=0){
+            errors.rejectValue("startTime", "obligatori",
+                    "La fecha de inicio no puede ser mas grande que la de fin");
             errors.rejectValue("endTime", "obligatori",
-                    "La hora de inicio no puede ser posterior a la hora de finalizacion");
+                    "La fecha de inicio no puede ser mas grande que la de fin");
         }
         if (reservation.getDate()==null)
-            errors.rejectValue("code", "obligatori",
+            errors.rejectValue("date", "obligatori",
                     "Se debe introducir una fecha para la reserva");
     }
 }
