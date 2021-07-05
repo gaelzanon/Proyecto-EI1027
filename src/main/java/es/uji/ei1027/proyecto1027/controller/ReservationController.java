@@ -102,9 +102,10 @@ public class ReservationController {
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
     }
-    @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
-    public String editReservation(Model model, @PathVariable String code) {
-        model.addAttribute("reservation", ReservationDao.getReservation(code));
+    @RequestMapping(value={"/update/{code}","/update/{code}"}, method = RequestMethod.GET)
+    public String editReservation(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("reservation"))
+            model.addAttribute("reservation", ReservationDao.getReservation(code));
         model.addAttribute("codeArea", NaturalAreaDao.getNaturalAreaNames() );
         List<Zone> zonas = reservationService.getAllZonesPerArea(ReservationDao.getReservation(code).getCodeArea());
         model.addAttribute("zonas", zonas);
@@ -121,7 +122,7 @@ public class ReservationController {
         if (bindingResult.hasErrors()){
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.reservation",bindingResult);
             attributes.addFlashAttribute("reservation",reservation);
-            return "redirect:/reservation/update"; }
+            return "redirect:/reservation/update/"+reservation.getCode(); }
         try {
             ReservationDao.updateReservation(reservation);
             return "redirect:list";
