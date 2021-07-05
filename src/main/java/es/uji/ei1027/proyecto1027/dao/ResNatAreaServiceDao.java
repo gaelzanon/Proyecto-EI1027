@@ -33,6 +33,16 @@ public class ResNatAreaServiceDao {
         jdbcTemplate.update("DELETE from R_NArea_Services where code_relacion=? ", code_relacion);
     }
 
+    public ResNatAreaService getResNatAreaService(String code_relacion) {
+        try {
+            return this.jdbcTemplate.queryForObject(
+                    "SELECT * FROM R_NArea_Services WHERE code_relacion=?",
+                    new ResNatAreaServiceRowMapper(), code_relacion);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 
     /* Obtener un ResNatAreaService por area */
     public List<ResNatAreaService> getResNatAreaServicePorArea(String code_area) {

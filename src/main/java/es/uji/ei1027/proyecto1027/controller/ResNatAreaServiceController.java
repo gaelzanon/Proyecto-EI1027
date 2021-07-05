@@ -122,6 +122,8 @@ public class ResNatAreaServiceController {
         List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
         model.addAttribute("services", serDisp);
         model.addAttribute("resNatAreaSersPA", servAsig);
+        System.out.println(serDisp);
+        System.out.println(servAsig);
 
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         model.addAttribute("serviceList",serviceDao.getServices());
@@ -155,11 +157,14 @@ public class ResNatAreaServiceController {
         return nameUri;
     }
 
-    @RequestMapping(value = "/delete/{Code_relacion}")
-    public String processDeleteResNatAreaService(@PathVariable String Code_relacion) {
+    @RequestMapping(value = "/delete/{code_relacion}")
+    public String processDeleteResNatAreaService(@PathVariable String code_relacion) {
 
-        resNatAreaServiceDao.deleteR_NArea_service(Code_relacion);
-        return "redirect:/resNatAreaSer/list";
+        ResNatAreaService resNatAreaService = resNatAreaServiceDao.getResNatAreaService(code_relacion);
+        String nameUri="redirect:../porArea/" + resNatAreaService.getCode_area();
+        resNatAreaServiceDao.deleteR_NArea_service(code_relacion);
+        nameUri = UriUtils.encodePath(nameUri, "UTF-8");
+        return nameUri;
     }
 
 
