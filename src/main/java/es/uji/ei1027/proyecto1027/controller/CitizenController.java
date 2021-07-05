@@ -119,7 +119,7 @@ public class CitizenController {
             return "redirect:../list";
         } catch (Exception e){
             throw new ProyectoException(
-                    "Ha ocurrido un error accediendo a la base de datos. Intentalo de nuevo mas tarde.", "ErrorAccedintDades");
+                    "El cliente tiene reservas activas. Por favor, bórralas antes.", "ErrorAccedintDades");
         }
     }
 
