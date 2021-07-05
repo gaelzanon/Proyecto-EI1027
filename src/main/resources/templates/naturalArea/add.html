@@ -19,35 +19,35 @@
         <form class="form-horizontal" action="#" th:action="@{/naturalArea/add}"
               th:object="${naturalArea}" method="post">
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="name">Nombre:</label>
+        <label class="control-label col-sm-2" for="name">Nombre*:</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" id="name" th:field="*{name}" />
             <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="address">Dirección:</label>
+        <label class="control-label col-sm-2" for="address">Dirección*:</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" id="address" th:field="*{address}" />
             <div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="maxCapacity">Capacidad máxima:</label>
+        <label class="control-label col-sm-2" for="maxCapacity">Capacidad máxima*:</label>
         <div class="col-sm-4">
             <input type="number" class="form-control" id="maxCapacity" th:field="*{maxCapacity}" min="1"/>
             <div class="error" th:if="${#fields.hasErrors('maxCapacity')}" th:errors="*{maxCapacity}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
+        <label class="control-label col-sm-2" for="descripcion">Descripción*:</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}" />
             <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="type_of_area">Tipo:</label>
+        <label class="control-label col-sm-2" for="type_of_area">Tipo*:</label>
         <div class="col-sm-4">
             <select class="form_control" type="text" id="type_of_area" th:field="*{type_of_area}">
                 <option th:each="type_of_area: ${types_of_area}" th:value="${type_of_area}" th:text="${type_of_area}"></option>
@@ -56,7 +56,7 @@
             </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="state">Estado:</label>
+        <label class="control-label col-sm-2" for="state">Estado*:</label>
         <div class="col-sm-4">
             <select class="form_control" type="text" id="state" th:field="*{state}">
                 <option value="Abierta">Abierta</option>
@@ -67,21 +67,21 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="startTime">Hora de apertura:</label>
+        <label class="control-label col-sm-2" for="startTime">Hora de apertura*:</label>
         <div class="col-sm-4">
             <input type="time" class="form-control" id="startTime" th:field="*{startTime}" />
             <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="endTime">Hora de cierre:</label>
+        <label class="control-label col-sm-2" for="endTime">Hora de cierre*:</label>
         <div class="col-sm-4">
             <input type="time" class="form-control" id="endTime" th:field="*{endTime}" />
             <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
         </div>
     </div>
     <div class="form-group row">
-        <label class="control-label col-sm-2" for="munCode">Municipio:</label>
+        <label class="control-label col-sm-2" for="munCode">Municipio*:</label>
         <div class="col-sm-4">
             <select class="form_control" type="text" id="munCode" th:field="*{munCode}">
                 <option th:each="munCode: ${munCode}" th:value="${munCode}" th:text="${munCode}"></option>

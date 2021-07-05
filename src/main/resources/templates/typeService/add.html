@@ -19,7 +19,7 @@
     <form class="form-horizontal" action="#" th:action="@{/typeService/add}"
           th:object="${type_of_service}" method="post">
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="type">Tipo de servicio:</label>
+            <label class="control-label col-sm-2" for="type">Tipo de servicio*:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="type" th:field="*{type}" />
                 <div class="error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>

@@ -19,14 +19,14 @@
         <form class="form-horizontal" action="#" th:action="@{/reservation/add}"
               th:object="${reservation}" method="post">
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="nifCitizen">NIF:</label>
+                <label class="control-label col-sm-2" for="nifCitizen">NIF*:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="nifCitizen" th:field="*{nifCitizen}" />
                     <div class="error" th:if="${#fields.hasErrors('nifCitizen')}" th:errors="*{nifCitizen}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="codeArea">Area:</label>
+                <label class="control-label col-sm-2" for="codeArea">Area*:</label>
 
                     <div class="col-sm-4">
                         <select class="form_control" type="text" id="codeArea" th:field="*{codeArea}">
@@ -37,21 +37,21 @@
 
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="date">Date:</label>
+                <label class="control-label col-sm-2" for="date">Date*:</label>
                 <div class="col-sm-4">
                     <input type="date" class="form-control" id="date" th:field="*{date}" />
                     <div class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="startTime">Hora de inicio:</label>
+                <label class="control-label col-sm-2" for="startTime">Hora de inicio*:</label>
                 <div class="col-sm-4">
                     <input type="time" class="form-control" id="startTime" th:field="*{startTime}" />
                     <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="endTime">Hora de finalización:</label>
+                <label class="control-label col-sm-2" for="endTime">Hora de finalización*:</label>
                 <div class="col-sm-4">
                     <input type="time" class="form-control" id="endTime" th:field="*{endTime}" />
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
