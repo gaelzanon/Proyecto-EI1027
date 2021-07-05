@@ -127,7 +127,7 @@ public class ServiceController {
             return "redirect:/service/update";}
         try {
             for(Service ser:serviceDao.getServices()){
-                if(service.getType_of_service().equals(ser.getType_of_service()) && service.getDescription().equals(ser.getDescription())){
+                if(service.getType_of_service().equals(ser.getType_of_service()) && service.getDescription().equals(ser.getDescription()) && !service.getCode().toString().equals(ser.getCode().toString())){
                     throw new ProyectoException(
                             "Ya existe el servicio "
                                     + service.getDescription() + " con el tipo de servicio "+service.getType_of_service(), "CPduplicada");

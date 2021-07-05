@@ -74,30 +74,6 @@ public class TypeServiceController {
         return "redirect:list";
     }
 
-    /* No se actualiza, solo hay clave primaria
-    @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
-    public String editService(Model model, @PathVariable String code) {
-        model.addAttribute("service", ServiceDao.getService(code));
-
-        return "typeService/update";
-    }
-
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("service") Service service,
-            BindingResult bindingResult) {
-        ServiceValidator serviceValidator = new ServiceValidator();
-        serviceValidator.validate(service, bindingResult);
-        if (bindingResult.hasErrors())
-            return "typeService/update";
-        try {
-            ServiceDao.updateService(service);
-        } catch (DataAccessException e) {
-            throw new ProyectoException(
-                    "Error en el acceso a la base de datos", "ErrorAccedintDades");
-        }
-        return "redirect:list";
-    }*/
 
     @RequestMapping(value="/delete/{type}")
     public String processDelete(@PathVariable String type) {

@@ -67,7 +67,7 @@ public class SolicitudController {
         } catch (
                 DuplicateKeyException e) {
             throw new ProyectoException(
-                    "Ya existe el tipo de area "
+                    "Ya existe esa solicitud "
                             + solicitud.getCode(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(
