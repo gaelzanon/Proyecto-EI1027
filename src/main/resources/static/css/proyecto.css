@@ -125,5 +125,7 @@ li:first-child {
     margin-top:0;
 }
 
-
+label{
+    font-weight: bold;
+}
 
