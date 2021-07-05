@@ -107,20 +107,23 @@ public class ReservationController {
         if(!model.containsAttribute("reservation"))
             model.addAttribute("reservation", ReservationDao.getReservation(code));
         model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
-        List<Zone> zonas = reservationService.getAllZonesPerArea(ReservationDao.getReservation(code).getCodeArea());
-        model.addAttribute("zonas", zonas);
+        if(!model.containsAttribute("zonas")){
+            List<Zone> zonas = reservationService.getAllZonesPerArea(ReservationDao.getReservation(code).getCodeArea());
+            model.addAttribute("zonas", zonas);
+        }
         return "reservation/update";
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("reservation") final Reservation reservation,
+            @ModelAttribute("reservation") final Reservation reservation, @ModelAttribute("zonas") final ArrayList<Zone> zonas,
             RedirectAttributes attributes, final BindingResult bindingResult) {
-        //reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
+        reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
         ReservationValidator reservationValidator = new ReservationValidator();
         reservationValidator.validate(reservation, bindingResult);
         if (bindingResult.hasErrors()){
             attributes.addFlashAttribute("org.springframework.validation.BindingResult.reservation",bindingResult);
             attributes.addFlashAttribute("reservation",reservation);
+            attributes.addFlashAttribute("zonas",zonas);
             return "redirect:/reservation/update"; }
         try {
             ReservationDao.updateReservation(reservation);
@@ -136,9 +139,7 @@ public class ReservationController {
     public String detailsReservation(Model model, @PathVariable String code) {
         Reservation reservation = ReservationDao.getReservation(code);
         model.addAttribute("reservation", reservation);
-        System.out.println(reservation.getCodeZone());
         Zone zone = reservationService.getZone(reservation.getCodeZone());
-        System.out.println(zone.toString());
         String coord = "Fila: " + zone.getRow() + ", Columna:" + zone.getCol();
         model.addAttribute("coord", coord);
         NaturalArea natArea = reservationService.getNaturalArea(reservation.getCodeArea());
