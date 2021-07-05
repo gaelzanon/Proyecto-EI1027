@@ -106,8 +106,9 @@ public class ResNatAreaServiceController {
         } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya existe dado de alta el servicio "
-                            + resNatAreaService.getCode() + " en el area "
-                            + resNatAreaService.getCode_area(), "CPduplicada");
+                            + serviceDao.getService(resNatAreaService.getCode()).getDescription() + " en el area "
+                            + naturalAreaDao.getNaturalArea(resNatAreaService.getCode_area()).getName() +" cpn fecha de inicio "
+                            + resNatAreaService.getStartTime()+ " y fecha de fin "+resNatAreaService.getEndTime(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
@@ -115,8 +116,8 @@ public class ResNatAreaServiceController {
 
     }
 
-    @RequestMapping("/porArea/{code_area}")
-    public String listResNatAreaServicePorArea(HttpSession session, Model model, @PathVariable String code_area) {
+    @RequestMapping(value = {"/porArea/{code_area}","/porArea"},method = RequestMethod.GET)
+    public String listResNatAreaServicePorArea(HttpSession session, Model model, @PathVariable(required = false) String code_area) {
         UserDetails user=(UserDetails) session.getAttribute("user");
         if ( user== null || !user.getUserType().equals(UserDetailsEnum.MunicipalManager.toString()))
         {
@@ -128,8 +129,10 @@ public class ResNatAreaServiceController {
             model.addAttribute("resNatAreaSer", resNatAreaService);
         }
 
-        List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
-        model.addAttribute("resNatAreaSersPA", servAsig);
+        if(!model.containsAttribute("resNatAreaSersPA")){
+            List<ResNatAreaService> servAsig = resNatAreaSerService.getResNatAreaServiceByArea(code_area);
+            model.addAttribute("resNatAreaSersPA", servAsig);
+        }
 
         List<String> serDisp = resNatAreaSerService.getAllServices();
         model.addAttribute("services", serDisp);
@@ -159,8 +162,9 @@ public class ResNatAreaServiceController {
         } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya está asignado el servicio "
-                            + resNatAreaService.getCode() + " al area "
-                            + resNatAreaService.getCode_area(), "CPduplicada");
+                            + serviceDao.getService(resNatAreaService.getCode()).getDescription() + " en el area "
+                            + naturalAreaDao.getNaturalArea(resNatAreaService.getCode_area()).getName() +" con fecha de inicio "
+                            + resNatAreaService.getStartTime()+ " y fecha de fin "+resNatAreaService.getEndTime(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
@@ -171,8 +175,9 @@ public class ResNatAreaServiceController {
     public String processDeleteResNatAreaService(@PathVariable String Code_relacion) {
 
         try{
+            String codeArea=resNatAreaServiceDao.getResNatAreaService(Code_relacion).getCode_area();
             resNatAreaServiceDao.deleteR_NArea_service(Code_relacion);
-            return "redirect:/resNatAreaSer/list";
+            return "redirect:/resNatAreaSer/porArea/"+codeArea;
         }catch (Exception e) {
             throw new ProyectoException(
                     "Error en la base de datos.", "ErrorAccedintDades");
