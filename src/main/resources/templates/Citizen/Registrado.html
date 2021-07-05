@@ -11,8 +11,19 @@
           th:href="@{/css/proyecto.css}"/>
 </head>
 <body>
-<h1> Gracias por Registrarse</h1>
-<h5> Has sido Registrado en la aplicacion correctamente.</h5>
-<a href="/login" class="btn btn-primary" role="button">Volver</a>
+<div layout:fragment="content">
+    <div class="container">
+        <br>
+        <h1> Gracias por Registrarse</h1>
+        <hr color="blue" size=3>
+        <h5> Has sido registrado en la aplicacion correctamente.</h5>
+
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-4">
+                <a href="/login" class="btn btn-primary" role="button">Continuar</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
