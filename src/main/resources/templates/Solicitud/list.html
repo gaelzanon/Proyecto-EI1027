@@ -33,8 +33,6 @@
             <td th:text="${solicitud.Fecha}"></td>
             <td></td>
 
-            <td><a th:href="@{/solicitud/details/{code}(code=${solicitud.code})}" class="btn btn-primary" role="button">Mas información</a>
-            </td>
             <td><a th:href="@{/solicitud/delete/{code}(code=${solicitud.code})}" class="btn btn-danger" onclick="return confirm('¿Estas seguro de que quieres eliminar este elemento?');" role="button">Borrar</a>
             </td>
         </tr>

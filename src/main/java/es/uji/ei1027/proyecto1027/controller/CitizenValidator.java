@@ -29,5 +29,8 @@ public class CitizenValidator implements Validator {
         if (citizen.getEmail().trim().equals(""))
             errors.rejectValue("Email", "obligatori",
                     "Se debe introducir un email");
+        if (citizen.getPassword().trim().equals(""))
+            errors.rejectValue("password", "obligatori",
+                    "Se debe introducir una contraseña");
     }
 }

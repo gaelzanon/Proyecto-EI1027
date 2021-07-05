@@ -88,6 +88,7 @@ public class CitizenController {
     @RequestMapping(value="/updatePerfil/{NIF}", method = RequestMethod.GET)
     public String editCitizenPerfil(Model model, @PathVariable String NIF) {
         model.addAttribute("citizen", CitizenDao.getCitizen(NIF));
+
         deUnUso=true;
         return "citizen/update";
     }
@@ -96,6 +97,8 @@ public class CitizenController {
     public String processUpdateSubmit(
             @ModelAttribute("citizen") Citizen citizen,
             BindingResult bindingResult) {
+        citizen.setTipoUsuario("citizen");
+        System.out.println(citizen);
         CitizenValidator citizenValidator = new CitizenValidator();
         citizenValidator.validate(citizen, bindingResult);
         if (deUnUso==true) {
@@ -108,7 +111,7 @@ public class CitizenController {
         if (bindingResult.hasErrors())
             return "citizen/update";
         CitizenDao.updateCitizen(citizen);
-        return "redirect:../../../";
+        return "redirect:/mainMenu";
     }
 
     @RequestMapping(value="/delete/{NIF}")

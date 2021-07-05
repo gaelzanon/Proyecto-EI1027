@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class CitizenDao {
     public void addCitizen(Citizen citizen) {
         jdbcTemplate.update(
                 "INSERT INTO citizen VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                citizen.getNIF(),citizen.getName(),citizen.getSurname(),citizen.getEmail(), citizen.getAddress(),citizen.getDate_of_birth(),citizen.getRegistration_date(), citizen.getPassword(), citizen.getTipoUsuario());
+                citizen.getNIF(),citizen.getName(),citizen.getSurname(),citizen.getEmail(), citizen.getAddress(),citizen.getDate_of_birth(), LocalDate.now(), citizen.getPassword(), citizen.getTipoUsuario());
     }
 
 
