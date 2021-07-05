@@ -148,6 +148,7 @@ public class ResNatAreaServiceController {
             RedirectAttributes attributes, final BindingResult bindingResult) {
         codigos = (int)(Math.random()*100000);
         resNatAreaService.setCode_relacion( String.valueOf(codigos));
+        if(resNatAreaService.getEndTime()==null){resNatAreaService.setEndTime(LocalDate.of(1970,1,1));}
         ResNatAreaServiceValidator resNatAreaServiceValidator = new ResNatAreaServiceValidator();
         resNatAreaServiceValidator.validate(resNatAreaService, bindingResult);
         String nameUri="redirect:porArea/" + resNatAreaService.getCode_area();

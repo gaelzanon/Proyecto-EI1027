@@ -74,7 +74,13 @@ li:first-child {
 	color: red;
 }
 
+input[type=date]{
+    visibility:visible;
+}
 
+input[type=checkbox]:checked + input[type=date] {
+    visibility:hidden;
+}
 
 /*CAJA DE LOGIN*/
 .centro div{

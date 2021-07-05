@@ -4,6 +4,8 @@ import es.uji.ei1027.proyecto1027.model.ResNatAreaService;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.time.LocalDate;
+
 public class ResNatAreaServiceValidator implements Validator {
     @Override
     public boolean supports(Class<?> cls) {
@@ -15,6 +17,7 @@ public class ResNatAreaServiceValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         ResNatAreaService rnas = (ResNatAreaService) obj;
+
         if(rnas.getCode().trim().equals("NoDisp"))
             errors.rejectValue("code", "obligatori",
                     "No existen más servicios disponibles");
@@ -32,7 +35,7 @@ public class ResNatAreaServiceValidator implements Validator {
             errors.rejectValue("endTime", "obligatori",
                     "Se debe introducir una fecha de cierre");
         }
-        if (rnas.getEndTime().compareTo(rnas.getStartTime()) < 0) {
+        if (rnas.getEndTime().compareTo(rnas.getStartTime()) < 0 && !rnas.getEndTime().equals(LocalDate.of(1970,1,1))) {
             errors.rejectValue("endTime", "obligatori",
                     "Se debe introducir una fecha posterior a la fecha de apertura");
         }

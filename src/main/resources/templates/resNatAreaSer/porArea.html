@@ -21,6 +21,7 @@
             <th>Área</th>
             <th>Servicio</th>
             <th>Fecha inicio</th>
+            <th>Permanente</th>
             <th>Fecha final</th>
             <th></th>
         </tr>
@@ -36,7 +37,10 @@
                 <td th:if="${resNatAreaSer.code == serv.code}" th:text="${serv.description}"></td>
             </th:block>
             <td th:text="${resNatAreaSer.startTime}"></td>
-            <td th:text="${resNatAreaSer.endTime}"></td>
+            <td><input type="checkbox" th:checked="${resNatAreaSer.endTime.toString().equals('1970-01-01')}" th:disabled="true"></td>
+            <td th:if=${resNatAreaSer.endTime.toString().equals('1970-01-01')}></td>
+            <td th:unless=${resNatAreaSer.endTime.toString().equals('1970-01-01')} th:text="${resNatAreaSer.endTime}"></td>
+
             <td></td>
             <td><a th:href="@{/resNatAreaSer/delete/{code_relacion} (code_relacion=${resNatAreaSer.code_relacion})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
@@ -67,7 +71,9 @@
                     <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
                 </td>
                 <td>
-                    <input type="date" class="form-control" id="endTime" th:field="*{endTime}" required/>
+                    <label for="permanente">Permanente</label>
+                    <input type="checkbox" id="permanente">
+                    <input type="date" style="perm" class="form-control" id="endTime" th:field="*{endTime}"/>
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </td>
                 <td>
