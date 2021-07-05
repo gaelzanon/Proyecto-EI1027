@@ -17,79 +17,83 @@
     <hr color="blue" size=3>
     <form action="#" th:action="@{/Reservation/update}"
           th:object="${reservation}" method="post">
+
+
+        <div class="form-group row">
+            <div class="col-sm-8">
+                <p style="font-size: 200%; margin-bottom: 0;" th:text="'Reserva en '+ ${natArea.name}"></p>
+            </div>
+        </div>
+
+        <fieldset style="border: 1px solid #BEBEBE; padding: 20px;">
+            <legend>Datos de la reserva</legend>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="address">Dirección:</label>
+                <label class="control-label col-sm-2">Estado:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="address" th:field="*{address}" readonly="readonly" />
+                    <p th:text="*{State}"></p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="Date">Fecha de la Reserva:</label>
+                <label class="control-label col-sm-2">Dirección:</label>
                 <div class="col-sm-4">
-                    <input type="date" class="form-control" id="Date" th:field="*{Date}" readonly="readonly" />
+                    <p th:text="${municipio.name} + ', ' + *{address}"></p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="qr">QR:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="qr" th:field="*{qr}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('qr')}" th:errors="*{qr}"></div>
+                <label class="control-label col-sm-2">Reserva:</label>
+                <div class="col-sm-6">
+                    <span>Dia </span>
+                    <b th:text="*{date}"></b>
+                    <span> desde las </span>
+                    <b th:text="*{startTime}"></b>
+                    <span> hasta las </span>
+                    <b th:text="*{endTime}"></b>
                 </div>
             </div>
             <div class="form-group row">
+                <label class="control-label col-sm-2">QR:</label>
                 <div class="col-sm-4">
-                    <input type="hidden" class="form-control" id="Code" th:field="*{Code}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('Code')}" th:errors="*{Code}"></div>
+                    <p th:text="*{qr}">
+                </div>
+            </div>
+        </fieldset>
+
+        <br>
+
+        <fieldset style="border: 1px solid #BEBEBE; padding: 20px;">
+            <legend>Datos del cliente</legend>
+            <div class="form-group row">
+                <label class="control-label col-sm-2">NIF:</label>
+                <div class="col-sm-4">
+                    <p th:text="*{NifCitizen}"></p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="creationDate">Fecha de Creación:</label>
+                <label class="control-label col-sm-2">Apellidos, Nombre:</label>
                 <div class="col-sm-4">
-                    <input type="date" class="form-control" id="creationDate" th:field="*{creationDate}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('creationDate')}" th:errors="*{creationDate}"></div>
+                    <p th:text="${citizen.surname} + ', ' + ${citizen.name}"></p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="NifCitizen">NIF :</label>
+                <label class="control-label col-sm-2">Email:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="NifCitizen" th:field="*{NifCitizen}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('NifCitizen')}" th:errors="*{NifCitizen}"></div>
+                    <p th:text="${citizen.email}"></p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="control-label col-sm-2" for="State">Estado:</label>
+                <label class="control-label col-sm-2">Fecha de nacimiento:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="State" th:field="*{State}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('State')}" th:errors="*{State}"></div>
+                    <p th:text="${citizen.date_of_birth}"></p>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="control-label col-sm-2" for="StartTime">Comienzo de la Reserva:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="StartTime" th:field="*{StartTime}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('StartTime')}" th:errors="*{StartTime}"></div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="control-label col-sm-2" for="endTime">Finalizacion de la Reserva:</label>
-                <div class="col-sm-4">
-                    <input type="time" class="form-control" id="endTime" th:field="*{endTime}" readonly="readonly"/>
-                    <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
-                </div>
-            </div>
-        <!--<div class="form-group row">-->
-            <!--<label class="control-label col-sm-2" for="zone">Zona del area:</label>-->
-            <!--<div class="col-sm-4">-->
-                <!--<input type="text" class="form-control" id="zone" th:field="*{coord}" readonly="readonly"/>-->
-                <!--<div class="error" th:if="${#fields.hasErrors('coord')}" th:errors="*{coord}"></div>-->
-            <!--</div>-->
-        <!--</div>-->
+        </fieldset>
+
+        <br>
             <div class="form-group row">
                 <div class="col-sm-offset-2 col-sm-4">
                     <a href="/reservation/list" class="btn btn-primary" role="button">Volver</a>
                 </div>
             </div>
-
     </form>
 </div>
 </body>

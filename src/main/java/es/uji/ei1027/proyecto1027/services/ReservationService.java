@@ -13,4 +13,6 @@ public interface ReservationService {
     public Zone getZone(String code);
     public Controller getController(String nif);
     public List<String> getAreasForMunicipalManager(String nif);
+    public NaturalArea getNaturalArea(String codeArea);
+    public Municipality getMunicipioDeNaturalArea(String codMun);
 }

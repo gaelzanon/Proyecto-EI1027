@@ -75,4 +75,14 @@ public class ReservationSvc implements ReservationService {
         }
         return codigosArea;
     }
+
+    @Override
+    public NaturalArea getNaturalArea(String codeArea) {
+        return naturalAreaDao.getNaturalArea(codeArea);
+    }
+
+    @Override
+    public Municipality getMunicipioDeNaturalArea(String codMun) {
+        return municipalityDao.getMunicipality(codMun);
+    }
 }

@@ -125,14 +125,21 @@ public class ReservationController {
         return "redirect:list";
     }
 
-    @RequestMapping(value={"/details/{code}","/details"}, method = RequestMethod.GET)
-    public String detailsReservation(Model model, @PathVariable(required = false) String code) {
+    @RequestMapping(value="/details/{code}", method = RequestMethod.GET)
+    public String detailsReservation(Model model, @PathVariable String code) {
         Reservation reservation = ReservationDao.getReservation(code);
-        if(!model.containsAttribute("reservation"))
-            model.addAttribute("reservation", reservation);
-        Zone zone = reservationService.getZone(reservation.getCodeZone());
-        //String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
-        //model.addAttribute("coord", coord);
+        model.addAttribute("reservation", reservation);
+//        System.out.println(reservation.getCodeZone());
+//        Zone zone = reservationService.getZone(reservation.getCodeZone());
+//        System.out.println(zone.toString());
+//        String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
+//        model.addAttribute("coord", coord);
+        NaturalArea natArea = reservationService.getNaturalArea(reservation.getCodeArea());
+        Municipality municipio = reservationService.getMunicipioDeNaturalArea(natArea.getMunCode());
+        Citizen citizen = reservationService.getCitizen(reservation.getNifCitizen());
+        model.addAttribute("citizen", citizen);
+        model.addAttribute("municipio", municipio);
+        model.addAttribute("natArea", natArea);
         return "reservation/details";
     }
 
