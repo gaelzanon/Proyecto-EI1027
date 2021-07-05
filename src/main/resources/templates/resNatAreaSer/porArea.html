@@ -63,11 +63,11 @@
                 </td>
 
                 <td>
-                    <input type="date" class="form-control" id="startTime" th:field="*{startTime}" />
+                    <input type="date" class="form-control" id="startTime" th:field="*{startTime}" required/>
                     <div class="error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
                 </td>
                 <td>
-                    <input type="date" class="form-control" id="endTime" th:field="*{endTime}" />
+                    <input type="date" class="form-control" id="endTime" th:field="*{endTime}" required/>
                     <div class="error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></div>
                 </td>
                 <td>
