@@ -102,11 +102,10 @@ public class ReservationController {
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
     }
-    @RequestMapping(value={"/update/{code}","/update"}, method = RequestMethod.GET)
-    public String editReservation(Model model, @PathVariable(required = false) String code) {
-        if(!model.containsAttribute("reservation"))
-            model.addAttribute("reservation", ReservationDao.getReservation(code));
-        model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
+    @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
+    public String editReservation(Model model, @PathVariable String code) {
+        model.addAttribute("reservation", ReservationDao.getReservation(code));
+        model.addAttribute("codeArea", NaturalAreaDao.getNaturalAreaNames() );
         List<Zone> zonas = reservationService.getAllZonesPerArea(ReservationDao.getReservation(code).getCodeArea());
         model.addAttribute("zonas", zonas);
         return "reservation/update";
@@ -115,6 +114,7 @@ public class ReservationController {
     public String processUpdateSubmit(
             @ModelAttribute("reservation") final Reservation reservation,
             RedirectAttributes attributes, final BindingResult bindingResult) {
+        System.out.println(reservation.toString());
         //reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
         ReservationValidator reservationValidator = new ReservationValidator();
         reservationValidator.validate(reservation, bindingResult);
