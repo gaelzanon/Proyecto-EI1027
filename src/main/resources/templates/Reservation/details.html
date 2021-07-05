@@ -39,6 +39,14 @@
                     <p th:text="${municipio.name} + ', ' + *{address}"></p>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label class="control-label col-sm-2">Posición dentro del area:</label>
+                <div class="col-sm-4">
+                    <p th:text="${coord}"></p>
+                </div>
+            </div>
+
             <div class="form-group row">
                 <label class="control-label col-sm-2">Reserva:</label>
                 <div class="col-sm-6">

@@ -19,6 +19,12 @@ public class Reservation {
     private LocalTime startTime;
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime endTime;
+    private String codeZone;
+    private String codeArea;
+
+    public Reservation() {
+
+    }
 
     public String getCodeZone() {
         return codeZone;
@@ -26,13 +32,6 @@ public class Reservation {
 
     public void setCodeZone(String codeZone) {
         this.codeZone = codeZone;
-    }
-
-    private String codeZone;
-    private String codeArea;
-
-    public Reservation() {
-
     }
 
     public String getAddress() {

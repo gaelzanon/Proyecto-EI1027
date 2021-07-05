@@ -129,11 +129,11 @@ public class ReservationController {
     public String detailsReservation(Model model, @PathVariable String code) {
         Reservation reservation = ReservationDao.getReservation(code);
         model.addAttribute("reservation", reservation);
-//        System.out.println(reservation.getCodeZone());
-//        Zone zone = reservationService.getZone(reservation.getCodeZone());
-//        System.out.println(zone.toString());
-//        String coord = "(" + zone.getCol() + ", " + zone.getRow() + ")";
-//        model.addAttribute("coord", coord);
+        System.out.println(reservation.getCodeZone());
+        Zone zone = reservationService.getZone(reservation.getCodeZone());
+        System.out.println(zone.toString());
+        String coord = "Fila: " + zone.getRow() + ", Columna:" + zone.getCol();
+        model.addAttribute("coord", coord);
         NaturalArea natArea = reservationService.getNaturalArea(reservation.getCodeArea());
         Municipality municipio = reservationService.getMunicipioDeNaturalArea(natArea.getMunCode());
         Citizen citizen = reservationService.getCitizen(reservation.getNifCitizen());
@@ -200,8 +200,8 @@ public class ReservationController {
         reservation.setAddress(reservationService.getAddress(reservation.getCodeArea()));
         String nameUri="redirect:porArea/" + reservation.getCodeArea();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
-//        ReservationValidator reservationValidator = new ReservationValidator();
-//        reservationValidator.validate(reservation, bindingResult);
+        ReservationValidator reservationValidator = new ReservationValidator();
+        reservationValidator.validate(reservation, bindingResult);
         if(bindingResult.hasErrors()){
             return nameUri;
         }
