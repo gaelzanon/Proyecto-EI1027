@@ -1,4 +1,6 @@
 package es.uji.ei1027.proyecto1027.model;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 
@@ -10,7 +12,9 @@ public class Citizen {
     private String surname;
     private String email;
     private String address;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate date_of_birth;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate registration_date;
 
     public String getNIF() {
