@@ -46,7 +46,7 @@
                   th:object="${resNatAreaSer}" method="post">
 
                 <th:block th:each="area: ${naturalArea}">
-                    <td th:if="${codarea.code_area == area.codeArea}" th:text="${area.name}"><input type="text" th:field="*{code_area}" /></td>
+                    <td th:if="${resNatAreaSer.code_area == area.codeArea}" th:text="${area.name}"><input type="text" th:field="*{code_area}" /></td>
                 </th:block>
 
                 <td>

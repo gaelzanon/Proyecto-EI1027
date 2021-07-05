@@ -75,7 +75,7 @@ public class ResNatAreaServiceController {
         model.addAttribute("naturalArea",naturalAreaDao.getNaturalArea());
         model.addAttribute("service",serviceDao.getServices());
 
-        return "resNatAreaSer/list";
+        return "redirect:/resNatAreaSer/porArea";
     }
     @RequestMapping(value="/add")
     public String addResNatAreaService(Model model) {
@@ -115,9 +115,13 @@ public class ResNatAreaServiceController {
 
     }
 
-    @RequestMapping(value = {"/porArea/{code_area}","/porArea"}, method = RequestMethod.GET)
-    public String listResNatAreaServicePorArea(Model model, @PathVariable(required = false) String code_area) {
-
+    @RequestMapping("/porArea/{code_area}")
+    public String listResNatAreaServicePorArea(HttpSession session, Model model, @PathVariable String code_area) {
+        UserDetails user=(UserDetails) session.getAttribute("user");
+        if ( user== null || !user.getUserType().equals(UserDetailsEnum.MunicipalManager.toString()))
+        {
+            return "redirect:/";
+        }
         if(!model.containsAttribute("resNatAreaSer")){
             ResNatAreaService resNatAreaService = new ResNatAreaService();
             resNatAreaService.setCode_area(code_area);
