@@ -39,5 +39,8 @@ public class ReservationValidator implements Validator {
         if (reservation.getDate()==null)
             errors.rejectValue("date", "obligatori",
                     "Se debe introducir una fecha para la reserva");
+        if (reservation.getCodeZone().trim().equals("NoDisp"))
+            errors.rejectValue("codeZone", "obligatori",
+                    "No quedan zonas disponibles en este espacio natural");
     }
 }

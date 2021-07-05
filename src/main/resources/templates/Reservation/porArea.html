@@ -20,21 +20,14 @@
     <br>
     <h2 th:text="${nombreArea}"></h2>
     <br>
-    <div class="form-group row">
-        <label>Nombre:</label>
-        <div class="col-md-4 col-md-offset-3">
-            <p th:text="${citizen.name}"></p>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label>NIF:</label>
-        <div class="col-md-4  col-md-offset-3">
-            <p th:text="${citizen.NIF}"></p>
-        </div>
-    </div>
-    <br>
-
     <form class="form-horizontal" action="#" th:action="@{/reservation/porArea}" th:object="${codeArea}" method="post">
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Usuario:</label>
+            <div class="col-sm-4">
+                <p style="font-style: italic;" th:text="${citizen.name + ' ' + citizen.surname + ', ' + citizen.NIF}"></p>
+            </div>
+        </div>
 
         <div class="form-group row">
             <div class="col-sm-4">
@@ -65,13 +58,13 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="zonas">Zona del espacio:</label>
+            <label class="control-label col-sm-2" for="codeZone">Zona (Columna, Fila):</label>
             <div class="col-sm-4">
-                <select>
+                <select id="codeZone" th:field="*{codeZone}">
                     <div th:if="${#lists.isEmpty(zonas)}">
                         <option value="NoDisp">No quedan disponibles</option>
                     </div>
-                    <option th:unless="${#lists.isEmpty(zonas)}" th:each="zona:${zonas}" id="zonas"
+                    <option th:unless="${#lists.isEmpty(zonas)}" th:each="zona:${zonas}"
                             th:value="${zona.code}"
                             th:text="${'(' + zona.col + ', ' + zona.row + ')'}">
                     </option>
@@ -81,8 +74,8 @@
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-success">Crear reserva</button>
-                <a href="/mainMenu"class="btn btn-primary" role="button">Volver</a>
+                <button type="submit" class="btn btn-success">Confirmar</button>
+                <a href="/mainMenu" class="btn btn-primary" role="button">Volver</a>
             </div>
         </div>
     </form>

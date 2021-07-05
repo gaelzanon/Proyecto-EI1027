@@ -200,8 +200,8 @@ public class ReservationController {
         reservation.setAddress(reservationService.getAddress(reservation.getCodeArea()));
         String nameUri="redirect:porArea/" + reservation.getCodeArea();
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
-//        ReservationValidator reservationValidator = new ReservationValidator();
-//        reservationValidator.validate(reservation, bindingResult);
+        ReservationValidator reservationValidator = new ReservationValidator();
+        reservationValidator.validate(reservation, bindingResult);
         if(bindingResult.hasErrors()){
             return nameUri;
         }
