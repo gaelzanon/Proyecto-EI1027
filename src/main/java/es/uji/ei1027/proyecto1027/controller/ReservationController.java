@@ -67,14 +67,13 @@ public class ReservationController {
     public String addReservation(Model model) {
         if(!model.containsAttribute("reservation"))
             model.addAttribute("reservation", new Reservation());
-        model.addAttribute("reservation", new Reservation());
         model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
         return "reservation/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("reservation") Reservation reservation, RedirectAttributes attributes,
-                                   BindingResult bindingResult) {
+    public String processAddSubmit(@ModelAttribute("reservation") final Reservation reservation,
+                                   RedirectAttributes attributes, final BindingResult bindingResult) {
 
         codigos = (int)(Math.random()*100000);
         reservation.setCode( String.valueOf(codigos));
@@ -91,6 +90,7 @@ public class ReservationController {
             return "redirect:/reservation/add";}
         try {
             ReservationDao.addReservation(reservation);
+            return "redirect:reservation/porCitizen";
         } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya existe una reserva para el cliente "
@@ -101,11 +101,11 @@ public class ReservationController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        return "redirect:reservation/porCitizen";
     }
-    @RequestMapping(value="/update/{code}", method = RequestMethod.GET)
-    public String editReservation(Model model, @PathVariable String code) {
-        model.addAttribute("reservation", ReservationDao.getReservation(code));
+    @RequestMapping(value={"/update/{code}","/update"}, method = RequestMethod.GET)
+    public String editReservation(Model model, @PathVariable(required = false) String code) {
+        if(!model.containsAttribute("reservation"))
+            model.addAttribute("reservation", ReservationDao.getReservation(code));
         model.addAttribute("codeArea",NaturalAreaDao.getNaturalAreaNames() );
         List<Zone> zonas = reservationService.getAllZonesPerArea(ReservationDao.getReservation(code).getCodeArea());
         model.addAttribute("zonas", zonas);
@@ -113,16 +113,23 @@ public class ReservationController {
     }
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("reservation") Reservation reservation,
-            BindingResult bindingResult) {
-        reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
-        if (bindingResult.hasErrors())
-            return "reservation/update";
+            @ModelAttribute("reservation") final Reservation reservation,
+            RedirectAttributes attributes, final BindingResult bindingResult) {
+        //reservation.setCodeArea(NaturalAreaDao.getNaturalAreaCode(reservation.getCodeArea()));
         ReservationValidator reservationValidator = new ReservationValidator();
         reservationValidator.validate(reservation, bindingResult);
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.reservation",bindingResult);
+            attributes.addFlashAttribute("reservation",reservation);
+            return "redirect:/reservation/update"; }
+        try {
+            ReservationDao.updateReservation(reservation);
+            return "redirect:list";
+        } catch (DataAccessException e) {
+        throw new ProyectoException(
+                "Error en el acceso a la base de datos", "ErrorAccedintDades");
+        }
 
-        ReservationDao.updateReservation(reservation);
-        return "redirect:list";
     }
 
     @RequestMapping(value="/details/{code}", method = RequestMethod.GET)
@@ -167,12 +174,13 @@ public class ReservationController {
 
 
 
-    @RequestMapping("/porArea/{code_area}")
-    public String reservationPorArea(Model model,@PathVariable String code_area, HttpSession session) {
+    @RequestMapping(value = {"/porArea/{code_area}","/porArea"}, method = RequestMethod.GET)
+    public String reservationPorArea(Model model,@PathVariable(required = false) String code_area, HttpSession session) {
         Reservation reservation = new Reservation();
 
         reservation.setCodeArea(code_area);
-        model.addAttribute("codeArea", reservation);
+        if(!model.containsAttribute("reservation"))
+            model.addAttribute("reservation", reservation);
 
         String nombre = reservationService.getAreaName(code_area);
         model.addAttribute("nombreArea", nombre);
@@ -186,7 +194,8 @@ public class ReservationController {
     }
 
     @RequestMapping(value="/porArea", method=RequestMethod.POST)
-    public String processAddSubmitPorArea(@ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult, HttpSession session) {
+    public String processAddSubmitPorArea(@ModelAttribute("reservation") final Reservation reservation, RedirectAttributes attributes,
+                                          final BindingResult bindingResult, HttpSession session) {
 //        String[] coord = coordenadas.split(",");
 //        reservation.setCols(Integer.parseInt(coord[0]));
 //        reservation.setRow(Integer.parseInt(coord[1]));
@@ -202,11 +211,13 @@ public class ReservationController {
         nameUri = UriUtils.encodePath(nameUri, "UTF-8");
         ReservationValidator reservationValidator = new ReservationValidator();
         reservationValidator.validate(reservation, bindingResult);
-        if(bindingResult.hasErrors()){
-            return nameUri;
-        }
+        if (bindingResult.hasErrors()){
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.reservation",bindingResult);
+            attributes.addFlashAttribute("reservation",reservation);
+            return nameUri; }
         try {
             ReservationDao.addReservation(reservation);
+            return "redirect:porCitizen";
         } catch (DuplicateKeyException e) {
             throw new ProyectoException(
                     "Ya existe una reserva para el cliente "
@@ -217,7 +228,7 @@ public class ReservationController {
             throw new ProyectoException(
                     "Error en el acceso a la base de datos", "ErrorAccedintDades");
         }
-        return "redirect:porCitizen";
+
     }
 
     @RequestMapping("/porController")
