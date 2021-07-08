@@ -71,8 +71,7 @@ public class MunicipalityController {
         } catch (
                 DuplicateKeyException e) {
             throw new ProyectoException(
-                    "Ya esta dado de alta el municipio"
-                            + municipality.getCode() + " de codigo "
+                    "Ya esta dado de alta el municipio "
                             + municipality.getName(), "CPduplicada");
         } catch (DataAccessException e) {
             throw new ProyectoException(

@@ -210,7 +210,7 @@ public class NaturalAreaController {
             return "redirect:../list";
         } catch (Exception e){
             throw new ProyectoException(
-                    "Lo sentimos pero esta área tiene personal asignado o reservas pendientes.", "ErrorAccedintDades");
+                    "Lo sentimos pero esta área se encuentra en uso. Comprueba que no tiene zonas, servicios o reservas asignadas antes de borrarla.", "ErrorAccedintDades");
         }
 
     }
